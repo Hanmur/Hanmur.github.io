@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="mapmap是一种无序的，基于key_value的数据结构 go语言中map是引用类型，必须初始化 map的定义map的定义语法： 1map[keyType]valueType  其中，  keyType：键的类型 valueType：值的类型  map类型的变量初始值为nil 需要使用make()函数分配内存 1make(map[keyType]valueType, [cap])  其中，  c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2021/08/04/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/map/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="mapmap是一种无序的，基于key_value的数据结构 go语言中map是引用类型，必须初始化 map的定义map的定义语法： 1map[keyType]valueType  其中，  keyType：键的类型 valueType：值的类型  map类型的变量初始值为nil 需要使用make()函数分配内存 1make(map[keyType]valueType, [cap])  其中，  c">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-08-03T17:50:53.355Z">
+<meta property="article:modified_time" content="2021-07-29T14:31:30.640Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Go语言学习/map" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/08/04/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/map/" class="article-date">
+  <time class="dt-published" datetime="2021-08-03T17:50:53.355Z" itemprop="datePublished">2021-08-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="map"><a href="#map" class="headerlink" title="map"></a>map</h1><p>map是一种无序的，基于<code>key_value</code>的数据结构</p>
+<p>go语言中map是引用类型，必须初始化</p>
+<h3 id="map的定义"><a href="#map的定义" class="headerlink" title="map的定义"></a>map的定义</h3><p><code>map</code>的定义语法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">map</span>[keyType]valueType</span><br></pre></td></tr></table></figure>
+
+<p>其中，</p>
+<ul>
+<li><code>keyType</code>：键的类型</li>
+<li><code>valueType</code>：值的类型</li>
+</ul>
+<p>map类型的变量初始值为<code>nil</code></p>
+<p>需要使用<code>make()</code>函数分配内存</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">make</span>(<span class="keyword">map</span>[keyType]valueType, [<span class="built_in">cap</span>])</span><br></pre></td></tr></table></figure>
+
+<p>其中，</p>
+<ul>
+<li><code>cap</code>：map的容量</li>
+</ul>
+<h3 id="map的使用"><a href="#map的使用" class="headerlink" title="map的使用"></a>map的使用</h3><p>map中数据是成对存在的，使用示例如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">scoreMap := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>, <span class="number">8</span>)</span><br><span class="line">scoreMap[<span class="string">&quot;武子&quot;</span>] = <span class="number">90</span></span><br><span class="line">scoreMap[<span class="string">&quot;康康&quot;</span>] = <span class="number">100</span></span><br><span class="line"></span><br><span class="line">fmt.<span class="built_in">println</span>(scoreMap)			<span class="comment">//输出：map[康康:100 武子:90]</span></span><br><span class="line">fmt.<span class="built_in">println</span>(scoreMap[<span class="string">&quot;武子&quot;</span>])	   <span class="comment">//输出：100</span></span><br></pre></td></tr></table></figure>
+
+<p>map也可以在声明时初始化元素</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nMap := <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>&#123;</span><br><span class="line">	<span class="string">&quot;武子&quot;</span> : <span class="string">&quot;90&quot;</span>,</span><br><span class="line">	<span class="string">&quot;康康&quot;</span> : <span class="string">&quot;100&quot;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="判断Map中某个键是否存在"><a href="#判断Map中某个键是否存在" class="headerlink" title="判断Map中某个键是否存在"></a>判断Map中某个键是否存在</h3><p>Go语言中判断map中键是否存在</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">value,ok := <span class="keyword">map</span>[key]</span><br></pre></td></tr></table></figure>
+
+<p>举例</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数分考试</span></span><br><span class="line">scoreMap := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>] <span class="keyword">int</span>)</span><br><span class="line">scoreMap[<span class="string">&quot;武子&quot;</span>] = <span class="number">90</span></span><br><span class="line">scoreMap[<span class="string">&quot;康康&quot;</span>] = <span class="number">100</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果key存在	 ok为true    v为对应的值；</span></span><br><span class="line"><span class="comment">// 如果key不存在	 ok为false   v为值类型的零值</span></span><br><span class="line">v, ok := scoreMap[<span class="string">&quot;武子&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ok &#123;</span><br><span class="line">	fmt.Println(v)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;这人旷考？&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="map的遍历"><a href="#map的遍历" class="headerlink" title="map的遍历"></a>map的遍历</h3><p>使用<code>for range</code>遍历map</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">scoreMap := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>, <span class="number">8</span>)</span><br><span class="line">scoreMap[<span class="string">&quot;武子&quot;</span>] = <span class="number">90</span></span><br><span class="line">scoreMap[<span class="string">&quot;康康&quot;</span>] = <span class="number">100</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//遍历key和value</span></span><br><span class="line"><span class="keyword">for</span> key, value := <span class="keyword">range</span> scoreMap&#123;</span><br><span class="line">    fmt.Println(key, value)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//遍历key</span></span><br><span class="line"><span class="keyword">for</span> key := <span class="keyword">range</span> scoreMap&#123;</span><br><span class="line">    fmt.Println(key, value)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用delete-函数删除键值对"><a href="#使用delete-函数删除键值对" class="headerlink" title="使用delete()函数删除键值对"></a>使用delete()函数删除键值对</h3><p><code>delete</code>函数的格式：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">delete</span>(<span class="keyword">map</span>, key)</span><br></pre></td></tr></table></figure>
+
+<p>其中，</p>
+<ul>
+<li><p><code>map</code>：要删除键值对的map</p>
+</li>
+<li><p><code>key</code>：要删除键值对的键</p>
+</li>
+</ul>
+<p>举例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">scoreMap := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>, <span class="number">8</span>)</span><br><span class="line">scoreMap[<span class="string">&quot;武子&quot;</span>] = <span class="number">90</span></span><br><span class="line">scoreMap[<span class="string">&quot;康康&quot;</span>] = <span class="number">100</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">delete</span>(scoreMap, <span class="string">&quot;武子&quot;</span>)	<span class="comment">//delete 武子 对应的键值对</span></span><br><span class="line">fmt.<span class="built_in">println</span>(scoreMap)	<span class="comment">//输出：map[康康:100]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="按照指定顺序遍历map"><a href="#按照指定顺序遍历map" class="headerlink" title="按照指定顺序遍历map"></a>按照指定顺序遍历map</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">rand.Seed(time.Now().UnixNano()) <span class="comment">//初始化随机数种子</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> scoreMap = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>, <span class="number">200</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">100</span>; i++ &#123;</span><br><span class="line">    key := fmt.Sprintf(<span class="string">&quot;stu%02d&quot;</span>, i) <span class="comment">//生成stu开头的字符串</span></span><br><span class="line">    value := rand.Intn(<span class="number">100</span>)          <span class="comment">//生成0~99的随机整数</span></span><br><span class="line">    scoreMap[key] = value</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//取出map中的所有key存入切片keys</span></span><br><span class="line"><span class="keyword">var</span> keys = <span class="built_in">make</span>([]<span class="keyword">string</span>, <span class="number">0</span>, <span class="number">200</span>)</span><br><span class="line"><span class="keyword">for</span> key := <span class="keyword">range</span> scoreMap &#123;</span><br><span class="line">    keys = <span class="built_in">append</span>(keys, key)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//对切片进行排序</span></span><br><span class="line">sort.Strings(keys)</span><br><span class="line"><span class="comment">//按照排序后的key遍历map</span></span><br><span class="line"><span class="keyword">for</span> _, key := <span class="keyword">range</span> keys &#123;</span><br><span class="line">    fmt.Println(key, scoreMap[key])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="元素为map的切片"><a href="#元素为map的切片" class="headerlink" title="元素为map的切片"></a>元素为map的切片</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> mapSlice = <span class="built_in">make</span>([]<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 对切片中的map元素进行初始化</span></span><br><span class="line">	mapSlice[<span class="number">0</span>] = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>, <span class="number">10</span>)</span><br><span class="line">	mapSlice[<span class="number">0</span>][<span class="string">&quot;name&quot;</span>] = <span class="string">&quot;小王子&quot;</span></span><br><span class="line">	mapSlice[<span class="number">0</span>][<span class="string">&quot;password&quot;</span>] = <span class="string">&quot;123456&quot;</span></span><br><span class="line">	mapSlice[<span class="number">0</span>][<span class="string">&quot;address&quot;</span>] = <span class="string">&quot;沙河&quot;</span></span><br><span class="line">    </span><br><span class="line">    fmt.Println(mapSlice)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="值为切片类型的map"><a href="#值为切片类型的map" class="headerlink" title="值为切片类型的map"></a>值为切片类型的map</h3><p>下面的代码演示了map中值为切片类型的操作：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> sliceMap = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>][]<span class="keyword">string</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">	key := <span class="string">&quot;中国&quot;</span></span><br><span class="line">    </span><br><span class="line">	<span class="comment">//判定key是否在map中</span></span><br><span class="line">    value, ok := sliceMap[key]</span><br><span class="line">	<span class="keyword">if</span> !ok &#123;</span><br><span class="line">		value = <span class="built_in">make</span>([]<span class="keyword">string</span>, <span class="number">0</span>, <span class="number">2</span>)</span><br><span class="line">	&#125;</span><br><span class="line">    value = <span class="built_in">append</span>(value, <span class="string">&quot;北京&quot;</span>, <span class="string">&quot;上海&quot;</span>)</span><br><span class="line">	</span><br><span class="line">    sliceMap[key] = value</span><br><span class="line">	</span><br><span class="line">    fmt.Println(sliceMap)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/08/04/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/map/" data-id="ckrwd22d9000iqcubftd96roe" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/08/04/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/%E5%8C%85/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/08/04/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/fmt%E6%95%B4%E7%90%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/08/04/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/04/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/%E6%8C%87%E9%92%88/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/04/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/%E8%BF%90%E7%AE%97%E7%AC%A6/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/04/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/%E6%95%B0%E7%BB%84/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/04/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/%E5%88%87%E7%89%87/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="接口接口类型接口是一种抽象类型。 interface是一组method的集合，是duck-type programming的体现。 接口做的事情是定义一个协议，不关心属性(数据)，只关心行为(方法) 接口的定义Go语言提倡面向接口编程 每个接口由数个方法组成，接口的定义格式： 1234type 接口名 interface&amp;#123;    方法名1( 参数列表1 ) 返回值列表1    方法名2(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2021/08/04/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/%E6%8E%A5%E5%8F%A3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="接口接口类型接口是一种抽象类型。 interface是一组method的集合，是duck-type programming的体现。 接口做的事情是定义一个协议，不关心属性(数据)，只关心行为(方法) 接口的定义Go语言提倡面向接口编程 每个接口由数个方法组成，接口的定义格式： 1234type 接口名 interface&amp;#123;    方法名1( 参数列表1 ) 返回值列表1    方法名2(">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.liwenzhou.com/images/Go/interface/interface.png">
+<meta property="article:published_time" content="2021-08-03T17:50:53.370Z">
+<meta property="article:modified_time" content="2021-08-03T11:11:00.866Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.liwenzhou.com/images/Go/interface/interface.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Go语言学习/接口" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/08/04/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/%E6%8E%A5%E5%8F%A3/" class="article-date">
+  <time class="dt-published" datetime="2021-08-03T17:50:53.370Z" itemprop="datePublished">2021-08-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><h3 id="接口类型"><a href="#接口类型" class="headerlink" title="接口类型"></a>接口类型</h3><p>接口是一种抽象类型。</p>
+<p><code>interface</code>是一组<code>method</code>的集合，是<code>duck-type programming</code>的体现。</p>
+<p>接口做的事情是定义一个协议，不关心属性(数据)，只关心行为(方法)</p>
+<h3 id="接口的定义"><a href="#接口的定义" class="headerlink" title="接口的定义"></a>接口的定义</h3><p>Go语言提倡面向接口编程</p>
+<p>每个接口由数个方法组成，接口的定义格式：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> 接口名 <span class="keyword">interface</span>&#123;</span><br><span class="line">    方法名<span class="number">1</span>( 参数列表<span class="number">1</span> ) 返回值列表<span class="number">1</span></span><br><span class="line">    方法名<span class="number">2</span>( 参数列表<span class="number">2</span> ) 返回值列表<span class="number">2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<ul>
+<li>接口名：使用<code>type</code>将接口定义为自定义的类型名，Go的接口在命名时通常在单词后面添加<code>er</code></li>
+<li>方法名：可以公有也可以私有</li>
+<li>参数列表、返回值列表：参数变量名可以省略</li>
+</ul>
+<p>举例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> writer <span class="keyword">interface</span>&#123;</span><br><span class="line">    Write([]<span class="keyword">byte</span>) error</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="实现接口"><a href="#实现接口" class="headerlink" title="实现接口"></a>实现接口</h3><p>一个对象只要实现了接口中的全部方法，就实现了这个接口，所以接口就是一个需要实现的方法列表。</p>
+<p>举例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Sayer 接口</span></span><br><span class="line"><span class="keyword">type</span> Sayer <span class="keyword">interface</span> &#123;</span><br><span class="line">	say()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义dog和cat两个结构体：</span></span><br><span class="line"><span class="keyword">type</span> dog <span class="keyword">struct</span> &#123;&#125;</span><br><span class="line"><span class="keyword">type</span> cat <span class="keyword">struct</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// dog实现了Sayer接口</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d dog)</span> <span class="title">say</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;汪汪汪&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// cat实现了Sayer接口</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c cat)</span> <span class="title">say</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;喵喵喵&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="接口类型变量"><a href="#接口类型变量" class="headerlink" title="接口类型变量"></a>接口类型变量</h3><p>实现了接口，就可以通过接口实现多态</p>
+<p>举例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> x Sayer <span class="comment">// 声明一个Sayer类型的变量x</span></span><br><span class="line">	</span><br><span class="line">    a := cat&#123;&#125;  <span class="comment">// 实例化一个cat</span></span><br><span class="line">	b := dog&#123;&#125;  <span class="comment">// 实例化一个dog</span></span><br><span class="line">	</span><br><span class="line">    x = a       <span class="comment">// 可以把cat实例直接赋值给x</span></span><br><span class="line">	x.say()     <span class="comment">// 喵喵喵</span></span><br><span class="line">	</span><br><span class="line">    x = b       <span class="comment">// 可以把dog实例直接赋值给x</span></span><br><span class="line">	x.say()     <span class="comment">// 汪汪汪</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="值接收者和指针接收者实现接口的区别"><a href="#值接收者和指针接收者实现接口的区别" class="headerlink" title="值接收者和指针接收者实现接口的区别"></a>值接收者和指针接收者实现接口的区别</h3><p><strong>使用值接收者实现接口后</strong></p>
+<p>不管是类型变量，还是指针类型变量，都可以赋给该接口变量</p>
+<p>举例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d dog)</span> <span class="title">move</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;狗会动&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> x Mover</span><br><span class="line">	</span><br><span class="line">    <span class="keyword">var</span> wangcai = dog&#123;&#125; <span class="comment">// 旺财是dog类型</span></span><br><span class="line">	x = wangcai         <span class="comment">// x可以接收dog类型</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> fugui = &amp;dog&#123;&#125;  <span class="comment">// 富贵是*dog类型</span></span><br><span class="line">	x = fugui           <span class="comment">// x可以接收*dog类型</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用指针接收者实现接口后：</strong></p>
+<p>只有指针类型变量可以赋给该接口变量</p>
+<p>举例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d *dog)</span> <span class="title">move</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;狗会动&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> x Mover</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> wangcai = dog&#123;&#125; <span class="comment">// 旺财是dog类型</span></span><br><span class="line">	x = wangcai         <span class="comment">// x不可以接收dog类型</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> fugui = &amp;dog&#123;&#125;  <span class="comment">// 富贵是*dog类型</span></span><br><span class="line">	x = fugui           <span class="comment">// x可以接收*dog类型</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="类型与接口的关系"><a href="#类型与接口的关系" class="headerlink" title="类型与接口的关系"></a>类型与接口的关系</h3><p>一个类型可以实现多个接口，且接口直接相互独立。</p>
+<p>多个类型也可以实现一个接口。</p>
+<h3 id="接口嵌套"><a href="#接口嵌套" class="headerlink" title="接口嵌套"></a>接口嵌套</h3><p>接口之间可以嵌套产生新的接口，这里类似继承的关系</p>
+<p>举例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Sayer 接口</span></span><br><span class="line"><span class="keyword">type</span> Sayer <span class="keyword">interface</span> &#123;</span><br><span class="line">	say()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Mover 接口</span></span><br><span class="line"><span class="keyword">type</span> Mover <span class="keyword">interface</span> &#123;</span><br><span class="line">	move()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 接口嵌套</span></span><br><span class="line"><span class="keyword">type</span> animal <span class="keyword">interface</span> &#123;</span><br><span class="line">	Sayer</span><br><span class="line">	Mover</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="空接口"><a href="#空接口" class="headerlink" title="空接口"></a>空接口</h3><h5 id="空接口的定义"><a href="#空接口的定义" class="headerlink" title="空接口的定义"></a>空接口的定义</h5><p>空接口是指没有定义任何方法的接口。因此任何类型都实现了空接口。</p>
+<p>空接口类型的变量可以存储任意类型的变量。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义一个空接口x</span></span><br><span class="line"><span class="keyword">var</span> x <span class="keyword">interface</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="空接口的应用"><a href="#空接口的应用" class="headerlink" title="空接口的应用"></a>空接口的应用</h5><p><strong>空接口作为函数的参数</strong></p>
+<p>使用空接口实现可以接收任意类型的函数参数。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 空接口作为函数参数</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">show</span><span class="params">(a <span class="keyword">interface</span>&#123;&#125;)</span></span> &#123;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;type:%T value:%v\n&quot;</span>, a, a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>空接口作为map的值</strong></p>
+<p>使用空接口实现可以保存任意值的字典。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 空接口作为map值</span></span><br><span class="line"><span class="keyword">var</span> studentInfo = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">interface</span>&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="类型断言"><a href="#类型断言" class="headerlink" title="类型断言"></a>类型断言</h3><h5 id="接口值"><a href="#接口值" class="headerlink" title="接口值"></a>接口值</h5><p>接口值是由<code>具体类型</code>和<code>具体类型的值</code>两部分组成，这两部分称为接口的<code>动态类型</code>和<code>动态值</code></p>
+<p>举例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> w io.Writer</span><br><span class="line">w = os.Stdout</span><br><span class="line">w = <span class="built_in">new</span>(bytes.Buffer)</span><br><span class="line">w = <span class="literal">nil</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://www.liwenzhou.com/images/Go/interface/interface.png" alt="接口值图解"></p>
+<h5 id="类型断言-1"><a href="#类型断言-1" class="headerlink" title="类型断言"></a>类型断言</h5><p>判断空接口中的值可以使用类型断言：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x.(T)</span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<ul>
+<li>x：表示类型为<code>interface&#123;&#125;</code>的变量</li>
+<li>T：表示断言x可能的类型</li>
+</ul>
+<p>该函数返回两个参数</p>
+<ul>
+<li>参数一：x转化为T类型后的变量</li>
+<li>参数二：如果断言正确则为<code>true</code>，否则为<code>false</code></li>
+</ul>
+<p>可以使用<code>switch</code>语句实现多次断言</p>
+<p>举例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> v := x.(<span class="keyword">type</span>) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="keyword">string</span>:</span><br><span class="line">    fmt.Printf(<span class="string">&quot;x is a string，value is %v\n&quot;</span>, v)</span><br><span class="line">    <span class="keyword">case</span> <span class="keyword">int</span>:</span><br><span class="line">    fmt.Printf(<span class="string">&quot;x is a int is %v\n&quot;</span>, v)</span><br><span class="line">    <span class="keyword">case</span> <span class="keyword">bool</span>:</span><br><span class="line">    fmt.Printf(<span class="string">&quot;x is a bool is %v\n&quot;</span>, v)</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">    fmt.Println(<span class="string">&quot;unsupport type！&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/08/04/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/%E6%8E%A5%E5%8F%A3/" data-id="ckrwd22ea000rqcub2vqye6bz" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/08/04/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/%E7%BB%93%E6%9E%84%E4%BD%93/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/08/04/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/08/04/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/04/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/%E6%8C%87%E9%92%88/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/04/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/%E8%BF%90%E7%AE%97%E7%AC%A6/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/04/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/%E6%95%B0%E7%BB%84/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/04/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/%E5%88%87%E7%89%87/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

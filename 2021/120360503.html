@@ -889,7 +889,7 @@ SET GOARCH=amd64    //目标处理器架构是amd64
 </div>
 
 <script src="/libs/valine/av-min.js"></script>
-<script src="/libs/valine/Valine.min.js"></script>
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
 <script>
     new Valine({
         el: '#vcomments',
@@ -898,7 +898,7 @@ SET GOARCH=amd64    //目标处理器架构是amd64
         notify: 'true' === 'true',
         verify: 'false' === 'true',
         visitor: 'true' === 'true',
-        avatar: 'monsterid',
+        avatar: '',
         pageSize: '10',
         lang: 'zh-cn',
         placeholder: 'Comment here',

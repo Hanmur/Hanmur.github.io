@@ -333,7 +333,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -494,7 +494,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-02
+                    2021-12-07
                 </div>
                 
 
@@ -529,7 +529,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="在-Go-中恰到好处的内存对齐"><a href="#在-Go-中恰到好处的内存对齐" class="headerlink" title="在 Go 中恰到好处的内存对齐"></a>在 Go 中恰到好处的内存对齐</h1><p>作者：<a target="_blank" rel="noopener" href="https://segmentfault.com/u/eddycjy"><strong>煎鱼</strong></a></p>
-<p>原文地址：<a target="_blank" rel="noopener" href="https://link.segmentfault.com/?url=https://book.eddycjy.com/golang/talk/go-memory-align.html">在 Go 中恰到好处的内存对齐</a></p>
+<p>原文地址：<a target="_blank" rel="noopener" href="https://link.segmentfault.com/?url=https%3A%2F%2Fbook.eddycjy.com%2Fgolang%2Ftalk%2Fgo-memory-align.html">在 Go 中恰到好处的内存对齐</a></p>
 <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><pre><code>type Part1 struct {
     a bool
     b int32
@@ -537,8 +537,7 @@
     d int64
     e byte
 }
-</code></pre>
-<p>在开始之前，希望你计算一下 <code>Part1</code> 共占用的大小是多少呢？</p>
+</code></pre><p>在开始之前，希望你计算一下 <code>Part1</code> 共占用的大小是多少呢？</p>
 <pre><code>func main() {
     fmt.Printf("bool size: %d\n", unsafe.Sizeof(bool(true)))
     fmt.Printf("int32 size: %d\n", unsafe.Sizeof(int32(0)))
@@ -547,16 +546,14 @@
     fmt.Printf("byte size: %d\n", unsafe.Sizeof(byte(0)))
     fmt.Printf("string size: %d\n", unsafe.Sizeof("EDDYCJY"))
 }
-</code></pre>
-<p>输出结果：</p>
+</code></pre><p>输出结果：</p>
 <pre><code>bool size: 1
 int32 size: 4
 int8 size: 1
 int64 size: 8
 byte size: 1
 string size: 16
-</code></pre>
-<p>这么一算，<code>Part1</code> 这一个结构体的占用内存大小为 1+4+1+8+1 = 15 个字节。相信有的小伙伴是这么算的，看上去也没什么毛病</p>
+</code></pre><p>这么一算，<code>Part1</code> 这一个结构体的占用内存大小为 1+4+1+8+1 = 15 个字节。相信有的小伙伴是这么算的，看上去也没什么毛病</p>
 <p>真实情况是怎么样的呢？我们实际调用看看，如下：</p>
 <pre><code>type Part1 struct {
     a bool
@@ -568,14 +565,12 @@ string size: 16
 
 func main() {
     part1 := Part1{}
-    
+
     fmt.Printf("part1 size: %d, align: %d\n", unsafe.Sizeof(part1), unsafe.Alignof(part1))
 }
-</code></pre>
-<p>输出结果：</p>
+</code></pre><p>输出结果：</p>
 <pre><code>part1 size: 32, align: 8
-</code></pre>
-<p>最终输出为占用 32 个字节。这与前面所预期的结果完全不一样。这充分地说明了先前的计算方式是错误的。为什么呢？</p>
+</code></pre><p>最终输出为占用 32 个字节。这与前面所预期的结果完全不一样。这充分地说明了先前的计算方式是错误的。为什么呢？</p>
 <p>在这里要提到 “内存对齐” 这一概念，才能够用正确的姿势去计算，接下来我们详细的讲讲它是什么</p>
 <h2 id="内存对齐"><a href="#内存对齐" class="headerlink" title="内存对齐"></a>内存对齐</h2><p>有的小伙伴可能会认为内存读取，就是一个简单的字节数组摆放</p>
 <p><img src="https://segmentfault.com/img/remote/1460000017527315?w=319&amp;h=149" alt="image"></p>
@@ -617,8 +612,7 @@ func main() {
     fmt.Printf("string align: %d\n", unsafe.Alignof("EDDYCJY"))
     fmt.Printf("map align: %d\n", unsafe.Alignof(map[string]string{}))
 }
-</code></pre>
-<p>输出结果：</p>
+</code></pre><p>输出结果：</p>
 <pre><code>bool align: 1
 int32 align: 4
 int8 align: 1
@@ -626,8 +620,7 @@ int64 align: 8
 byte align: 1
 string align: 8
 map align: 8
-</code></pre>
-<p>在 Go 中可以调用 <code>unsafe.Alignof</code> 来返回相应类型的对齐系数。通过观察输出结果，可得知基本都是 <code>2^n</code>，最大也不会超过 8。这是因为我手提（64 位）编译器默认对齐系数是 8，因此最大值不会超过这个数</p>
+</code></pre><p>在 Go 中可以调用 <code>unsafe.Alignof</code> 来返回相应类型的对齐系数。通过观察输出结果，可得知基本都是 <code>2^n</code>，最大也不会超过 8。这是因为我手提（64 位）编译器默认对齐系数是 8，因此最大值不会超过这个数</p>
 <h3 id="整体对齐"><a href="#整体对齐" class="headerlink" title="整体对齐"></a>整体对齐</h3><p>在上小节中，提到了结构体中的成员变量要做字节对齐。那么想当然身为最终结果的结构体，也是需要做字节对齐的</p>
 <h3 id="对齐规则"><a href="#对齐规则" class="headerlink" title="对齐规则"></a>对齐规则</h3><ul>
 <li>结构体的成员变量，第一个成员变量的偏移量为 0。往后的每个成员变量的对齐值必须为<strong>编译器默认对齐长度</strong>（<code>#pragma pack(n)</code>）或<strong>当前成员变量类型的长度</strong>（<code>unsafe.Sizeof</code>），取<strong>最小值作为当前类型的对齐值</strong>。其偏移量必须为对齐值的整数倍</li>
@@ -635,6 +628,7 @@ map align: 8
 <li>结合以上两点，可得知若<strong>编译器默认对齐长度</strong>（<code>#pragma pack(n)</code>）超过结构体内成员变量的类型最大长度时，默认对齐长度是没有任何意义的</li>
 </ul>
 <h2 id="分析流程"><a href="#分析流程" class="headerlink" title="分析流程"></a>分析流程</h2><p>接下来我们一起分析一下，“它” 到底经历了些什么，影响了 “预期” 结果</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -644,7 +638,8 @@ map align: 8
 <th>自身占用</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>a</td>
 <td>bool</td>
 <td>0</td>
@@ -698,7 +693,9 @@ map align: 8
 <td>-</td>
 <td>32</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h3 id="成员对齐-1"><a href="#成员对齐-1" class="headerlink" title="成员对齐"></a>成员对齐</h3><ul>
 <li>第一个成员 a<ul>
 <li>类型为 bool</li>
@@ -760,13 +757,12 @@ func main() {
     fmt.Printf("part1 size: %d, align: %d\n", unsafe.Sizeof(part1), unsafe.Alignof(part1))
     fmt.Printf("part2 size: %d, align: %d\n", unsafe.Sizeof(part2), unsafe.Alignof(part2))
 }
-</code></pre>
-<p>输出结果：</p>
+</code></pre><p>输出结果：</p>
 <pre><code>part1 size: 32, align: 8part2 size: 16, align: 8
-</code></pre>
-<p>通过结果可以惊喜的发现，只是 “简单” 对成员变量的字段顺序进行改变，就改变了结构体占用大小</p>
+</code></pre><p>通过结果可以惊喜的发现，只是 “简单” 对成员变量的字段顺序进行改变，就改变了结构体占用大小</p>
 <p>接下来我们一起剖析一下 <code>Part2</code>，看看它的内部到底和上一位之间有什么区别，才导致了这样的结果？</p>
-<h3 id="分析流程-1"><a href="#分析流程-1" class="headerlink" title="分析流程"></a>分析流程</h3><table>
+<h3 id="分析流程-1"><a href="#分析流程-1" class="headerlink" title="分析流程"></a>分析流程</h3><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>成员变量</th>
@@ -775,7 +771,8 @@ func main() {
 <th>自身占用</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>e</td>
 <td>byte</td>
 <td>0</td>
@@ -817,7 +814,9 @@ func main() {
 <td>-</td>
 <td>16</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h4 id="成员对齐-2"><a href="#成员对齐-2" class="headerlink" title="成员对齐"></a>成员对齐</h4><ul>
 <li>第一个成员 e<ul>
 <li>类型为 byte</li>
@@ -1364,7 +1363,7 @@ func main() {
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="切片">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="切片">
                         
                         <span class="card-title">切片</span>
                     </div>
@@ -1566,6 +1565,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
@@ -1584,7 +1590,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">41.9k</span>
+                        class="white-color">36.5k</span>
             
             
             
@@ -1820,9 +1826,9 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-
+    <script src="/js/FunnyTitle.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 
 </html>

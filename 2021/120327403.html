@@ -333,7 +333,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -494,7 +494,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-03
+                    2021-12-07
                 </div>
                 
 
@@ -536,138 +536,138 @@
 <li><code>Println</code>会在输出内容结尾增加换行符</li>
 </ul>
 <p>三个函数签名：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">Print</span><span class="token punctuation">(</span>a <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">,</span> err <span class="token builtin">error</span><span class="token punctuation">)</span>
-<span class="token keyword">func</span> <span class="token function">Printf</span><span class="token punctuation">(</span>format <span class="token builtin">string</span><span class="token punctuation">,</span> a <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">,</span> err <span class="token builtin">error</span><span class="token punctuation">)</span>
-<span class="token keyword">func</span> <span class="token function">Println</span><span class="token punctuation">(</span>a <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">,</span> err <span class="token builtin">error</span><span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func Print(a ...interface{}) (n int, err error)
+func Printf(format string, a ...interface{}) (n int, err error)
+func Println(a ...interface{}) (n int, err error)
 </code></pre>
 <h3 id="Fprint"><a href="#Fprint" class="headerlink" title="Fprint"></a>Fprint</h3><p><code>Fprint</code>函数会将内容输出到一个<code>io.Writer</code>接口类型的变量<code>w</code>中，是用于文件处理的函数。</p>
 <p>三个函数签名：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">Fprint</span><span class="token punctuation">(</span>w io<span class="token punctuation">.</span>Writer<span class="token punctuation">,</span> a <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">,</span> err <span class="token builtin">error</span><span class="token punctuation">)</span>
-<span class="token keyword">func</span> <span class="token function">Fprintf</span><span class="token punctuation">(</span>w io<span class="token punctuation">.</span>Writer<span class="token punctuation">,</span> format <span class="token builtin">string</span><span class="token punctuation">,</span> a <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">,</span> err <span class="token builtin">error</span><span class="token punctuation">)</span>
-<span class="token keyword">func</span> <span class="token function">Fprintln</span><span class="token punctuation">(</span>w io<span class="token punctuation">.</span>Writer<span class="token punctuation">,</span> a <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">,</span> err <span class="token builtin">error</span><span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func Fprint(w io.Writer, a ...interface{}) (n int, err error)
+func Fprintf(w io.Writer, format string, a ...interface{}) (n int, err error)
+func Fprintln(w io.Writer, a ...interface{}) (n int, err error)
 </code></pre>
 <p>举例：</p>
-<pre class=" language-go"><code class="language-go"><span class="token comment" spellcheck="true">// 向标准输出写入内容</span>
-fmt<span class="token punctuation">.</span><span class="token function">Fprintln</span><span class="token punctuation">(</span>os<span class="token punctuation">.</span>Stdout<span class="token punctuation">,</span> <span class="token string">"向标准输出写入内容"</span><span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true">// 打开文件</span>
-fileObj<span class="token punctuation">,</span> err <span class="token operator">:=</span> os<span class="token punctuation">.</span><span class="token function">OpenFile</span><span class="token punctuation">(</span><span class="token string">"./xx.txt"</span><span class="token punctuation">,</span> os<span class="token punctuation">.</span>O_CREATE<span class="token operator">|</span>os<span class="token punctuation">.</span>O_WRONLY<span class="token operator">|</span>os<span class="token punctuation">.</span>O_APPEND<span class="token punctuation">,</span> <span class="token number">0644</span><span class="token punctuation">)</span>
-<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"打开文件出错，err:"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
-    <span class="token keyword">return</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">// 向标准输出写入内容
+fmt.Fprintln(os.Stdout, "向标准输出写入内容")
+// 打开文件
+fileObj, err := os.OpenFile("./xx.txt", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
+if err != nil {
+    fmt.Println("打开文件出错，err:", err)
+    return
+}
 
-name <span class="token operator">:=</span> <span class="token string">"康康"</span>
-<span class="token comment" spellcheck="true">// 向打开的文件句柄中写入内容</span>
-fmt<span class="token punctuation">.</span><span class="token function">Fprintf</span><span class="token punctuation">(</span>fileObj<span class="token punctuation">,</span> <span class="token string">"往文件中写入信息：%s"</span><span class="token punctuation">,</span> name<span class="token punctuation">)</span>
+name := "康康"
+// 向打开的文件句柄中写入内容
+fmt.Fprintf(fileObj, "往文件中写入信息：%s", name)
 </code></pre>
 <blockquote>
 <p>注意：只要满足<code>io.Writer</code>接口的类型都支持写入。</p>
 </blockquote>
 <h3 id="Sprint"><a href="#Sprint" class="headerlink" title="Sprint"></a>Sprint</h3><p><code>Sprint</code>系列函数会把传入的数据生成并返回一个字符串。</p>
 <p>三个函数签名：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">Sprint</span><span class="token punctuation">(</span>a <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token builtin">string</span>
-<span class="token keyword">func</span> <span class="token function">Sprintf</span><span class="token punctuation">(</span>format <span class="token builtin">string</span><span class="token punctuation">,</span> a <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token builtin">string</span>
-<span class="token keyword">func</span> <span class="token function">Sprintln</span><span class="token punctuation">(</span>a <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token builtin">string</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func Sprint(a ...interface{}) string
+func Sprintf(format string, a ...interface{}) string
+func Sprintln(a ...interface{}) string
 </code></pre>
 <p>举例：</p>
-<pre class=" language-go"><code class="language-go">s1 <span class="token operator">:=</span> fmt<span class="token punctuation">.</span><span class="token function">Sprint</span><span class="token punctuation">(</span><span class="token string">"康康"</span><span class="token punctuation">)</span>
-name <span class="token operator">:=</span> <span class="token string">"康康"</span>
-age <span class="token operator">:=</span> <span class="token number">18</span>
-s2 <span class="token operator">:=</span> fmt<span class="token punctuation">.</span><span class="token function">Sprintf</span><span class="token punctuation">(</span><span class="token string">"name:%s,age:%d"</span><span class="token punctuation">,</span> name<span class="token punctuation">,</span> age<span class="token punctuation">)</span>
-s3 <span class="token operator">:=</span> fmt<span class="token punctuation">.</span><span class="token function">Sprintln</span><span class="token punctuation">(</span><span class="token string">"康康"</span><span class="token punctuation">)</span>
-fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>s1<span class="token punctuation">,</span> s2<span class="token punctuation">,</span> s3<span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">s1 := fmt.Sprint("康康")
+name := "康康"
+age := 18
+s2 := fmt.Sprintf("name:%s,age:%d", name, age)
+s3 := fmt.Sprintln("康康")
+fmt.Println(s1, s2, s3)
 </code></pre>
 <h3 id="Errorf"><a href="#Errorf" class="headerlink" title="Errorf"></a>Errorf</h3><p><code>Errorf</code>函数根据format参数生成格式化字符串并返回一个包含该字符串的错误。</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">Errorf</span><span class="token punctuation">(</span>format <span class="token builtin">string</span><span class="token punctuation">,</span> a <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token builtin">error</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func Errorf(format string, a ...interface{}) error
 </code></pre>
 <p>通常使用这种方式来自定义错误类型，例如：</p>
-<pre class=" language-go"><code class="language-go">err <span class="token operator">:=</span> fmt<span class="token punctuation">.</span><span class="token function">Errorf</span><span class="token punctuation">(</span><span class="token string">"这是一个错误"</span><span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">err := fmt.Errorf("这是一个错误")
 </code></pre>
 <blockquote>
 <p>Go1.13版本为<code>fmt.Errorf</code>函数新加了一个<code>%w</code>占位符用来生成一个可以包裹Error的Wrapping Error。</p>
-<pre class=" language-go"><code class="language-go">e <span class="token operator">:=</span> errors<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token string">"原始错误e"</span><span class="token punctuation">)</span>
-w <span class="token operator">:=</span> fmt<span class="token punctuation">.</span><span class="token function">Errorf</span><span class="token punctuation">(</span><span class="token string">"Wrap了一个错误%w"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">e := errors.New("原始错误e")
+w := fmt.Errorf("Wrap了一个错误%w", e)
 </code></pre>
 </blockquote>
 <h2 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h2><h3 id="mt-Scan"><a href="#mt-Scan" class="headerlink" title="mt.Scan"></a>mt.Scan</h3><p>函数签名：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">Scan</span><span class="token punctuation">(</span>a <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">,</span> err <span class="token builtin">error</span><span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func Scan(a ...interface{}) (n int, err error)
 </code></pre>
 <ul>
 <li>Scan从标准输入扫描文本，读取由空白符分隔的值保存到传递给本函数的参数中，换行符视为空白符。</li>
 <li>本函数返回成功扫描的数据个数和遇到的任何错误。如果读取的数据个数比提供的参数少，会返回一个错误报告原因。</li>
 </ul>
 <p>举例：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">var</span> <span class="token punctuation">(</span>
-        name    <span class="token builtin">string</span>
-        age     <span class="token builtin">int</span>
-        married <span class="token builtin">bool</span>
-    <span class="token punctuation">)</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Scan</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>name<span class="token punctuation">,</span> <span class="token operator">&amp;</span>age<span class="token punctuation">,</span> <span class="token operator">&amp;</span>married<span class="token punctuation">)</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"扫描结果 name:%s age:%d married:%t \n"</span><span class="token punctuation">,</span> name<span class="token punctuation">,</span> age<span class="token punctuation">,</span> married<span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func main() {
+    var (
+        name    string
+        age     int
+        married bool
+    )
+    fmt.Scan(&name, &age, &married)
+    fmt.Printf("扫描结果 name:%s age:%d married:%t \n", name, age, married)
+}
 </code></pre>
 <p><code>fmt.Scan</code>从标准输入中扫描用户输入的数据，将以空白符分隔的数据分别存入指定的参数。</p>
 <h3 id="fmt-Scanf"><a href="#fmt-Scanf" class="headerlink" title="fmt.Scanf"></a>fmt.Scanf</h3><p>函数签名：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">Scanf</span><span class="token punctuation">(</span>format <span class="token builtin">string</span><span class="token punctuation">,</span> a <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">,</span> err <span class="token builtin">error</span><span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func Scanf(format string, a ...interface{}) (n int, err error)
 </code></pre>
 <ul>
 <li>Scanf从标准输入扫描文本，根据format参数指定的格式去读取由空白符分隔的值保存到传递给本函数的参数中。</li>
 <li>本函数返回成功扫描的数据个数和遇到的任何错误。</li>
 </ul>
 <p>举例：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">var</span> <span class="token punctuation">(</span>
-        name    <span class="token builtin">string</span>
-        age     <span class="token builtin">int</span>
-        married <span class="token builtin">bool</span>
-    <span class="token punctuation">)</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Scanf</span><span class="token punctuation">(</span><span class="token string">"1:%s 2:%d 3:%t"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>name<span class="token punctuation">,</span> <span class="token operator">&amp;</span>age<span class="token punctuation">,</span> <span class="token operator">&amp;</span>married<span class="token punctuation">)</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"扫描结果 name:%s age:%d married:%t \n"</span><span class="token punctuation">,</span> name<span class="token punctuation">,</span> age<span class="token punctuation">,</span> married<span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func main() {
+    var (
+        name    string
+        age     int
+        married bool
+    )
+    fmt.Scanf("1:%s 2:%d 3:%t", &name, &age, &married)
+    fmt.Printf("扫描结果 name:%s age:%d married:%t \n", name, age, married)
+}
 </code></pre>
 <p><code>fmt.Scanf</code>不同于<code>fmt.Scan</code>简单的以空格作为输入数据的分隔符，<code>fmt.Scanf</code>为输入数据指定了具体的输入内容格式，只有按照格式输入数据才会被扫描并存入对应变量。</p>
 <p>比如此时要输入数据应该输入</p>
-<pre class=" language-go"><code class="language-go"><span class="token number">1</span><span class="token punctuation">:</span>康康 <span class="token number">2</span>：<span class="token number">17</span> <span class="token number">3</span><span class="token punctuation">:</span><span class="token boolean">false</span>
+<pre class=" language-lang-go"><code class="language-lang-go">1:康康 2：17 3:false
 </code></pre>
 <h3 id="fmt-Scanln"><a href="#fmt-Scanln" class="headerlink" title="fmt.Scanln"></a>fmt.Scanln</h3><p>函数签名：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">Scanln</span><span class="token punctuation">(</span>a <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">,</span> err <span class="token builtin">error</span><span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func Scanln(a ...interface{}) (n int, err error)
 </code></pre>
 <ul>
 <li>Scanln类似Scan，它在遇到换行时才停止扫描。最后一个数据后面必须有换行或者到达结束位置。</li>
 <li>本函数返回成功扫描的数据个数和遇到的任何错误。</li>
 </ul>
 <p>举例：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">var</span> <span class="token punctuation">(</span>
-        name    <span class="token builtin">string</span>
-        age     <span class="token builtin">int</span>
-        married <span class="token builtin">bool</span>
-    <span class="token punctuation">)</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Scanln</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>name<span class="token punctuation">,</span> <span class="token operator">&amp;</span>age<span class="token punctuation">,</span> <span class="token operator">&amp;</span>married<span class="token punctuation">)</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"扫描结果 name:%s age:%d married:%t \n"</span><span class="token punctuation">,</span> name<span class="token punctuation">,</span> age<span class="token punctuation">,</span> married<span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func main() {
+    var (
+        name    string
+        age     int
+        married bool
+    )
+    fmt.Scanln(&name, &age, &married)
+    fmt.Printf("扫描结果 name:%s age:%d married:%t \n", name, age, married)
+}
 </code></pre>
 <p><code>fmt.Scanln</code>遇到回车就结束扫描</p>
 <h3 id="bufio-NewReader"><a href="#bufio-NewReader" class="headerlink" title="bufio.NewReader"></a>bufio.NewReader</h3><p>有时候我们想完整获取输入的内容，而输入的内容可能包含空格，这种情况下可以使用<code>bufio</code>包来实现。</p>
 <p>举例：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">bufioDemo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    reader <span class="token operator">:=</span> bufio<span class="token punctuation">.</span><span class="token function">NewReader</span><span class="token punctuation">(</span>os<span class="token punctuation">.</span>Stdin<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 从标准输入生成读对象</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Print</span><span class="token punctuation">(</span><span class="token string">"请输入内容："</span><span class="token punctuation">)</span>
-    text<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> reader<span class="token punctuation">.</span><span class="token function">ReadString</span><span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 读到换行</span>
-    text <span class="token operator">=</span> strings<span class="token punctuation">.</span><span class="token function">TrimSpace</span><span class="token punctuation">(</span>text<span class="token punctuation">)</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%#v\n"</span><span class="token punctuation">,</span> text<span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func bufioDemo() {
+    reader := bufio.NewReader(os.Stdin) // 从标准输入生成读对象
+    fmt.Print("请输入内容：")
+    text, _ := reader.ReadString('\n') // 读到换行
+    text = strings.TrimSpace(text)
+    fmt.Printf("%#v\n", text)
+}
 </code></pre>
 <h3 id="Fscan系列"><a href="#Fscan系列" class="headerlink" title="Fscan系列"></a>Fscan系列</h3><p>这几个函数功能分别类似于<code>fmt.Scan</code>、<code>fmt.Scanf</code>、<code>fmt.Scanln</code>三个函数，只不过它们不是从标准输入中读取数据而是从<code>io.Reader</code>中读取数据。</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">Fscan</span><span class="token punctuation">(</span>r io<span class="token punctuation">.</span>Reader<span class="token punctuation">,</span> a <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">,</span> err <span class="token builtin">error</span><span class="token punctuation">)</span>
-<span class="token keyword">func</span> <span class="token function">Fscanln</span><span class="token punctuation">(</span>r io<span class="token punctuation">.</span>Reader<span class="token punctuation">,</span> a <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">,</span> err <span class="token builtin">error</span><span class="token punctuation">)</span>
-<span class="token keyword">func</span> <span class="token function">Fscanf</span><span class="token punctuation">(</span>r io<span class="token punctuation">.</span>Reader<span class="token punctuation">,</span> format <span class="token builtin">string</span><span class="token punctuation">,</span> a <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">,</span> err <span class="token builtin">error</span><span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func Fscan(r io.Reader, a ...interface{}) (n int, err error)
+func Fscanln(r io.Reader, a ...interface{}) (n int, err error)
+func Fscanf(r io.Reader, format string, a ...interface{}) (n int, err error)
 </code></pre>
 <h3 id="Sscan系列"><a href="#Sscan系列" class="headerlink" title="Sscan系列"></a>Sscan系列</h3><p>这几个函数功能分别类似于<code>fmt.Scan</code>、<code>fmt.Scanf</code>、<code>fmt.Scanln</code>三个函数，只不过它们不是从标准输入中读取数据而是从指定字符串中读取数据。</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">Sscan</span><span class="token punctuation">(</span>str <span class="token builtin">string</span><span class="token punctuation">,</span> a <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">,</span> err <span class="token builtin">error</span><span class="token punctuation">)</span>
-<span class="token keyword">func</span> <span class="token function">Sscanln</span><span class="token punctuation">(</span>str <span class="token builtin">string</span><span class="token punctuation">,</span> a <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">,</span> err <span class="token builtin">error</span><span class="token punctuation">)</span>
-<span class="token keyword">func</span> <span class="token function">Sscanf</span><span class="token punctuation">(</span>str <span class="token builtin">string</span><span class="token punctuation">,</span> format <span class="token builtin">string</span><span class="token punctuation">,</span> a <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">,</span> err <span class="token builtin">error</span><span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func Sscan(str string, a ...interface{}) (n int, err error)
+func Sscanln(str string, a ...interface{}) (n int, err error)
+func Sscanf(str string, format string, a ...interface{}) (n int, err error)
 </code></pre>
 
                 
@@ -1115,7 +1115,7 @@ w <span class="token operator">:=</span> fmt<span class="token punctuation">.</s
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="fmt占位符">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="fmt占位符">
                         
                         <span class="card-title">fmt占位符</span>
                     </div>
@@ -1172,7 +1172,7 @@ w <span class="token operator">:=</span> fmt<span class="token punctuation">.</s
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="flag包">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="flag包">
                         
                         <span class="card-title">flag包</span>
                     </div>
@@ -1374,6 +1374,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
@@ -1392,7 +1399,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">41.9k</span>
+                        class="white-color">36.5k</span>
             
             
             
@@ -1628,9 +1635,9 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-
+    <script src="/js/FunnyTitle.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 
 </html>

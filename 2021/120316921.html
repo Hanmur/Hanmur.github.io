@@ -333,7 +333,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -494,14 +494,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-06
+                    2021-12-07
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    999
+                    991
                 </div>
                 
 
@@ -530,82 +530,86 @@
             <div id="articleContent">
                 <h1 id="Go语言标准库flag基本使用"><a href="#Go语言标准库flag基本使用" class="headerlink" title="Go语言标准库flag基本使用"></a>Go语言标准库flag基本使用</h1><p>Go语言内置的<code>flag</code>包实现了命令行参数的解析，<code>flag</code>包使得开发命令行工具更为简单。</p>
 <h2 id="os-Args"><a href="#os-Args" class="headerlink" title="os.Args"></a>os.Args</h2><p>如果只是简单的想要获取命令行参数，可以像下面的代码示例一样使用<code>os.Args</code>来获取命令行参数。</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">package</span> main
+<pre class=" language-lang-go"><code class="language-lang-go">package main
 
-<span class="token keyword">import</span> <span class="token punctuation">(</span>
-    <span class="token string">"fmt"</span>
-    <span class="token string">"os"</span>
-<span class="token punctuation">)</span>
+import (
+    "fmt"
+    "os"
+)
 
-<span class="token comment" spellcheck="true">//os.Args demo</span>
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">//os.Args是一个[]string</span>
-    <span class="token keyword">if</span> <span class="token function">len</span><span class="token punctuation">(</span>os<span class="token punctuation">.</span>Args<span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">0</span> <span class="token punctuation">{</span>
-        <span class="token keyword">for</span> index<span class="token punctuation">,</span> arg <span class="token operator">:=</span> <span class="token keyword">range</span> os<span class="token punctuation">.</span>Args <span class="token punctuation">{</span>
-            fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"args[%d]=%v\n"</span><span class="token punctuation">,</span> index<span class="token punctuation">,</span> arg<span class="token punctuation">)</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+//os.Args demo
+func main() {
+    //os.Args是一个[]string
+    if len(os.Args) > 0 {
+        for index, arg := range os.Args {
+            fmt.Printf("args[%d]=%v\n", index, arg)
+        }
+    }
+}
 </code></pre>
 <p>将上面的代码执行<code>go build -o "args_demo"</code>编译之后，执行：</p>
-<pre class=" language-bash"><code class="language-bash">$ ./args_demo a b c d
-args<span class="token punctuation">[</span>0<span class="token punctuation">]</span><span class="token operator">=</span>./args_demo
-args<span class="token punctuation">[</span>1<span class="token punctuation">]</span><span class="token operator">=</span>a
-args<span class="token punctuation">[</span>2<span class="token punctuation">]</span><span class="token operator">=</span>b
-args<span class="token punctuation">[</span>3<span class="token punctuation">]</span><span class="token operator">=</span>c
-args<span class="token punctuation">[</span>4<span class="token punctuation">]</span><span class="token operator">=</span>d
+<pre class=" language-lang-bash"><code class="language-lang-bash">$ ./args_demo a b c d
+args[0]=./args_demo
+args[1]=a
+args[2]=b
+args[3]=c
+args[4]=d
 </code></pre>
 <p><code>os.Args</code>是一个存储命令行参数的字符串切片，它的第一个元素是执行文件的名称。</p>
 <h2 id="flag包基本使用"><a href="#flag包基本使用" class="headerlink" title="flag包基本使用"></a>flag包基本使用</h2><p>本文介绍了flag包的常用函数和基本用法，更详细的内容请查看<a target="_blank" rel="noopener" href="https://studygolang.com/pkgdoc">官方文档</a>。</p>
-<h3 id="导入flag包"><a href="#导入flag包" class="headerlink" title="导入flag包"></a>导入flag包</h3><pre class=" language-go"><code class="language-go"><span class="token keyword">import</span> flag
+<h3 id="导入flag包"><a href="#导入flag包" class="headerlink" title="导入flag包"></a>导入flag包</h3><pre class=" language-lang-go"><code class="language-lang-go">import flag
 </code></pre>
 <h3 id="flag参数类型"><a href="#flag参数类型" class="headerlink" title="flag参数类型"></a>flag参数类型</h3><p>flag包支持的命令行参数类型有<code>bool</code>、<code>int</code>、<code>int64</code>、<code>uint</code>、<code>uint64</code>、<code>float</code> <code>float64</code>、<code>string</code>、<code>duration</code>。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">flag参数</th>
-<th align="center">有效值</th>
+<th style="text-align:center">flag参数</th>
+<th style="text-align:center">有效值</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">字符串flag</td>
-<td align="center">合法字符串</td>
+<tbody>
+<tr>
+<td style="text-align:center">字符串flag</td>
+<td style="text-align:center">合法字符串</td>
 </tr>
 <tr>
-<td align="center">整数flag</td>
-<td align="center">1234、0664、0x1234等类型，也可以是负数。</td>
+<td style="text-align:center">整数flag</td>
+<td style="text-align:center">1234、0664、0x1234等类型，也可以是负数。</td>
 </tr>
 <tr>
-<td align="center">浮点数flag</td>
-<td align="center">合法浮点数</td>
+<td style="text-align:center">浮点数flag</td>
+<td style="text-align:center">合法浮点数</td>
 </tr>
 <tr>
-<td align="center">bool类型flag</td>
-<td align="center">1, 0, t, f, T, F, true, false, TRUE, FALSE, True, False。</td>
+<td style="text-align:center">bool类型flag</td>
+<td style="text-align:center">1, 0, t, f, T, F, true, false, TRUE, FALSE, True, False。</td>
 </tr>
 <tr>
-<td align="center">时间段flag</td>
-<td align="center">任何合法的时间段字符串。如”300ms”、”-1.5h”、”2h45m”。 合法的单位有”ns”、”us” /“µs”、”ms”、”s”、”m”、”h”。</td>
+<td style="text-align:center">时间段flag</td>
+<td style="text-align:center">任何合法的时间段字符串。如”300ms”、”-1.5h”、”2h45m”。 合法的单位有”ns”、”us” /“µs”、”ms”、”s”、”m”、”h”。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h3 id="定义命令行flag参数"><a href="#定义命令行flag参数" class="headerlink" title="定义命令行flag参数"></a>定义命令行flag参数</h3><p>有以下两种常用的定义命令行<code>flag</code>参数的方法。</p>
 <h4 id="flag-Type"><a href="#flag-Type" class="headerlink" title="flag.Type()"></a>flag.Type()</h4><p>基本格式如下：</p>
 <p><code>flag.Type(flag名, 默认值, 帮助信息)*Type</code> 例如我们要定义姓名、年龄、婚否三个命令行参数，我们可以按如下方式定义：</p>
-<pre class=" language-go"><code class="language-go">name <span class="token operator">:=</span> flag<span class="token punctuation">.</span><span class="token function">String</span><span class="token punctuation">(</span><span class="token string">"name"</span><span class="token punctuation">,</span> <span class="token string">"张三"</span><span class="token punctuation">,</span> <span class="token string">"姓名"</span><span class="token punctuation">)</span>
-age <span class="token operator">:=</span> flag<span class="token punctuation">.</span><span class="token function">Int</span><span class="token punctuation">(</span><span class="token string">"age"</span><span class="token punctuation">,</span> <span class="token number">18</span><span class="token punctuation">,</span> <span class="token string">"年龄"</span><span class="token punctuation">)</span>
-married <span class="token operator">:=</span> flag<span class="token punctuation">.</span><span class="token function">Bool</span><span class="token punctuation">(</span><span class="token string">"married"</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token string">"婚否"</span><span class="token punctuation">)</span>
-delay <span class="token operator">:=</span> flag<span class="token punctuation">.</span><span class="token function">Duration</span><span class="token punctuation">(</span><span class="token string">"d"</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token string">"时间间隔"</span><span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">name := flag.String("name", "张三", "姓名")
+age := flag.Int("age", 18, "年龄")
+married := flag.Bool("married", false, "婚否")
+delay := flag.Duration("d", 0, "时间间隔")
 </code></pre>
 <p>需要注意的是，此时<code>name</code>、<code>age</code>、<code>married</code>、<code>delay</code>均为对应类型的指针。</p>
 <h4 id="flag-TypeVar"><a href="#flag-TypeVar" class="headerlink" title="flag.TypeVar()"></a>flag.TypeVar()</h4><p>基本格式如下： <code>flag.TypeVar(Type指针, flag名, 默认值, 帮助信息)</code> 例如我们要定义姓名、年龄、婚否三个命令行参数，我们可以按如下方式定义：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">var</span> name <span class="token builtin">string</span>
-<span class="token keyword">var</span> age <span class="token builtin">int</span>
-<span class="token keyword">var</span> married <span class="token builtin">bool</span>
-<span class="token keyword">var</span> delay time<span class="token punctuation">.</span>Duration
-flag<span class="token punctuation">.</span><span class="token function">StringVar</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>name<span class="token punctuation">,</span> <span class="token string">"name"</span><span class="token punctuation">,</span> <span class="token string">"张三"</span><span class="token punctuation">,</span> <span class="token string">"姓名"</span><span class="token punctuation">)</span>
-flag<span class="token punctuation">.</span><span class="token function">IntVar</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>age<span class="token punctuation">,</span> <span class="token string">"age"</span><span class="token punctuation">,</span> <span class="token number">18</span><span class="token punctuation">,</span> <span class="token string">"年龄"</span><span class="token punctuation">)</span>
-flag<span class="token punctuation">.</span><span class="token function">BoolVar</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>married<span class="token punctuation">,</span> <span class="token string">"married"</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token string">"婚否"</span><span class="token punctuation">)</span>
-flag<span class="token punctuation">.</span><span class="token function">DurationVar</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>delay<span class="token punctuation">,</span> <span class="token string">"d"</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token string">"时间间隔"</span><span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">var name string
+var age int
+var married bool
+var delay time.Duration
+flag.StringVar(&name, "name", "张三", "姓名")
+flag.IntVar(&age, "age", 18, "年龄")
+flag.BoolVar(&married, "married", false, "婚否")
+flag.DurationVar(&delay, "d", 0, "时间间隔")
 </code></pre>
 <h3 id="flag-Parse"><a href="#flag-Parse" class="headerlink" title="flag.Parse()"></a>flag.Parse()</h3><p>通过以上两种方法定义好命令行flag参数后，需要通过调用<code>flag.Parse()</code>来对命令行参数进行解析。</p>
 <p>支持的命令行参数格式有以下几种：</p>
@@ -617,55 +621,55 @@ flag<span class="token punctuation">.</span><span class="token function">Duratio
 </ul>
 <p>其中，布尔类型的参数必须使用等号的方式指定。</p>
 <p>Flag解析在第一个非flag参数（单个”-“不是flag参数）之前停止，或者在终止符”–“之后停止。</p>
-<h3 id="flag其他函数"><a href="#flag其他函数" class="headerlink" title="flag其他函数"></a>flag其他函数</h3><pre class=" language-go"><code class="language-go">flag<span class="token punctuation">.</span><span class="token function">Args</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">////返回命令行参数后的其他参数，以[]string类型</span>
-flag<span class="token punctuation">.</span><span class="token function">NArg</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//返回命令行参数后的其他参数个数</span>
-flag<span class="token punctuation">.</span><span class="token function">NFlag</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//返回使用的命令行参数个数</span>
+<h3 id="flag其他函数"><a href="#flag其他函数" class="headerlink" title="flag其他函数"></a>flag其他函数</h3><pre class=" language-lang-go"><code class="language-lang-go">flag.Args()  ////返回命令行参数后的其他参数，以[]string类型
+flag.NArg()  //返回命令行参数后的其他参数个数
+flag.NFlag() //返回使用的命令行参数个数
 </code></pre>
-<h3 id="完整示例"><a href="#完整示例" class="headerlink" title="完整示例"></a>完整示例</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">//定义命令行参数方式1</span>
-    <span class="token keyword">var</span> name <span class="token builtin">string</span>
-    <span class="token keyword">var</span> age <span class="token builtin">int</span>
-    <span class="token keyword">var</span> married <span class="token builtin">bool</span>
-    <span class="token keyword">var</span> delay time<span class="token punctuation">.</span>Duration
-    flag<span class="token punctuation">.</span><span class="token function">StringVar</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>name<span class="token punctuation">,</span> <span class="token string">"name"</span><span class="token punctuation">,</span> <span class="token string">"张三"</span><span class="token punctuation">,</span> <span class="token string">"姓名"</span><span class="token punctuation">)</span>
-    flag<span class="token punctuation">.</span><span class="token function">IntVar</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>age<span class="token punctuation">,</span> <span class="token string">"age"</span><span class="token punctuation">,</span> <span class="token number">18</span><span class="token punctuation">,</span> <span class="token string">"年龄"</span><span class="token punctuation">)</span>
-    flag<span class="token punctuation">.</span><span class="token function">BoolVar</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>married<span class="token punctuation">,</span> <span class="token string">"married"</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token string">"婚否"</span><span class="token punctuation">)</span>
-    flag<span class="token punctuation">.</span><span class="token function">DurationVar</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>delay<span class="token punctuation">,</span> <span class="token string">"d"</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token string">"延迟的时间间隔"</span><span class="token punctuation">)</span>
+<h3 id="完整示例"><a href="#完整示例" class="headerlink" title="完整示例"></a>完整示例</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><pre class=" language-lang-go"><code class="language-lang-go">func main() {
+    //定义命令行参数方式1
+    var name string
+    var age int
+    var married bool
+    var delay time.Duration
+    flag.StringVar(&name, "name", "张三", "姓名")
+    flag.IntVar(&age, "age", 18, "年龄")
+    flag.BoolVar(&married, "married", false, "婚否")
+    flag.DurationVar(&delay, "d", 0, "延迟的时间间隔")
 
-    <span class="token comment" spellcheck="true">//解析命令行参数</span>
-    flag<span class="token punctuation">.</span><span class="token function">Parse</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> age<span class="token punctuation">,</span> married<span class="token punctuation">,</span> delay<span class="token punctuation">)</span>
-    <span class="token comment" spellcheck="true">//返回命令行参数后的其他参数</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>flag<span class="token punctuation">.</span><span class="token function">Args</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token comment" spellcheck="true">//返回命令行参数后的其他参数个数</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>flag<span class="token punctuation">.</span><span class="token function">NArg</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token comment" spellcheck="true">//返回使用的命令行参数个数</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>flag<span class="token punctuation">.</span><span class="token function">NFlag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+    //解析命令行参数
+    flag.Parse()
+    fmt.Println(name, age, married, delay)
+    //返回命令行参数后的其他参数
+    fmt.Println(flag.Args())
+    //返回命令行参数后的其他参数个数
+    fmt.Println(flag.NArg())
+    //返回使用的命令行参数个数
+    fmt.Println(flag.NFlag())
+}
 </code></pre>
 <h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p>命令行参数使用提示：</p>
-<pre class=" language-bash"><code class="language-bash">$ ./flag_demo -help
+<pre class=" language-lang-bash"><code class="language-lang-bash">$ ./flag_demo -help
 Usage of ./flag_demo:
   -age int
-        年龄 <span class="token punctuation">(</span>default 18<span class="token punctuation">)</span>
+        年龄 (default 18)
   -d duration
         时间间隔
   -married
         婚否
   -name string
-        姓名 <span class="token punctuation">(</span>default <span class="token string">"张三"</span><span class="token punctuation">)</span>
+        姓名 (default "张三")
 </code></pre>
 <p>正常使用命令行flag参数：</p>
-<pre class=" language-bash"><code class="language-bash">$ ./flag_demo -name 沙河娜扎 --age 28 -married<span class="token operator">=</span>false -d<span class="token operator">=</span>1h30m
-沙河娜扎 28 <span class="token boolean">false</span> 1h30m0s
-<span class="token punctuation">[</span><span class="token punctuation">]</span>
+<pre class=" language-lang-bash"><code class="language-lang-bash">$ ./flag_demo -name 沙河娜扎 --age 28 -married=false -d=1h30m
+沙河娜扎 28 false 1h30m0s
+[]
 0
 4
 </code></pre>
 <p>使用非flag命令行参数：</p>
-<pre class=" language-bash"><code class="language-bash">$ ./flag_demo a b c
-张三 18 <span class="token boolean">false</span> 0s
-<span class="token punctuation">[</span>a b c<span class="token punctuation">]</span>
+<pre class=" language-lang-bash"><code class="language-lang-bash">$ ./flag_demo a b c
+张三 18 false 0s
+[a b c]
 3
 0
 </code></pre>
@@ -1115,7 +1119,7 @@ Usage of ./flag_demo:
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="fmt包">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="fmt包">
                         
                         <span class="card-title">fmt包</span>
                     </div>
@@ -1374,6 +1378,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
@@ -1392,7 +1403,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">41.9k</span>
+                        class="white-color">36.5k</span>
             
             
             
@@ -1628,9 +1639,9 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-
+    <script src="/js/FunnyTitle.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 
 </html>

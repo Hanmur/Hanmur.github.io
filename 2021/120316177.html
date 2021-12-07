@@ -333,7 +333,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -494,7 +494,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-06
+                    2021-12-07
                 </div>
                 
 
@@ -532,283 +532,287 @@
 <p>文件是什么？</p>
 <p>计算机中的文件是存储在外部介质（通常是磁盘）上的数据集合，文件分为文本文件和二进制文件。</p>
 <h2 id="打开和关闭文件"><a href="#打开和关闭文件" class="headerlink" title="打开和关闭文件"></a>打开和关闭文件</h2><p><code>os.Open()</code>函数能够打开一个文件，返回一个<code>*File</code>和一个<code>err</code>。对得到的文件实例调用<code>close()</code>方法能够关闭文件。</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">package</span> main
+<pre class=" language-lang-go"><code class="language-lang-go">package main
 
-<span class="token keyword">import</span> <span class="token punctuation">(</span>
-    <span class="token string">"fmt"</span>
-    <span class="token string">"os"</span>
-<span class="token punctuation">)</span>
+import (
+    "fmt"
+    "os"
+)
 
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">// 只读方式打开当前目录下的main.go文件</span>
-    file<span class="token punctuation">,</span> err <span class="token operator">:=</span> os<span class="token punctuation">.</span><span class="token function">Open</span><span class="token punctuation">(</span><span class="token string">"./main.go"</span><span class="token punctuation">)</span>
-    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"open file failed!, err:"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
-        <span class="token keyword">return</span>
-    <span class="token punctuation">}</span>
-    <span class="token comment" spellcheck="true">// 关闭文件</span>
-    file<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+func main() {
+    // 只读方式打开当前目录下的main.go文件
+    file, err := os.Open("./main.go")
+    if err != nil {
+        fmt.Println("open file failed!, err:", err)
+        return
+    }
+    // 关闭文件
+    file.Close()
+}
 </code></pre>
 <p>为了防止文件忘记关闭，我们通常使用defer注册文件关闭语句。</p>
 <h2 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h2><h3 id="file-Read"><a href="#file-Read" class="headerlink" title="file.Read()"></a>file.Read()</h3><h4 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h4><p>Read方法定义如下：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token punctuation">(</span>f <span class="token operator">*</span>File<span class="token punctuation">)</span> <span class="token function">Read</span><span class="token punctuation">(</span>b <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">,</span> err <span class="token builtin">error</span><span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func (f *File) Read(b []byte) (n int, err error)
 </code></pre>
 <p>它接收一个字节切片，返回读取的字节数和可能的具体错误，读到文件末尾时会返回<code>0</code>和<code>io.EOF</code>。 举个例子：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">// 只读方式打开当前目录下的main.go文件</span>
-    file<span class="token punctuation">,</span> err <span class="token operator">:=</span> os<span class="token punctuation">.</span><span class="token function">Open</span><span class="token punctuation">(</span><span class="token string">"./main.go"</span><span class="token punctuation">)</span>
-    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"open file failed!, err:"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
-        <span class="token keyword">return</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">defer</span> file<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token comment" spellcheck="true">// 使用Read方法读取数据</span>
-    <span class="token keyword">var</span> tmp <span class="token operator">=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> <span class="token number">128</span><span class="token punctuation">)</span>
-    n<span class="token punctuation">,</span> err <span class="token operator">:=</span> file<span class="token punctuation">.</span><span class="token function">Read</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span>
-    <span class="token keyword">if</span> err <span class="token operator">==</span> io<span class="token punctuation">.</span>EOF <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"文件读完了"</span><span class="token punctuation">)</span>
-        <span class="token keyword">return</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"read file failed, err:"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
-        <span class="token keyword">return</span>
-    <span class="token punctuation">}</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"读取了%d字节数据\n"</span><span class="token punctuation">,</span> n<span class="token punctuation">)</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>tmp<span class="token punctuation">[</span><span class="token punctuation">:</span>n<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func main() {
+    // 只读方式打开当前目录下的main.go文件
+    file, err := os.Open("./main.go")
+    if err != nil {
+        fmt.Println("open file failed!, err:", err)
+        return
+    }
+    defer file.Close()
+    // 使用Read方法读取数据
+    var tmp = make([]byte, 128)
+    n, err := file.Read(tmp)
+    if err == io.EOF {
+        fmt.Println("文件读完了")
+        return
+    }
+    if err != nil {
+        fmt.Println("read file failed, err:", err)
+        return
+    }
+    fmt.Printf("读取了%d字节数据\n", n)
+    fmt.Println(string(tmp[:n]))
+}
 </code></pre>
 <h4 id="循环读取"><a href="#循环读取" class="headerlink" title="循环读取"></a>循环读取</h4><p>使用for循环读取文件中的所有数据。</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">// 只读方式打开当前目录下的main.go文件</span>
-    file<span class="token punctuation">,</span> err <span class="token operator">:=</span> os<span class="token punctuation">.</span><span class="token function">Open</span><span class="token punctuation">(</span><span class="token string">"./main.go"</span><span class="token punctuation">)</span>
-    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"open file failed!, err:"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
-        <span class="token keyword">return</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">defer</span> file<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token comment" spellcheck="true">// 循环读取文件</span>
-    <span class="token keyword">var</span> content <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span>
-    <span class="token keyword">var</span> tmp <span class="token operator">=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> <span class="token number">128</span><span class="token punctuation">)</span>
-    <span class="token keyword">for</span> <span class="token punctuation">{</span>
-        n<span class="token punctuation">,</span> err <span class="token operator">:=</span> file<span class="token punctuation">.</span><span class="token function">Read</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span>
-        <span class="token keyword">if</span> err <span class="token operator">==</span> io<span class="token punctuation">.</span>EOF <span class="token punctuation">{</span>
-            fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"文件读完了"</span><span class="token punctuation">)</span>
-            <span class="token keyword">break</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-            fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"read file failed, err:"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
-            <span class="token keyword">return</span>
-        <span class="token punctuation">}</span>
-        content <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>content<span class="token punctuation">,</span> tmp<span class="token punctuation">[</span><span class="token punctuation">:</span>n<span class="token punctuation">]</span><span class="token operator">...</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>content<span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func main() {
+    // 只读方式打开当前目录下的main.go文件
+    file, err := os.Open("./main.go")
+    if err != nil {
+        fmt.Println("open file failed!, err:", err)
+        return
+    }
+    defer file.Close()
+    // 循环读取文件
+    var content []byte
+    var tmp = make([]byte, 128)
+    for {
+        n, err := file.Read(tmp)
+        if err == io.EOF {
+            fmt.Println("文件读完了")
+            break
+        }
+        if err != nil {
+            fmt.Println("read file failed, err:", err)
+            return
+        }
+        content = append(content, tmp[:n]...)
+    }
+    fmt.Println(string(content))
+}
 </code></pre>
 <h3 id="bufio读取文件"><a href="#bufio读取文件" class="headerlink" title="bufio读取文件"></a>bufio读取文件</h3><p>bufio是在file的基础上封装了一层API，支持更多的功能。</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">package</span> main
+<pre class=" language-lang-go"><code class="language-lang-go">package main
 
-<span class="token keyword">import</span> <span class="token punctuation">(</span>
-    <span class="token string">"bufio"</span>
-    <span class="token string">"fmt"</span>
-    <span class="token string">"io"</span>
-    <span class="token string">"os"</span>
-<span class="token punctuation">)</span>
+import (
+    "bufio"
+    "fmt"
+    "io"
+    "os"
+)
 
-<span class="token comment" spellcheck="true">// bufio按行读取示例</span>
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">//打开文件</span>
-    file<span class="token punctuation">,</span> err <span class="token operator">:=</span> os<span class="token punctuation">.</span><span class="token function">Open</span><span class="token punctuation">(</span><span class="token string">"./xx.txt"</span><span class="token punctuation">)</span>
-    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"open file failed, err:"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
-        <span class="token keyword">return</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">defer</span> file<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token comment" spellcheck="true">//读取文件</span>
-    reader <span class="token operator">:=</span> bufio<span class="token punctuation">.</span><span class="token function">NewReader</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span>
-    <span class="token keyword">for</span> <span class="token punctuation">{</span>
-        line<span class="token punctuation">,</span> err <span class="token operator">:=</span> reader<span class="token punctuation">.</span><span class="token function">ReadString</span><span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//注意是字符</span>
-        <span class="token keyword">if</span> err <span class="token operator">==</span> io<span class="token punctuation">.</span>EOF <span class="token punctuation">{</span>
-            <span class="token keyword">if</span> <span class="token function">len</span><span class="token punctuation">(</span>line<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span> <span class="token punctuation">{</span>
-                fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>line<span class="token punctuation">)</span>
-            <span class="token punctuation">}</span>
-            fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"文件读完了"</span><span class="token punctuation">)</span>
-            <span class="token keyword">break</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-            fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"read file failed, err:"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
-            <span class="token keyword">return</span>
-        <span class="token punctuation">}</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Print</span><span class="token punctuation">(</span>line<span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+// bufio按行读取示例
+func main() {
+    //打开文件
+    file, err := os.Open("./xx.txt")
+    if err != nil {
+        fmt.Println("open file failed, err:", err)
+        return
+    }
+    defer file.Close()
+    //读取文件
+    reader := bufio.NewReader(file)
+    for {
+        line, err := reader.ReadString('\n') //注意是字符
+        if err == io.EOF {
+            if len(line) != 0 {
+                fmt.Println(line)
+            }
+            fmt.Println("文件读完了")
+            break
+        }
+        if err != nil {
+            fmt.Println("read file failed, err:", err)
+            return
+        }
+        fmt.Print(line)
+    }
+}
 </code></pre>
 <h3 id="ioutil读取整个文件"><a href="#ioutil读取整个文件" class="headerlink" title="ioutil读取整个文件"></a>ioutil读取整个文件</h3><p><code>io/ioutil</code>包的<code>ReadFile</code>方法能够读取完整的文件，只需要将文件名作为参数传入。</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">package</span> main
+<pre class=" language-lang-go"><code class="language-lang-go">package main
 
-<span class="token keyword">import</span> <span class="token punctuation">(</span>
-    <span class="token string">"fmt"</span>
-    <span class="token string">"io/ioutil"</span>
-<span class="token punctuation">)</span>
+import (
+    "fmt"
+    "io/ioutil"
+)
 
-<span class="token comment" spellcheck="true">// ioutil.ReadFile读取整个文件</span>
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    content<span class="token punctuation">,</span> err <span class="token operator">:=</span> ioutil<span class="token punctuation">.</span><span class="token function">ReadFile</span><span class="token punctuation">(</span><span class="token string">"./main.go"</span><span class="token punctuation">)</span>
-    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"read file failed, err:"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
-        <span class="token keyword">return</span>
-    <span class="token punctuation">}</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>content<span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+// ioutil.ReadFile读取整个文件
+func main() {
+    content, err := ioutil.ReadFile("./main.go")
+    if err != nil {
+        fmt.Println("read file failed, err:", err)
+        return
+    }
+    fmt.Println(string(content))
+}
 </code></pre>
 <h2 id="文件写入"><a href="#文件写入" class="headerlink" title="文件写入"></a>文件写入</h2><p><code>os.OpenFile()</code>函数能够以指定模式打开文件，从而实现文件写入相关功能。</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">OpenFile</span><span class="token punctuation">(</span>name <span class="token builtin">string</span><span class="token punctuation">,</span> flag <span class="token builtin">int</span><span class="token punctuation">,</span> perm FileMode<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token operator">*</span>File<span class="token punctuation">,</span> <span class="token builtin">error</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token operator">...</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func OpenFile(name string, flag int, perm FileMode) (*File, error) {
+    ...
+}
 </code></pre>
 <p>其中：</p>
 <p><code>name</code>：要打开的文件名 <code>flag</code>：打开文件的模式。 模式有以下几种：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">模式</th>
-<th align="center">含义</th>
+<th style="text-align:center">模式</th>
+<th style="text-align:center">含义</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center"><code>os.O_WRONLY</code></td>
-<td align="center">只写</td>
+<tbody>
+<tr>
+<td style="text-align:center"><code>os.O_WRONLY</code></td>
+<td style="text-align:center">只写</td>
 </tr>
 <tr>
-<td align="center"><code>os.O_CREATE</code></td>
-<td align="center">创建文件</td>
+<td style="text-align:center"><code>os.O_CREATE</code></td>
+<td style="text-align:center">创建文件</td>
 </tr>
 <tr>
-<td align="center"><code>os.O_RDONLY</code></td>
-<td align="center">只读</td>
+<td style="text-align:center"><code>os.O_RDONLY</code></td>
+<td style="text-align:center">只读</td>
 </tr>
 <tr>
-<td align="center"><code>os.O_RDWR</code></td>
-<td align="center">读写</td>
+<td style="text-align:center"><code>os.O_RDWR</code></td>
+<td style="text-align:center">读写</td>
 </tr>
 <tr>
-<td align="center"><code>os.O_TRUNC</code></td>
-<td align="center">清空</td>
+<td style="text-align:center"><code>os.O_TRUNC</code></td>
+<td style="text-align:center">清空</td>
 </tr>
 <tr>
-<td align="center"><code>os.O_APPEND</code></td>
-<td align="center">追加</td>
+<td style="text-align:center"><code>os.O_APPEND</code></td>
+<td style="text-align:center">追加</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p><code>perm</code>：文件权限，一个八进制数。r（读）04，w（写）02，x（执行）01。</p>
-<h3 id="Write和WriteString"><a href="#Write和WriteString" class="headerlink" title="Write和WriteString"></a>Write和WriteString</h3><pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">//打开文件</span>
-    file<span class="token punctuation">,</span> err <span class="token operator">:=</span> os<span class="token punctuation">.</span><span class="token function">OpenFile</span><span class="token punctuation">(</span><span class="token string">"xx.txt"</span><span class="token punctuation">,</span> os<span class="token punctuation">.</span>O_CREATE<span class="token operator">|</span>os<span class="token punctuation">.</span>O_TRUNC<span class="token operator">|</span>os<span class="token punctuation">.</span>O_WRONLY<span class="token punctuation">,</span> <span class="token number">0666</span><span class="token punctuation">)</span>
-    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"open file failed, err:"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
-        <span class="token keyword">return</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">defer</span> file<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token comment" spellcheck="true">//写入数据</span>
-    str <span class="token operator">:=</span> <span class="token string">"hello 武子"</span>
-    file<span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">)</span>       <span class="token comment" spellcheck="true">//写入字节切片数据</span>
-    file<span class="token punctuation">.</span><span class="token function">WriteString</span><span class="token punctuation">(</span><span class="token string">"hello 康康"</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//直接写入字符串数据</span>
-<span class="token punctuation">}</span>
+<h3 id="Write和WriteString"><a href="#Write和WriteString" class="headerlink" title="Write和WriteString"></a>Write和WriteString</h3><pre class=" language-lang-go"><code class="language-lang-go">func main() {
+    //打开文件
+    file, err := os.OpenFile("xx.txt", os.O_CREATE|os.O_TRUNC|os.O_WRONLY, 0666)
+    if err != nil {
+        fmt.Println("open file failed, err:", err)
+        return
+    }
+    defer file.Close()
+    //写入数据
+    str := "hello 武子"
+    file.Write([]byte(str))       //写入字节切片数据
+    file.WriteString("hello 康康") //直接写入字符串数据
+}
 </code></pre>
-<h3 id="bufio-NewWriter"><a href="#bufio-NewWriter" class="headerlink" title="bufio.NewWriter"></a>bufio.NewWriter</h3><pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">//打开文件</span>
-    file<span class="token punctuation">,</span> err <span class="token operator">:=</span> os<span class="token punctuation">.</span><span class="token function">OpenFile</span><span class="token punctuation">(</span><span class="token string">"xx.txt"</span><span class="token punctuation">,</span> os<span class="token punctuation">.</span>O_CREATE<span class="token operator">|</span>os<span class="token punctuation">.</span>O_TRUNC<span class="token operator">|</span>os<span class="token punctuation">.</span>O_WRONLY<span class="token punctuation">,</span> <span class="token number">0666</span><span class="token punctuation">)</span>
-    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"open file failed, err:"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
-        <span class="token keyword">return</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">defer</span> file<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token comment" spellcheck="true">//写入数据</span>
-    writer <span class="token operator">:=</span> bufio<span class="token punctuation">.</span><span class="token function">NewWriter</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span>
-    <span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">{</span>
-        writer<span class="token punctuation">.</span><span class="token function">WriteString</span><span class="token punctuation">(</span><span class="token string">"hello 康康\n"</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//将数据先写入缓存</span>
-    <span class="token punctuation">}</span>
-    writer<span class="token punctuation">.</span><span class="token function">Flush</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//将缓存中的内容写入文件</span>
-<span class="token punctuation">}</span>
+<h3 id="bufio-NewWriter"><a href="#bufio-NewWriter" class="headerlink" title="bufio.NewWriter"></a>bufio.NewWriter</h3><pre class=" language-lang-go"><code class="language-lang-go">func main() {
+    //打开文件
+    file, err := os.OpenFile("xx.txt", os.O_CREATE|os.O_TRUNC|os.O_WRONLY, 0666)
+    if err != nil {
+        fmt.Println("open file failed, err:", err)
+        return
+    }
+    defer file.Close()
+    //写入数据
+    writer := bufio.NewWriter(file)
+    for i := 0; i < 10; i++ {
+        writer.WriteString("hello 康康\n") //将数据先写入缓存
+    }
+    writer.Flush() //将缓存中的内容写入文件
+}
 </code></pre>
-<h3 id="ioutil-WriteFile"><a href="#ioutil-WriteFile" class="headerlink" title="ioutil.WriteFile"></a>ioutil.WriteFile</h3><pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    str <span class="token operator">:=</span> <span class="token string">"hello 沙河"</span>
-    err <span class="token operator">:=</span> ioutil<span class="token punctuation">.</span><span class="token function">WriteFile</span><span class="token punctuation">(</span><span class="token string">"./xx.txt"</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0666</span><span class="token punctuation">)</span>
-    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"write file failed, err:"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
-        <span class="token keyword">return</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+<h3 id="ioutil-WriteFile"><a href="#ioutil-WriteFile" class="headerlink" title="ioutil.WriteFile"></a>ioutil.WriteFile</h3><pre class=" language-lang-go"><code class="language-lang-go">func main() {
+    str := "hello 沙河"
+    err := ioutil.WriteFile("./xx.txt", []byte(str), 0666)
+    if err != nil {
+        fmt.Println("write file failed, err:", err)
+        return
+    }
+}
 </code></pre>
 <h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><h3 id="copyFile"><a href="#copyFile" class="headerlink" title="copyFile"></a>copyFile</h3><p>借助<code>io.Copy()</code>实现一个拷贝文件函数。</p>
-<pre class=" language-go"><code class="language-go"><span class="token comment" spellcheck="true">// CopyFile 拷贝文件函数</span>
-<span class="token keyword">func</span> <span class="token function">CopyFile</span><span class="token punctuation">(</span>dstName<span class="token punctuation">,</span> srcName <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>written <span class="token builtin">int64</span><span class="token punctuation">,</span> err <span class="token builtin">error</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">// 以读方式打开源文件</span>
-    src<span class="token punctuation">,</span> err <span class="token operator">:=</span> os<span class="token punctuation">.</span><span class="token function">Open</span><span class="token punctuation">(</span>srcName<span class="token punctuation">)</span>
-    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"open %s failed, err:%v.\n"</span><span class="token punctuation">,</span> srcName<span class="token punctuation">,</span> err<span class="token punctuation">)</span>
-        <span class="token keyword">return</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">defer</span> src<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token comment" spellcheck="true">// 以写|创建的方式打开目标文件</span>
-    dst<span class="token punctuation">,</span> err <span class="token operator">:=</span> os<span class="token punctuation">.</span><span class="token function">OpenFile</span><span class="token punctuation">(</span>dstName<span class="token punctuation">,</span> os<span class="token punctuation">.</span>O_WRONLY<span class="token operator">|</span>os<span class="token punctuation">.</span>O_CREATE<span class="token punctuation">,</span> <span class="token number">0644</span><span class="token punctuation">)</span>
-    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"open %s failed, err:%v.\n"</span><span class="token punctuation">,</span> dstName<span class="token punctuation">,</span> err<span class="token punctuation">)</span>
-        <span class="token keyword">return</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">defer</span> dst<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    
-    <span class="token keyword">return</span> io<span class="token punctuation">.</span><span class="token function">Copy</span><span class="token punctuation">(</span>dst<span class="token punctuation">,</span> src<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//调用io.Copy()拷贝内容</span>
-<span class="token punctuation">}</span>
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token boolean">_</span><span class="token punctuation">,</span> err <span class="token operator">:=</span> <span class="token function">CopyFile</span><span class="token punctuation">(</span><span class="token string">"dst.txt"</span><span class="token punctuation">,</span> <span class="token string">"src.txt"</span><span class="token punctuation">)</span>
-    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"copy file failed, err:"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
-        <span class="token keyword">return</span>
-    <span class="token punctuation">}</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"copy done!"</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">// CopyFile 拷贝文件函数
+func CopyFile(dstName, srcName string) (written int64, err error) {
+    // 以读方式打开源文件
+    src, err := os.Open(srcName)
+    if err != nil {
+        fmt.Printf("open %s failed, err:%v.\n", srcName, err)
+        return
+    }
+    defer src.Close()
+    // 以写|创建的方式打开目标文件
+    dst, err := os.OpenFile(dstName, os.O_WRONLY|os.O_CREATE, 0644)
+    if err != nil {
+        fmt.Printf("open %s failed, err:%v.\n", dstName, err)
+        return
+    }
+    defer dst.Close()
+
+    return io.Copy(dst, src) //调用io.Copy()拷贝内容
+}
+func main() {
+    _, err := CopyFile("dst.txt", "src.txt")
+    if err != nil {
+        fmt.Println("copy file failed, err:", err)
+        return
+    }
+    fmt.Println("copy done!")
+}
 </code></pre>
 <h3 id="实现一个cat命令"><a href="#实现一个cat命令" class="headerlink" title="实现一个cat命令"></a>实现一个cat命令</h3><p>使用文件操作相关知识，模拟实现linux平台<code>cat</code>命令的功能。</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">package</span> main
+<pre class=" language-lang-go"><code class="language-lang-go">package main
 
-<span class="token keyword">import</span> <span class="token punctuation">(</span>
-    <span class="token string">"bufio"</span>
-    <span class="token string">"flag"</span>
-    <span class="token string">"fmt"</span>
-    <span class="token string">"io"</span>
-    <span class="token string">"os"</span>
-<span class="token punctuation">)</span>
+import (
+    "bufio"
+    "flag"
+    "fmt"
+    "io"
+    "os"
+)
 
-<span class="token comment" spellcheck="true">// cat命令实现</span>
-<span class="token keyword">func</span> <span class="token function">cat</span><span class="token punctuation">(</span>r <span class="token operator">*</span>bufio<span class="token punctuation">.</span>Reader<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">for</span> <span class="token punctuation">{</span>
-        buf<span class="token punctuation">,</span> err <span class="token operator">:=</span> r<span class="token punctuation">.</span><span class="token function">ReadBytes</span><span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//注意是字符</span>
-        <span class="token keyword">if</span> err <span class="token operator">==</span> io<span class="token punctuation">.</span>EOF <span class="token punctuation">{</span>
-            <span class="token comment" spellcheck="true">// 退出之前将已读到的内容输出</span>
-            fmt<span class="token punctuation">.</span><span class="token function">Fprintf</span><span class="token punctuation">(</span>os<span class="token punctuation">.</span>Stdout<span class="token punctuation">,</span> <span class="token string">"%s"</span><span class="token punctuation">,</span> buf<span class="token punctuation">)</span>
-            <span class="token keyword">break</span>
-        <span class="token punctuation">}</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Fprintf</span><span class="token punctuation">(</span>os<span class="token punctuation">.</span>Stdout<span class="token punctuation">,</span> <span class="token string">"%s"</span><span class="token punctuation">,</span> buf<span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+// cat命令实现
+func cat(r *bufio.Reader) {
+    for {
+        buf, err := r.ReadBytes('\n') //注意是字符
+        if err == io.EOF {
+            // 退出之前将已读到的内容输出
+            fmt.Fprintf(os.Stdout, "%s", buf)
+            break
+        }
+        fmt.Fprintf(os.Stdout, "%s", buf)
+    }
+}
 
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    flag<span class="token punctuation">.</span><span class="token function">Parse</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 解析命令行参数</span>
-    <span class="token keyword">if</span> flag<span class="token punctuation">.</span><span class="token function">NArg</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">// 如果没有参数默认从标准输入读取内容</span>
-        <span class="token function">cat</span><span class="token punctuation">(</span>bufio<span class="token punctuation">.</span><span class="token function">NewReader</span><span class="token punctuation">(</span>os<span class="token punctuation">.</span>Stdin<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-    <span class="token comment" spellcheck="true">// 依次读取每个指定文件的内容并打印到终端</span>
-    <span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> flag<span class="token punctuation">.</span><span class="token function">NArg</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">{</span>
-        f<span class="token punctuation">,</span> err <span class="token operator">:=</span> os<span class="token punctuation">.</span><span class="token function">Open</span><span class="token punctuation">(</span>flag<span class="token punctuation">.</span><span class="token function">Arg</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span>
-        <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-            fmt<span class="token punctuation">.</span><span class="token function">Fprintf</span><span class="token punctuation">(</span>os<span class="token punctuation">.</span>Stdout<span class="token punctuation">,</span> <span class="token string">"reading from %s failed, err:%v\n"</span><span class="token punctuation">,</span> flag<span class="token punctuation">.</span><span class="token function">Arg</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
-            <span class="token keyword">continue</span>
-        <span class="token punctuation">}</span>
-        <span class="token function">cat</span><span class="token punctuation">(</span>bufio<span class="token punctuation">.</span><span class="token function">NewReader</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+func main() {
+    flag.Parse() // 解析命令行参数
+    if flag.NArg() == 0 {
+        // 如果没有参数默认从标准输入读取内容
+        cat(bufio.NewReader(os.Stdin))
+    }
+    // 依次读取每个指定文件的内容并打印到终端
+    for i := 0; i < flag.NArg(); i++ {
+        f, err := os.Open(flag.Arg(i))
+        if err != nil {
+            fmt.Fprintf(os.Stdout, "reading from %s failed, err:%v\n", flag.Arg(i), err)
+            continue
+        }
+        cat(bufio.NewReader(f))
+    }
+}
 </code></pre>
 
                 
@@ -1256,7 +1260,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="文件属性filemode">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="文件属性filemode">
                         
                         <span class="card-title">文件属性filemode</span>
                     </div>
@@ -1313,7 +1317,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="随机数">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="随机数">
                         
                         <span class="card-title">随机数</span>
                     </div>
@@ -1515,6 +1519,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
@@ -1533,7 +1544,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">41.9k</span>
+                        class="white-color">36.5k</span>
             
             
             
@@ -1769,9 +1780,9 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-
+    <script src="/js/FunnyTitle.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 
 </html>

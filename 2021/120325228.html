@@ -333,7 +333,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -494,7 +494,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-03
+                    2021-12-07
                 </div>
                 
 
@@ -528,14 +528,16 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="fmt占位符"><a href="#fmt占位符" class="headerlink" title="fmt占位符"></a>fmt占位符</h1><h2 id="通用占位符"><a href="#通用占位符" class="headerlink" title="通用占位符"></a>通用占位符</h2><table>
+                <h1 id="fmt占位符"><a href="#fmt占位符" class="headerlink" title="fmt占位符"></a>fmt占位符</h1><h2 id="通用占位符"><a href="#通用占位符" class="headerlink" title="通用占位符"></a>通用占位符</h2><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>%T</th>
 <th>查看类型</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>%v</td>
 <td>查看值</td>
 </tr>
@@ -555,188 +557,218 @@
 <td>%%</td>
 <td>百分号</td>
 </tr>
-</tbody></table>
-<h2 id="布尔型"><a href="#布尔型" class="headerlink" title="布尔型"></a>布尔型</h2><table>
-<thead>
-<tr>
-<th align="center">占位符</th>
-<th align="center">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">%t</td>
-<td align="center">true或false</td>
-</tr>
-</tbody></table>
-<h2 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h2><table>
-<thead>
-<tr>
-<th align="center">占位符</th>
-<th align="center">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">%b</td>
-<td align="center">表示为二进制</td>
-</tr>
-<tr>
-<td align="center">%c</td>
-<td align="center">该值对应的unicode码值</td>
-</tr>
-<tr>
-<td align="center">%d</td>
-<td align="center">表示为十进制</td>
-</tr>
-<tr>
-<td align="center">%o</td>
-<td align="center">表示为八进制</td>
-</tr>
-<tr>
-<td align="center">%x</td>
-<td align="center">表示为十六进制，使用a-f</td>
-</tr>
-<tr>
-<td align="center">%X</td>
-<td align="center">表示为十六进制，使用A-F</td>
-</tr>
-<tr>
-<td align="center">%U</td>
-<td align="center">表示为Unicode格式：U+1234，等价于”U+%04X”</td>
-</tr>
-<tr>
-<td align="center">%q</td>
-<td align="center">该值对应的单引号括起来的go语法字符字面值，必要时会采用安全的转义表示</td>
-</tr>
-</tbody></table>
-<h2 id="浮点数与复数"><a href="#浮点数与复数" class="headerlink" title="浮点数与复数"></a>浮点数与复数</h2><table>
-<thead>
-<tr>
-<th align="center">占位符</th>
-<th align="center">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">%b</td>
-<td align="center">无小数部分、二进制指数的科学计数法，如-123456p-78</td>
-</tr>
-<tr>
-<td align="center">%e</td>
-<td align="center">科学计数法，如-1234.456e+78</td>
-</tr>
-<tr>
-<td align="center">%E</td>
-<td align="center">科学计数法，如-1234.456E+78</td>
-</tr>
-<tr>
-<td align="center">%f</td>
-<td align="center">有小数部分但无指数部分，如123.456</td>
-</tr>
-<tr>
-<td align="center">%F</td>
-<td align="center">等价于%f</td>
-</tr>
-<tr>
-<td align="center">%g</td>
-<td align="center">根据实际情况采用%e或%f格式（以获得更简洁、准确的输出）</td>
-</tr>
-<tr>
-<td align="center">%G</td>
-<td align="center">根据实际情况采用%E或%F格式（以获得更简洁、准确的输出）</td>
-</tr>
-</tbody></table>
-<h2 id="字符串和-byte"><a href="#字符串和-byte" class="headerlink" title="字符串和[]byte"></a>字符串和[]byte</h2><table>
-<thead>
-<tr>
-<th align="center">占位符</th>
-<th align="center">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">%s</td>
-<td align="center">直接输出字符串或者[]byte</td>
-</tr>
-<tr>
-<td align="center">%q</td>
-<td align="center">该值对应的双引号括起来的go语法字符串字面值，必要时会采用安全的转义表示</td>
-</tr>
-<tr>
-<td align="center">%x</td>
-<td align="center">每个字节用两字符十六进制数表示（使用a-f</td>
-</tr>
-<tr>
-<td align="center">%X</td>
-<td align="center">每个字节用两字符十六进制数表示（使用A-F）</td>
-</tr>
-</tbody></table>
-<h2 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h2><table>
-<thead>
-<tr>
-<th align="center">占位符</th>
-<th align="center">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">%p</td>
-<td align="center">表示为十六进制，并加上前导的0x</td>
-</tr>
-</tbody></table>
-<h2 id="宽度标识符"><a href="#宽度标识符" class="headerlink" title="宽度标识符"></a>宽度标识符</h2><p>宽度通过一个紧跟在百分号后面的十进制数指定，如果未指定宽度，则表示值时除必需之外不作填充。精度通过（可选的）宽度后跟点号后跟的十进制数指定。如果未指定精度，会使用默认精度；如果点号后没有跟数字，表示精度为0。举例如下：</p>
+</tbody>
+</table>
+</div>
+<h2 id="布尔型"><a href="#布尔型" class="headerlink" title="布尔型"></a>布尔型</h2><div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">占位符</th>
-<th align="center">说明</th>
+<th style="text-align:center">占位符</th>
+<th style="text-align:center">说明</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">%f</td>
-<td align="center">默认宽度，默认精度</td>
-</tr>
+<tbody>
 <tr>
-<td align="center">%9f</td>
-<td align="center">宽度9，默认精度</td>
+<td style="text-align:center">%t</td>
+<td style="text-align:center">true或false</td>
 </tr>
-<tr>
-<td align="center">%.2f</td>
-<td align="center">默认宽度，精度2</td>
-</tr>
-<tr>
-<td align="center">%9.2f</td>
-<td align="center">宽度9，精度2</td>
-</tr>
-<tr>
-<td align="center">%9.f</td>
-<td align="center">宽度9，精度0</td>
-</tr>
-</tbody></table>
-<h2 id="其他flag"><a href="#其他flag" class="headerlink" title="其他flag"></a>其他flag</h2><table>
+</tbody>
+</table>
+</div>
+<h2 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h2><div class="table-container">
+<table>
 <thead>
 <tr>
-<th align="center">占位符</th>
-<th align="center">说明</th>
+<th style="text-align:center">占位符</th>
+<th style="text-align:center">说明</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">’+’</td>
-<td align="center">总是输出数值的正负号；对%q（%+q）会生成全部是ASCII字符的输出（通过转义）；</td>
+<tbody>
+<tr>
+<td style="text-align:center">%b</td>
+<td style="text-align:center">表示为二进制</td>
 </tr>
 <tr>
-<td align="center">’ ‘</td>
-<td align="center">对数值，正数前加空格而负数前加负号；对字符串采用%x或%X时（% x或% X）会给各打印的字节之间加空格</td>
+<td style="text-align:center">%c</td>
+<td style="text-align:center">该值对应的unicode码值</td>
 </tr>
 <tr>
-<td align="center">’-’</td>
-<td align="center">在输出右边填充空白而不是默认的左边（即从默认的右对齐切换为左对齐）；</td>
+<td style="text-align:center">%d</td>
+<td style="text-align:center">表示为十进制</td>
 </tr>
 <tr>
-<td align="center">’#’</td>
-<td align="center">八进制数前加0（%#o），十六进制数前加0x（%#x）或0X（%#X），指针去掉前面的0x（%#p）对%q（%#q），对%U（%#U）会输出空格和单引号括起来的go字面值；</td>
+<td style="text-align:center">%o</td>
+<td style="text-align:center">表示为八进制</td>
 </tr>
 <tr>
-<td align="center">‘0’</td>
-<td align="center">使用0而不是空格填充，对于数值类型会把填充的0放在正负号后面；</td>
+<td style="text-align:center">%x</td>
+<td style="text-align:center">表示为十六进制，使用a-f</td>
 </tr>
-</tbody></table>
+<tr>
+<td style="text-align:center">%X</td>
+<td style="text-align:center">表示为十六进制，使用A-F</td>
+</tr>
+<tr>
+<td style="text-align:center">%U</td>
+<td style="text-align:center">表示为Unicode格式：U+1234，等价于”U+%04X”</td>
+</tr>
+<tr>
+<td style="text-align:center">%q</td>
+<td style="text-align:center">该值对应的单引号括起来的go语法字符字面值，必要时会采用安全的转义表示</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="浮点数与复数"><a href="#浮点数与复数" class="headerlink" title="浮点数与复数"></a>浮点数与复数</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">占位符</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">%b</td>
+<td style="text-align:center">无小数部分、二进制指数的科学计数法，如-123456p-78</td>
+</tr>
+<tr>
+<td style="text-align:center">%e</td>
+<td style="text-align:center">科学计数法，如-1234.456e+78</td>
+</tr>
+<tr>
+<td style="text-align:center">%E</td>
+<td style="text-align:center">科学计数法，如-1234.456E+78</td>
+</tr>
+<tr>
+<td style="text-align:center">%f</td>
+<td style="text-align:center">有小数部分但无指数部分，如123.456</td>
+</tr>
+<tr>
+<td style="text-align:center">%F</td>
+<td style="text-align:center">等价于%f</td>
+</tr>
+<tr>
+<td style="text-align:center">%g</td>
+<td style="text-align:center">根据实际情况采用%e或%f格式（以获得更简洁、准确的输出）</td>
+</tr>
+<tr>
+<td style="text-align:center">%G</td>
+<td style="text-align:center">根据实际情况采用%E或%F格式（以获得更简洁、准确的输出）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="字符串和-byte"><a href="#字符串和-byte" class="headerlink" title="字符串和[]byte"></a>字符串和[]byte</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">占位符</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">%s</td>
+<td style="text-align:center">直接输出字符串或者[]byte</td>
+</tr>
+<tr>
+<td style="text-align:center">%q</td>
+<td style="text-align:center">该值对应的双引号括起来的go语法字符串字面值，必要时会采用安全的转义表示</td>
+</tr>
+<tr>
+<td style="text-align:center">%x</td>
+<td style="text-align:center">每个字节用两字符十六进制数表示（使用a-f</td>
+</tr>
+<tr>
+<td style="text-align:center">%X</td>
+<td style="text-align:center">每个字节用两字符十六进制数表示（使用A-F）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">占位符</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">%p</td>
+<td style="text-align:center">表示为十六进制，并加上前导的0x</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="宽度标识符"><a href="#宽度标识符" class="headerlink" title="宽度标识符"></a>宽度标识符</h2><p>宽度通过一个紧跟在百分号后面的十进制数指定，如果未指定宽度，则表示值时除必需之外不作填充。精度通过（可选的）宽度后跟点号后跟的十进制数指定。如果未指定精度，会使用默认精度；如果点号后没有跟数字，表示精度为0。举例如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">占位符</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">%f</td>
+<td style="text-align:center">默认宽度，默认精度</td>
+</tr>
+<tr>
+<td style="text-align:center">%9f</td>
+<td style="text-align:center">宽度9，默认精度</td>
+</tr>
+<tr>
+<td style="text-align:center">%.2f</td>
+<td style="text-align:center">默认宽度，精度2</td>
+</tr>
+<tr>
+<td style="text-align:center">%9.2f</td>
+<td style="text-align:center">宽度9，精度2</td>
+</tr>
+<tr>
+<td style="text-align:center">%9.f</td>
+<td style="text-align:center">宽度9，精度0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="其他flag"><a href="#其他flag" class="headerlink" title="其他flag"></a>其他flag</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">占位符</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">’+’</td>
+<td style="text-align:center">总是输出数值的正负号；对%q（%+q）会生成全部是ASCII字符的输出（通过转义）；</td>
+</tr>
+<tr>
+<td style="text-align:center">’ ‘</td>
+<td style="text-align:center">对数值，正数前加空格而负数前加负号；对字符串采用%x或%X时（% x或% X）会给各打印的字节之间加空格</td>
+</tr>
+<tr>
+<td style="text-align:center">’-’</td>
+<td style="text-align:center">在输出右边填充空白而不是默认的左边（即从默认的右对齐切换为左对齐）；</td>
+</tr>
+<tr>
+<td style="text-align:center">’#’</td>
+<td style="text-align:center">八进制数前加0（%#o），十六进制数前加0x（%#x）或0X（%#X），指针去掉前面的0x（%#p）对%q（%#q），对%U（%#U）会输出空格和单引号括起来的go字面值；</td>
+</tr>
+<tr>
+<td style="text-align:center">‘0’</td>
+<td style="text-align:center">使用0而不是空格填充，对于数值类型会把填充的0放在正负号后面；</td>
+</tr>
+</tbody>
+</table>
+</div>
 
                 
             </div>
@@ -1183,7 +1215,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="http-net包">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="http-net包">
                         
                         <span class="card-title">http-net包</span>
                     </div>
@@ -1240,7 +1272,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="fmt包">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="fmt包">
                         
                         <span class="card-title">fmt包</span>
                     </div>
@@ -1442,6 +1474,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
@@ -1460,7 +1499,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">41.9k</span>
+                        class="white-color">36.5k</span>
             
             
             
@@ -1696,9 +1735,9 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-
+    <script src="/js/FunnyTitle.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 
 </html>

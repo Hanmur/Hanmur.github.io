@@ -333,7 +333,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -502,7 +502,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-06
+                    2021-12-07
                 </div>
                 
 
@@ -536,18 +536,13 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="欧拉函数"><a href="#欧拉函数" class="headerlink" title="欧拉函数"></a>欧拉函数</h2><h3 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h3><p>$$\phi(n) = \underline{从1到n中和n互素的数}的个数$$</p>
-<p>$$公式：\phi(n) = n * \prod(1 - \frac{1}{p_i}), \quad p_i是n的所有质因子$$</p>
-<h3 id="规律："><a href="#规律：" class="headerlink" title="规律："></a>规律：</h3><ul>
+                <h2 id="欧拉函数"><a href="#欧拉函数" class="headerlink" title="欧拉函数"></a>欧拉函数</h2><h3 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h3><script type="math/tex; mode=display">\phi(n) = \underline{从1到n中和n互素的数}的个数</script><script type="math/tex; mode=display">公式：\phi(n) = n * \prod(1 - \frac{1}{p_i}), \quad p_i是n的所有质因子</script><h3 id="规律："><a href="#规律：" class="headerlink" title="规律："></a>规律：</h3><ul>
 <li><p>$n$为质数：</p>
-<p>$$\phi(n) = n - 1$$</p>
-</li>
+<script type="math/tex; mode=display">\phi(n) = n - 1</script></li>
 <li><p>$n = p^k$，$p$为素数：</p>
-<p>$$\phi(n) = p^k *(1 - \frac1p)$$</p>
-</li>
+<script type="math/tex; mode=display">\phi(n) = p^k *(1 - \frac1p)</script></li>
 <li><p>当$m$和$n$互质：</p>
-<p>$$\phi(n * m) = \phi(n) * \phi(m)$$</p>
-</li>
+<script type="math/tex; mode=display">\phi(n * m) = \phi(n) * \phi(m)</script></li>
 </ul>
 
                 
@@ -999,7 +994,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="常见解题思路">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="常见解题思路">
                         
                         <span class="card-title">常见解题思路</span>
                     </div>
@@ -1064,7 +1059,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="RSA加密算法">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="RSA加密算法">
                         
                         <span class="card-title">RSA加密算法</span>
                     </div>
@@ -1274,6 +1269,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
@@ -1292,7 +1294,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">41.9k</span>
+                        class="white-color">36.5k</span>
             
             
             
@@ -1528,9 +1530,9 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-
+    <script src="/js/FunnyTitle.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 
 </html>

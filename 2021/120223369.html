@@ -333,7 +333,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -494,7 +494,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-02
+                    2021-12-07
                 </div>
                 
 
@@ -535,25 +535,25 @@
 <p>它内部包括<code>地址</code> <code>长度</code> <code>容量</code></p>
 <p>切片一般用来快速地操作一块数据集合</p>
 <h3 id="切片的定义"><a href="#切片的定义" class="headerlink" title="切片的定义"></a>切片的定义</h3><p>声明切片类型的语法：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">var</span> name <span class="token punctuation">[</span><span class="token punctuation">]</span>T
+<pre class=" language-lang-go"><code class="language-lang-go">var name []T
 </code></pre>
 <p>其中<code>name</code>指变量名，<code>T</code>指切片中的元素类型</p>
 <p>举例：定义一个存放<code>int</code>类型的切片</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">var</span> name <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span>
+<pre class=" language-lang-go"><code class="language-lang-go">var name []int
 </code></pre>
 <p>初始化：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">var</span> isMe <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">bool</span><span class="token punctuation">{</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">var isMe []bool{false, true}
 </code></pre>
 <h3 id="切片的长度和容量"><a href="#切片的长度和容量" class="headerlink" title="切片的长度和容量"></a>切片的长度和容量</h3><p>切片拥有自己的长度和容量</p>
 <p>可以通过<code>len()</code>函数求长度，<code>cap()</code>函数求容量</p>
 <p>切片的容量是指底层数组的容量</p>
 <p><img src="C:\Users\86189\AppData\Roaming\Typora\typora-user-images\image-20210721234733324.png" alt="image-20210721234733324"></p>
-<h3 id="由数组得到切片"><a href="#由数组得到切片" class="headerlink" title="由数组得到切片"></a>由数组得到切片</h3><pre class=" language-go"><code class="language-go">a1 <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token operator">...</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">,</span> <span class="token number">13</span><span class="token punctuation">}</span>
-s1 <span class="token operator">:=</span> a1<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token number">4</span><span class="token punctuation">]</span>    <span class="token comment" spellcheck="true">//基于a1切割，左闭右开（左右都支持缺省）</span>
+<h3 id="由数组得到切片"><a href="#由数组得到切片" class="headerlink" title="由数组得到切片"></a>由数组得到切片</h3><pre class=" language-lang-go"><code class="language-lang-go">a1 := [...]int{1, 3, 5, 7, 9, 11, 13}
+s1 := a1[0:4]    //基于a1切割，左闭右开（左右都支持缺省）
 </code></pre>
 <p>切片也可以从切片中再切片，方式和数组类似</p>
 <h3 id="使用make-函数构造切片"><a href="#使用make-函数构造切片" class="headerlink" title="使用make()函数构造切片"></a>使用make()函数构造切片</h3><p>如果要动态地创建一个切片，我们需要使用<code>make()</code>函数：</p>
-<pre class=" language-go"><code class="language-go"><span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span>T<span class="token punctuation">,</span> size<span class="token punctuation">,</span> <span class="token builtin">cap</span><span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">make([]T, size, cap)
 </code></pre>
 <p>其中</p>
 <ul>
@@ -571,41 +571,41 @@ s1 <span class="token operator">:=</span> a1<span class="token punctuation">[</s
 <p>切片是引用！</p>
 <p>切片是引用！</p>
 <h3 id="append-方法为切片增加元素"><a href="#append-方法为切片增加元素" class="headerlink" title="append()方法为切片增加元素"></a>append()方法为切片增加元素</h3><h5 id="append-可以为切片动态添加元素。"><a href="#append-可以为切片动态添加元素。" class="headerlink" title="append()可以为切片动态添加元素。"></a><code>append()</code>可以为切片动态添加元素。</h5><p>可以一次添加一个元素，可以添加多个元素，也可以添加另一个切片中的元素（后面加…）。</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">var</span> s <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span>
-    s <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>        <span class="token comment" spellcheck="true">// [1]</span>
-    s <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">// [1 2 3 4]</span>
-    s2 <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">{</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">}</span>  
-    s <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> s2<span class="token operator">...</span><span class="token punctuation">)</span>    <span class="token comment" spellcheck="true">// [1 2 3 4 5 6 7]</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func main(){
+    var s []int
+    s = append(s, 1)        // [1]
+    s = append(s, 2, 3, 4)  // [1 2 3 4]
+    s2 := []int{5, 6, 7}  
+    s = append(s, s2...)    // [1 2 3 4 5 6 7]
+}
 </code></pre>
 <p><strong>注意：</strong>通过<code>var</code>声明的零值切片可以在<code>append()</code>函数直接使用，无需初始化。</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">var</span> s <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span>
-s <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">var s []int
+s = append(s, 1, 2, 3)
 </code></pre>
 <h5 id="append方法使得切片扩容"><a href="#append方法使得切片扩容" class="headerlink" title="append方法使得切片扩容"></a><code>append</code>方法使得切片扩容</h5><p>当底层数组不能容纳新增的元素时，切片就会自动按照一定的策略进行“扩容”，此时该切片指向的底层数组就会更换。</p>
 <p>“扩容”操作往往发生在<code>append()</code>函数调用时，所以我们通常都需要用原变量接收append函数的返回值。</p>
 <p>举例：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">//append()添加元素和切片扩容</span>
-    <span class="token keyword">var</span> numSlice <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span>
-    <span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">{</span>
-        numSlice <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>numSlice<span class="token punctuation">,</span> i<span class="token punctuation">)</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%v  len:%d  cap:%d  ptr:%p\n"</span><span class="token punctuation">,</span> numSlice<span class="token punctuation">,</span> <span class="token function">len</span><span class="token punctuation">(</span>numSlice<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">cap</span><span class="token punctuation">(</span>numSlice<span class="token punctuation">)</span><span class="token punctuation">,</span> numSlice<span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func main() {
+    //append()添加元素和切片扩容
+    var numSlice []int
+    for i := 0; i < 10; i++ {
+        numSlice = append(numSlice, i)
+        fmt.Printf("%v  len:%d  cap:%d  ptr:%p\n", numSlice, len(numSlice), cap(numSlice), numSlice)
+    }
+}
 </code></pre>
 <p>输出：</p>
-<pre class=" language-bash"><code class="language-bash"><span class="token punctuation">[</span>0<span class="token punctuation">]</span>  len:1  cap:1  ptr:0xc0000a8000
-<span class="token punctuation">[</span>0 1<span class="token punctuation">]</span>  len:2  cap:2  ptr:0xc0000a8040
-<span class="token punctuation">[</span>0 1 2<span class="token punctuation">]</span>  len:3  cap:4  ptr:0xc0000b2020
-<span class="token punctuation">[</span>0 1 2 3<span class="token punctuation">]</span>  len:4  cap:4  ptr:0xc0000b2020
-<span class="token punctuation">[</span>0 1 2 3 4<span class="token punctuation">]</span>  len:5  cap:8  ptr:0xc0000b6000
-<span class="token punctuation">[</span>0 1 2 3 4 5<span class="token punctuation">]</span>  len:6  cap:8  ptr:0xc0000b6000
-<span class="token punctuation">[</span>0 1 2 3 4 5 6<span class="token punctuation">]</span>  len:7  cap:8  ptr:0xc0000b6000
-<span class="token punctuation">[</span>0 1 2 3 4 5 6 7<span class="token punctuation">]</span>  len:8  cap:8  ptr:0xc0000b6000
-<span class="token punctuation">[</span>0 1 2 3 4 5 6 7 8<span class="token punctuation">]</span>  len:9  cap:16  ptr:0xc0000b8000
-<span class="token punctuation">[</span>0 1 2 3 4 5 6 7 8 9<span class="token punctuation">]</span>  len:10  cap:16  ptr:0xc0000b8000
+<pre class=" language-lang-bash"><code class="language-lang-bash">[0]  len:1  cap:1  ptr:0xc0000a8000
+[0 1]  len:2  cap:2  ptr:0xc0000a8040
+[0 1 2]  len:3  cap:4  ptr:0xc0000b2020
+[0 1 2 3]  len:4  cap:4  ptr:0xc0000b2020
+[0 1 2 3 4]  len:5  cap:8  ptr:0xc0000b6000
+[0 1 2 3 4 5]  len:6  cap:8  ptr:0xc0000b6000
+[0 1 2 3 4 5 6]  len:7  cap:8  ptr:0xc0000b6000
+[0 1 2 3 4 5 6 7]  len:8  cap:8  ptr:0xc0000b6000
+[0 1 2 3 4 5 6 7 8]  len:9  cap:16  ptr:0xc0000b8000
+[0 1 2 3 4 5 6 7 8 9]  len:10  cap:16  ptr:0xc0000b8000
 </code></pre>
 <p>从上面的结果可以看出：</p>
 <ol>
@@ -615,7 +615,7 @@ s <span class="token operator">=</span> <span class="token function">append</spa
 <h3 id="copy-函数复制切片"><a href="#copy-函数复制切片" class="headerlink" title="copy()函数复制切片"></a><code>copy()</code>函数复制切片</h3><p>由于切片是引用类型，所以直接将切片赋值给其他切片传递的是引用</p>
 <p>而<code>copy()</code>函数将一个切片空间的数据复制到另外一个切片空间中</p>
 <p><code>copy()</code>函数的使用格式如下：</p>
-<pre class=" language-bash"><code class="language-bash">copy<span class="token punctuation">(</span>destSlice, srcSlice <span class="token punctuation">[</span><span class="token punctuation">]</span>T<span class="token punctuation">)</span>
+<pre class=" language-lang-bash"><code class="language-lang-bash">copy(destSlice, srcSlice []T)
 </code></pre>
 <p>其中：</p>
 <ul>
@@ -624,22 +624,22 @@ s <span class="token operator">=</span> <span class="token function">append</spa
 <li><code>T</code>:类型</li>
 </ul>
 <p>举例：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">// copy()复制切片</span>
-    destSlice <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">}</span>
-    srcSlice <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span>
-    <span class="token function">copy</span><span class="token punctuation">(</span>destSlice<span class="token punctuation">,</span> srcSlice<span class="token punctuation">)</span>     <span class="token comment" spellcheck="true">//使用copy()函数</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>destSlice<span class="token punctuation">)</span>     <span class="token comment" spellcheck="true">//[1 2 3 4 5]</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>srcSlice<span class="token punctuation">)</span>     <span class="token comment" spellcheck="true">//[1 2 3 4 5]</span>
-    srcSlice<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1000</span>        <span class="token comment" spellcheck="true">//改变srcSlice中的值</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>destSlice<span class="token punctuation">)</span>    <span class="token comment" spellcheck="true">//[1 2 3 4 5]</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>srcSlice<span class="token punctuation">)</span>     <span class="token comment" spellcheck="true">//[1000 2 3 4 5]</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func main() {
+    // copy()复制切片
+    destSlice := []int{1, 2, 3, 4, 5}
+    srcSlice := make([]int, 5, 5)
+    copy(destSlice, srcSlice)     //使用copy()函数
+    fmt.Println(destSlice)     //[1 2 3 4 5]
+    fmt.Println(srcSlice)     //[1 2 3 4 5]
+    srcSlice[0] = 1000        //改变srcSlice中的值
+    fmt.Println(destSlice)    //[1 2 3 4 5]
+    fmt.Println(srcSlice)     //[1000 2 3 4 5]
+}
 </code></pre>
 <h3 id="从切片中删除元素"><a href="#从切片中删除元素" class="headerlink" title="从切片中删除元素"></a>从切片中删除元素</h3><p>Go语言中没有删除切片元素的方法</p>
 <p>我们可以用切片的特性删除元素</p>
-<pre class=" language-go"><code class="language-go">n <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">}</span>
-n <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>n<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> n<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token operator">...</span><span class="token punctuation">)</span>        <span class="token comment" spellcheck="true">//将除2号索引之外的元素加入n中</span>
+<pre class=" language-lang-go"><code class="language-lang-go">n := []int{1, 2, 3, 4, 5, 6, 7}
+n = append(n[:2], n[3:]...)        //将除2号索引之外的元素加入n中
 </code></pre>
 
                 
@@ -1087,7 +1087,7 @@ n <span class="token operator">=</span> <span class="token function">append</spa
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="内存对齐">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="内存对齐">
                         
                         <span class="card-title">内存对齐</span>
                     </div>
@@ -1144,7 +1144,7 @@ n <span class="token operator">=</span> <span class="token function">append</spa
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="切片的小技巧">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="切片的小技巧">
                         
                         <span class="card-title">切片的小技巧</span>
                     </div>
@@ -1346,6 +1346,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
@@ -1364,7 +1371,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">41.9k</span>
+                        class="white-color">36.5k</span>
             
             
             
@@ -1600,9 +1607,9 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-
+    <script src="/js/FunnyTitle.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 
 </html>

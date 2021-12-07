@@ -333,7 +333,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -494,14 +494,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-06
+                    2021-12-07
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    140
+                    91
                 </div>
                 
 
@@ -529,22 +529,22 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="GO获取随机数"><a href="#GO获取随机数" class="headerlink" title="GO获取随机数"></a>GO获取随机数</h2><p>使用的”math/rand”包。</p>
-<h3 id="基本随机数"><a href="#基本随机数" class="headerlink" title="基本随机数"></a><strong>基本随机数</strong></h3><pre class=" language-go"><code class="language-go">a <span class="token operator">:=</span> rand<span class="token punctuation">.</span><span class="token function">Int</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-b <span class="token operator">:=</span> rand<span class="token punctuation">.</span><span class="token function">Intn</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//生成0-99之间的随机数</span>
-fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
-fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+<h3 id="基本随机数"><a href="#基本随机数" class="headerlink" title="基本随机数"></a><strong>基本随机数</strong></h3><pre class=" language-lang-go"><code class="language-lang-go">a := rand.Int()
+b := rand.Intn(100)  //生成0-99之间的随机数
+fmt.Println(a)
+fmt.Println(b)
 </code></pre>
 <p>可以生成随机数，但是数值不会变。</p>
-<h3 id="生成可变随机数"><a href="#生成可变随机数" class="headerlink" title="生成可变随机数"></a><strong>生成可变随机数</strong></h3><pre class=" language-go"><code class="language-go"><span class="token comment" spellcheck="true">//将时间戳设置成种子数</span>
-rand<span class="token punctuation">.</span><span class="token function">Seed</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span><span class="token function">Now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">UnixNano</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true">//生成10个0-99之间的随机数</span>
-<span class="token keyword">for</span> i<span class="token operator">:=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">10</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">{</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>rand<span class="token punctuation">.</span><span class="token function">Intn</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+<h3 id="生成可变随机数"><a href="#生成可变随机数" class="headerlink" title="生成可变随机数"></a><strong>生成可变随机数</strong></h3><pre class=" language-lang-go"><code class="language-lang-go">//将时间戳设置成种子数
+rand.Seed(time.Now().UnixNano())
+//生成10个0-99之间的随机数
+for i:=0;i<10;i++{
+    fmt.Println(rand.Intn(100))
+}
 </code></pre>
-<h3 id="生成指定范围内的随机数"><a href="#生成指定范围内的随机数" class="headerlink" title="生成指定范围内的随机数"></a><strong>生成指定范围内的随机数</strong></h3><pre class=" language-go"><code class="language-go"><span class="token comment" spellcheck="true">//生成[15，88]之间的随机数,括号左包含右不包含</span>
-n<span class="token operator">:=</span>rand<span class="token punctuation">.</span><span class="token function">Intn</span><span class="token punctuation">(</span><span class="token number">73</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token number">15</span> <span class="token comment" spellcheck="true">//(88-15 )+15</span>
-fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+<h3 id="生成指定范围内的随机数"><a href="#生成指定范围内的随机数" class="headerlink" title="生成指定范围内的随机数"></a><strong>生成指定范围内的随机数</strong></h3><pre class=" language-lang-go"><code class="language-lang-go">//生成[15，88]之间的随机数,括号左包含右不包含
+n:=rand.Intn(73)+15 //(88-15 )+15
+fmt.Println(n)
 </code></pre>
 
                 
@@ -992,7 +992,7 @@ fmt<span class="token punctuation">.</span><span class="token function">Println<
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="文件操作">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="文件操作">
                         
                         <span class="card-title">文件操作</span>
                     </div>
@@ -1049,7 +1049,7 @@ fmt<span class="token punctuation">.</span><span class="token function">Println<
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="深入Golang调度器之GMP模型">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="深入Golang调度器之GMP模型">
                         
                         <span class="card-title">深入Golang调度器之GMP模型</span>
                     </div>
@@ -1251,6 +1251,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
@@ -1269,7 +1276,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">41.9k</span>
+                        class="white-color">36.5k</span>
             
             
             
@@ -1505,9 +1512,9 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-
+    <script src="/js/FunnyTitle.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 
 </html>

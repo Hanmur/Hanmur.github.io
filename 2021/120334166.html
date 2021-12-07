@@ -333,7 +333,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -494,21 +494,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-03
+                    2021-12-07
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.4k
+                    664
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    2 分
                 </div>
                 
 
@@ -538,22 +538,22 @@
 <li><code>Panic系列</code>（Panic|Panicf|Panicln）</li>
 </ul>
 <p>举例：通过<code>log</code>包来调用上面提到的方法，默认它们会将日志信息打印到终端界面：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">package</span> main
+<pre class=" language-lang-go"><code class="language-lang-go">package main
 
-<span class="token keyword">import</span> <span class="token punctuation">(</span>
-    <span class="token string">"log"</span>
-<span class="token punctuation">)</span>
+import (
+    "log"
+)
 
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    log<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"这是一条很普通的日志。"</span><span class="token punctuation">)</span>
-    v <span class="token operator">:=</span> <span class="token string">"很普通的"</span>
-    log<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"这是一条%s日志。\n"</span><span class="token punctuation">,</span> v<span class="token punctuation">)</span>
-    log<span class="token punctuation">.</span><span class="token function">Fatalln</span><span class="token punctuation">(</span><span class="token string">"这是一条会触发fatal的日志。"</span><span class="token punctuation">)</span>
-    log<span class="token punctuation">.</span><span class="token function">Panicln</span><span class="token punctuation">(</span><span class="token string">"这是一条会触发panic的日志。"</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+func main() {
+    log.Println("这是一条很普通的日志。")
+    v := "很普通的"
+    log.Printf("这是一条%s日志。\n", v)
+    log.Fatalln("这是一条会触发fatal的日志。")
+    log.Panicln("这是一条会触发panic的日志。")
+}
 </code></pre>
 <p>编译并执行上面的代码会得到如下输出：</p>
-<pre class=" language-bash"><code class="language-bash">2021/08/19 20:29:43 这是一条很普通的日志。
+<pre class=" language-lang-bash"><code class="language-lang-bash">2021/08/19 20:29:43 这是一条很普通的日志。
 2021/08/19 20:29:43 这是一条很普通的日志。
 2021/08/19 20:29:43 这是一条会触发fatal的日志。
 </code></pre>
@@ -562,83 +562,83 @@
 <p><code>Panic</code>系列函数会在写入日志信息后<code>panic</code>。</p>
 <h2 id="配置logger"><a href="#配置logger" class="headerlink" title="配置logger"></a>配置logger</h2><h3 id="标准logger的配置"><a href="#标准logger的配置" class="headerlink" title="标准logger的配置"></a>标准logger的配置</h3><p>默认情况下的logger只会提供日志的时间信息，但是很多情况下我们希望得到更多信息，比如记录该日志的文件名和行号等。<code>log</code>标准库中为我们提供了定制这些设置的方法。</p>
 <p><code>log</code>标准库中的<code>Flags</code>函数会返回标准logger的输出配置，而<code>SetFlags</code>函数用来设置标准logger的输出配置。</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">Flags</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int</span>
-<span class="token keyword">func</span> <span class="token function">SetFlags</span><span class="token punctuation">(</span>flag <span class="token builtin">int</span><span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func Flags() int
+func SetFlags(flag int)
 </code></pre>
 <h3 id="flag选项"><a href="#flag选项" class="headerlink" title="flag选项"></a>flag选项</h3><p><code>log</code>标准库提供了如下的flag选项，它们是一系列定义好的常量。</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">const</span> <span class="token punctuation">(</span>
-    <span class="token comment" spellcheck="true">// 控制输出日志信息的细节，不能控制输出的顺序和格式。</span>
-    <span class="token comment" spellcheck="true">// 输出的日志在每一项后会有一个冒号分隔：例如2009/01/23 01:23:23.123123 /a/b/c/d.go:23: message</span>
-    Ldate         <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token boolean">iota</span>     <span class="token comment" spellcheck="true">// 日期：2009/01/23</span>
-    Ltime                         <span class="token comment" spellcheck="true">// 时间：01:23:23</span>
-    Lmicroseconds                 <span class="token comment" spellcheck="true">// 微秒级别的时间：01:23:23.123123（用于增强Ltime位）</span>
-    Llongfile                     <span class="token comment" spellcheck="true">// 文件全路径名+行号： /a/b/c/d.go:23</span>
-    Lshortfile                    <span class="token comment" spellcheck="true">// 文件名+行号：d.go:23（会覆盖掉Llongfile）</span>
-    LUTC                          <span class="token comment" spellcheck="true">// 使用UTC时间</span>
-    LstdFlags     <span class="token operator">=</span> Ldate <span class="token operator">|</span> Ltime <span class="token comment" spellcheck="true">// 标准logger的初始值</span>
-<span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">const (
+    // 控制输出日志信息的细节，不能控制输出的顺序和格式。
+    // 输出的日志在每一项后会有一个冒号分隔：例如2009/01/23 01:23:23.123123 /a/b/c/d.go:23: message
+    Ldate         = 1 << iota     // 日期：2009/01/23
+    Ltime                         // 时间：01:23:23
+    Lmicroseconds                 // 微秒级别的时间：01:23:23.123123（用于增强Ltime位）
+    Llongfile                     // 文件全路径名+行号： /a/b/c/d.go:23
+    Lshortfile                    // 文件名+行号：d.go:23（会覆盖掉Llongfile）
+    LUTC                          // 使用UTC时间
+    LstdFlags     = Ldate | Ltime // 标准logger的初始值
+)
 </code></pre>
 <p>举例：在记录日志之前设置标准logger的输出选项：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    log<span class="token punctuation">.</span><span class="token function">SetFlags</span><span class="token punctuation">(</span>log<span class="token punctuation">.</span>Llongfile <span class="token operator">|</span> log<span class="token punctuation">.</span>Lmicroseconds <span class="token operator">|</span> log<span class="token punctuation">.</span>Ldate<span class="token punctuation">)</span>
-    log<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"这是一条很普通的日志。"</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func main() {
+    log.SetFlags(log.Llongfile | log.Lmicroseconds | log.Ldate)
+    log.Println("这是一条很普通的日志。")
+}
 </code></pre>
 <p>编译执行后得到的输出结果：</p>
-<pre class=" language-go"><code class="language-go"><span class="token number">2021</span><span class="token operator">/</span><span class="token number">08</span><span class="token operator">/</span><span class="token number">19</span> <span class="token number">20</span><span class="token punctuation">:</span><span class="token number">39</span><span class="token punctuation">:</span><span class="token number">31.855723</span> C<span class="token punctuation">:</span><span class="token operator">/</span>Users<span class="token operator">/</span><span class="token number">86189</span><span class="token operator">/</span><span class="token keyword">go</span><span class="token operator">/</span>src<span class="token operator">/</span>GoLearn<span class="token operator">/</span>test<span class="token operator">/</span>test<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">9</span><span class="token punctuation">:</span> 这是一条很普通的日志。
+<pre class=" language-lang-go"><code class="language-lang-go">2021/08/19 20:39:31.855723 C:/Users/86189/go/src/GoLearn/test/test.go:9: 这是一条很普通的日志。
 </code></pre>
 <h3 id="配置日志前缀"><a href="#配置日志前缀" class="headerlink" title="配置日志前缀"></a>配置日志前缀</h3><p><code>log</code>标准库中还提供了关于日志信息前缀的两个方法：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">Prefix</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span>
-<span class="token keyword">func</span> <span class="token function">SetPrefix</span><span class="token punctuation">(</span>prefix <span class="token builtin">string</span><span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func Prefix() string
+func SetPrefix(prefix string)
 </code></pre>
 <p>其中<code>Prefix</code>函数用来查看标准logger的输出前缀，<code>SetPrefix</code>函数用来设置输出前缀。</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    log<span class="token punctuation">.</span><span class="token function">SetFlags</span><span class="token punctuation">(</span>log<span class="token punctuation">.</span>Llongfile <span class="token operator">|</span> log<span class="token punctuation">.</span>Lmicroseconds <span class="token operator">|</span> log<span class="token punctuation">.</span>Ldate<span class="token punctuation">)</span>
-    log<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"这是一条很普通的日志。"</span><span class="token punctuation">)</span>
-    log<span class="token punctuation">.</span><span class="token function">SetPrefix</span><span class="token punctuation">(</span><span class="token string">"[Hanmur]"</span><span class="token punctuation">)</span>
-    log<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"这是一条很普通的日志。"</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func main() {
+    log.SetFlags(log.Llongfile | log.Lmicroseconds | log.Ldate)
+    log.Println("这是一条很普通的日志。")
+    log.SetPrefix("[Hanmur]")
+    log.Println("这是一条很普通的日志。")
+}
 </code></pre>
 <p>输出结果：</p>
-<pre class=" language-bash"><code class="language-bash">2021/08/19 20:35:49.421980 C:/Users/86189/go/src/GoLearn/test/test.go:9: 这是一条很普通的日志。
-<span class="token punctuation">[</span>Hanmur<span class="token punctuation">]</span>2021/08/19 20:35:49.431919 C:/Users/86189/go/src/GoLearn/test/test.go:11: 这是一条很普通的日志。
+<pre class=" language-lang-bash"><code class="language-lang-bash">2021/08/19 20:35:49.421980 C:/Users/86189/go/src/GoLearn/test/test.go:9: 这是一条很普通的日志。
+[Hanmur]2021/08/19 20:35:49.431919 C:/Users/86189/go/src/GoLearn/test/test.go:11: 这是一条很普通的日志。
 </code></pre>
 <p>这样我们就能够在代码中为我们的日志信息添加指定的前缀，方便之后对日志信息进行检索和处理。</p>
-<h3 id="配置日志输出位置"><a href="#配置日志输出位置" class="headerlink" title="配置日志输出位置"></a>配置日志输出位置</h3><pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">SetOutput</span><span class="token punctuation">(</span>w io<span class="token punctuation">.</span>Writer<span class="token punctuation">)</span>
+<h3 id="配置日志输出位置"><a href="#配置日志输出位置" class="headerlink" title="配置日志输出位置"></a>配置日志输出位置</h3><pre class=" language-lang-go"><code class="language-lang-go">func SetOutput(w io.Writer)
 </code></pre>
 <p><code>SetOutput</code>函数用来设置标准logger的输出目的地，默认是标准错误输出。</p>
 <p>例如，下面的代码会把日志输出到同目录下的<code>xx.log</code>文件中。</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">//打开文件</span>
-    logFile<span class="token punctuation">,</span> err <span class="token operator">:=</span> os<span class="token punctuation">.</span><span class="token function">OpenFile</span><span class="token punctuation">(</span><span class="token string">"./xx.log"</span><span class="token punctuation">,</span> os<span class="token punctuation">.</span>O_CREATE<span class="token operator">|</span>os<span class="token punctuation">.</span>O_WRONLY<span class="token operator">|</span>os<span class="token punctuation">.</span>O_APPEND<span class="token punctuation">,</span> <span class="token number">0644</span><span class="token punctuation">)</span>
-    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"open log file failed, err:"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
-        <span class="token keyword">return</span>
-    <span class="token punctuation">}</span>
-    <span class="token comment" spellcheck="true">//设置日志输出文件</span>
-    log<span class="token punctuation">.</span><span class="token function">SetOutput</span><span class="token punctuation">(</span>logFile<span class="token punctuation">)</span>
-    <span class="token comment" spellcheck="true">//设置日志输出格式</span>
-    log<span class="token punctuation">.</span><span class="token function">SetFlags</span><span class="token punctuation">(</span>log<span class="token punctuation">.</span>Llongfile <span class="token operator">|</span> log<span class="token punctuation">.</span>Lmicroseconds <span class="token operator">|</span> log<span class="token punctuation">.</span>Ldate<span class="token punctuation">)</span>
-    <span class="token comment" spellcheck="true">//日志输出</span>
-    log<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"这是一条很普通的日志。"</span><span class="token punctuation">)</span>
-    log<span class="token punctuation">.</span><span class="token function">SetPrefix</span><span class="token punctuation">(</span><span class="token string">"[Hanmur]"</span><span class="token punctuation">)</span>
-    log<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"这是一条很普通的日志。"</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func main() {
+    //打开文件
+    logFile, err := os.OpenFile("./xx.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
+    if err != nil {
+        fmt.Println("open log file failed, err:", err)
+        return
+    }
+    //设置日志输出文件
+    log.SetOutput(logFile)
+    //设置日志输出格式
+    log.SetFlags(log.Llongfile | log.Lmicroseconds | log.Ldate)
+    //日志输出
+    log.Println("这是一条很普通的日志。")
+    log.SetPrefix("[Hanmur]")
+    log.Println("这是一条很普通的日志。")
+}
 </code></pre>
 <p>如果要使用标准的logger，我们通常会把上面的配置操作写到<code>init</code>函数中：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    logFile<span class="token punctuation">,</span> err <span class="token operator">:=</span> os<span class="token punctuation">.</span><span class="token function">OpenFile</span><span class="token punctuation">(</span><span class="token string">"./xx.log"</span><span class="token punctuation">,</span> os<span class="token punctuation">.</span>O_CREATE<span class="token operator">|</span>os<span class="token punctuation">.</span>O_WRONLY<span class="token operator">|</span>os<span class="token punctuation">.</span>O_APPEND<span class="token punctuation">,</span> <span class="token number">0644</span><span class="token punctuation">)</span>
-    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"open log file failed, err:"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
-        <span class="token keyword">return</span>
-    <span class="token punctuation">}</span>
-    log<span class="token punctuation">.</span><span class="token function">SetOutput</span><span class="token punctuation">(</span>logFile<span class="token punctuation">)</span>
-    log<span class="token punctuation">.</span><span class="token function">SetFlags</span><span class="token punctuation">(</span>log<span class="token punctuation">.</span>Llongfile <span class="token operator">|</span> log<span class="token punctuation">.</span>Lmicroseconds <span class="token operator">|</span> log<span class="token punctuation">.</span>Ldate<span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func init() {
+    logFile, err := os.OpenFile("./xx.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
+    if err != nil {
+        fmt.Println("open log file failed, err:", err)
+        return
+    }
+    log.SetOutput(logFile)
+    log.SetFlags(log.Llongfile | log.Lmicroseconds | log.Ldate)
+}
 </code></pre>
 <h2 id="创建logger"><a href="#创建logger" class="headerlink" title="创建logger"></a>创建logger</h2><p><code>log</code>标准库中还提供了一个创建新logger对象的构造函数–<code>New</code>，支持我们创建自己的logger示例。</p>
 <p><code>New</code>函数的签名：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">New</span><span class="token punctuation">(</span>out io<span class="token punctuation">.</span>Writer<span class="token punctuation">,</span> prefix <span class="token builtin">string</span><span class="token punctuation">,</span> flag <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token operator">*</span>Logger
+<pre class=" language-lang-go"><code class="language-lang-go">func New(out io.Writer, prefix string, flag int) *Logger
 </code></pre>
 <p>New创建一个Logger对象。其中，</p>
 <ul>
@@ -647,13 +647,13 @@
 <li>参数flag定义日志的属性（时间、文件等等）。</li>
 </ul>
 <p>举例：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    logger <span class="token operator">:=</span> log<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span>os<span class="token punctuation">.</span>Stdout<span class="token punctuation">,</span> <span class="token string">"&lt;New>"</span><span class="token punctuation">,</span> log<span class="token punctuation">.</span>Lshortfile<span class="token operator">|</span>log<span class="token punctuation">.</span>Ldate<span class="token operator">|</span>log<span class="token punctuation">.</span>Ltime<span class="token punctuation">)</span>
-    logger<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"这是自定义的logger记录的日志。"</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func main() {
+    logger := log.New(os.Stdout, "<New>", log.Lshortfile|log.Ldate|log.Ltime)
+    logger.Println("这是自定义的logger记录的日志。")
+}
 </code></pre>
 <p>将上面的代码编译执行之后，得到结果如下：</p>
-<pre class=" language-bash"><code class="language-bash"><span class="token operator">&lt;</span>New<span class="token operator">></span>2021/08/19 20:38:55 test.go:10: 这是自定义的logger记录的日志。
+<pre class=" language-lang-bash"><code class="language-lang-bash"><New>2021/08/19 20:38:55 test.go:10: 这是自定义的logger记录的日志。
 </code></pre>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Go内置的log库功能有限，例如无法满足记录不同级别日志的情况，我们在实际的项目中根据自己的需要选择使用第三方的日志库，如<a target="_blank" rel="noopener" href="https://github.com/sirupsen/logrus">logrus</a>、<a target="_blank" rel="noopener" href="https://github.com/uber-go/zap">zap</a>等。</p>
 
@@ -1102,7 +1102,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="strconv包">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="strconv包">
                         
                         <span class="card-title">strconv包</span>
                     </div>
@@ -1159,7 +1159,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="http-net包">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="http-net包">
                         
                         <span class="card-title">http-net包</span>
                     </div>
@@ -1361,6 +1361,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
@@ -1379,7 +1386,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">41.9k</span>
+                        class="white-color">36.5k</span>
             
             
             
@@ -1615,9 +1622,9 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-
+    <script src="/js/FunnyTitle.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 
 </html>

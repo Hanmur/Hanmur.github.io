@@ -333,7 +333,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/28.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -494,14 +494,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-02
+                    2021-12-07
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    336
+                    73
                 </div>
                 
 
@@ -529,28 +529,28 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h1><p>Go语言中<code>if</code>条件判断的格式：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">if</span> 表达式<span class="token number">1</span><span class="token punctuation">{</span>
-    分支<span class="token number">1</span>
-<span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token keyword">if</span> 表达式<span class="token number">2</span><span class="token punctuation">{</span>
-    分支<span class="token number">2</span>
-<span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
-    分支<span class="token number">3</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">if 表达式1{
+    分支1
+}else if 表达式2{
+    分支2
+}else{
+    分支3
+}
 </code></pre>
 <h1 id="for语句"><a href="#for语句" class="headerlink" title="for语句"></a>for语句</h1><p>Go语言中<code>for</code>循环的格式：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">for</span> 初始语句<span class="token punctuation">;</span>条件表达式<span class="token punctuation">;</span>结束语句<span class="token punctuation">{</span>
+<pre class=" language-lang-go"><code class="language-lang-go">for 初始语句;条件表达式;结束语句{
     循环语句
-<span class="token punctuation">}</span>
+}
 </code></pre>
 <p>举例：打印1 - 100</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">for</span> i<span class="token operator">:=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token number">100</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">{</span>
-    fmt<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
-<span class="token punctuation">}</span> 
+<pre class=" language-lang-go"><code class="language-lang-go">for i:= 1; i <= 100; i++{
+    fmt.println(i)
+}
 </code></pre>
 <p>也可以同时省略初始语句与结束语句，类似<code>while</code></p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">for</span> 条件表达式<span class="token punctuation">{</span>
+<pre class=" language-lang-go"><code class="language-lang-go">for 条件表达式{
     循环语句
-<span class="token punctuation">}</span>
+}
 </code></pre>
 <h1 id="for-range-键值循环"><a href="#for-range-键值循环" class="headerlink" title="for range(键值循环)"></a>for range(键值循环)</h1><p>go语言中可以使用<code>for range</code>遍历数组，切片，字符串，map及通道</p>
 <p>通过<code>for range</code>遍历的返回值有以下规律：</p>
@@ -560,25 +560,21 @@
 <li>通道只返回通道内的值</li>
 </ol>
 <h1 id="switch-case"><a href="#switch-case" class="headerlink" title="switch case"></a>switch case</h1><p>使用<code>switch</code>语句可方便地对大量数据进行条件判断</p>
-<pre class=" language-go"><code class="language-go">n1 <span class="token operator">:=</span> <span class="token number">1</span>
-<span class="token keyword">switch</span><span class="token punctuation">(</span>n1<span class="token punctuation">)</span><span class="token punctuation">{</span>
-<span class="token keyword">case</span> <span class="token number">1</span><span class="token punctuation">:</span>
-    语句<span class="token number">1</span>
-<span class="token keyword">case</span> <span class="token number">2</span><span class="token punctuation">:</span>
-    语句<span class="token number">2</span>
-<span class="token keyword">default</span><span class="token punctuation">:</span>
-    语句<span class="token number">3</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">n1 := 1
+switch(n1){
+case 1:
+    语句1
+case 2:
+    语句2
+default:
+    语句3
+}
 </code></pre>
 <blockquote>
 <p>在go中一个分支可以有多个值</p>
 <p>如：<code>case 1, 2, 3:</code></p>
-</blockquote>
-<blockquote>
 <p>分支也可以使用表达式</p>
 <p>如：<code>case age &lt; 25:</code></p>
-</blockquote>
-<blockquote>
 <p><code>fallthrough</code>语法可以执行满足case的下一个case</p>
 <p>是为了兼容C中的case而设计的</p>
 </blockquote>
@@ -1031,7 +1027,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="反射">
+                        <img src="/medias/featureimages/27.jpg" class="responsive-img" alt="反射">
                         
                         <span class="card-title">反射</span>
                     </div>
@@ -1088,7 +1084,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="运算符">
+                        <img src="/medias/featureimages/30.jpg" class="responsive-img" alt="运算符">
                         
                         <span class="card-title">运算符</span>
                     </div>
@@ -1290,6 +1286,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
@@ -1308,7 +1311,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">41.9k</span>
+                        class="white-color">36.5k</span>
             
             
             
@@ -1544,9 +1547,9 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-
+    <script src="/js/FunnyTitle.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 
 </html>

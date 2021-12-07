@@ -494,21 +494,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-03
+                    2021-12-07
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3k
+                    420
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    12 分
+                    1 分
                 </div>
                 
 
@@ -529,206 +529,206 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="Go标准库Context"><a href="#Go标准库Context" class="headerlink" title="Go标准库Context"></a>Go标准库Context</h1><p>在 Go http包的Server中，每一个请求在都有一个对应的 goroutine 去处理。请求处理函数通常会启动额外的 goroutine 用来访问后端服务，比如数据库和RPC服务。用来处理一个请求的 goroutine 通常需要访问一些与请求特定的数据，比如终端用户的身份认证信息、验证相关的token、请求的截止时间。 当一个请求被取消或超时时，所有用来处理该请求的 goroutine 都应该迅速退出，然后系统才能释放这些 goroutine 占用的资源。</p>
-<h2 id="为什么需要Context"><a href="#为什么需要Context" class="headerlink" title="为什么需要Context"></a>为什么需要Context</h2><h3 id="基本示例"><a href="#基本示例" class="headerlink" title="基本示例"></a>基本示例</h3><pre class=" language-go"><code class="language-go"><span class="token keyword">package</span> main
+<h2 id="为什么需要Context"><a href="#为什么需要Context" class="headerlink" title="为什么需要Context"></a>为什么需要Context</h2><h3 id="基本示例"><a href="#基本示例" class="headerlink" title="基本示例"></a>基本示例</h3><pre class=" language-lang-go"><code class="language-lang-go">package main
 
-<span class="token keyword">import</span> <span class="token punctuation">(</span>
-    <span class="token string">"fmt"</span>
-    <span class="token string">"sync"</span>
+import (
+    "fmt"
+    "sync"
 
-    <span class="token string">"time"</span>
-<span class="token punctuation">)</span>
+    "time"
+)
 
-<span class="token keyword">var</span> wg sync<span class="token punctuation">.</span>WaitGroup
+var wg sync.WaitGroup
 
-<span class="token comment" spellcheck="true">// 初始的例子</span>
+// 初始的例子
 
-<span class="token keyword">func</span> <span class="token function">worker</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">for</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"worker"</span><span class="token punctuation">)</span>
-        time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>Second<span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-    <span class="token comment" spellcheck="true">// 如何接收外部命令实现退出</span>
-    wg<span class="token punctuation">.</span><span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+func worker() {
+    for {
+        fmt.Println("worker")
+        time.Sleep(time.Second)
+    }
+    // 如何接收外部命令实现退出
+    wg.Done()
+}
 
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    wg<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
-    <span class="token keyword">go</span> <span class="token function">worker</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token comment" spellcheck="true">// 如何优雅的实现结束子goroutine</span>
-    wg<span class="token punctuation">.</span><span class="token function">Wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"over"</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+func main() {
+    wg.Add(1)
+    go worker()
+    // 如何优雅的实现结束子goroutine
+    wg.Wait()
+    fmt.Println("over")
+}
 </code></pre>
-<h3 id="全局变量方式"><a href="#全局变量方式" class="headerlink" title="全局变量方式"></a>全局变量方式</h3><pre class=" language-go"><code class="language-go"><span class="token keyword">package</span> main
+<h3 id="全局变量方式"><a href="#全局变量方式" class="headerlink" title="全局变量方式"></a>全局变量方式</h3><pre class=" language-lang-go"><code class="language-lang-go">package main
 
-<span class="token keyword">import</span> <span class="token punctuation">(</span>
-    <span class="token string">"fmt"</span>
-    <span class="token string">"sync"</span>
+import (
+    "fmt"
+    "sync"
 
-    <span class="token string">"time"</span>
-<span class="token punctuation">)</span>
+    "time"
+)
 
-<span class="token keyword">var</span> wg sync<span class="token punctuation">.</span>WaitGroup
-<span class="token keyword">var</span> exit <span class="token builtin">bool</span>
+var wg sync.WaitGroup
+var exit bool
 
-<span class="token comment" spellcheck="true">// 全局变量方式存在的问题：</span>
-<span class="token comment" spellcheck="true">// 1. 使用全局变量在跨包调用时不容易统一</span>
-<span class="token comment" spellcheck="true">// 2. 如果worker中再启动goroutine，就不太好控制了。</span>
+// 全局变量方式存在的问题：
+// 1. 使用全局变量在跨包调用时不容易统一
+// 2. 如果worker中再启动goroutine，就不太好控制了。
 
-<span class="token keyword">func</span> <span class="token function">worker</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">for</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"worker"</span><span class="token punctuation">)</span>
-        time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>Second<span class="token punctuation">)</span>
-        <span class="token keyword">if</span> exit <span class="token punctuation">{</span>
-            <span class="token keyword">break</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-    wg<span class="token punctuation">.</span><span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+func worker() {
+    for {
+        fmt.Println("worker")
+        time.Sleep(time.Second)
+        if exit {
+            break
+        }
+    }
+    wg.Done()
+}
 
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    wg<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
-    <span class="token keyword">go</span> <span class="token function">worker</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>Second <span class="token operator">*</span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// sleep3秒以免程序过快退出</span>
-    exit <span class="token operator">=</span> <span class="token boolean">true</span>                 <span class="token comment" spellcheck="true">// 修改全局变量实现子goroutine的退出</span>
-    wg<span class="token punctuation">.</span><span class="token function">Wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"over"</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+func main() {
+    wg.Add(1)
+    go worker()
+    time.Sleep(time.Second * 3) // sleep3秒以免程序过快退出
+    exit = true                 // 修改全局变量实现子goroutine的退出
+    wg.Wait()
+    fmt.Println("over")
+}
 </code></pre>
-<h3 id="通道方式"><a href="#通道方式" class="headerlink" title="通道方式"></a>通道方式</h3><pre class=" language-go"><code class="language-go"><span class="token keyword">package</span> main
+<h3 id="通道方式"><a href="#通道方式" class="headerlink" title="通道方式"></a>通道方式</h3><pre class=" language-lang-go"><code class="language-lang-go">package main
 
-<span class="token keyword">import</span> <span class="token punctuation">(</span>
-    <span class="token string">"fmt"</span>
-    <span class="token string">"sync"</span>
+import (
+    "fmt"
+    "sync"
 
-    <span class="token string">"time"</span>
-<span class="token punctuation">)</span>
+    "time"
+)
 
-<span class="token keyword">var</span> wg sync<span class="token punctuation">.</span>WaitGroup
+var wg sync.WaitGroup
 
-<span class="token comment" spellcheck="true">// 管道方式存在的问题：</span>
-<span class="token comment" spellcheck="true">// 1. 使用全局变量在跨包调用时不容易实现规范和统一，需要维护一个共用的channel</span>
+// 管道方式存在的问题：
+// 1. 使用全局变量在跨包调用时不容易实现规范和统一，需要维护一个共用的channel
 
-<span class="token keyword">func</span> <span class="token function">worker</span><span class="token punctuation">(</span>exitChan <span class="token keyword">chan</span> <span class="token keyword">struct</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-LOOP<span class="token punctuation">:</span>
-    <span class="token keyword">for</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"worker"</span><span class="token punctuation">)</span>
-        time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>Second<span class="token punctuation">)</span>
-        <span class="token keyword">select</span> <span class="token punctuation">{</span>
-        <span class="token keyword">case</span> <span class="token operator">&lt;-</span>exitChan<span class="token punctuation">:</span> <span class="token comment" spellcheck="true">// 等待接收上级通知</span>
-            <span class="token keyword">break</span> LOOP
-        <span class="token keyword">default</span><span class="token punctuation">:</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-    wg<span class="token punctuation">.</span><span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+func worker(exitChan chan struct{}) {
+LOOP:
+    for {
+        fmt.Println("worker")
+        time.Sleep(time.Second)
+        select {
+        case <-exitChan: // 等待接收上级通知
+            break LOOP
+        default:
+        }
+    }
+    wg.Done()
+}
 
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">var</span> exitChan <span class="token operator">=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> <span class="token keyword">struct</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
-    wg<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
-    <span class="token keyword">go</span> <span class="token function">worker</span><span class="token punctuation">(</span>exitChan<span class="token punctuation">)</span>
-    time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>Second <span class="token operator">*</span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// sleep3秒以免程序过快退出</span>
-    exitChan <span class="token operator">&lt;-</span> <span class="token keyword">struct</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">}</span>      <span class="token comment" spellcheck="true">// 给子goroutine发送退出信号</span>
-    <span class="token function">close</span><span class="token punctuation">(</span>exitChan<span class="token punctuation">)</span>
-    wg<span class="token punctuation">.</span><span class="token function">Wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"over"</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+func main() {
+    var exitChan = make(chan struct{})
+    wg.Add(1)
+    go worker(exitChan)
+    time.Sleep(time.Second * 3) // sleep3秒以免程序过快退出
+    exitChan <- struct{}{}      // 给子goroutine发送退出信号
+    close(exitChan)
+    wg.Wait()
+    fmt.Println("over")
+}
 </code></pre>
-<h3 id="官方版的方案"><a href="#官方版的方案" class="headerlink" title="官方版的方案"></a>官方版的方案</h3><pre class=" language-go"><code class="language-go"><span class="token keyword">package</span> main
+<h3 id="官方版的方案"><a href="#官方版的方案" class="headerlink" title="官方版的方案"></a>官方版的方案</h3><pre class=" language-lang-go"><code class="language-lang-go">package main
 
-<span class="token keyword">import</span> <span class="token punctuation">(</span>
-    <span class="token string">"context"</span>
-    <span class="token string">"fmt"</span>
-    <span class="token string">"sync"</span>
+import (
+    "context"
+    "fmt"
+    "sync"
 
-    <span class="token string">"time"</span>
-<span class="token punctuation">)</span>
+    "time"
+)
 
-<span class="token keyword">var</span> wg sync<span class="token punctuation">.</span>WaitGroup
+var wg sync.WaitGroup
 
-<span class="token keyword">func</span> <span class="token function">worker</span><span class="token punctuation">(</span>ctx context<span class="token punctuation">.</span>Context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-LOOP<span class="token punctuation">:</span>
-    <span class="token keyword">for</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"worker"</span><span class="token punctuation">)</span>
-        time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>Second<span class="token punctuation">)</span>
-        <span class="token keyword">select</span> <span class="token punctuation">{</span>
-        <span class="token keyword">case</span> <span class="token operator">&lt;-</span>ctx<span class="token punctuation">.</span><span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token comment" spellcheck="true">// 等待上级通知</span>
-            <span class="token keyword">break</span> LOOP
-        <span class="token keyword">default</span><span class="token punctuation">:</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-    wg<span class="token punctuation">.</span><span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+func worker(ctx context.Context) {
+LOOP:
+    for {
+        fmt.Println("worker")
+        time.Sleep(time.Second)
+        select {
+        case <-ctx.Done(): // 等待上级通知
+            break LOOP
+        default:
+        }
+    }
+    wg.Done()
+}
 
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    ctx<span class="token punctuation">,</span> cancel <span class="token operator">:=</span> context<span class="token punctuation">.</span><span class="token function">WithCancel</span><span class="token punctuation">(</span>context<span class="token punctuation">.</span><span class="token function">Background</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    wg<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
-    <span class="token keyword">go</span> <span class="token function">worker</span><span class="token punctuation">(</span>ctx<span class="token punctuation">)</span>
-    time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>Second <span class="token operator">*</span> <span class="token number">3</span><span class="token punctuation">)</span>
-    <span class="token function">cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 通知子goroutine结束</span>
-    wg<span class="token punctuation">.</span><span class="token function">Wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"over"</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+func main() {
+    ctx, cancel := context.WithCancel(context.Background())
+    wg.Add(1)
+    go worker(ctx)
+    time.Sleep(time.Second * 3)
+    cancel() // 通知子goroutine结束
+    wg.Wait()
+    fmt.Println("over")
+}
 </code></pre>
 <p>当子goroutine又开启另外一个goroutine时，只需要将ctx传入即可：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">package</span> main
+<pre class=" language-lang-go"><code class="language-lang-go">package main
 
-<span class="token keyword">import</span> <span class="token punctuation">(</span>
-    <span class="token string">"context"</span>
-    <span class="token string">"fmt"</span>
-    <span class="token string">"sync"</span>
+import (
+    "context"
+    "fmt"
+    "sync"
 
-    <span class="token string">"time"</span>
-<span class="token punctuation">)</span>
+    "time"
+)
 
-<span class="token keyword">var</span> wg sync<span class="token punctuation">.</span>WaitGroup
+var wg sync.WaitGroup
 
-<span class="token keyword">func</span> <span class="token function">worker</span><span class="token punctuation">(</span>ctx context<span class="token punctuation">.</span>Context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">go</span> <span class="token function">worker2</span><span class="token punctuation">(</span>ctx<span class="token punctuation">)</span>
-LOOP<span class="token punctuation">:</span>
-    <span class="token keyword">for</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"worker"</span><span class="token punctuation">)</span>
-        time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>Second<span class="token punctuation">)</span>
-        <span class="token keyword">select</span> <span class="token punctuation">{</span>
-        <span class="token keyword">case</span> <span class="token operator">&lt;-</span>ctx<span class="token punctuation">.</span><span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token comment" spellcheck="true">// 等待上级通知</span>
-            <span class="token keyword">break</span> LOOP
-        <span class="token keyword">default</span><span class="token punctuation">:</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-    wg<span class="token punctuation">.</span><span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+func worker(ctx context.Context) {
+    go worker2(ctx)
+LOOP:
+    for {
+        fmt.Println("worker")
+        time.Sleep(time.Second)
+        select {
+        case <-ctx.Done(): // 等待上级通知
+            break LOOP
+        default:
+        }
+    }
+    wg.Done()
+}
 
-<span class="token keyword">func</span> <span class="token function">worker2</span><span class="token punctuation">(</span>ctx context<span class="token punctuation">.</span>Context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-LOOP<span class="token punctuation">:</span>
-    <span class="token keyword">for</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"worker2"</span><span class="token punctuation">)</span>
-        time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>Second<span class="token punctuation">)</span>
-        <span class="token keyword">select</span> <span class="token punctuation">{</span>
-        <span class="token keyword">case</span> <span class="token operator">&lt;-</span>ctx<span class="token punctuation">.</span><span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token comment" spellcheck="true">// 等待上级通知</span>
-            <span class="token keyword">break</span> LOOP
-        <span class="token keyword">default</span><span class="token punctuation">:</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    ctx<span class="token punctuation">,</span> cancel <span class="token operator">:=</span> context<span class="token punctuation">.</span><span class="token function">WithCancel</span><span class="token punctuation">(</span>context<span class="token punctuation">.</span><span class="token function">Background</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    wg<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
-    <span class="token keyword">go</span> <span class="token function">worker</span><span class="token punctuation">(</span>ctx<span class="token punctuation">)</span>
-    time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>Second <span class="token operator">*</span> <span class="token number">3</span><span class="token punctuation">)</span>
-    <span class="token function">cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 通知子goroutine结束</span>
-    wg<span class="token punctuation">.</span><span class="token function">Wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"over"</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+func worker2(ctx context.Context) {
+LOOP:
+    for {
+        fmt.Println("worker2")
+        time.Sleep(time.Second)
+        select {
+        case <-ctx.Done(): // 等待上级通知
+            break LOOP
+        default:
+        }
+    }
+}
+func main() {
+    ctx, cancel := context.WithCancel(context.Background())
+    wg.Add(1)
+    go worker(ctx)
+    time.Sleep(time.Second * 3)
+    cancel() // 通知子goroutine结束
+    wg.Wait()
+    fmt.Println("over")
+}
 </code></pre>
 <h2 id="Context初识"><a href="#Context初识" class="headerlink" title="Context初识"></a>Context初识</h2><p>Go1.7加入了一个新的标准库<code>context</code>，它定义了<code>Context</code>类型，专门用来简化 对于处理单个请求的多个 goroutine 之间与请求域的数据、取消信号、截止时间等相关操作，这些操作可能涉及多个 API 调用。</p>
 <p>对服务器传入的请求应该创建上下文，而对服务器的传出调用应该接受上下文。它们之间的函数调用链必须传递上下文，或者可以使用<code>WithCancel</code>、<code>WithDeadline</code>、<code>WithTimeout</code>或<code>WithValue</code>创建的派生上下文。当一个上下文被取消时，它派生的所有上下文也被取消。</p>
 <h2 id="Context接口"><a href="#Context接口" class="headerlink" title="Context接口"></a>Context接口</h2><p><code>context.Context</code>是一个接口，该接口定义了四个需要实现的方法。具体签名如下：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">type</span> Context <span class="token keyword">interface</span> <span class="token punctuation">{</span>
-    <span class="token function">Deadline</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>deadline time<span class="token punctuation">.</span>Time<span class="token punctuation">,</span> ok <span class="token builtin">bool</span><span class="token punctuation">)</span>
-    <span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;-</span><span class="token keyword">chan</span> <span class="token keyword">struct</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
-    <span class="token function">Err</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">error</span>
-    <span class="token function">Value</span><span class="token punctuation">(</span>key <span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">type Context interface {
+    Deadline() (deadline time.Time, ok bool)
+    Done() <-chan struct{}
+    Err() error
+    Value(key interface{}) interface{}
+}
 </code></pre>
 <p>其中：</p>
 <ul>
@@ -737,14 +737,11 @@ LOOP<span class="token punctuation">:</span>
 <li><p><code>Done</code>方法需要返回一个<code>Channel</code>，这个Channel会在当前工作完成或者上下文被取消之后关闭，多次调用<code>Done</code>方法会返回同一个Channel；</p>
 </li>
 <li><pre><code>Err
-</code></pre>
-<p>方法会返回当前</p>
+</code></pre><p>方法会返回当前</p>
 <pre><code>Context
-</code></pre>
-<p>结束的原因，它只会在</p>
+</code></pre><p>结束的原因，它只会在</p>
 <pre><code>Done
-</code></pre>
-<p>返回的Channel被关闭时才会返回非空的值；</p>
+</code></pre><p>返回的Channel被关闭时才会返回非空的值；</p>
 <ul>
 <li>如果当前<code>Context</code>被取消就会返回<code>Canceled</code>错误；</li>
 <li>如果当前<code>Context</code>超时就会返回<code>DeadlineExceeded</code>错误；</li>
@@ -759,160 +756,160 @@ LOOP<span class="token punctuation">:</span>
 <p><code>background</code>和<code>todo</code>本质上都是<code>emptyCtx</code>结构体类型，是一个不可取消，没有设置截止时间，没有携带任何值的Context。</p>
 <h2 id="With系列函数"><a href="#With系列函数" class="headerlink" title="With系列函数"></a>With系列函数</h2><p>此外，<code>context</code>包中还定义了四个With系列函数。</p>
 <h3 id="WithCancel"><a href="#WithCancel" class="headerlink" title="WithCancel"></a>WithCancel</h3><p><code>WithCancel</code>的函数签名如下：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">WithCancel</span><span class="token punctuation">(</span>parent Context<span class="token punctuation">)</span> <span class="token punctuation">(</span>ctx Context<span class="token punctuation">,</span> cancel CancelFunc<span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func WithCancel(parent Context) (ctx Context, cancel CancelFunc)
 </code></pre>
 <p><code>WithCancel</code>返回带有新Done通道的父节点的副本。当调用返回的cancel函数或当关闭父上下文的Done通道时，将关闭返回上下文的Done通道，无论先发生什么情况。</p>
 <p>取消此上下文将释放与其关联的资源，因此代码应该在此上下文中运行的操作完成后立即调用cancel。</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">gen</span><span class="token punctuation">(</span>ctx context<span class="token punctuation">.</span>Context<span class="token punctuation">)</span> <span class="token operator">&lt;-</span><span class="token keyword">chan</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
-        dst <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> <span class="token builtin">int</span><span class="token punctuation">)</span>
-        n <span class="token operator">:=</span> <span class="token number">1</span>
-        <span class="token keyword">go</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">for</span> <span class="token punctuation">{</span>
-                <span class="token keyword">select</span> <span class="token punctuation">{</span>
-                <span class="token keyword">case</span> <span class="token operator">&lt;-</span>ctx<span class="token punctuation">.</span><span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-                    <span class="token keyword">return</span> <span class="token comment" spellcheck="true">// return结束该goroutine，防止泄露</span>
-                <span class="token keyword">case</span> dst <span class="token operator">&lt;-</span> n<span class="token punctuation">:</span>
-                    n<span class="token operator">++</span>
-                <span class="token punctuation">}</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token keyword">return</span> dst
-    <span class="token punctuation">}</span>
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    ctx<span class="token punctuation">,</span> cancel <span class="token operator">:=</span> context<span class="token punctuation">.</span><span class="token function">WithCancel</span><span class="token punctuation">(</span>context<span class="token punctuation">.</span><span class="token function">Background</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token keyword">defer</span> <span class="token function">cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 当我们取完需要的整数后调用cancel</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func gen(ctx context.Context) <-chan int {
+        dst := make(chan int)
+        n := 1
+        go func() {
+            for {
+                select {
+                case <-ctx.Done():
+                    return // return结束该goroutine，防止泄露
+                case dst <- n:
+                    n++
+                }
+            }
+        }()
+        return dst
+    }
+func main() {
+    ctx, cancel := context.WithCancel(context.Background())
+    defer cancel() // 当我们取完需要的整数后调用cancel
 
-    <span class="token keyword">for</span> n <span class="token operator">:=</span> <span class="token keyword">range</span> <span class="token function">gen</span><span class="token punctuation">(</span>ctx<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span>
-        <span class="token keyword">if</span> n <span class="token operator">==</span> <span class="token number">5</span> <span class="token punctuation">{</span>
-            <span class="token keyword">break</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+    for n := range gen(ctx) {
+        fmt.Println(n)
+        if n == 5 {
+            break
+        }
+    }
+}
 </code></pre>
 <p>上面的示例代码中，<code>gen</code>函数在单独的goroutine中生成整数并将它们发送到返回的通道。 gen的调用者在使用生成的整数之后需要取消上下文，以免<code>gen</code>启动的内部goroutine发生泄漏。</p>
 <h3 id="WithDeadline"><a href="#WithDeadline" class="headerlink" title="WithDeadline"></a>WithDeadline</h3><p><code>WithDeadline</code>的函数签名如下：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">WithDeadline</span><span class="token punctuation">(</span>parent Context<span class="token punctuation">,</span> deadline time<span class="token punctuation">.</span>Time<span class="token punctuation">)</span> <span class="token punctuation">(</span>Context<span class="token punctuation">,</span> CancelFunc<span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func WithDeadline(parent Context, deadline time.Time) (Context, CancelFunc)
 </code></pre>
 <p>返回父上下文的副本，并将deadline调整为不迟于d。如果父上下文的deadline已经早于d，则WithDeadline(parent, d)在语义上等同于父上下文。当截止日过期时，当调用返回的cancel函数时，或者当父上下文的Done通道关闭时，返回上下文的Done通道将被关闭，以最先发生的情况为准。</p>
 <p>取消此上下文将释放与其关联的资源，因此代码应该在此上下文中运行的操作完成后立即调用cancel。</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    d <span class="token operator">:=</span> time<span class="token punctuation">.</span><span class="token function">Now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token number">50</span> <span class="token operator">*</span> time<span class="token punctuation">.</span>Millisecond<span class="token punctuation">)</span>
-    ctx<span class="token punctuation">,</span> cancel <span class="token operator">:=</span> context<span class="token punctuation">.</span><span class="token function">WithDeadline</span><span class="token punctuation">(</span>context<span class="token punctuation">.</span><span class="token function">Background</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> d<span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func main() {
+    d := time.Now().Add(50 * time.Millisecond)
+    ctx, cancel := context.WithDeadline(context.Background(), d)
 
-    <span class="token comment" spellcheck="true">// 尽管ctx会过期，但在任何情况下调用它的cancel函数都是很好的实践。</span>
-    <span class="token comment" spellcheck="true">// 如果不这样做，可能会使上下文及其父类存活的时间超过必要的时间。</span>
-    <span class="token keyword">defer</span> <span class="token function">cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    // 尽管ctx会过期，但在任何情况下调用它的cancel函数都是很好的实践。
+    // 如果不这样做，可能会使上下文及其父类存活的时间超过必要的时间。
+    defer cancel()
 
-    <span class="token keyword">select</span> <span class="token punctuation">{</span>
-    <span class="token keyword">case</span> <span class="token operator">&lt;-</span>time<span class="token punctuation">.</span><span class="token function">After</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">*</span> time<span class="token punctuation">.</span>Second<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"overslept"</span><span class="token punctuation">)</span>
-    <span class="token keyword">case</span> <span class="token operator">&lt;-</span>ctx<span class="token punctuation">.</span><span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>ctx<span class="token punctuation">.</span><span class="token function">Err</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+    select {
+    case <-time.After(1 * time.Second):
+        fmt.Println("overslept")
+    case <-ctx.Done():
+        fmt.Println(ctx.Err())
+    }
+}
 </code></pre>
 <p>上面的代码中，定义了一个50毫秒之后过期的deadline，然后我们调用<code>context.WithDeadline(context.Background(), d)</code>得到一个上下文（ctx）和一个取消函数（cancel），然后使用一个select让主程序陷入等待：等待1秒后打印<code>overslept</code>退出或者等待ctx过期后退出。</p>
 <p>在上面的示例代码中，因为ctx 50毫秒后就会过期，所以<code>ctx.Done()</code>会先接收到context到期通知，并且会打印ctx.Err()的内容。</p>
 <h3 id="WithTimeout"><a href="#WithTimeout" class="headerlink" title="WithTimeout"></a>WithTimeout</h3><p><code>WithTimeout</code>的函数签名如下：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">WithTimeout</span><span class="token punctuation">(</span>parent Context<span class="token punctuation">,</span> timeout time<span class="token punctuation">.</span>Duration<span class="token punctuation">)</span> <span class="token punctuation">(</span>Context<span class="token punctuation">,</span> CancelFunc<span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func WithTimeout(parent Context, timeout time.Duration) (Context, CancelFunc)
 </code></pre>
 <p><code>WithTimeout</code>返回<code>WithDeadline(parent, time.Now().Add(timeout))</code>。</p>
 <p>取消此上下文将释放与其相关的资源，因此代码应该在此上下文中运行的操作完成后立即调用cancel，通常用于数据库或者网络连接的超时控制。具体示例如下：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">package</span> main
+<pre class=" language-lang-go"><code class="language-lang-go">package main
 
-<span class="token keyword">import</span> <span class="token punctuation">(</span>
-    <span class="token string">"context"</span>
-    <span class="token string">"fmt"</span>
-    <span class="token string">"sync"</span>
+import (
+    "context"
+    "fmt"
+    "sync"
 
-    <span class="token string">"time"</span>
-<span class="token punctuation">)</span>
+    "time"
+)
 
-<span class="token comment" spellcheck="true">// context.WithTimeout</span>
+// context.WithTimeout
 
-<span class="token keyword">var</span> wg sync<span class="token punctuation">.</span>WaitGroup
+var wg sync.WaitGroup
 
-<span class="token keyword">func</span> <span class="token function">worker</span><span class="token punctuation">(</span>ctx context<span class="token punctuation">.</span>Context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-LOOP<span class="token punctuation">:</span>
-    <span class="token keyword">for</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"db connecting ..."</span><span class="token punctuation">)</span>
-        time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>Millisecond <span class="token operator">*</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 假设正常连接数据库耗时10毫秒</span>
-        <span class="token keyword">select</span> <span class="token punctuation">{</span>
-        <span class="token keyword">case</span> <span class="token operator">&lt;-</span>ctx<span class="token punctuation">.</span><span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token comment" spellcheck="true">// 50毫秒后自动调用</span>
-            <span class="token keyword">break</span> LOOP
-        <span class="token keyword">default</span><span class="token punctuation">:</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"worker done!"</span><span class="token punctuation">)</span>
-    wg<span class="token punctuation">.</span><span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+func worker(ctx context.Context) {
+LOOP:
+    for {
+        fmt.Println("db connecting ...")
+        time.Sleep(time.Millisecond * 10) // 假设正常连接数据库耗时10毫秒
+        select {
+        case <-ctx.Done(): // 50毫秒后自动调用
+            break LOOP
+        default:
+        }
+    }
+    fmt.Println("worker done!")
+    wg.Done()
+}
 
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">// 设置一个50毫秒的超时</span>
-    ctx<span class="token punctuation">,</span> cancel <span class="token operator">:=</span> context<span class="token punctuation">.</span><span class="token function">WithTimeout</span><span class="token punctuation">(</span>context<span class="token punctuation">.</span><span class="token function">Background</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> time<span class="token punctuation">.</span>Millisecond<span class="token operator">*</span><span class="token number">50</span><span class="token punctuation">)</span>
-    wg<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
-    <span class="token keyword">go</span> <span class="token function">worker</span><span class="token punctuation">(</span>ctx<span class="token punctuation">)</span>
-    time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>Second <span class="token operator">*</span> <span class="token number">5</span><span class="token punctuation">)</span>
-    <span class="token function">cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 通知子goroutine结束</span>
-    wg<span class="token punctuation">.</span><span class="token function">Wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"over"</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+func main() {
+    // 设置一个50毫秒的超时
+    ctx, cancel := context.WithTimeout(context.Background(), time.Millisecond*50)
+    wg.Add(1)
+    go worker(ctx)
+    time.Sleep(time.Second * 5)
+    cancel() // 通知子goroutine结束
+    wg.Wait()
+    fmt.Println("over")
+}
 </code></pre>
 <h3 id="WithValue"><a href="#WithValue" class="headerlink" title="WithValue"></a>WithValue</h3><p><code>WithValue</code>函数能够将请求作用域的数据与 Context 对象建立关系。声明如下：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">WithValue</span><span class="token punctuation">(</span>parent Context<span class="token punctuation">,</span> key<span class="token punctuation">,</span> val <span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> Context
+<pre class=" language-lang-go"><code class="language-lang-go">func WithValue(parent Context, key, val interface{}) Context
 </code></pre>
 <p><code>WithValue</code>返回父节点的副本，其中与key关联的值为val。</p>
 <p>仅对API和进程间传递请求域的数据使用上下文值，而不是使用它来传递可选参数给函数。</p>
 <p>所提供的键必须是可比较的，并且不应该是<code>string</code>类型或任何其他内置类型，以避免使用上下文在包之间发生冲突。<code>WithValue</code>的用户应该为键定义自己的类型。为了避免在分配给interface{}时进行分配，上下文键通常具有具体类型<code>struct{}</code>。或者，导出的上下文关键变量的静态类型应该是指针或接口。</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">package</span> main
+<pre class=" language-lang-go"><code class="language-lang-go">package main
 
-<span class="token keyword">import</span> <span class="token punctuation">(</span>
-    <span class="token string">"context"</span>
-    <span class="token string">"fmt"</span>
-    <span class="token string">"sync"</span>
+import (
+    "context"
+    "fmt"
+    "sync"
 
-    <span class="token string">"time"</span>
-<span class="token punctuation">)</span>
+    "time"
+)
 
-<span class="token comment" spellcheck="true">// context.WithValue</span>
+// context.WithValue
 
-<span class="token keyword">type</span> TraceCode <span class="token builtin">string</span>
+type TraceCode string
 
-<span class="token keyword">var</span> wg sync<span class="token punctuation">.</span>WaitGroup
+var wg sync.WaitGroup
 
-<span class="token keyword">func</span> <span class="token function">worker</span><span class="token punctuation">(</span>ctx context<span class="token punctuation">.</span>Context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    key <span class="token operator">:=</span> <span class="token function">TraceCode</span><span class="token punctuation">(</span><span class="token string">"TRACE_CODE"</span><span class="token punctuation">)</span>
-    traceCode<span class="token punctuation">,</span> ok <span class="token operator">:=</span> ctx<span class="token punctuation">.</span><span class="token function">Value</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 在子goroutine中获取trace code</span>
-    <span class="token keyword">if</span> <span class="token operator">!</span>ok <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"invalid trace code"</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-LOOP<span class="token punctuation">:</span>
-    <span class="token keyword">for</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"worker, trace code:%s\n"</span><span class="token punctuation">,</span> traceCode<span class="token punctuation">)</span>
-        time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>Millisecond <span class="token operator">*</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 假设正常连接数据库耗时10毫秒</span>
-        <span class="token keyword">select</span> <span class="token punctuation">{</span>
-        <span class="token keyword">case</span> <span class="token operator">&lt;-</span>ctx<span class="token punctuation">.</span><span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token comment" spellcheck="true">// 50毫秒后自动调用</span>
-            <span class="token keyword">break</span> LOOP
-        <span class="token keyword">default</span><span class="token punctuation">:</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"worker done!"</span><span class="token punctuation">)</span>
-    wg<span class="token punctuation">.</span><span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+func worker(ctx context.Context) {
+    key := TraceCode("TRACE_CODE")
+    traceCode, ok := ctx.Value(key).(string) // 在子goroutine中获取trace code
+    if !ok {
+        fmt.Println("invalid trace code")
+    }
+LOOP:
+    for {
+        fmt.Printf("worker, trace code:%s\n", traceCode)
+        time.Sleep(time.Millisecond * 10) // 假设正常连接数据库耗时10毫秒
+        select {
+        case <-ctx.Done(): // 50毫秒后自动调用
+            break LOOP
+        default:
+        }
+    }
+    fmt.Println("worker done!")
+    wg.Done()
+}
 
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">// 设置一个50毫秒的超时</span>
-    ctx<span class="token punctuation">,</span> cancel <span class="token operator">:=</span> context<span class="token punctuation">.</span><span class="token function">WithTimeout</span><span class="token punctuation">(</span>context<span class="token punctuation">.</span><span class="token function">Background</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> time<span class="token punctuation">.</span>Millisecond<span class="token operator">*</span><span class="token number">50</span><span class="token punctuation">)</span>
-    <span class="token comment" spellcheck="true">// 在系统的入口中设置trace code传递给后续启动的goroutine实现日志数据聚合</span>
-    ctx <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">WithValue</span><span class="token punctuation">(</span>ctx<span class="token punctuation">,</span> <span class="token function">TraceCode</span><span class="token punctuation">(</span><span class="token string">"TRACE_CODE"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"12512312234"</span><span class="token punctuation">)</span>
-    wg<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
-    <span class="token keyword">go</span> <span class="token function">worker</span><span class="token punctuation">(</span>ctx<span class="token punctuation">)</span>
-    time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>Second <span class="token operator">*</span> <span class="token number">5</span><span class="token punctuation">)</span>
-    <span class="token function">cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 通知子goroutine结束</span>
-    wg<span class="token punctuation">.</span><span class="token function">Wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"over"</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+func main() {
+    // 设置一个50毫秒的超时
+    ctx, cancel := context.WithTimeout(context.Background(), time.Millisecond*50)
+    // 在系统的入口中设置trace code传递给后续启动的goroutine实现日志数据聚合
+    ctx = context.WithValue(ctx, TraceCode("TRACE_CODE"), "12512312234")
+    wg.Add(1)
+    go worker(ctx)
+    time.Sleep(time.Second * 5)
+    cancel() // 通知子goroutine结束
+    wg.Wait()
+    fmt.Println("over")
+}
 </code></pre>
 <h2 id="使用Context的注意事项"><a href="#使用Context的注意事项" class="headerlink" title="使用Context的注意事项"></a>使用Context的注意事项</h2><ul>
 <li>推荐以参数的方式显示传递Context</li>
@@ -922,108 +919,108 @@ LOOP<span class="token punctuation">:</span>
 <li>Context是线程安全的，可以放心的在多个goroutine中传递</li>
 </ul>
 <h2 id="客户端超时取消示例"><a href="#客户端超时取消示例" class="headerlink" title="客户端超时取消示例"></a>客户端超时取消示例</h2><p>调用服务端API时如何在客户端实现超时控制？</p>
-<h3 id="server端"><a href="#server端" class="headerlink" title="server端"></a>server端</h3><pre class=" language-go"><code class="language-go"><span class="token comment" spellcheck="true">// context_timeout/server/main.go</span>
-<span class="token keyword">package</span> main
+<h3 id="server端"><a href="#server端" class="headerlink" title="server端"></a>server端</h3><pre class=" language-lang-go"><code class="language-lang-go">// context_timeout/server/main.go
+package main
 
-<span class="token keyword">import</span> <span class="token punctuation">(</span>
-    <span class="token string">"fmt"</span>
-    <span class="token string">"math/rand"</span>
-    <span class="token string">"net/http"</span>
+import (
+    "fmt"
+    "math/rand"
+    "net/http"
 
-    <span class="token string">"time"</span>
-<span class="token punctuation">)</span>
+    "time"
+)
 
-<span class="token comment" spellcheck="true">// server端，随机出现慢响应</span>
+// server端，随机出现慢响应
 
-<span class="token keyword">func</span> <span class="token function">indexHandler</span><span class="token punctuation">(</span>w http<span class="token punctuation">.</span>ResponseWriter<span class="token punctuation">,</span> r <span class="token operator">*</span>http<span class="token punctuation">.</span>Request<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    number <span class="token operator">:=</span> rand<span class="token punctuation">.</span><span class="token function">Intn</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
-    <span class="token keyword">if</span> number <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">{</span>
-        time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>Second <span class="token operator">*</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 耗时10秒的慢响应</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Fprintf</span><span class="token punctuation">(</span>w<span class="token punctuation">,</span> <span class="token string">"slow response"</span><span class="token punctuation">)</span>
-        <span class="token keyword">return</span>
-    <span class="token punctuation">}</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Fprint</span><span class="token punctuation">(</span>w<span class="token punctuation">,</span> <span class="token string">"quick response"</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+func indexHandler(w http.ResponseWriter, r *http.Request) {
+    number := rand.Intn(2)
+    if number == 0 {
+        time.Sleep(time.Second * 10) // 耗时10秒的慢响应
+        fmt.Fprintf(w, "slow response")
+        return
+    }
+    fmt.Fprint(w, "quick response")
+}
 
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    http<span class="token punctuation">.</span><span class="token function">HandleFunc</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">,</span> indexHandler<span class="token punctuation">)</span>
-    err <span class="token operator">:=</span> http<span class="token punctuation">.</span><span class="token function">ListenAndServe</span><span class="token punctuation">(</span><span class="token string">":8000"</span><span class="token punctuation">,</span> <span class="token boolean">nil</span><span class="token punctuation">)</span>
-    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-        <span class="token function">panic</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+func main() {
+    http.HandleFunc("/", indexHandler)
+    err := http.ListenAndServe(":8000", nil)
+    if err != nil {
+        panic(err)
+    }
+}
 </code></pre>
-<h3 id="client端"><a href="#client端" class="headerlink" title="client端"></a>client端</h3><pre class=" language-go"><code class="language-go"><span class="token comment" spellcheck="true">// context_timeout/client/main.go</span>
-<span class="token keyword">package</span> main
+<h3 id="client端"><a href="#client端" class="headerlink" title="client端"></a>client端</h3><pre class=" language-lang-go"><code class="language-lang-go">// context_timeout/client/main.go
+package main
 
-<span class="token keyword">import</span> <span class="token punctuation">(</span>
-    <span class="token string">"context"</span>
-    <span class="token string">"fmt"</span>
-    <span class="token string">"io/ioutil"</span>
-    <span class="token string">"net/http"</span>
-    <span class="token string">"sync"</span>
-    <span class="token string">"time"</span>
-<span class="token punctuation">)</span>
+import (
+    "context"
+    "fmt"
+    "io/ioutil"
+    "net/http"
+    "sync"
+    "time"
+)
 
-<span class="token comment" spellcheck="true">// 客户端</span>
+// 客户端
 
-<span class="token keyword">type</span> respData <span class="token keyword">struct</span> <span class="token punctuation">{</span>
-    resp <span class="token operator">*</span>http<span class="token punctuation">.</span>Response
-    err  <span class="token builtin">error</span>
-<span class="token punctuation">}</span>
+type respData struct {
+    resp *http.Response
+    err  error
+}
 
-<span class="token keyword">func</span> <span class="token function">doCall</span><span class="token punctuation">(</span>ctx context<span class="token punctuation">.</span>Context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    transport <span class="token operator">:=</span> http<span class="token punctuation">.</span>Transport<span class="token punctuation">{</span>
-       <span class="token comment" spellcheck="true">// 请求频繁可定义全局的client对象并启用长链接</span>
-       <span class="token comment" spellcheck="true">// 请求不频繁使用短链接</span>
-       DisableKeepAlives<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>     <span class="token punctuation">}</span>
-    client <span class="token operator">:=</span> http<span class="token punctuation">.</span>Client<span class="token punctuation">{</span>
-        Transport<span class="token punctuation">:</span> <span class="token operator">&amp;</span>transport<span class="token punctuation">,</span>
-    <span class="token punctuation">}</span>
+func doCall(ctx context.Context) {
+    transport := http.Transport{
+       // 请求频繁可定义全局的client对象并启用长链接
+       // 请求不频繁使用短链接
+       DisableKeepAlives: true,     }
+    client := http.Client{
+        Transport: &transport,
+    }
 
-    respChan <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> <span class="token operator">*</span>respData<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
-    req<span class="token punctuation">,</span> err <span class="token operator">:=</span> http<span class="token punctuation">.</span><span class="token function">NewRequest</span><span class="token punctuation">(</span><span class="token string">"GET"</span><span class="token punctuation">,</span> <span class="token string">"http://127.0.0.1:8000/"</span><span class="token punctuation">,</span> <span class="token boolean">nil</span><span class="token punctuation">)</span>
-    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"new requestg failed, err:%v\n"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
-        <span class="token keyword">return</span>
-    <span class="token punctuation">}</span>
-    req <span class="token operator">=</span> req<span class="token punctuation">.</span><span class="token function">WithContext</span><span class="token punctuation">(</span>ctx<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 使用带超时的ctx创建一个新的client request</span>
-    <span class="token keyword">var</span> wg sync<span class="token punctuation">.</span>WaitGroup
-    wg<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
-    <span class="token keyword">defer</span> wg<span class="token punctuation">.</span><span class="token function">Wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token keyword">go</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        resp<span class="token punctuation">,</span> err <span class="token operator">:=</span> client<span class="token punctuation">.</span><span class="token function">Do</span><span class="token punctuation">(</span>req<span class="token punctuation">)</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"client.do resp:%v, err:%v\n"</span><span class="token punctuation">,</span> resp<span class="token punctuation">,</span> err<span class="token punctuation">)</span>
-        rd <span class="token operator">:=</span> <span class="token operator">&amp;</span>respData<span class="token punctuation">{</span>
-            resp<span class="token punctuation">:</span> resp<span class="token punctuation">,</span>
-            err<span class="token punctuation">:</span>  err<span class="token punctuation">,</span>
-        <span class="token punctuation">}</span>
-        respChan <span class="token operator">&lt;-</span> rd
-        wg<span class="token punctuation">.</span><span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    respChan := make(chan *respData, 1)
+    req, err := http.NewRequest("GET", "http://127.0.0.1:8000/", nil)
+    if err != nil {
+        fmt.Printf("new requestg failed, err:%v\n", err)
+        return
+    }
+    req = req.WithContext(ctx) // 使用带超时的ctx创建一个新的client request
+    var wg sync.WaitGroup
+    wg.Add(1)
+    defer wg.Wait()
+    go func() {
+        resp, err := client.Do(req)
+        fmt.Printf("client.do resp:%v, err:%v\n", resp, err)
+        rd := &respData{
+            resp: resp,
+            err:  err,
+        }
+        respChan <- rd
+        wg.Done()
+    }()
 
-    <span class="token keyword">select</span> <span class="token punctuation">{</span>
-    <span class="token keyword">case</span> <span class="token operator">&lt;-</span>ctx<span class="token punctuation">.</span><span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token comment" spellcheck="true">//transport.CancelRequest(req)</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"call api timeout"</span><span class="token punctuation">)</span>
-    <span class="token keyword">case</span> result <span class="token operator">:=</span> <span class="token operator">&lt;-</span>respChan<span class="token punctuation">:</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"call server api success"</span><span class="token punctuation">)</span>
-        <span class="token keyword">if</span> result<span class="token punctuation">.</span>err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-            fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"call server api failed, err:%v\n"</span><span class="token punctuation">,</span> result<span class="token punctuation">.</span>err<span class="token punctuation">)</span>
-            <span class="token keyword">return</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">defer</span> result<span class="token punctuation">.</span>resp<span class="token punctuation">.</span>Body<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-        data<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> ioutil<span class="token punctuation">.</span><span class="token function">ReadAll</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>resp<span class="token punctuation">.</span>Body<span class="token punctuation">)</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"resp:%v\n"</span><span class="token punctuation">,</span> <span class="token function">string</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+    select {
+    case <-ctx.Done():
+        //transport.CancelRequest(req)
+        fmt.Println("call api timeout")
+    case result := <-respChan:
+        fmt.Println("call server api success")
+        if result.err != nil {
+            fmt.Printf("call server api failed, err:%v\n", result.err)
+            return
+        }
+        defer result.resp.Body.Close()
+        data, _ := ioutil.ReadAll(result.resp.Body)
+        fmt.Printf("resp:%v\n", string(data))
+    }
+}
 
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">// 定义一个100毫秒的超时</span>
-    ctx<span class="token punctuation">,</span> cancel <span class="token operator">:=</span> context<span class="token punctuation">.</span><span class="token function">WithTimeout</span><span class="token punctuation">(</span>context<span class="token punctuation">.</span><span class="token function">Background</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> time<span class="token punctuation">.</span>Millisecond<span class="token operator">*</span><span class="token number">100</span><span class="token punctuation">)</span>
-    <span class="token keyword">defer</span> <span class="token function">cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 调用cancel释放子goroutine资源</span>
-    <span class="token function">doCall</span><span class="token punctuation">(</span>ctx<span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+func main() {
+    // 定义一个100毫秒的超时
+    ctx, cancel := context.WithTimeout(context.Background(), time.Millisecond*100)
+    defer cancel() // 调用cancel释放子goroutine资源
+    doCall(ctx)
+}
 </code></pre>
 
                 
@@ -1471,7 +1468,7 @@ LOOP<span class="token punctuation">:</span>
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="flag包">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="flag包">
                         
                         <span class="card-title">flag包</span>
                     </div>
@@ -1528,7 +1525,7 @@ LOOP<span class="token punctuation">:</span>
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="文件属性filemode">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="文件属性filemode">
                         
                         <span class="card-title">文件属性filemode</span>
                     </div>
@@ -1730,6 +1727,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
@@ -1748,7 +1752,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">41.9k</span>
+                        class="white-color">36.5k</span>
             
             
             
@@ -1984,9 +1988,9 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-
+    <script src="/js/FunnyTitle.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 
 </html>

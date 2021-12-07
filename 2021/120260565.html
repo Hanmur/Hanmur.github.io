@@ -333,7 +333,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -494,7 +494,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-02
+                    2021-12-07
                 </div>
                 
 
@@ -529,6 +529,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h1><p>整型可以分为两个大类</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -536,7 +537,8 @@
 <th>无符号整型</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>int8</td>
 <td>uint8</td>
 </tr>
@@ -552,9 +554,12 @@
 <td>int64</td>
 <td>uint64</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>其中<code>uint8</code>对应<code>byte</code>型，<code>int16</code>对应<code>short</code>型，<code>int64</code>对应<code>long</code>型</p>
 <p><strong>特殊整型</strong></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -562,7 +567,8 @@
 <th>描述</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>uint</td>
 <td>随操作系统对应32或64</td>
 </tr>
@@ -574,12 +580,15 @@
 <td>uintptr</td>
 <td>无符号整型，用于存放指针</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p><strong>八进制&amp;十六进制</strong></p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">var</span> a <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token number">10</span>     <span class="token comment" spellcheck="true">//10进制</span>
-<span class="token keyword">var</span> b <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token number">077</span>    <span class="token comment" spellcheck="true">//8进制</span>
-<span class="token keyword">var</span> c <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token number">0xff</span> <span class="token comment" spellcheck="true">//16进制</span>
+<pre class=" language-lang-go"><code class="language-lang-go">var a int = 10     //10进制
+var b int = 077    //8进制
+var c int = 0xff //16进制
 </code></pre>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -589,35 +598,38 @@
 <th>十六进制</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>%b</td>
 <td>%o</td>
 <td>%d</td>
 <td>%x</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h1 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h1><p>浮点数分为<code>float32</code>和<code>float64</code></p>
 <p>遵循<code>IEEE 754</code>标准</p>
 <p>对应符号<code>%f</code></p>
 <h1 id="复数"><a href="#复数" class="headerlink" title="复数"></a>复数</h1><p>复数分为<code>complex64</code>和<code>complex128</code></p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">var</span> c1 <span class="token builtin">complex64</span>
-c1 <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">+</span> <span class="token number">2i</span>
-<span class="token keyword">var</span> c2 <span class="token builtin">complex128</span>
-c2 <span class="token operator">=</span> <span class="token number">2</span> <span class="token operator">+</span> <span class="token number">3i</span> 
+<pre class=" language-lang-go"><code class="language-lang-go">var c1 complex64
+c1 = 1 + 2i
+var c2 complex128
+c2 = 2 + 3i
 </code></pre>
 <h1 id="布尔值"><a href="#布尔值" class="headerlink" title="布尔值"></a>布尔值</h1><p>布尔值<code>bool</code> 只有两个值：<code>true</code>和<code>false</code></p>
 <p>默认值为<code>false</code></p>
 <p>go语言中不允许将整数型强制转换成布尔型</p>
 <p>go语言中也不允许参与数值运算</p>
 <h1 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h1><p>Go语言类型转换格式：</p>
-<pre class=" language-go"><code class="language-go"><span class="token function">type_name</span><span class="token punctuation">(</span>expression<span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">type_name(expression)
 </code></pre>
 <p><code>type_name</code>为类型，<code>expression</code>为表达式</p>
 <p>举例：将整型转换为浮点型</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">var</span> intNum <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token number">17</span>
-<span class="token keyword">var</span> floatNum <span class="token builtin">float32</span>
+<pre class=" language-lang-go"><code class="language-lang-go">var intNum int = 17
+var floatNum float32
 
-floatNum <span class="token operator">=</span> <span class="token function">float32</span><span class="token punctuation">(</span>intNum<span class="token punctuation">)</span>    <span class="token comment" spellcheck="true">//floatNum = 17</span>
+floatNum = float32(intNum)    //floatNum = 17
 </code></pre>
 <p>Go不支持隐式类型转化</p>
 
@@ -1066,7 +1078,7 @@ floatNum <span class="token operator">=</span> <span class="token function">floa
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="makefile">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="makefile">
                         
                         <span class="card-title">makefile</span>
                     </div>
@@ -1325,6 +1337,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
@@ -1343,7 +1362,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">41.9k</span>
+                        class="white-color">36.5k</span>
             
             
             
@@ -1579,9 +1598,9 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-
+    <script src="/js/FunnyTitle.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 
 </html>

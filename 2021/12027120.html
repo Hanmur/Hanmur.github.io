@@ -333,7 +333,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -494,14 +494,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-02
+                    2021-12-07
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    524
+                    522
                 </div>
                 
 
@@ -535,8 +535,8 @@
 <p>关于<code>Makefile</code>的详细内容推荐阅读<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/7097.html">Makefile教程</a>。</p>
 <h3 id="规则概述"><a href="#规则概述" class="headerlink" title="规则概述"></a>规则概述</h3><p><code>Makefile</code>由多条规则组成，每条规则主要由两个部分组成，分别是依赖的关系和执行的命令。</p>
 <p>其结构如下所示：</p>
-<pre class=" language-makefile"><code class="language-makefile"><span class="token symbol">[target] ... </span><span class="token punctuation">:</span> [prerequisites] ...
-&lt;tab>[command]
+<pre class=" language-lang-makefile"><code class="language-lang-makefile">[target] ... : [prerequisites] ...
+<tab>[command]
     ...
     ...
 </code></pre>
@@ -547,34 +547,34 @@
 <li>command：make 需要执行的命令（任意的 shell 命令）。可以有多条命令，每一条命令占一行。</li>
 </ul>
 <p>举个例子：</p>
-<pre class=" language-makefile"><code class="language-makefile"><span class="token symbol">build</span><span class="token punctuation">:</span>
-    CGO_ENABLED<span class="token operator">=</span>0 GOOS<span class="token operator">=</span>linux GOARCH<span class="token operator">=</span>amd64 go build -o xx
+<pre class=" language-lang-makefile"><code class="language-lang-makefile">build:
+    CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o xx
 </code></pre>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><pre class=" language-makefile"><code class="language-makefile"><span class="token builtin">.PHONY</span><span class="token punctuation">:</span> all build run gotool clean help
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><pre class=" language-lang-makefile"><code class="language-lang-makefile">.PHONY: all build run gotool clean help
 
-BINARY<span class="token operator">=</span><span class="token string">"bluebell"</span>
+BINARY="bluebell"
 
-<span class="token symbol">all</span><span class="token punctuation">:</span> gotool build
+all: gotool build
 
-<span class="token symbol">build</span><span class="token punctuation">:</span>
-    CGO_ENABLED<span class="token operator">=</span>0 GOOS<span class="token operator">=</span>linux GOARCH<span class="token operator">=</span>amd64 go build -o <span class="token variable">$</span><span class="token punctuation">{</span>BINARY<span class="token punctuation">}</span>
+build:
+    CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ${BINARY}
 
-<span class="token symbol">run</span><span class="token punctuation">:</span>
-    <span class="token operator">@</span>go run ./
+run:
+    @go run ./
 
-<span class="token symbol">gotool</span><span class="token punctuation">:</span>
+gotool:
     go fmt ./
     go vet ./
 
-<span class="token symbol">clean</span><span class="token punctuation">:</span>
-    <span class="token operator">@</span>if [ -f <span class="token variable">$</span><span class="token punctuation">{</span>BINARY<span class="token punctuation">}</span> ] <span class="token punctuation">;</span> then rm <span class="token variable">$</span><span class="token punctuation">{</span>BINARY<span class="token punctuation">}</span> <span class="token punctuation">;</span> fi
+clean:
+    @if [ -f ${BINARY} ] ; then rm ${BINARY} ; fi
 
-<span class="token symbol">help</span><span class="token punctuation">:</span>
-    <span class="token operator">@</span>echo <span class="token string">"make - 格式化 Go 代码, 并编译生成二进制文件"</span>
-    <span class="token operator">@</span>echo <span class="token string">"make build - 编译 Go 代码, 生成二进制文件"</span>
-    <span class="token operator">@</span>echo <span class="token string">"make run - 直接运行 Go 代码"</span>
-    <span class="token operator">@</span>echo <span class="token string">"make clean - 移除二进制文件和 vim swap files"</span>
-    <span class="token operator">@</span>echo <span class="token string">"make gotool - 运行 Go 工具 'fmt' and 'vet'"</span>
+help:
+    @echo "make - 格式化 Go 代码, 并编译生成二进制文件"
+    @echo "make build - 编译 Go 代码, 生成二进制文件"
+    @echo "make run - 直接运行 Go 代码"
+    @echo "make clean - 移除二进制文件和 vim swap files"
+    @echo "make gotool - 运行 Go 工具 'fmt' and 'vet'"
 </code></pre>
 <p>其中：</p>
 <ul>
@@ -1027,7 +1027,7 @@ BINARY<span class="token operator">=</span><span class="token string">"bluebell"
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="运算符">
+                        <img src="/medias/featureimages/30.jpg" class="responsive-img" alt="运算符">
                         
                         <span class="card-title">运算符</span>
                     </div>
@@ -1084,7 +1084,7 @@ BINARY<span class="token operator">=</span><span class="token string">"bluebell"
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="基本数据类型">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="基本数据类型">
                         
                         <span class="card-title">基本数据类型</span>
                     </div>
@@ -1286,6 +1286,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
@@ -1304,7 +1311,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">41.9k</span>
+                        class="white-color">36.5k</span>
             
             
             
@@ -1540,9 +1547,9 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-
+    <script src="/js/FunnyTitle.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 
 </html>

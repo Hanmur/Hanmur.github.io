@@ -333,7 +333,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -494,7 +494,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-02
+                    2021-12-07
                 </div>
                 
 
@@ -543,7 +543,7 @@
 <h3 id="指针地址和指针类型"><a href="#指针地址和指针类型" class="headerlink" title="指针地址和指针类型"></a>指针地址和指针类型</h3><p>变量在运行时有一个地址，代表变量在内存的位置</p>
 <p>所有值类型都有对应的指针类型，如<code>*int</code></p>
 <h3 id="new和make"><a href="#new和make" class="headerlink" title="new和make"></a>new和make</h3><h5 id="new"><a href="#new" class="headerlink" title="new"></a>new</h5><p>new的函数签名：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">new</span><span class="token punctuation">(</span>Type<span class="token punctuation">)</span> <span class="token operator">*</span>Type
+<pre class=" language-lang-go"><code class="language-lang-go">func new(Type) *Type
 </code></pre>
 <p>其中，</p>
 <ul>
@@ -551,26 +551,26 @@
 <li>*Type表示类型指针，new函数返回一个指向该类型内存地址的指针</li>
 </ul>
 <p>举例：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    a <span class="token operator">:=</span> <span class="token function">new</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">)</span>    <span class="token comment" spellcheck="true">//声明并申请一个int的空间</span>
-    
-    <span class="token operator">*</span>a <span class="token operator">=</span> <span class="token number">10</span>            <span class="token comment" spellcheck="true">//赋值</span>
-    
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token operator">*</span>a<span class="token punctuation">)</span>    <span class="token comment" spellcheck="true">//打印</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func main(){
+    a := new(int)    //声明并申请一个int的空间
+
+    *a = 10            //赋值
+
+    fmt.Println(*a)    //打印
+}
 </code></pre>
 <h5 id="make"><a href="#make" class="headerlink" title="make"></a>make</h5><p>make也是内存分配的函数，区别于new，它只用于<code>slice</code>，<code>map</code>，<code>chan</code>的内存创建，且返回的类型是它们本身而不是指针类型。</p>
 <p>make的函数签名：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">make</span><span class="token punctuation">(</span>t Type<span class="token punctuation">,</span> size <span class="token operator">...</span>IntegerType<span class="token punctuation">)</span> Type
+<pre class=" language-lang-go"><code class="language-lang-go">func make(t Type, size ...IntegerType) Type
 </code></pre>
 <p>我们在使用<code>slice</code>、<code>map</code>、<code>channel</code>时，都需要使用make进行初始化</p>
 <p>举例：</p>
-<pre class=" language-go"><code class="language-go">scoreMap <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span>
-scoreMap<span class="token punctuation">[</span><span class="token string">"武子"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">90</span>
-scoreMap<span class="token punctuation">[</span><span class="token string">"康康"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">100</span>
+<pre class=" language-lang-go"><code class="language-lang-go">scoreMap := make(map[string]int, 8)
+scoreMap["武子"] = 90
+scoreMap["康康"] = 100
 
-fmt<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>scoreMap<span class="token punctuation">)</span>            <span class="token comment" spellcheck="true">//输出：map[康康:100 武子:90]</span>
-fmt<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>scoreMap<span class="token punctuation">[</span><span class="token string">"武子"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>       <span class="token comment" spellcheck="true">//输出：100</span>
+fmt.println(scoreMap)            //输出：map[康康:100 武子:90]
+fmt.println(scoreMap["武子"])       //输出：100
 </code></pre>
 
                 
@@ -1018,7 +1018,7 @@ fmt<span class="token punctuation">.</span><span class="token function">println<
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="数组">
+                        <img src="/medias/featureimages/26.jpg" class="responsive-img" alt="数组">
                         
                         <span class="card-title">数组</span>
                     </div>
@@ -1075,7 +1075,7 @@ fmt<span class="token punctuation">.</span><span class="token function">println<
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="map">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="map">
                         
                         <span class="card-title">map</span>
                     </div>
@@ -1277,6 +1277,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
@@ -1295,7 +1302,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">41.9k</span>
+                        class="white-color">36.5k</span>
             
             
             
@@ -1531,9 +1538,9 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-
+    <script src="/js/FunnyTitle.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 
 </html>

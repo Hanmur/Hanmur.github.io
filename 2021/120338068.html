@@ -333,7 +333,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -494,7 +494,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-03
+                    2021-12-07
                 </div>
                 
 
@@ -536,7 +536,7 @@
 </ul>
 <h3 id="包的定义"><a href="#包的定义" class="headerlink" title="包的定义"></a>包的定义</h3><p>包可以理解为存放<code>.go</code>文件的文件夹</p>
 <p>该文件夹下的所有go文件需要在代码第一行添加</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">package</span> 包名
+<pre class=" language-lang-go"><code class="language-lang-go">package 包名
 </code></pre>
 <p>作用是声明文件所属的包</p>
 <p>注意：</p>
@@ -549,18 +549,18 @@
 <h3 id="可见性"><a href="#可见性" class="headerlink" title="可见性"></a>可见性</h3><p>在包外引用包内部的标识符，则该标识符必须对外可见。</p>
 <p>在Go语言中通过将标识符首字母大写表示标识符对外可见。</p>
 <p>举例：</p>
-<pre class=" language-go"><code class="language-go"><span class="token comment" spellcheck="true">// 首字母大写，外部包可见，可在其他包中使用</span>
-<span class="token keyword">func</span> <span class="token function">Add</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> x <span class="token operator">+</span> y
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">// 首字母大写，外部包可见，可在其他包中使用
+func Add(x, y int) int {
+    return x + y
+}
 
-<span class="token keyword">func</span> <span class="token function">age</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 首字母小写，外部包不可见，只能在当前包内使用</span>
-    <span class="token keyword">var</span> Age <span class="token operator">=</span> <span class="token number">18</span> <span class="token comment" spellcheck="true">// 函数局部变量，外部包不可见，只能在当前函数内使用</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>Age<span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+func age() { // 首字母小写，外部包不可见，只能在当前包内使用
+    var Age = 18 // 函数局部变量，外部包不可见，只能在当前函数内使用
+    fmt.Println(Age)
+}
 </code></pre>
 <h3 id="包的导入"><a href="#包的导入" class="headerlink" title="包的导入"></a>包的导入</h3><p>在代码中引入其他包的内容，需要通过<code>import</code>导入使用的包：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">import</span> <span class="token string">"包的路径"</span>
+<pre class=" language-lang-go"><code class="language-lang-go">import "包的路径"
 </code></pre>
 <p>注意：</p>
 <ul>
@@ -570,44 +570,42 @@
 <li>Go语言中禁止循环导入包</li>
 </ul>
 <h5 id="导入格式"><a href="#导入格式" class="headerlink" title="导入格式"></a>导入格式</h5><p>单行导入：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">import</span> <span class="token string">"Bag1"</span>
-<span class="token keyword">import</span> <span class="token string">"Bag2"</span>
+<pre class=" language-lang-go"><code class="language-lang-go">import "Bag1"
+import "Bag2"
 </code></pre>
 <p>多行导入：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">import</span><span class="token punctuation">{</span>
-    <span class="token string">"bag1"</span>
-    <span class="token string">"bag2"</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">import{
+    "bag1"
+    "bag2"
+}
 </code></pre>
 <h5 id="自定义包名"><a href="#自定义包名" class="headerlink" title="自定义包名"></a>自定义包名</h5><p>导入包时，可以为导入的包设置别名，格式：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">import</span> 别名 <span class="token string">"包的路径"</span>
+<pre class=" language-lang-go"><code class="language-lang-go">import 别名 "包的路径"
 </code></pre>
 <p>多行导入时，格式为：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">import</span><span class="token punctuation">{</span>
-    别名<span class="token number">1</span> <span class="token string">"路径1"</span>
-    别名<span class="token number">2</span> <span class="token string">"路径2"</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">import{
+    别名1 "路径1"
+    别名2 "路径2"
+}
 </code></pre>
 <h5 id="匿名导入包"><a href="#匿名导入包" class="headerlink" title="匿名导入包"></a>匿名导入包</h5><p>如果只希望导入包，不使用内部数据时，可以匿名导入包，格式为：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">import</span> <span class="token boolean">_</span> <span class="token string">"包的路径"</span>
+<pre class=" language-lang-go"><code class="language-lang-go">import _ "包的路径"
 </code></pre>
 <p>匿名导入的包与其他方式导入的包一样会编译入可执行文件中</p>
 <p>这里是为了利用包的<code>init</code>初始化函数或者包级变量的初始化表达式，但同时又避免没有使用包内数据带来的<code>unused import</code>编译错误</p>
 <p>举例：<code>image/png</code>包的注册</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">package</span> png <span class="token comment" spellcheck="true">// image/png</span>
+<pre class=" language-lang-go"><code class="language-lang-go">package png // image/png
 
-<span class="token keyword">func</span> <span class="token function">Decode</span><span class="token punctuation">(</span>r io<span class="token punctuation">.</span>Reader<span class="token punctuation">)</span> <span class="token punctuation">(</span>image<span class="token punctuation">.</span>Image<span class="token punctuation">,</span> <span class="token builtin">error</span><span class="token punctuation">)</span>
-<span class="token keyword">func</span> <span class="token function">DecodeConfig</span><span class="token punctuation">(</span>r io<span class="token punctuation">.</span>Reader<span class="token punctuation">)</span> <span class="token punctuation">(</span>image<span class="token punctuation">.</span>Config<span class="token punctuation">,</span> <span class="token builtin">error</span><span class="token punctuation">)</span>
+func Decode(r io.Reader) (image.Image, error)
+func DecodeConfig(r io.Reader) (image.Config, error)
 
-<span class="token keyword">func</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">const</span> pngHeader <span class="token operator">=</span> <span class="token string">"\x89PNG\r\n\x1a\n"</span>
-    image<span class="token punctuation">.</span><span class="token function">RegisterFormat</span><span class="token punctuation">(</span><span class="token string">"png"</span><span class="token punctuation">,</span> pngHeader<span class="token punctuation">,</span> Decode<span class="token punctuation">,</span> DecodeConfig<span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+func init() {
+    const pngHeader = "\x89PNG\r\n\x1a\n"
+    image.RegisterFormat("png", pngHeader, Decode, DecodeConfig)
+}
 </code></pre>
 <blockquote>
 <p>Go图像的解码器通过一个驱动入口使用，而驱动入口时通过调用<code>image.RegisterFormat</code>函数注册，一般是在每个格式包的<code>init</code>初始化函数中调用。</p>
-</blockquote>
-<blockquote>
 <p>在例子中的最终效果是，主程序只需要匿名导入特定图像驱动包，就可以使用<code>image.Decode</code>解码对应格式的图像了。</p>
 <p>数据库<code>database/sql</code>也采用了类似的技术，让用户可以根据自己需要选择导入必要的数据库驱动。</p>
 </blockquote>
@@ -1065,7 +1063,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="接口">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="接口">
                         
                         <span class="card-title">接口</span>
                     </div>
@@ -1122,7 +1120,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="编译">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="编译">
                         
                         <span class="card-title">编译</span>
                     </div>
@@ -1324,6 +1322,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
@@ -1342,7 +1347,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">41.9k</span>
+                        class="white-color">36.5k</span>
             
             
             
@@ -1578,9 +1583,9 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-
+    <script src="/js/FunnyTitle.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 
 </html>

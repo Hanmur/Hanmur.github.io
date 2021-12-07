@@ -333,7 +333,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -494,14 +494,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-02
+                    2021-12-07
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    619
+                    618
                 </div>
                 
 
@@ -531,7 +531,7 @@
                 <h1 id="map"><a href="#map" class="headerlink" title="map"></a>map</h1><p>map是一种无序的，基于<code>key_value</code>的数据结构</p>
 <p>go语言中map是引用类型，必须初始化</p>
 <h3 id="map的定义"><a href="#map的定义" class="headerlink" title="map的定义"></a>map的定义</h3><p><code>map</code>的定义语法：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">map</span><span class="token punctuation">[</span>keyType<span class="token punctuation">]</span>valueType
+<pre class=" language-lang-go"><code class="language-lang-go">map[keyType]valueType
 </code></pre>
 <p>其中，</p>
 <ul>
@@ -540,61 +540,61 @@
 </ul>
 <p>map类型的变量初始值为<code>nil</code></p>
 <p>需要使用<code>make()</code>函数分配内存</p>
-<pre class=" language-go"><code class="language-go"><span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span>keyType<span class="token punctuation">]</span>valueType<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token builtin">cap</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">make(map[keyType]valueType, [cap])
 </code></pre>
 <p>其中，</p>
 <ul>
 <li><code>cap</code>：map的容量</li>
 </ul>
 <h3 id="map的使用"><a href="#map的使用" class="headerlink" title="map的使用"></a>map的使用</h3><p>map中数据是成对存在的，使用示例如下：</p>
-<pre class=" language-go"><code class="language-go">scoreMap <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span>
-scoreMap<span class="token punctuation">[</span><span class="token string">"武子"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">90</span>
-scoreMap<span class="token punctuation">[</span><span class="token string">"康康"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">100</span>
+<pre class=" language-lang-go"><code class="language-lang-go">scoreMap := make(map[string]int, 8)
+scoreMap["武子"] = 90
+scoreMap["康康"] = 100
 
-fmt<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>scoreMap<span class="token punctuation">)</span>            <span class="token comment" spellcheck="true">//输出：map[康康:100 武子:90]</span>
-fmt<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>scoreMap<span class="token punctuation">[</span><span class="token string">"武子"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>       <span class="token comment" spellcheck="true">//输出：100</span>
+fmt.println(scoreMap)            //输出：map[康康:100 武子:90]
+fmt.println(scoreMap["武子"])       //输出：100
 </code></pre>
 <p>map也可以在声明时初始化元素</p>
-<pre class=" language-go"><code class="language-go">nMap <span class="token operator">:=</span> <span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">{</span>
-    <span class="token string">"武子"</span> <span class="token punctuation">:</span> <span class="token string">"90"</span><span class="token punctuation">,</span>
-    <span class="token string">"康康"</span> <span class="token punctuation">:</span> <span class="token string">"100"</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">nMap := map[string]string{
+    "武子" : "90",
+    "康康" : "100",
+}
 </code></pre>
 <h3 id="判断Map中某个键是否存在"><a href="#判断Map中某个键是否存在" class="headerlink" title="判断Map中某个键是否存在"></a>判断Map中某个键是否存在</h3><p>Go语言中判断map中键是否存在</p>
-<pre class=" language-go"><code class="language-go">value<span class="token punctuation">,</span>ok <span class="token operator">:=</span> <span class="token keyword">map</span><span class="token punctuation">[</span>key<span class="token punctuation">]</span>
+<pre class=" language-lang-go"><code class="language-lang-go">value,ok := map[key]
 </code></pre>
 <p>举例</p>
-<pre class=" language-go"><code class="language-go"><span class="token comment" spellcheck="true">//数分考试</span>
-scoreMap <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span> <span class="token builtin">int</span><span class="token punctuation">)</span>
-scoreMap<span class="token punctuation">[</span><span class="token string">"武子"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">90</span>
-scoreMap<span class="token punctuation">[</span><span class="token string">"康康"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">100</span>
+<pre class=" language-lang-go"><code class="language-lang-go">//数分考试
+scoreMap := make(map[string] int)
+scoreMap["武子"] = 90
+scoreMap["康康"] = 100
 
-<span class="token comment" spellcheck="true">// 如果key存在     ok为true    v为对应的值；</span>
-<span class="token comment" spellcheck="true">// 如果key不存在     ok为false   v为值类型的零值</span>
-v<span class="token punctuation">,</span> ok <span class="token operator">:=</span> scoreMap<span class="token punctuation">[</span><span class="token string">"武子"</span><span class="token punctuation">]</span>
+// 如果key存在     ok为true    v为对应的值；
+// 如果key不存在     ok为false   v为值类型的零值
+v, ok := scoreMap["武子"]
 
-<span class="token keyword">if</span> ok <span class="token punctuation">{</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span>
-<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"这人旷考？"</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+if ok {
+    fmt.Println(v)
+} else {
+    fmt.Println("这人旷考？")
+}
 </code></pre>
 <h3 id="map的遍历"><a href="#map的遍历" class="headerlink" title="map的遍历"></a>map的遍历</h3><p>使用<code>for range</code>遍历map</p>
-<pre class=" language-go"><code class="language-go">scoreMap <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span>
-scoreMap<span class="token punctuation">[</span><span class="token string">"武子"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">90</span>
-scoreMap<span class="token punctuation">[</span><span class="token string">"康康"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">100</span>
+<pre class=" language-lang-go"><code class="language-lang-go">scoreMap := make(map[string]int, 8)
+scoreMap["武子"] = 90
+scoreMap["康康"] = 100
 
-<span class="token comment" spellcheck="true">//遍历key和value</span>
-<span class="token keyword">for</span> key<span class="token punctuation">,</span> value <span class="token operator">:=</span> <span class="token keyword">range</span> scoreMap<span class="token punctuation">{</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> value<span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
-<span class="token comment" spellcheck="true">//遍历key</span>
-<span class="token keyword">for</span> key <span class="token operator">:=</span> <span class="token keyword">range</span> scoreMap<span class="token punctuation">{</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> value<span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+//遍历key和value
+for key, value := range scoreMap{
+    fmt.Println(key, value)
+}
+//遍历key
+for key := range scoreMap{
+    fmt.Println(key, value)
+}
 </code></pre>
 <h3 id="使用delete-函数删除键值对"><a href="#使用delete-函数删除键值对" class="headerlink" title="使用delete()函数删除键值对"></a>使用delete()函数删除键值对</h3><p><code>delete</code>函数的格式：</p>
-<pre class=" language-go"><code class="language-go"><span class="token function">delete</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">,</span> key<span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">delete(map, key)
 </code></pre>
 <p>其中，</p>
 <ul>
@@ -604,63 +604,63 @@ scoreMap<span class="token punctuation">[</span><span class="token string">"康�
 </li>
 </ul>
 <p>举例：</p>
-<pre class=" language-go"><code class="language-go">scoreMap <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span>
-scoreMap<span class="token punctuation">[</span><span class="token string">"武子"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">90</span>
-scoreMap<span class="token punctuation">[</span><span class="token string">"康康"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">100</span>
+<pre class=" language-lang-go"><code class="language-lang-go">scoreMap := make(map[string]int, 8)
+scoreMap["武子"] = 90
+scoreMap["康康"] = 100
 
-<span class="token function">delete</span><span class="token punctuation">(</span>scoreMap<span class="token punctuation">,</span> <span class="token string">"武子"</span><span class="token punctuation">)</span>    <span class="token comment" spellcheck="true">//delete 武子 对应的键值对</span>
-fmt<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>scoreMap<span class="token punctuation">)</span>    <span class="token comment" spellcheck="true">//输出：map[康康:100]</span>
+delete(scoreMap, "武子")    //delete 武子 对应的键值对
+fmt.println(scoreMap)    //输出：map[康康:100]
 </code></pre>
-<h3 id="按照指定顺序遍历map"><a href="#按照指定顺序遍历map" class="headerlink" title="按照指定顺序遍历map"></a>按照指定顺序遍历map</h3><pre class=" language-go"><code class="language-go">rand<span class="token punctuation">.</span><span class="token function">Seed</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span><span class="token function">Now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">UnixNano</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//初始化随机数种子</span>
+<h3 id="按照指定顺序遍历map"><a href="#按照指定顺序遍历map" class="headerlink" title="按照指定顺序遍历map"></a>按照指定顺序遍历map</h3><pre class=" language-lang-go"><code class="language-lang-go">rand.Seed(time.Now().UnixNano()) //初始化随机数种子
 
-<span class="token keyword">var</span> scoreMap <span class="token operator">=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">)</span>
+var scoreMap = make(map[string]int, 200)
 
-<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">100</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">{</span>
-    key <span class="token operator">:=</span> fmt<span class="token punctuation">.</span><span class="token function">Sprintf</span><span class="token punctuation">(</span><span class="token string">"stu%02d"</span><span class="token punctuation">,</span> i<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//生成stu开头的字符串</span>
-    value <span class="token operator">:=</span> rand<span class="token punctuation">.</span><span class="token function">Intn</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>          <span class="token comment" spellcheck="true">//生成0~99的随机整数</span>
-    scoreMap<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> value
-<span class="token punctuation">}</span>
-<span class="token comment" spellcheck="true">//取出map中的所有key存入切片keys</span>
-<span class="token keyword">var</span> keys <span class="token operator">=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">)</span>
-<span class="token keyword">for</span> key <span class="token operator">:=</span> <span class="token keyword">range</span> scoreMap <span class="token punctuation">{</span>
-    keys <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>keys<span class="token punctuation">,</span> key<span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
-<span class="token comment" spellcheck="true">//对切片进行排序</span>
-sort<span class="token punctuation">.</span><span class="token function">Strings</span><span class="token punctuation">(</span>keys<span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true">//按照排序后的key遍历map</span>
-<span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> key <span class="token operator">:=</span> <span class="token keyword">range</span> keys <span class="token punctuation">{</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> scoreMap<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+for i := 0; i < 100; i++ {
+    key := fmt.Sprintf("stu%02d", i) //生成stu开头的字符串
+    value := rand.Intn(100)          //生成0~99的随机整数
+    scoreMap[key] = value
+}
+//取出map中的所有key存入切片keys
+var keys = make([]string, 0, 200)
+for key := range scoreMap {
+    keys = append(keys, key)
+}
+//对切片进行排序
+sort.Strings(keys)
+//按照排序后的key遍历map
+for _, key := range keys {
+    fmt.Println(key, scoreMap[key])
+}
 </code></pre>
-<h3 id="元素为map的切片"><a href="#元素为map的切片" class="headerlink" title="元素为map的切片"></a>元素为map的切片</h3><pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">var</span> mapSlice <span class="token operator">=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
+<h3 id="元素为map的切片"><a href="#元素为map的切片" class="headerlink" title="元素为map的切片"></a>元素为map的切片</h3><pre class=" language-lang-go"><code class="language-lang-go">func main() {
+    var mapSlice = make([]map[string]string, 3)
 
-    <span class="token comment" spellcheck="true">// 对切片中的map元素进行初始化</span>
-    mapSlice<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span>
-    mapSlice<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">"name"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"小王子"</span>
-    mapSlice<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">"password"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"123456"</span>
-    mapSlice<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">"address"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"沙河"</span>
-    
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>mapSlice<span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+    // 对切片中的map元素进行初始化
+    mapSlice[0] = make(map[string]string, 10)
+    mapSlice[0]["name"] = "小王子"
+    mapSlice[0]["password"] = "123456"
+    mapSlice[0]["address"] = "沙河"
+
+    fmt.Println(mapSlice)
+}
 </code></pre>
 <h3 id="值为切片类型的map"><a href="#值为切片类型的map" class="headerlink" title="值为切片类型的map"></a>值为切片类型的map</h3><p>下面的代码演示了map中值为切片类型的操作：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">var</span> sliceMap <span class="token operator">=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func main() {
+    var sliceMap = make(map[string][]string, 3)
 
-    key <span class="token operator">:=</span> <span class="token string">"中国"</span>
-    
-    <span class="token comment" spellcheck="true">//判定key是否在map中</span>
-    value<span class="token punctuation">,</span> ok <span class="token operator">:=</span> sliceMap<span class="token punctuation">[</span>key<span class="token punctuation">]</span>
-    <span class="token keyword">if</span> <span class="token operator">!</span>ok <span class="token punctuation">{</span>
-        value <span class="token operator">=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-    value <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>value<span class="token punctuation">,</span> <span class="token string">"北京"</span><span class="token punctuation">,</span> <span class="token string">"上海"</span><span class="token punctuation">)</span>
-    
-    sliceMap<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> value
-    
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>sliceMap<span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+    key := "中国"
+
+    //判定key是否在map中
+    value, ok := sliceMap[key]
+    if !ok {
+        value = make([]string, 0, 2)
+    }
+    value = append(value, "北京", "上海")
+
+    sliceMap[key] = value
+
+    fmt.Println(sliceMap)
+}
 </code></pre>
 
                 
@@ -1108,7 +1108,7 @@ sort<span class="token punctuation">.</span><span class="token function">Strings
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="指针">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="指针">
                         
                         <span class="card-title">指针</span>
                     </div>
@@ -1165,7 +1165,7 @@ sort<span class="token punctuation">.</span><span class="token function">Strings
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="字符串操作">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="字符串操作">
                         
                         <span class="card-title">字符串操作</span>
                     </div>
@@ -1367,6 +1367,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
@@ -1385,7 +1392,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">41.9k</span>
+                        class="white-color">36.5k</span>
             
             
             
@@ -1621,9 +1628,9 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-
+    <script src="/js/FunnyTitle.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 
 </html>

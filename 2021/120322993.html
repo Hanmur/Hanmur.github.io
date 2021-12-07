@@ -333,7 +333,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -494,7 +494,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-03
+                    2021-12-07
                 </div>
                 
 
@@ -508,7 +508,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    5 分
                 </div>
                 
 
@@ -532,191 +532,191 @@
 <h2 id="net-http介绍"><a href="#net-http介绍" class="headerlink" title="net/http介绍"></a>net/http介绍</h2><p>Go语言内置的<code>net/http</code>包提供了HTTP客户端和服务端的实现。</p>
 <h3 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h3><p>超文本传输协议（HTTP，HyperText Transfer Protocol)是互联网上应用最为广泛的一种网络传输协议，所有的WWW文件都必须遵守这个标准。设计HTTP最初的目的是为了提供一种发布和接收HTML页面的方法。</p>
 <h2 id="HTTP客户端"><a href="#HTTP客户端" class="headerlink" title="HTTP客户端"></a>HTTP客户端</h2><h3 id="基本的HTTP-HTTPS请求"><a href="#基本的HTTP-HTTPS请求" class="headerlink" title="基本的HTTP/HTTPS请求"></a>基本的HTTP/HTTPS请求</h3><p>Get、Head、Post和PostForm函数发出HTTP/HTTPS请求。</p>
-<pre class=" language-go"><code class="language-go">resp<span class="token punctuation">,</span> err <span class="token operator">:=</span> http<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">"http://example.com/"</span><span class="token punctuation">)</span>
-<span class="token operator">...</span>
-resp<span class="token punctuation">,</span> err <span class="token operator">:=</span> http<span class="token punctuation">.</span><span class="token function">Post</span><span class="token punctuation">(</span><span class="token string">"http://example.com/upload"</span><span class="token punctuation">,</span> <span class="token string">"image/jpeg"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>buf<span class="token punctuation">)</span>
-<span class="token operator">...</span>
-resp<span class="token punctuation">,</span> err <span class="token operator">:=</span> http<span class="token punctuation">.</span><span class="token function">PostForm</span><span class="token punctuation">(</span><span class="token string">"http://example.com/form"</span><span class="token punctuation">,</span>
-    url<span class="token punctuation">.</span>Values<span class="token punctuation">{</span><span class="token string">"key"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token string">"Value"</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">"id"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token string">"123"</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">resp, err := http.Get("http://example.com/")
+...
+resp, err := http.Post("http://example.com/upload", "image/jpeg", &buf)
+...
+resp, err := http.PostForm("http://example.com/form",
+    url.Values{"key": {"Value"}, "id": {"123"}})
 </code></pre>
 <p>程序在使用完response后必须关闭回复的主体。</p>
-<pre class=" language-go"><code class="language-go">resp<span class="token punctuation">,</span> err <span class="token operator">:=</span> http<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">"http://example.com/"</span><span class="token punctuation">)</span>
-<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">// handle error</span>
-<span class="token punctuation">}</span>
-<span class="token keyword">defer</span> resp<span class="token punctuation">.</span>Body<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-body<span class="token punctuation">,</span> err <span class="token operator">:=</span> ioutil<span class="token punctuation">.</span><span class="token function">ReadAll</span><span class="token punctuation">(</span>resp<span class="token punctuation">.</span>Body<span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true">// ...</span>
+<pre class=" language-lang-go"><code class="language-lang-go">resp, err := http.Get("http://example.com/")
+if err != nil {
+    // handle error
+}
+defer resp.Body.Close()
+body, err := ioutil.ReadAll(resp.Body)
+// ...
 </code></pre>
 <h3 id="GET请求示例"><a href="#GET请求示例" class="headerlink" title="GET请求示例"></a>GET请求示例</h3><p>使用<code>net/http</code>包编写一个简单的发送HTTP请求的Client端，代码如下：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">package</span> main
+<pre class=" language-lang-go"><code class="language-lang-go">package main
 
-<span class="token keyword">import</span> <span class="token punctuation">(</span>
-    <span class="token string">"fmt"</span>
-    <span class="token string">"io/ioutil"</span>
-    <span class="token string">"net/http"</span>
-<span class="token punctuation">)</span>
+import (
+    "fmt"
+    "io/ioutil"
+    "net/http"
+)
 
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    resp<span class="token punctuation">,</span> err <span class="token operator">:=</span> http<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">"https://www.baidu.com/"</span><span class="token punctuation">)</span>
-    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"get failed, err:%v\n"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
-        <span class="token keyword">return</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">defer</span> resp<span class="token punctuation">.</span>Body<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    body<span class="token punctuation">,</span> err <span class="token operator">:=</span> ioutil<span class="token punctuation">.</span><span class="token function">ReadAll</span><span class="token punctuation">(</span>resp<span class="token punctuation">.</span>Body<span class="token punctuation">)</span>
-    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"read from resp.Body failed, err:%v\n"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
-        <span class="token keyword">return</span>
-    <span class="token punctuation">}</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Print</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>body<span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+func main() {
+    resp, err := http.Get("https://www.baidu.com/")
+    if err != nil {
+        fmt.Printf("get failed, err:%v\n", err)
+        return
+    }
+    defer resp.Body.Close()
+    body, err := ioutil.ReadAll(resp.Body)
+    if err != nil {
+        fmt.Printf("read from resp.Body failed, err:%v\n", err)
+        return
+    }
+    fmt.Print(string(body))
+}
 </code></pre>
 <p>将上面的代码保存之后编译成可执行文件，执行之后就能在终端打印<code>baidu.com</code>网站首页的内容了，我们的浏览器其实就是一个发送和接收HTTP协议数据的客户端，我们平时通过浏览器访问网页其实就是从网站的服务器接收HTTP数据，然后浏览器会按照HTML、CSS等规则将网页渲染展示出来。</p>
 <h3 id="带参数的GET请求示例"><a href="#带参数的GET请求示例" class="headerlink" title="带参数的GET请求示例"></a>带参数的GET请求示例</h3><p>关于GET请求的参数需要使用Go语言内置的<code>net/url</code>这个标准库来处理。</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    apiUrl <span class="token operator">:=</span> <span class="token string">"http://127.0.0.1:9090/get"</span>
-    <span class="token comment" spellcheck="true">// URL param</span>
-    data <span class="token operator">:=</span> url<span class="token punctuation">.</span>Values<span class="token punctuation">{</span><span class="token punctuation">}</span>
-    data<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token string">"name"</span><span class="token punctuation">,</span> <span class="token string">"小王子"</span><span class="token punctuation">)</span>
-    data<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token string">"age"</span><span class="token punctuation">,</span> <span class="token string">"18"</span><span class="token punctuation">)</span>
-    u<span class="token punctuation">,</span> err <span class="token operator">:=</span> url<span class="token punctuation">.</span><span class="token function">ParseRequestURI</span><span class="token punctuation">(</span>apiUrl<span class="token punctuation">)</span>
-    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"parse url requestUrl failed, err:%v\n"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-    u<span class="token punctuation">.</span>RawQuery <span class="token operator">=</span> data<span class="token punctuation">.</span><span class="token function">Encode</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// URL encode</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>u<span class="token punctuation">.</span><span class="token function">String</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    resp<span class="token punctuation">,</span> err <span class="token operator">:=</span> http<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span>u<span class="token punctuation">.</span><span class="token function">String</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"post failed, err:%v\n"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
-        <span class="token keyword">return</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">defer</span> resp<span class="token punctuation">.</span>Body<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    b<span class="token punctuation">,</span> err <span class="token operator">:=</span> ioutil<span class="token punctuation">.</span><span class="token function">ReadAll</span><span class="token punctuation">(</span>resp<span class="token punctuation">.</span>Body<span class="token punctuation">)</span>
-    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"get resp failed, err:%v\n"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
-        <span class="token keyword">return</span>
-    <span class="token punctuation">}</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func main() {
+    apiUrl := "http://127.0.0.1:9090/get"
+    // URL param
+    data := url.Values{}
+    data.Set("name", "小王子")
+    data.Set("age", "18")
+    u, err := url.ParseRequestURI(apiUrl)
+    if err != nil {
+        fmt.Printf("parse url requestUrl failed, err:%v\n", err)
+    }
+    u.RawQuery = data.Encode() // URL encode
+    fmt.Println(u.String())
+    resp, err := http.Get(u.String())
+    if err != nil {
+        fmt.Printf("post failed, err:%v\n", err)
+        return
+    }
+    defer resp.Body.Close()
+    b, err := ioutil.ReadAll(resp.Body)
+    if err != nil {
+        fmt.Printf("get resp failed, err:%v\n", err)
+        return
+    }
+    fmt.Println(string(b))
+}
 </code></pre>
 <p>对应的Server端HandlerFunc如下：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">getHandler</span><span class="token punctuation">(</span>w http<span class="token punctuation">.</span>ResponseWriter<span class="token punctuation">,</span> r <span class="token operator">*</span>http<span class="token punctuation">.</span>Request<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">defer</span> r<span class="token punctuation">.</span>Body<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    data <span class="token operator">:=</span> r<span class="token punctuation">.</span>URL<span class="token punctuation">.</span><span class="token function">Query</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">"name"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">"age"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    answer <span class="token operator">:=</span> <span class="token string">`{"status": "ok"}`</span>
-    w<span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span>answer<span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func getHandler(w http.ResponseWriter, r *http.Request) {
+    defer r.Body.Close()
+    data := r.URL.Query()
+    fmt.Println(data.Get("name"))
+    fmt.Println(data.Get("age"))
+    answer := `{"status": "ok"}`
+    w.Write([]byte(answer))
+}
 </code></pre>
 <h3 id="Post请求示例"><a href="#Post请求示例" class="headerlink" title="Post请求示例"></a>Post请求示例</h3><p>上面演示了使用<code>net/http</code>包发送<code>GET</code>请求的示例，发送<code>POST</code>请求的示例代码如下：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">package</span> main
+<pre class=" language-lang-go"><code class="language-lang-go">package main
 
-<span class="token keyword">import</span> <span class="token punctuation">(</span>
-    <span class="token string">"fmt"</span>
-    <span class="token string">"io/ioutil"</span>
-    <span class="token string">"net/http"</span>
-    <span class="token string">"strings"</span>
-<span class="token punctuation">)</span>
+import (
+    "fmt"
+    "io/ioutil"
+    "net/http"
+    "strings"
+)
 
-<span class="token comment" spellcheck="true">// net/http post demo</span>
+// net/http post demo
 
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    url <span class="token operator">:=</span> <span class="token string">"http://127.0.0.1:9090/post"</span>
-    <span class="token comment" spellcheck="true">// 表单数据</span>
-    <span class="token comment" spellcheck="true">//contentType := "application/x-www-form-urlencoded"</span>
-    <span class="token comment" spellcheck="true">//data := "name=小王子&amp;age=18"</span>
-    <span class="token comment" spellcheck="true">// json</span>
-    contentType <span class="token operator">:=</span> <span class="token string">"application/json"</span>
-    data <span class="token operator">:=</span> <span class="token string">`{"name":"小王子","age":18}`</span>
-    resp<span class="token punctuation">,</span> err <span class="token operator">:=</span> http<span class="token punctuation">.</span><span class="token function">Post</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span> contentType<span class="token punctuation">,</span> strings<span class="token punctuation">.</span><span class="token function">NewReader</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"post failed, err:%v\n"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
-        <span class="token keyword">return</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">defer</span> resp<span class="token punctuation">.</span>Body<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    b<span class="token punctuation">,</span> err <span class="token operator">:=</span> ioutil<span class="token punctuation">.</span><span class="token function">ReadAll</span><span class="token punctuation">(</span>resp<span class="token punctuation">.</span>Body<span class="token punctuation">)</span>
-    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"get resp failed, err:%v\n"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
-        <span class="token keyword">return</span>
-    <span class="token punctuation">}</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+func main() {
+    url := "http://127.0.0.1:9090/post"
+    // 表单数据
+    //contentType := "application/x-www-form-urlencoded"
+    //data := "name=小王子&age=18"
+    // json
+    contentType := "application/json"
+    data := `{"name":"小王子","age":18}`
+    resp, err := http.Post(url, contentType, strings.NewReader(data))
+    if err != nil {
+        fmt.Printf("post failed, err:%v\n", err)
+        return
+    }
+    defer resp.Body.Close()
+    b, err := ioutil.ReadAll(resp.Body)
+    if err != nil {
+        fmt.Printf("get resp failed, err:%v\n", err)
+        return
+    }
+    fmt.Println(string(b))
+}
 </code></pre>
 <p>对应的Server端HandlerFunc如下：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">postHandler</span><span class="token punctuation">(</span>w http<span class="token punctuation">.</span>ResponseWriter<span class="token punctuation">,</span> r <span class="token operator">*</span>http<span class="token punctuation">.</span>Request<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">defer</span> r<span class="token punctuation">.</span>Body<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token comment" spellcheck="true">// 1. 请求类型是application/x-www-form-urlencoded时解析form数据</span>
-    r<span class="token punctuation">.</span><span class="token function">ParseForm</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>r<span class="token punctuation">.</span>PostForm<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 打印form数据</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>r<span class="token punctuation">.</span>PostForm<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">"name"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> r<span class="token punctuation">.</span>PostForm<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">"age"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token comment" spellcheck="true">// 2. 请求类型是application/json时从r.Body读取数据</span>
-    b<span class="token punctuation">,</span> err <span class="token operator">:=</span> ioutil<span class="token punctuation">.</span><span class="token function">ReadAll</span><span class="token punctuation">(</span>r<span class="token punctuation">.</span>Body<span class="token punctuation">)</span>
-    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"read request.Body failed, err:%v\n"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
-        <span class="token keyword">return</span>
-    <span class="token punctuation">}</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    answer <span class="token operator">:=</span> <span class="token string">`{"status": "ok"}`</span>
-    w<span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span>answer<span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func postHandler(w http.ResponseWriter, r *http.Request) {
+    defer r.Body.Close()
+    // 1. 请求类型是application/x-www-form-urlencoded时解析form数据
+    r.ParseForm()
+    fmt.Println(r.PostForm) // 打印form数据
+    fmt.Println(r.PostForm.Get("name"), r.PostForm.Get("age"))
+    // 2. 请求类型是application/json时从r.Body读取数据
+    b, err := ioutil.ReadAll(r.Body)
+    if err != nil {
+        fmt.Printf("read request.Body failed, err:%v\n", err)
+        return
+    }
+    fmt.Println(string(b))
+    answer := `{"status": "ok"}`
+    w.Write([]byte(answer))
+}
 </code></pre>
 <h3 id="自定义Client"><a href="#自定义Client" class="headerlink" title="自定义Client"></a>自定义Client</h3><p>要管理HTTP客户端的头域、重定向策略和其他设置，创建一个Client：</p>
-<pre class=" language-go"><code class="language-go">client <span class="token operator">:=</span> <span class="token operator">&amp;</span>http<span class="token punctuation">.</span>Client<span class="token punctuation">{</span>
-    CheckRedirect<span class="token punctuation">:</span> redirectPolicyFunc<span class="token punctuation">,</span>
-<span class="token punctuation">}</span>
-resp<span class="token punctuation">,</span> err <span class="token operator">:=</span> client<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">"http://example.com"</span><span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true">// ...</span>
-req<span class="token punctuation">,</span> err <span class="token operator">:=</span> http<span class="token punctuation">.</span><span class="token function">NewRequest</span><span class="token punctuation">(</span><span class="token string">"GET"</span><span class="token punctuation">,</span> <span class="token string">"http://example.com"</span><span class="token punctuation">,</span> <span class="token boolean">nil</span><span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true">// ...</span>
-req<span class="token punctuation">.</span>Header<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">"If-None-Match"</span><span class="token punctuation">,</span> <span class="token string">`W/"wyzzy"`</span><span class="token punctuation">)</span>
-resp<span class="token punctuation">,</span> err <span class="token operator">:=</span> client<span class="token punctuation">.</span><span class="token function">Do</span><span class="token punctuation">(</span>req<span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true">// ...</span>
+<pre class=" language-lang-go"><code class="language-lang-go">client := &http.Client{
+    CheckRedirect: redirectPolicyFunc,
+}
+resp, err := client.Get("http://example.com")
+// ...
+req, err := http.NewRequest("GET", "http://example.com", nil)
+// ...
+req.Header.Add("If-None-Match", `W/"wyzzy"`)
+resp, err := client.Do(req)
+// ...
 </code></pre>
 <h3 id="自定义Transport"><a href="#自定义Transport" class="headerlink" title="自定义Transport"></a>自定义Transport</h3><p>要管理代理、TLS配置、keep-alive、压缩和其他设置，创建一个Transport：</p>
-<pre class=" language-go"><code class="language-go">tr <span class="token operator">:=</span> <span class="token operator">&amp;</span>http<span class="token punctuation">.</span>Transport<span class="token punctuation">{</span>
-    TLSClientConfig<span class="token punctuation">:</span>    <span class="token operator">&amp;</span>tls<span class="token punctuation">.</span>Config<span class="token punctuation">{</span>RootCAs<span class="token punctuation">:</span> pool<span class="token punctuation">}</span><span class="token punctuation">,</span>
-    DisableCompression<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span>
-client <span class="token operator">:=</span> <span class="token operator">&amp;</span>http<span class="token punctuation">.</span>Client<span class="token punctuation">{</span>Transport<span class="token punctuation">:</span> tr<span class="token punctuation">}</span>
-resp<span class="token punctuation">,</span> err <span class="token operator">:=</span> client<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">"https://example.com"</span><span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">tr := &http.Transport{
+    TLSClientConfig:    &tls.Config{RootCAs: pool},
+    DisableCompression: true,
+}
+client := &http.Client{Transport: tr}
+resp, err := client.Get("https://example.com")
 </code></pre>
 <p>Client和Transport类型都可以安全的被多个goroutine同时使用。出于效率考虑，应该一次建立、尽量重用。</p>
 <h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><h3 id="默认的Server"><a href="#默认的Server" class="headerlink" title="默认的Server"></a>默认的Server</h3><p>ListenAndServe使用指定的监听地址和处理器启动一个HTTP服务端。处理器参数通常是nil，这表示采用包变量DefaultServeMux作为处理器。</p>
 <p>Handle和HandleFunc函数可以向DefaultServeMux添加处理器。</p>
-<pre class=" language-go"><code class="language-go">http<span class="token punctuation">.</span><span class="token function">Handle</span><span class="token punctuation">(</span><span class="token string">"/foo"</span><span class="token punctuation">,</span> fooHandler<span class="token punctuation">)</span>
-http<span class="token punctuation">.</span><span class="token function">HandleFunc</span><span class="token punctuation">(</span><span class="token string">"/bar"</span><span class="token punctuation">,</span> <span class="token keyword">func</span><span class="token punctuation">(</span>w http<span class="token punctuation">.</span>ResponseWriter<span class="token punctuation">,</span> r <span class="token operator">*</span>http<span class="token punctuation">.</span>Request<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Fprintf</span><span class="token punctuation">(</span>w<span class="token punctuation">,</span> <span class="token string">"Hello, %q"</span><span class="token punctuation">,</span> html<span class="token punctuation">.</span><span class="token function">EscapeString</span><span class="token punctuation">(</span>r<span class="token punctuation">.</span>URL<span class="token punctuation">.</span>Path<span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
-log<span class="token punctuation">.</span><span class="token function">Fatal</span><span class="token punctuation">(</span>http<span class="token punctuation">.</span><span class="token function">ListenAndServe</span><span class="token punctuation">(</span><span class="token string">":8080"</span><span class="token punctuation">,</span> <span class="token boolean">nil</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">http.Handle("/foo", fooHandler)
+http.HandleFunc("/bar", func(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
+})
+log.Fatal(http.ListenAndServe(":8080", nil))
 </code></pre>
 <h3 id="默认的Server示例"><a href="#默认的Server示例" class="headerlink" title="默认的Server示例"></a>默认的Server示例</h3><p>使用Go语言中的<code>net/http</code>包来编写一个简单的接收HTTP请求的Server端示例，<code>net/http</code>包是对net包的进一步封装，专门用来处理HTTP协议的数据。具体的代码如下：</p>
-<pre class=" language-go"><code class="language-go"><span class="token comment" spellcheck="true">// http server</span>
+<pre class=" language-lang-go"><code class="language-lang-go">// http server
 
-<span class="token keyword">func</span> <span class="token function">sayHello</span><span class="token punctuation">(</span>w http<span class="token punctuation">.</span>ResponseWriter<span class="token punctuation">,</span> r <span class="token operator">*</span>http<span class="token punctuation">.</span>Request<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Fprintln</span><span class="token punctuation">(</span>w<span class="token punctuation">,</span> <span class="token string">"Hello 康康！"</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+func sayHello(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprintln(w, "Hello 康康！")
+}
 
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    http<span class="token punctuation">.</span><span class="token function">HandleFunc</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">,</span> sayHello<span class="token punctuation">)</span>
-    err <span class="token operator">:=</span> http<span class="token punctuation">.</span><span class="token function">ListenAndServe</span><span class="token punctuation">(</span><span class="token string">":9090"</span><span class="token punctuation">,</span> <span class="token boolean">nil</span><span class="token punctuation">)</span>
-    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"http server failed, err:%v\n"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
-        <span class="token keyword">return</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+func main() {
+    http.HandleFunc("/", sayHello)
+    err := http.ListenAndServe(":9090", nil)
+    if err != nil {
+        fmt.Printf("http server failed, err:%v\n", err)
+        return
+    }
+}
 </code></pre>
 <p>将上面的代码编译之后执行，打开你电脑上的浏览器在地址栏输入<code>127.0.0.1:9090</code>回车，此时就能够看到如下页面了。<img src="C:\Users\86189\AppData\Roaming\Typora\typora-user-images\image-20210828190935720.png" alt="image-20210828190935720"></p>
 <h3 id="自定义Server"><a href="#自定义Server" class="headerlink" title="自定义Server"></a>自定义Server</h3><p>要管理服务端的行为，可以创建一个自定义的Server：</p>
-<pre class=" language-go"><code class="language-go">s <span class="token operator">:=</span> <span class="token operator">&amp;</span>http<span class="token punctuation">.</span>Server<span class="token punctuation">{</span>
-    Addr<span class="token punctuation">:</span>           <span class="token string">":8080"</span><span class="token punctuation">,</span>
-    Handler<span class="token punctuation">:</span>        myHandler<span class="token punctuation">,</span>
-    ReadTimeout<span class="token punctuation">:</span>    <span class="token number">10</span> <span class="token operator">*</span> time<span class="token punctuation">.</span>Second<span class="token punctuation">,</span>
-    WriteTimeout<span class="token punctuation">:</span>   <span class="token number">10</span> <span class="token operator">*</span> time<span class="token punctuation">.</span>Second<span class="token punctuation">,</span>
-    MaxHeaderBytes<span class="token punctuation">:</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">20</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span>
-log<span class="token punctuation">.</span><span class="token function">Fatal</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">ListenAndServe</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">s := &http.Server{
+    Addr:           ":8080",
+    Handler:        myHandler,
+    ReadTimeout:    10 * time.Second,
+    WriteTimeout:   10 * time.Second,
+    MaxHeaderBytes: 1 << 20,
+}
+log.Fatal(s.ListenAndServe())
 </code></pre>
 
                 
@@ -1164,7 +1164,7 @@ log<span class="token punctuation">.</span><span class="token function">Fatal</s
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="log包">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="log包">
                         
                         <span class="card-title">log包</span>
                     </div>
@@ -1221,7 +1221,7 @@ log<span class="token punctuation">.</span><span class="token function">Fatal</s
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="fmt占位符">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="fmt占位符">
                         
                         <span class="card-title">fmt占位符</span>
                     </div>
@@ -1423,6 +1423,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
@@ -1441,7 +1448,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">41.9k</span>
+                        class="white-color">36.5k</span>
             
             
             
@@ -1677,9 +1684,9 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-
+    <script src="/js/FunnyTitle.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 
 </html>

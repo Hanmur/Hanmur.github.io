@@ -333,7 +333,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -502,7 +502,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-06
+                    2021-12-07
                 </div>
                 
 
@@ -542,14 +542,14 @@
 <li>e：加密指数</li>
 <li>d：解密指数</li>
 </ul>
-<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>$$<br>\phi(n) = (p - 1) * (q - 1)    \ e*d \equiv 1 \mod\phi(n)<br>$$</p>
-<h3 id="Python代码"><a href="#Python代码" class="headerlink" title="Python代码"></a>Python代码</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> gmpy2
-p <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-q <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-e <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-phi_n <span class="token operator">=</span> <span class="token punctuation">(</span>p<span class="token number">-1</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token punctuation">(</span>q<span class="token number">-1</span><span class="token punctuation">)</span>
-d <span class="token operator">=</span> gmpy2<span class="token punctuation">.</span>invert<span class="token punctuation">(</span>e<span class="token punctuation">,</span> phi_n<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><script type="math/tex; mode=display">
+\phi(n) = (p - 1) * (q - 1)    \\ e*d \equiv 1 \mod\phi(n)</script><h3 id="Python代码"><a href="#Python代码" class="headerlink" title="Python代码"></a>Python代码</h3><pre class=" language-lang-python"><code class="language-lang-python">import gmpy2
+p = ...
+q = ...
+e = ...
+phi_n = (p-1)*(q-1)
+d = gmpy2.invert(e, phi_n)
+print(d)
 </code></pre>
 <h2 id="已知-p-q-e-c-求m"><a href="#已知-p-q-e-c-求m" class="headerlink" title="已知(p,q,e,c) 求m"></a>已知(p,q,e,c) 求m</h2><h3 id="参数-1"><a href="#参数-1" class="headerlink" title="参数"></a>参数</h3><ul>
 <li>q：质数q</li>
@@ -558,19 +558,19 @@ d <span class="token operator">=</span> gmpy2<span class="token punctuation">.</
 <li>c：密文c</li>
 <li>m：明文m</li>
 </ul>
-<h3 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h3><p>$$<br>n = p * q, \quad \phi(n) = (p - 1) * (q - 1)\ e*d \equiv 1 \mod \phi(n) \ m = pow(c, d, n)<br>$$</p>
-<h3 id="Python代码-1"><a href="#Python代码-1" class="headerlink" title="Python代码"></a>Python代码</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> gmpy2
+<h3 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h3><script type="math/tex; mode=display">
+n = p * q, \quad \phi(n) = (p - 1) * (q - 1)\\ e*d \equiv 1 \mod \phi(n) \\ m = pow(c, d, n)</script><h3 id="Python代码-1"><a href="#Python代码-1" class="headerlink" title="Python代码"></a>Python代码</h3><pre class=" language-lang-python"><code class="language-lang-python">import gmpy2
 
-p <span class="token operator">=</span>  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-q <span class="token operator">=</span>  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-e <span class="token operator">=</span>  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-c <span class="token operator">=</span>  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+p =  ...
+q =  ...
+e =  ...
+c =  ...
 
-phi_n <span class="token operator">=</span> <span class="token punctuation">(</span>p <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>q <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span>
-d <span class="token operator">=</span> gmpy2<span class="token punctuation">.</span>invert<span class="token punctuation">(</span>e<span class="token punctuation">,</span> phi_n<span class="token punctuation">)</span>
-n <span class="token operator">=</span> p <span class="token operator">*</span> q
-m <span class="token operator">=</span> gmpy2<span class="token punctuation">.</span>powmod<span class="token punctuation">(</span>c<span class="token punctuation">,</span>d<span class="token punctuation">,</span>n<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>str<span class="token punctuation">(</span>m<span class="token punctuation">)</span> <span class="token punctuation">)</span>
+phi_n = (p - 1) * (q - 1)
+d = gmpy2.invert(e, phi_n)
+n = p * q
+m = gmpy2.powmod(c,d,n)
+print(str(m) )
 </code></pre>
 <h2 id="已知-q-p-dq-dp-c-求m"><a href="#已知-q-p-dq-dp-c-求m" class="headerlink" title="已知(q,p,dq,dp,c) 求m"></a>已知(q,p,dq,dp,c) 求m</h2><h3 id="参数-2"><a href="#参数-2" class="headerlink" title="参数"></a>参数</h3><ul>
 <li>q：质数q</li>
@@ -580,21 +580,32 @@ m <span class="token operator">=</span> gmpy2<span class="token punctuation">.</
 <li>c：密文</li>
 <li>m：明文</li>
 </ul>
-<h3 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h3><p>由于中国剩余定理:<br>$$<br>\because m = c^d\ mod n \ n = p * q \ \therefore mp \equiv c^d\ mod p \quad ① \ mq \equiv c^d\ mod q \quad ②<br>$$<br>由①式，有<br>$$<br>c^d = k*p + mp \quad ③<br>$$<br>将③式带入②式，有<br>$$<br>k * p \equiv (mp - mq) \mod q \ k \equiv [p^{-1} * (mp - mq)] \mod q<br>$$<br>将k带入③式，有<br>$$<br>c^d = {[p^{-1} * (mp - mq)]\ mod q} * p + mp<br>$$<br>由费马小定理:<br>$$<br>\because d = dp + k_p * (p - 1) = dq + k_q * (q - 1)             \   \therefore mp \equiv c^d \mod p \equiv c^{dp + k_p * (p - 1)} \mod p \equiv c^{dp} \mod p                          \ mq \equiv c^d \mod q \equiv c^{dq + k_q * (q - 1)} \mod q \equiv c^{dq} \mod q<br>$$<br>故:<br>$$<br>m \equiv c^d = {[p^{-1} * (mp - mq)] \mod q} * p + mp<br>$$</p>
-<h3 id="Python代码-2"><a href="#Python代码-2" class="headerlink" title="Python代码"></a>Python代码</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> gmpy2
-p <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-q <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-dp <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-dq <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-c <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<h3 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h3><p>由于中国剩余定理:</p>
+<script type="math/tex; mode=display">
+\because m = c^d\ mod n \\ n = p * q \\ \therefore mp \equiv c^d\ mod p \quad ① \\ mq \equiv c^d\ mod q \quad ②</script><p>由①式，有</p>
+<script type="math/tex; mode=display">
+c^d = k*p + mp \quad ③</script><p>将③式带入②式，有</p>
+<script type="math/tex; mode=display">
+k * p \equiv (mp - mq) \mod q \\ k \equiv [p^{-1} * (mp - mq)] \mod q</script><p>将k带入③式，有</p>
+<script type="math/tex; mode=display">
+c^d = \{[p^{-1} * (mp - mq)]\ mod q\} * p + mp</script><p>由费马小定理:</p>
+<script type="math/tex; mode=display">
+\because d = dp + k_p * (p - 1) = dq + k_q * (q - 1)             \\   \therefore mp \equiv c^d \mod p \equiv c^{dp + k_p * (p - 1)} \mod p \equiv c^{dp} \mod p                          \\ mq \equiv c^d \mod q \equiv c^{dq + k_q * (q - 1)} \mod q \equiv c^{dq} \mod q</script><p>故:</p>
+<script type="math/tex; mode=display">
+m \equiv c^d = \{[p^{-1} * (mp - mq)] \mod q\} * p + mp</script><h3 id="Python代码-2"><a href="#Python代码-2" class="headerlink" title="Python代码"></a>Python代码</h3><pre class=" language-lang-python"><code class="language-lang-python">import gmpy2
+p = ...
+q = ...
+dp = ...
+dq = ...
+c = ...
 
-I <span class="token operator">=</span> gmpy2<span class="token punctuation">.</span>invert<span class="token punctuation">(</span>q<span class="token punctuation">,</span>p<span class="token punctuation">)</span>
-mp <span class="token operator">=</span> pow<span class="token punctuation">(</span>c<span class="token punctuation">,</span>dp<span class="token punctuation">,</span>p<span class="token punctuation">)</span>
-mq <span class="token operator">=</span> pow<span class="token punctuation">(</span>c<span class="token punctuation">,</span>dq<span class="token punctuation">,</span>q<span class="token punctuation">)</span>
+I = gmpy2.invert(q,p)
+mp = pow(c,dp,p)
+mq = pow(c,dq,q)
 
-m <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span>mp<span class="token operator">-</span>mq<span class="token punctuation">)</span><span class="token operator">*</span>I<span class="token punctuation">)</span><span class="token operator">%</span>q<span class="token punctuation">)</span><span class="token operator">*</span>p<span class="token operator">+</span>mp
+m = (((mp-mq)*I)%q)*p+mp
 
-<span class="token keyword">print</span><span class="token punctuation">(</span>hex<span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">)</span>
+print(hex(m))
 </code></pre>
 <h2 id="已知-e-大数n-dp-c-求m"><a href="#已知-e-大数n-dp-c-求m" class="headerlink" title="已知(e,大数n,dp,c) 求m"></a>已知(e,大数n,dp,c) 求m</h2><h3 id="参数-3"><a href="#参数-3" class="headerlink" title="参数"></a>参数</h3><ul>
 <li>n：大数字n</li>
@@ -603,25 +614,25 @@ m <span class="token operator">=</span> <span class="token punctuation">(</span>
 <li>c：密文c</li>
 <li>m：明文m</li>
 </ul>
-<h3 id="原理-3"><a href="#原理-3" class="headerlink" title="原理"></a>原理</h3><p>$$<br>\because e * d \equiv 1 \mod((p-1)(q-1))\ dp \equiv d \mod(p - 1)    \ \therefore e<em>dp \equiv e</em>d \mod(p-1) \ \therefore e<em>d = k_1(p-1)(q-1) + 1 = k_2(p-1) + e</em>dp               \ e*dp = (p - 1)(k_1(q-1) - k_2)+1<br>$$</p>
-<p>$$<br>\because dp &lt; p  \ \therefore e &gt; (k_1(q-1) - k_2)\ (k_1(q-1)-k_2) \in (1,e) \遍历即可<br>$$</p>
-<h3 id="Python代码-3"><a href="#Python代码-3" class="headerlink" title="Python代码"></a>Python代码</h3><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 领航杯2019，EasyRSA</span>
-<span class="token keyword">import</span> gmpy2
-<span class="token keyword">import</span> libnum
+<h3 id="原理-3"><a href="#原理-3" class="headerlink" title="原理"></a>原理</h3><script type="math/tex; mode=display">
+\because e * d \equiv 1 \mod((p-1)(q-1))\\ dp \equiv d \mod(p - 1)    \\ \therefore e*dp \equiv e*d \mod(p-1) \\ \therefore e*d = k_1(p-1)(q-1) + 1 = k_2(p-1) + e*dp               \\ e*dp = (p - 1)(k_1(q-1) - k_2)+1</script><script type="math/tex; mode=display">
+\because dp < p  \\ \therefore e > (k_1(q-1) - k_2)\\ (k_1(q-1)-k_2) \in (1,e) \\遍历即可</script><h3 id="Python代码-3"><a href="#Python代码-3" class="headerlink" title="Python代码"></a>Python代码</h3><pre class=" language-lang-python"><code class="language-lang-python"># 领航杯2019，EasyRSA
+import gmpy2
+import libnum
 
-e <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-n <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-dp <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-c <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
- 
-<span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> e <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>dp <span class="token operator">*</span> e <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">%</span> i <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
-        <span class="token keyword">if</span> n <span class="token operator">%</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span>dp <span class="token operator">*</span> e <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">//</span> i<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
-            p <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>dp <span class="token operator">*</span> e <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">//</span> i<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span>
-            q <span class="token operator">=</span> n <span class="token operator">//</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span>dp <span class="token operator">*</span> e <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">//</span> i<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>
-            phi <span class="token operator">=</span> <span class="token punctuation">(</span>p <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>q <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span>
-            d <span class="token operator">=</span> gmpy2<span class="token punctuation">.</span>invert<span class="token punctuation">(</span>e<span class="token punctuation">,</span> phi<span class="token punctuation">)</span> <span class="token operator">%</span> phi
-            <span class="token keyword">print</span><span class="token punctuation">(</span>libnum<span class="token punctuation">.</span>n2s<span class="token punctuation">(</span>pow<span class="token punctuation">(</span>c<span class="token punctuation">,</span> d<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+e = ...
+n = ...
+dp = ...
+c = ...
+
+for i in range(1, e + 1):
+    if (dp * e - 1) % i == 0:
+        if n % (((dp * e - 1) // i) + 1) == 0:
+            p = ((dp * e - 1) // i) + 1
+            q = n // (((dp * e - 1) // i) + 1)
+            phi = (p - 1) * (q - 1)
+            d = gmpy2.invert(e, phi) % phi
+            print(libnum.n2s(pow(c, d, n)))
 </code></pre>
 <h2 id="已知-n-e1-e2-c1-c2-求m"><a href="#已知-n-e1-e2-c1-c2-求m" class="headerlink" title="已知(n,e1,e2,c1,c2) 求m"></a>已知(n,e1,e2,c1,c2) 求m</h2><h3 id="参数-4"><a href="#参数-4" class="headerlink" title="参数"></a>参数</h3><ul>
 <li>n：大数字n</li>
@@ -629,31 +640,37 @@ c <span class="token operator">=</span> <span class="token punctuation">.</span>
 <li>c1, c2：密文c</li>
 <li>m：明文m</li>
 </ul>
-<h3 id="原理-4"><a href="#原理-4" class="headerlink" title="原理"></a>原理</h3><p>共模攻击<br>$$<br>c_1 = m^{e_1}\mod n             \   c_2 = m^{e_2}\mod n<br>$$<br>当e1, e2互质时，有<br>$$<br>ae_1 + be_2 = 1<br>$$<br>利用拓展欧几里得算法，可求得(a, b)的一组解<br>$$<br>\\begin{align*} c_1^a * c_2^b\mod n  &amp;= ((m^{e_1}\mod n)^a * (m^{e_2}\mod n)^b)\mod n \ &amp;= m^{a<em>e_1+b</em>e_2}\mod n<br> \end{align*}<br>$$</p>
-<p>$$<br>\because a * e_1 + b * e_2 = 1  \ \therefore m\equiv c_1^a*c_2^b\mod n<br>$$</p>
-<h3 id="Python代码-4"><a href="#Python代码-4" class="headerlink" title="Python代码"></a>Python代码</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> gmpy2
-<span class="token keyword">import</span> binascii
+<h3 id="原理-4"><a href="#原理-4" class="headerlink" title="原理"></a>原理</h3><p>共模攻击</p>
+<script type="math/tex; mode=display">
+c_1 = m^{e_1}\mod n             \\   c_2 = m^{e_2}\mod n</script><p>当e1, e2互质时，有</p>
+<script type="math/tex; mode=display">
+ae_1 + be_2 = 1</script><p>利用拓展欧几里得算法，可求得(a, b)的一组解</p>
+<script type="math/tex; mode=display">
+\\\begin{align*} c_1^a * c_2^b\mod n  &= ((m^{e_1}\mod n)^a * (m^{e_2}\mod n)^b)\mod n \\ &= m^{a*e_1+b*e_2}\mod n
+ \end{align*}</script><script type="math/tex; mode=display">
+\because a * e_1 + b * e_2 = 1  \\ \therefore m\equiv c_1^a*c_2^b\mod n</script><h3 id="Python代码-4"><a href="#Python代码-4" class="headerlink" title="Python代码"></a>Python代码</h3><pre class=" language-lang-python"><code class="language-lang-python">import gmpy2
+import binascii
 
-n <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-c1 <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-c2 <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-e1 <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-e2 <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+n = ...
+c1 = ...
+c2 = ...
+e1 = ...
+e2 = ...
 
-s <span class="token operator">=</span> gmpy2<span class="token punctuation">.</span>gcdext<span class="token punctuation">(</span>e1<span class="token punctuation">,</span>e2<span class="token punctuation">)</span>
-a <span class="token operator">=</span> s<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
-b <span class="token operator">=</span> s<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span>
+s = gmpy2.gcdext(e1,e2)
+a = s[1]
+b = s[2]
 
-<span class="token keyword">if</span> a <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">:</span>
-    a <span class="token operator">=</span> <span class="token operator">-</span>a
-    c1 <span class="token operator">=</span> gmpy2<span class="token punctuation">.</span>invert<span class="token punctuation">(</span>c1<span class="token punctuation">,</span>n<span class="token punctuation">)</span>
-<span class="token keyword">else</span><span class="token punctuation">:</span>
-    b <span class="token operator">=</span> <span class="token operator">-</span>b
-    c2 <span class="token operator">=</span> gmpy2<span class="token punctuation">.</span>invert<span class="token punctuation">(</span>c2<span class="token punctuation">,</span>n<span class="token punctuation">)</span>
+if a < 0:
+    a = -a
+    c1 = gmpy2.invert(c1,n)
+else:
+    b = -b
+    c2 = gmpy2.invert(c2,n)
 
-m <span class="token operator">=</span> <span class="token punctuation">(</span>gmpy2<span class="token punctuation">.</span>powmod<span class="token punctuation">(</span>c1<span class="token punctuation">,</span>a<span class="token punctuation">,</span>n<span class="token punctuation">)</span><span class="token operator">*</span>gmpy2<span class="token punctuation">.</span>powmod<span class="token punctuation">(</span>c2<span class="token punctuation">,</span>b<span class="token punctuation">,</span>n<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">%</span>n
+m = (gmpy2.powmod(c1,a,n)*gmpy2.powmod(c2,b,n))%n
 
-<span class="token keyword">print</span><span class="token punctuation">(</span>binascii<span class="token punctuation">.</span>unhexlify<span class="token punctuation">(</span>hex<span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+print(binascii.unhexlify(hex(m)[2:]))
 </code></pre>
 <h2 id="n分解出多个质因数-求m"><a href="#n分解出多个质因数-求m" class="headerlink" title="n分解出多个质因数 求m"></a>n分解出多个质因数 求m</h2><h3 id="参数-5"><a href="#参数-5" class="headerlink" title="参数"></a>参数</h3><ul>
 <li>n：大数字n</li>
@@ -662,23 +679,24 @@ m <span class="token operator">=</span> <span class="token punctuation">(</span>
 <li>c：密文c</li>
 <li>m：明文m</li>
 </ul>
-<h3 id="原理-5"><a href="#原理-5" class="headerlink" title="原理"></a>原理</h3><p>n的质因数只影响φ的求值，依据<a target="_blank" rel="noopener" href="https://www.notion.so/e18df727d3fa488bbc03275034893cb4">欧拉函数</a>求出φ即可。如n有三个质因数，则<br>$$<br>\phi(n) = (p_1 - 1)(p_2 - 1)(p_3 - 1)<br>$$</p>
-<h3 id="Python代码-5"><a href="#Python代码-5" class="headerlink" title="Python代码"></a>Python代码</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> gmpy2
-<span class="token keyword">from</span> Crypto<span class="token punctuation">.</span>Util<span class="token punctuation">.</span>number <span class="token keyword">import</span> long_to_bytes
- 
-n<span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-e<span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-c<span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<h3 id="原理-5"><a href="#原理-5" class="headerlink" title="原理"></a>原理</h3><p>n的质因数只影响φ的求值，依据<a target="_blank" rel="noopener" href="https://www.notion.so/e18df727d3fa488bbc03275034893cb4">欧拉函数</a>求出φ即可。如n有三个质因数，则</p>
+<script type="math/tex; mode=display">
+\phi(n) = (p_1 - 1)(p_2 - 1)(p_3 - 1)</script><h3 id="Python代码-5"><a href="#Python代码-5" class="headerlink" title="Python代码"></a>Python代码</h3><pre class=" language-lang-python"><code class="language-lang-python">import gmpy2
+from Crypto.Util.number import long_to_bytes
 
-<span class="token comment" spellcheck="true"># n的质因数</span>
-p1 <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-p2 <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-p3 <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+n= ...
+e= ...
+c= ...
 
-phi <span class="token operator">=</span> <span class="token punctuation">(</span>p1 <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>p2 <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>p3 <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span>  
-d <span class="token operator">=</span> gmpy2<span class="token punctuation">.</span>invert<span class="token punctuation">(</span>e<span class="token punctuation">,</span> phi<span class="token punctuation">)</span>  
-m <span class="token operator">=</span> pow<span class="token punctuation">(</span>c<span class="token punctuation">,</span> d<span class="token punctuation">,</span> n<span class="token punctuation">)</span>  
-<span class="token keyword">print</span> long_to_bytes<span class="token punctuation">(</span>m<span class="token punctuation">)</span>
+# n的质因数
+p1 = ...
+p2 = ...
+p3 = ...
+
+phi = (p1 - 1) * (p2 - 1) * (p3 - 1)  
+d = gmpy2.invert(e, phi)  
+m = pow(c, d, n)  
+print long_to_bytes(m)
 </code></pre>
 <h2 id="公钥私钥的文件处理"><a href="#公钥私钥的文件处理" class="headerlink" title="公钥私钥的文件处理"></a>公钥私钥的文件处理</h2><h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>工具：</p>
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c945b0f0de0a">RSA工具集-openssl,rsatool,RsaCtfTool,RSAtool</a></p>
@@ -688,111 +706,112 @@ m <span class="token operator">=</span> pow<span class="token punctuation">(</sp
 </ul>
 <h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>上代码：</p>
 <p>获取公钥文件的公钥</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> Crypto<span class="token punctuation">.</span>PublicKey <span class="token keyword">import</span> RSA
+<pre class=" language-lang-python"><code class="language-lang-python">from Crypto.PublicKey import RSA
 
-path <span class="token operator">=</span> <span class="token string">'...'</span>
+path = '...'
 
-<span class="token keyword">with</span> open<span class="token punctuation">(</span>path<span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
-    key <span class="token operator">=</span> RSA<span class="token punctuation">.</span>import_key<span class="token punctuation">(</span>f<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'e = %d'</span> <span class="token operator">%</span> key<span class="token punctuation">.</span>e<span class="token punctuation">)</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'n = %d'</span> <span class="token operator">%</span> key<span class="token punctuation">.</span>n<span class="token punctuation">)</span>
+with open(path) as f:
+    key = RSA.import_key(f.read())
+    print('e = %d' % key.e)
+    print('n = %d' % key.n)
 </code></pre>
 <p>私钥解密文件</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> gmpy2
-<span class="token keyword">import</span> rsa
+<pre class=" language-lang-python"><code class="language-lang-python">import gmpy2
+import rsa
 
-p <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-q <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-n <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-e <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-d <span class="token operator">=</span> int<span class="token punctuation">(</span>gmpy2<span class="token punctuation">.</span>invert<span class="token punctuation">(</span>e<span class="token punctuation">,</span> <span class="token punctuation">(</span>p<span class="token number">-1</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>q<span class="token number">-1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+p = ...
+q = ...
+n = ...
+e = ...
+d = int(gmpy2.invert(e, (p-1) * (q-1)))
 
-privatekey <span class="token operator">=</span> rsa<span class="token punctuation">.</span>PrivateKey<span class="token punctuation">(</span>n<span class="token punctuation">,</span> e<span class="token punctuation">,</span> d<span class="token punctuation">,</span> p<span class="token punctuation">,</span> q<span class="token punctuation">)</span>      <span class="token comment" spellcheck="true"># 根据已知参数，计算私钥</span>
+privatekey = rsa.PrivateKey(n, e, d, p, q)      # 根据已知参数，计算私钥
 
-path <span class="token operator">=</span> <span class="token string">"..."</span>
-<span class="token keyword">with</span> open<span class="token punctuation">(</span>path<span class="token punctuation">,</span> <span class="token string">"rb"</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span>rsa<span class="token punctuation">.</span>decrypt<span class="token punctuation">(</span>f<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> privatekey<span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>       <span class="token comment" spellcheck="true"># 使用私钥对密文进行解密，并打印</span>
+path = "..."
+with open(path, "rb") as f:
+    print(rsa.decrypt(f.read(), privatekey).decode())       # 使用私钥对密文进行解密，并打印
 </code></pre>
-<h2 id="低加密指数分解攻击-e-2-3"><a href="#低加密指数分解攻击-e-2-3" class="headerlink" title="低加密指数分解攻击(e = 2, 3)"></a>低加密指数分解攻击(e = 2, 3)</h2><h3 id="e-2"><a href="#e-2" class="headerlink" title="e = 2"></a>e = 2</h3><h4 id="原理-6"><a href="#原理-6" class="headerlink" title="原理"></a>原理</h4><p>$$<br>c = m^e \mod n<br>$$</p>
-<p>因为$e = 2$， 相当于$c$是$m$的平方对$n$取模</p>
+<h2 id="低加密指数分解攻击-e-2-3"><a href="#低加密指数分解攻击-e-2-3" class="headerlink" title="低加密指数分解攻击(e = 2, 3)"></a>低加密指数分解攻击(e = 2, 3)</h2><h3 id="e-2"><a href="#e-2" class="headerlink" title="e = 2"></a>e = 2</h3><h4 id="原理-6"><a href="#原理-6" class="headerlink" title="原理"></a>原理</h4><script type="math/tex; mode=display">
+c = m^e \mod n</script><p>因为$e = 2$， 相当于$c$是$m$的平方对$n$取模</p>
 <p>一般开根就可以了</p>
-<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> gmpy2
-<span class="token keyword">import</span> libnum
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><pre class=" language-lang-python"><code class="language-lang-python">import gmpy2
+import libnum
 
-c <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+c = ...
 
-m <span class="token operator">=</span> gmpy2<span class="token punctuation">.</span>isqrt<span class="token punctuation">(</span>c<span class="token punctuation">)</span>
-m_text <span class="token operator">=</span> libnum<span class="token punctuation">.</span>n2s<span class="token punctuation">(</span>int<span class="token punctuation">(</span>m<span class="token punctuation">)</span> <span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">#将十六进制转为字符</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>m_text<span class="token punctuation">)</span>
+m = gmpy2.isqrt(c)
+m_text = libnum.n2s(int(m) )  #将十六进制转为字符
+print(m_text)
 </code></pre>
-<h3 id="e-3"><a href="#e-3" class="headerlink" title="e = 3"></a>e = 3</h3><h4 id="原理-7"><a href="#原理-7" class="headerlink" title="原理"></a>原理</h4><p>$$<br>\because c = m^e \mod n \ \therefore c + k*n = m^e<br>$$</p>
-<p>e很小的时候，k的值也会很小，所以可以直接爆破</p>
-<h4 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h4><pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> gmpy2<span class="token punctuation">,</span>binascii<span class="token punctuation">,</span>libnum<span class="token punctuation">,</span>time
-n <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-e <span class="token operator">=</span> <span class="token number">3</span>
-c <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<h3 id="e-3"><a href="#e-3" class="headerlink" title="e = 3"></a>e = 3</h3><h4 id="原理-7"><a href="#原理-7" class="headerlink" title="原理"></a>原理</h4><script type="math/tex; mode=display">
+\because c = m^e \mod n \\ \therefore c + k*n = m^e</script><p>e很小的时候，k的值也会很小，所以可以直接爆破</p>
+<h4 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h4><pre class=" language-lang-python"><code class="language-lang-python">import gmpy2,binascii,libnum,time
+n = ...
+e = 3
+c = ...
 
-m <span class="token operator">=</span> <span class="token number">0</span>
-<span class="token keyword">for</span> i <span class="token keyword">in</span> xrange<span class="token punctuation">(</span><span class="token number">200000</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">if</span> gmpy2<span class="token punctuation">.</span>iroot<span class="token punctuation">(</span>c <span class="token operator">+</span> n <span class="token operator">*</span> i<span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">:</span>
-        m <span class="token operator">=</span> gmpy2<span class="token punctuation">.</span>iroot<span class="token punctuation">(</span>c <span class="token operator">+</span> n <span class="token operator">*</span> i<span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
-        <span class="token keyword">print</span> libnum<span class="token punctuation">,</span>n2s<span class="token punctuation">(</span>m<span class="token punctuation">)</span>
-        <span class="token keyword">break</span>
+m = 0
+for i in xrange(200000):
+    if gmpy2.iroot(c + n * i, e)[1] == 1:
+        m = gmpy2.iroot(c + n * i, e)[0]
+        print libnum,n2s(m)
+        break
 </code></pre>
-<h2 id="低解密指数攻击-e太大-太小时"><a href="#低解密指数攻击-e太大-太小时" class="headerlink" title="低解密指数攻击(e太大/太小时)"></a>低解密指数攻击(e太大/太小时)</h2><h3 id="原理-8"><a href="#原理-8" class="headerlink" title="原理"></a>原理</h3><p>低解密指数攻击，也称RSA维纳攻击(RSA wiener attack)<br>$$<br>e * d \equiv 1 \mod \phi(n)<br>$$<br>在解密指数$d$比较小的时候，加密指数$e$会显得很大，在$e$过大或者过小的时候，可以用算法从$e$快速推断$d$的值，进而求$m$</p>
+<h2 id="低解密指数攻击-e太大-太小时"><a href="#低解密指数攻击-e太大-太小时" class="headerlink" title="低解密指数攻击(e太大/太小时)"></a>低解密指数攻击(e太大/太小时)</h2><h3 id="原理-8"><a href="#原理-8" class="headerlink" title="原理"></a>原理</h3><p>低解密指数攻击，也称RSA维纳攻击(RSA wiener attack)</p>
+<script type="math/tex; mode=display">
+e * d \equiv 1 \mod \phi(n)</script><p>在解密指数$d$比较小的时候，加密指数$e$会显得很大，在$e$过大或者过小的时候，可以用算法从$e$快速推断$d$的值，进而求$m$</p>
 <p>具体算法我再读读代码)</p>
-<h3 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> gmpy2
-<span class="token keyword">import</span> time
+<h3 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h3><pre class=" language-lang-python"><code class="language-lang-python">import gmpy2
+import time
 
-<span class="token comment" spellcheck="true"># 展开为连分数</span>
-<span class="token keyword">def</span> <span class="token function">continuedFra</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    cF <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
-    <span class="token keyword">while</span> y<span class="token punctuation">:</span>
-        cF <span class="token operator">+=</span> <span class="token punctuation">[</span>x <span class="token operator">/</span> y<span class="token punctuation">]</span>
-        x<span class="token punctuation">,</span> y <span class="token operator">=</span> y<span class="token punctuation">,</span> x <span class="token operator">%</span> y
-    <span class="token keyword">return</span> cF
+# 展开为连分数
+def continuedFra(x, y):
+    cF = []
+    while y:
+        cF += [x / y]
+        x, y = y, x % y
+    return cF
 
-<span class="token comment" spellcheck="true"># 分数化简</span>
-<span class="token keyword">def</span> <span class="token function">Simplify</span><span class="token punctuation">(</span>ctnf<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    numerator <span class="token operator">=</span> <span class="token number">0</span>
-    denominator <span class="token operator">=</span> <span class="token number">1</span>
-    <span class="token keyword">for</span> x <span class="token keyword">in</span> ctnf<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
-        numerator<span class="token punctuation">,</span> denominator <span class="token operator">=</span> denominator<span class="token punctuation">,</span> x <span class="token operator">*</span> denominator <span class="token operator">+</span> numerator
-    <span class="token keyword">return</span> <span class="token punctuation">(</span>numerator<span class="token punctuation">,</span> denominator<span class="token punctuation">)</span>
+# 分数化简
+def Simplify(ctnf):
+    numerator = 0
+    denominator = 1
+    for x in ctnf[::-1]:
+        numerator, denominator = denominator, x * denominator + numerator
+    return (numerator, denominator)
 
-<span class="token comment" spellcheck="true"># 连分数化简</span>
-<span class="token keyword">def</span> <span class="token function">calculateFrac</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    cF <span class="token operator">=</span> continuedFra<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span>
-    cF <span class="token operator">=</span> map<span class="token punctuation">(</span>Simplify<span class="token punctuation">,</span> <span class="token punctuation">(</span>cF<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span>i<span class="token punctuation">]</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> xrange<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> len<span class="token punctuation">(</span>cF<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token keyword">return</span> cF
+# 连分数化简
+def calculateFrac(x, y):
+    cF = continuedFra(x, y)
+    cF = map(Simplify, (cF[0:i] for i in xrange(1, len(cF))))
+    return cF
 
-<span class="token comment" spellcheck="true"># 解韦达定理</span>
-<span class="token keyword">def</span> <span class="token function">solve_pq</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    par <span class="token operator">=</span> gmpy2<span class="token punctuation">.</span>isqrt<span class="token punctuation">(</span>b <span class="token operator">*</span> b <span class="token operator">-</span> <span class="token number">4</span> <span class="token operator">*</span> a <span class="token operator">*</span> c<span class="token punctuation">)</span>
-    <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token operator">-</span>b <span class="token operator">+</span> par<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">*</span> a<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token operator">-</span>b <span class="token operator">-</span> par<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">*</span> a<span class="token punctuation">)</span>
+# 解韦达定理
+def solve_pq(a, b, c):
+    par = gmpy2.isqrt(b * b - 4 * a * c)
+    return (-b + par) / (2 * a), (-b - par) / (2 * a)
 
-<span class="token keyword">def</span> <span class="token function">wienerAttack</span><span class="token punctuation">(</span>e<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span>d<span class="token punctuation">,</span> k<span class="token punctuation">)</span> <span class="token keyword">in</span> calculateFrac<span class="token punctuation">(</span>e<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">if</span> k <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span> <span class="token keyword">continue</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>e <span class="token operator">*</span> d <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">%</span> k <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">:</span> <span class="token keyword">continue</span>
-        phi <span class="token operator">=</span> <span class="token punctuation">(</span>e <span class="token operator">*</span> d <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">/</span> k
-        p<span class="token punctuation">,</span> q <span class="token operator">=</span> solve_pq<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> n <span class="token operator">-</span> phi <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> n<span class="token punctuation">)</span>
-        <span class="token keyword">if</span> p <span class="token operator">*</span> q <span class="token operator">==</span> n<span class="token punctuation">:</span>
-            <span class="token keyword">return</span> abs<span class="token punctuation">(</span>int<span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> abs<span class="token punctuation">(</span>int<span class="token punctuation">(</span>q<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token keyword">print</span> <span class="token string">'not find!'</span>
+def wienerAttack(e, n):
+    for (d, k) in calculateFrac(e, n):
+        if k == 0: continue
+        if (e * d - 1) % k != 0: continue
+        phi = (e * d - 1) / k
+        p, q = solve_pq(1, n - phi + 1, n)
+        if p * q == n:
+            return abs(int(p)), abs(int(q))
+    print 'not find!'
 
-<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
-    n <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    e <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    c <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    
-    p<span class="token punctuation">,</span> q <span class="token operator">=</span> wienerAttack<span class="token punctuation">(</span>e<span class="token punctuation">,</span> n<span class="token punctuation">)</span>
-    phi_n <span class="token operator">=</span> <span class="token punctuation">(</span>p <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>q <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span>
-    d <span class="token operator">=</span> gmpy2<span class="token punctuation">.</span>invert<span class="token punctuation">(</span>e<span class="token punctuation">,</span> phi_n<span class="token punctuation">)</span>
-    m <span class="token operator">=</span> pow<span class="token punctuation">(</span>c<span class="token punctuation">,</span> d<span class="token punctuation">,</span> n<span class="token punctuation">)</span>
+if __name__ == '__main__':
+    n = ...
+    e = ...
+    c = ...
 
-    <span class="token keyword">print</span> <span class="token string">'  [-]m is:'</span> <span class="token operator">+</span> <span class="token string">'{:x}'</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'hex'</span><span class="token punctuation">)</span>
-    
+    p, q = wienerAttack(e, n)
+    phi_n = (p - 1) * (q - 1)
+    d = gmpy2.invert(e, phi_n)
+    m = pow(c, d, n)
+
+    print '  [-]m is:' + '{:x}'.format(m).decode('hex')
 </code></pre>
 
                 
@@ -1245,7 +1264,7 @@ m <span class="token operator">=</span> <span class="token number">0</span>
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="常见解题思路">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="常见解题思路">
                         
                         <span class="card-title">常见解题思路</span>
                     </div>
@@ -1311,7 +1330,7 @@ m <span class="token operator">=</span> <span class="token number">0</span>
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="欧拉函数">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="欧拉函数">
                         
                         <span class="card-title">欧拉函数</span>
                     </div>
@@ -1521,6 +1540,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
@@ -1539,7 +1565,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">41.9k</span>
+                        class="white-color">36.5k</span>
             
             
             
@@ -1775,9 +1801,9 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-
+    <script src="/js/FunnyTitle.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 
 </html>

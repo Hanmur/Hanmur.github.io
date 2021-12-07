@@ -333,7 +333,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -494,21 +494,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-03
+                    2021-12-07
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    575
+                    570
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    2 分
                 </div>
                 
 
@@ -529,210 +529,230 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="原子操作"><a href="#原子操作" class="headerlink" title="原子操作"></a>原子操作</h1><p>锁机制的底层是基于原子操作的，其一般直接通过CPU指令实现。Go语言中原子操作由内置的标准库<code>sync/atomic</code>提供。</p>
-<h3 id="atomic包"><a href="#atomic包" class="headerlink" title="atomic包"></a>atomic包</h3><table>
-<thead>
-<tr>
-<th align="center">读取操作</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">func LoadInt32(addr *int32) (val int32)</td>
-</tr>
-<tr>
-<td align="center">func LoadInt64(addr *int64) (val int64)</td>
-</tr>
-<tr>
-<td align="center">func LoadUint32(addr *uint32) (val uint32)</td>
-</tr>
-<tr>
-<td align="center">func LoadUint64(addr *uint64) (val uint64)</td>
-</tr>
-<tr>
-<td align="center">func LoadUintptr(addr *uintptr) (val uintptr)</td>
-</tr>
-<tr>
-<td align="center">func LoadPointer(addr *unsafe.Pointer) (val unsafe.Pointer)</td>
-</tr>
-</tbody></table>
+<h3 id="atomic包"><a href="#atomic包" class="headerlink" title="atomic包"></a>atomic包</h3><div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">写入操作</th>
+<th style="text-align:center">读取操作</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">func StoreInt32(addr *int32, val int32)</td>
+<tbody>
+<tr>
+<td style="text-align:center">func LoadInt32(addr *int32) (val int32)</td>
 </tr>
 <tr>
-<td align="center">func StoreInt64(addr *int64, val int64)</td>
+<td style="text-align:center">func LoadInt64(addr *int64) (val int64)</td>
 </tr>
 <tr>
-<td align="center">func StoreUint32(addr *uint32, val uint32)</td>
+<td style="text-align:center">func LoadUint32(addr *uint32) (val uint32)</td>
 </tr>
 <tr>
-<td align="center">func StoreUint64(addr *uint64, val uint64)</td>
+<td style="text-align:center">func LoadUint64(addr *uint64) (val uint64)</td>
 </tr>
 <tr>
-<td align="center">func StoreUintptr(addr *uintptr, val uintptr)</td>
+<td style="text-align:center">func LoadUintptr(addr *uintptr) (val uintptr)</td>
 </tr>
 <tr>
-<td align="center">func StorePointer(addr *unsafe.Pointer, val unsafe.Pointer)</td>
+<td style="text-align:center">func LoadPointer(addr *unsafe.Pointer) (val unsafe.Pointer)</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">修改操作</th>
+<th style="text-align:center">写入操作</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">func AddInt32(addr *int32, delta int32) (new int32)</td>
+<tbody>
+<tr>
+<td style="text-align:center">func StoreInt32(addr *int32, val int32)</td>
 </tr>
 <tr>
-<td align="center">func AddInt64(addr *int64, delta int64) (new int64)</td>
+<td style="text-align:center">func StoreInt64(addr *int64, val int64)</td>
 </tr>
 <tr>
-<td align="center">func AddUint32(addr *uint32, delta uint32) (new uint32)</td>
+<td style="text-align:center">func StoreUint32(addr *uint32, val uint32)</td>
 </tr>
 <tr>
-<td align="center">func AddUint64(addr *uint64, delta uint64) (new uint64)</td>
+<td style="text-align:center">func StoreUint64(addr *uint64, val uint64)</td>
 </tr>
 <tr>
-<td align="center">func AddUintptr(addr *uintptr, delta uintptr) (new uintptr)</td>
+<td style="text-align:center">func StoreUintptr(addr *uintptr, val uintptr)</td>
 </tr>
-</tbody></table>
+<tr>
+<td style="text-align:center">func StorePointer(addr *unsafe.Pointer, val unsafe.Pointer)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">交换操作</th>
+<th style="text-align:center">修改操作</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">func SwapInt32(addr *int32, new int32) (old int32)</td>
+<tbody>
+<tr>
+<td style="text-align:center">func AddInt32(addr *int32, delta int32) (new int32)</td>
 </tr>
 <tr>
-<td align="center">func SwapInt64(addr *int64, new int64) (old int64)</td>
+<td style="text-align:center">func AddInt64(addr *int64, delta int64) (new int64)</td>
 </tr>
 <tr>
-<td align="center">func SwapUint32(addr *uint32, new uint32) (old uint32)</td>
+<td style="text-align:center">func AddUint32(addr *uint32, delta uint32) (new uint32)</td>
 </tr>
 <tr>
-<td align="center">func SwapUint64(addr *uint64, new uint64) (old uint64)</td>
+<td style="text-align:center">func AddUint64(addr *uint64, delta uint64) (new uint64)</td>
 </tr>
 <tr>
-<td align="center">func SwapUintptr(addr *uintptr, new uintptr) (old uintptr)</td>
+<td style="text-align:center">func AddUintptr(addr *uintptr, delta uintptr) (new uintptr)</td>
 </tr>
-<tr>
-<td align="center">func SwapPointer(addr *unsafe.Pointer, new unsafe.Pointer) (old unsafe.Pointer)</td>
-</tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">比较并交换操作</th>
+<th style="text-align:center">交换操作</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">func CompareAndSwapInt32(addr *int32, old, new int32) (swapped bool)</td>
+<tbody>
+<tr>
+<td style="text-align:center">func SwapInt32(addr *int32, new int32) (old int32)</td>
 </tr>
 <tr>
-<td align="center">func CompareAndSwapInt64(addr *int64, old, new int64) (swapped bool)</td>
+<td style="text-align:center">func SwapInt64(addr *int64, new int64) (old int64)</td>
 </tr>
 <tr>
-<td align="center">func CompareAndSwapUint32(addr *uint32, old, new uint32) (swapped bool)</td>
+<td style="text-align:center">func SwapUint32(addr *uint32, new uint32) (old uint32)</td>
 </tr>
 <tr>
-<td align="center">func CompareAndSwapUint64(addr *uint64, old, new uint64) (swapped bool)</td>
+<td style="text-align:center">func SwapUint64(addr *uint64, new uint64) (old uint64)</td>
 </tr>
 <tr>
-<td align="center">func CompareAndSwapUintptr(addr *uintptr, old, new uintptr) (swapped bool)</td>
+<td style="text-align:center">func SwapUintptr(addr *uintptr, new uintptr) (old uintptr)</td>
 </tr>
 <tr>
-<td align="center">func CompareAndSwapPointer(addr *unsafe.Pointer, old, new unsafe.Pointer) (swapped bool)</td>
+<td style="text-align:center">func SwapPointer(addr *unsafe.Pointer, new unsafe.Pointer) (old unsafe.Pointer)</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">比较并交换操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">func CompareAndSwapInt32(addr *int32, old, new int32) (swapped bool)</td>
+</tr>
+<tr>
+<td style="text-align:center">func CompareAndSwapInt64(addr *int64, old, new int64) (swapped bool)</td>
+</tr>
+<tr>
+<td style="text-align:center">func CompareAndSwapUint32(addr *uint32, old, new uint32) (swapped bool)</td>
+</tr>
+<tr>
+<td style="text-align:center">func CompareAndSwapUint64(addr *uint64, old, new uint64) (swapped bool)</td>
+</tr>
+<tr>
+<td style="text-align:center">func CompareAndSwapUintptr(addr *uintptr, old, new uintptr) (swapped bool)</td>
+</tr>
+<tr>
+<td style="text-align:center">func CompareAndSwapPointer(addr *unsafe.Pointer, old, new unsafe.Pointer) (swapped bool)</td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>举例：比较下互斥锁和原子操作的性能。</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">package</span> main
+<pre class=" language-lang-go"><code class="language-lang-go">package main
 
-<span class="token keyword">import</span> <span class="token punctuation">(</span>
-    <span class="token string">"fmt"</span>
-    <span class="token string">"sync"</span>
-    <span class="token string">"sync/atomic"</span>
-    <span class="token string">"time"</span>
-<span class="token punctuation">)</span>
+import (
+    "fmt"
+    "sync"
+    "sync/atomic"
+    "time"
+)
 
-<span class="token keyword">type</span> Counter <span class="token keyword">interface</span> <span class="token punctuation">{</span>
-    <span class="token function">Inc</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token function">Load</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int64</span>
-<span class="token punctuation">}</span>
+type Counter interface {
+    Inc()
+    Load() int64
+}
 
-<span class="token comment" spellcheck="true">// 普通版</span>
-<span class="token keyword">type</span> CommonCounter <span class="token keyword">struct</span> <span class="token punctuation">{</span>
-    counter <span class="token builtin">int64</span>
-<span class="token punctuation">}</span>
+// 普通版
+type CommonCounter struct {
+    counter int64
+}
 
-<span class="token keyword">func</span> <span class="token punctuation">(</span>c CommonCounter<span class="token punctuation">)</span> <span class="token function">Inc</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    c<span class="token punctuation">.</span>counter<span class="token operator">++</span>
-<span class="token punctuation">}</span>
+func (c CommonCounter) Inc() {
+    c.counter++
+}
 
-<span class="token keyword">func</span> <span class="token punctuation">(</span>c CommonCounter<span class="token punctuation">)</span> <span class="token function">Load</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int64</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> c<span class="token punctuation">.</span>counter
-<span class="token punctuation">}</span>
+func (c CommonCounter) Load() int64 {
+    return c.counter
+}
 
-<span class="token comment" spellcheck="true">// 互斥锁版</span>
-<span class="token keyword">type</span> MutexCounter <span class="token keyword">struct</span> <span class="token punctuation">{</span>
-    counter <span class="token builtin">int64</span>
-    lock    sync<span class="token punctuation">.</span>Mutex
-<span class="token punctuation">}</span>
+// 互斥锁版
+type MutexCounter struct {
+    counter int64
+    lock    sync.Mutex
+}
 
-<span class="token keyword">func</span> <span class="token punctuation">(</span>m <span class="token operator">*</span>MutexCounter<span class="token punctuation">)</span> <span class="token function">Inc</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    m<span class="token punctuation">.</span>lock<span class="token punctuation">.</span><span class="token function">Lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token keyword">defer</span> m<span class="token punctuation">.</span>lock<span class="token punctuation">.</span><span class="token function">Unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    m<span class="token punctuation">.</span>counter<span class="token operator">++</span>
-<span class="token punctuation">}</span>
+func (m *MutexCounter) Inc() {
+    m.lock.Lock()
+    defer m.lock.Unlock()
+    m.counter++
+}
 
-<span class="token keyword">func</span> <span class="token punctuation">(</span>m <span class="token operator">*</span>MutexCounter<span class="token punctuation">)</span> <span class="token function">Load</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int64</span> <span class="token punctuation">{</span>
-    m<span class="token punctuation">.</span>lock<span class="token punctuation">.</span><span class="token function">Lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token keyword">defer</span> m<span class="token punctuation">.</span>lock<span class="token punctuation">.</span><span class="token function">Unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token keyword">return</span> m<span class="token punctuation">.</span>counter
-<span class="token punctuation">}</span>
+func (m *MutexCounter) Load() int64 {
+    m.lock.Lock()
+    defer m.lock.Unlock()
+    return m.counter
+}
 
-<span class="token comment" spellcheck="true">// 原子操作版</span>
-<span class="token keyword">type</span> AtomicCounter <span class="token keyword">struct</span> <span class="token punctuation">{</span>
-    counter <span class="token builtin">int64</span>
-<span class="token punctuation">}</span>
+// 原子操作版
+type AtomicCounter struct {
+    counter int64
+}
 
-<span class="token keyword">func</span> <span class="token punctuation">(</span>a <span class="token operator">*</span>AtomicCounter<span class="token punctuation">)</span> <span class="token function">Inc</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    atomic<span class="token punctuation">.</span><span class="token function">AddInt64</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>a<span class="token punctuation">.</span>counter<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+func (a *AtomicCounter) Inc() {
+    atomic.AddInt64(&a.counter, 1)
+}
 
-<span class="token keyword">func</span> <span class="token punctuation">(</span>a <span class="token operator">*</span>AtomicCounter<span class="token punctuation">)</span> <span class="token function">Load</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int64</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> atomic<span class="token punctuation">.</span><span class="token function">LoadInt64</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>a<span class="token punctuation">.</span>counter<span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+func (a *AtomicCounter) Load() int64 {
+    return atomic.LoadInt64(&a.counter)
+}
 
-<span class="token keyword">func</span> <span class="token function">test</span><span class="token punctuation">(</span>c Counter<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">var</span> wg sync<span class="token punctuation">.</span>WaitGroup
-    start <span class="token operator">:=</span> time<span class="token punctuation">.</span><span class="token function">Now</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">1000</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">{</span>
-        wg<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
-        <span class="token keyword">go</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            c<span class="token punctuation">.</span><span class="token function">Inc</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-            wg<span class="token punctuation">.</span><span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-    wg<span class="token punctuation">.</span><span class="token function">Wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    end <span class="token operator">:=</span> time<span class="token punctuation">.</span><span class="token function">Now</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span><span class="token function">Load</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> end<span class="token punctuation">.</span><span class="token function">Sub</span><span class="token punctuation">(</span>start<span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+func test(c Counter) {
+    var wg sync.WaitGroup
+    start := time.Now()
+    for i := 0; i < 1000; i++ {
+        wg.Add(1)
+        go func() {
+            c.Inc()
+            wg.Done()
+        }()
+    }
+    wg.Wait()
+    end := time.Now()
+    fmt.Println(c.Load(), end.Sub(start))
+}
 
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    c1 <span class="token operator">:=</span> CommonCounter<span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment" spellcheck="true">// 非并发安全</span>
-    <span class="token function">test</span><span class="token punctuation">(</span>c1<span class="token punctuation">)</span>
-    c2 <span class="token operator">:=</span> MutexCounter<span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment" spellcheck="true">// 使用互斥锁实现并发安全</span>
-    <span class="token function">test</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>c2<span class="token punctuation">)</span>
-    c3 <span class="token operator">:=</span> AtomicCounter<span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment" spellcheck="true">// 并发安全且比互斥锁效率更高</span>
-    <span class="token function">test</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>c3<span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+func main() {
+    c1 := CommonCounter{} // 非并发安全
+    test(c1)
+    c2 := MutexCounter{} // 使用互斥锁实现并发安全
+    test(&c2)
+    c3 := AtomicCounter{} // 并发安全且比互斥锁效率更高
+    test(&c3)
+}
 </code></pre>
 <p><code>atomic</code>包提供了底层的原子级内存操作，对于同步算法的实现很有用。这些函数必须谨慎地保证正确使用。除了某些特殊的底层应用，使用通道或者sync包的函数/类型实现同步更好。</p>
 
@@ -1181,7 +1201,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="深入Golang调度器之GMP模型">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="深入Golang调度器之GMP模型">
                         
                         <span class="card-title">深入Golang调度器之GMP模型</span>
                     </div>
@@ -1238,7 +1258,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="并发任务和通道">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="并发任务和通道">
                         
                         <span class="card-title">并发任务和通道</span>
                     </div>
@@ -1440,6 +1460,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
@@ -1458,7 +1485,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">41.9k</span>
+                        class="white-color">36.5k</span>
             
             
             
@@ -1694,9 +1721,9 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-
+    <script src="/js/FunnyTitle.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 
 </html>

@@ -333,7 +333,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/27.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -494,7 +494,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-02
+                    2021-12-07
                 </div>
                 
 
@@ -550,283 +550,291 @@
 </ul>
 <h3 id="TypeOf"><a href="#TypeOf" class="headerlink" title="TypeOf"></a>TypeOf</h3><p>在Go语言中，使用<code>reflect.TypeOf()</code>函数可以获得任意值的类型对象<code>reflect.Type</code></p>
 <p>举例：</p>
-<pre class=" language-go"><code class="language-go">typeX <span class="token operator">:=</span> reflect<span class="token punctuation">.</span><span class="token function">TypeOf</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">typeX := reflect.TypeOf(x)
 
-fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%v\n"</span><span class="token punctuation">,</span> typeX<span class="token punctuation">)</span>
+fmt.Printf("%v\n", typeX)
 </code></pre>
 <h5 id="type-name-和-type-kind"><a href="#type-name-和-type-kind" class="headerlink" title="type name 和 type kind"></a>type name 和 type kind</h5><p>在反射中，类型又划分为两种：</p>
 <ul>
 <li>名字（Name）：可以使用type关键字自定义的类型名</li>
 <li>种类（Kind）：底层的类型</li>
 </ul>
-<pre class=" language-go"><code class="language-go">typeX <span class="token operator">:=</span> reflect<span class="token punctuation">.</span><span class="token function">TypeOf</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">typeX := reflect.TypeOf(x)
 
-fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%v -- %v\n"</span><span class="token punctuation">,</span> typeX<span class="token punctuation">.</span><span class="token function">Name</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> typeX<span class="token punctuation">.</span><span class="token function">Kind</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+fmt.Printf("%v -- %v\n", typeX.Name(), typeX.Kind() )
 </code></pre>
 <p>其中数组、切片、Map、指针等类型的变量，他们的<code>.Name()</code>均返回<code>空</code></p>
 <p>在<code>reflect</code>包定义的Kind类型：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">type</span> Kind <span class="token builtin">uint</span>
-<span class="token keyword">const</span> <span class="token punctuation">(</span>
-    Invalid Kind <span class="token operator">=</span> <span class="token boolean">iota</span>  <span class="token comment" spellcheck="true">// 非法类型</span>
-    Bool                 <span class="token comment" spellcheck="true">// 布尔型</span>
-    Int                  <span class="token comment" spellcheck="true">// 有符号整型</span>
-    Int8                 <span class="token comment" spellcheck="true">// 有符号8位整型</span>
-    Int16                <span class="token comment" spellcheck="true">// 有符号16位整型</span>
-    Int32                <span class="token comment" spellcheck="true">// 有符号32位整型</span>
-    Int64                <span class="token comment" spellcheck="true">// 有符号64位整型</span>
-    Uint                 <span class="token comment" spellcheck="true">// 无符号整型</span>
-    Uint8                <span class="token comment" spellcheck="true">// 无符号8位整型</span>
-    Uint16               <span class="token comment" spellcheck="true">// 无符号16位整型</span>
-    Uint32               <span class="token comment" spellcheck="true">// 无符号32位整型</span>
-    Uint64               <span class="token comment" spellcheck="true">// 无符号64位整型</span>
-    Uintptr              <span class="token comment" spellcheck="true">// 指针</span>
-    Float32              <span class="token comment" spellcheck="true">// 单精度浮点数</span>
-    Float64              <span class="token comment" spellcheck="true">// 双精度浮点数</span>
-    Complex64            <span class="token comment" spellcheck="true">// 64位复数类型</span>
-    Complex128           <span class="token comment" spellcheck="true">// 128位复数类型</span>
-    Array                <span class="token comment" spellcheck="true">// 数组</span>
-    Chan                 <span class="token comment" spellcheck="true">// 通道</span>
-    Func                 <span class="token comment" spellcheck="true">// 函数</span>
-    Interface            <span class="token comment" spellcheck="true">// 接口</span>
-    Map                  <span class="token comment" spellcheck="true">// 映射</span>
-    Ptr                  <span class="token comment" spellcheck="true">// 指针</span>
-    Slice                <span class="token comment" spellcheck="true">// 切片</span>
-    String               <span class="token comment" spellcheck="true">// 字符串</span>
-    Struct               <span class="token comment" spellcheck="true">// 结构体</span>
-    UnsafePointer        <span class="token comment" spellcheck="true">// 底层指针</span>
-<span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">type Kind uint
+const (
+    Invalid Kind = iota  // 非法类型
+    Bool                 // 布尔型
+    Int                  // 有符号整型
+    Int8                 // 有符号8位整型
+    Int16                // 有符号16位整型
+    Int32                // 有符号32位整型
+    Int64                // 有符号64位整型
+    Uint                 // 无符号整型
+    Uint8                // 无符号8位整型
+    Uint16               // 无符号16位整型
+    Uint32               // 无符号32位整型
+    Uint64               // 无符号64位整型
+    Uintptr              // 指针
+    Float32              // 单精度浮点数
+    Float64              // 双精度浮点数
+    Complex64            // 64位复数类型
+    Complex128           // 128位复数类型
+    Array                // 数组
+    Chan                 // 通道
+    Func                 // 函数
+    Interface            // 接口
+    Map                  // 映射
+    Ptr                  // 指针
+    Slice                // 切片
+    String               // 字符串
+    Struct               // 结构体
+    UnsafePointer        // 底层指针
+)
 </code></pre>
 <h3 id="ValueOf"><a href="#ValueOf" class="headerlink" title="ValueOf"></a>ValueOf</h3><p><code>reflect.ValueOf()</code>返回的是<code>reflect.Value</code>类型，其中包含了原始值的值信息。<code>reflect.Value</code>与原始值之间可以互相转换。</p>
 <p><code>reflect.Value</code>类型提供的获取原始值的方法：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">方法</th>
-<th align="center">说明</th>
+<th style="text-align:center">方法</th>
+<th style="text-align:center">说明</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">Interface() interface {}</td>
-<td align="center">将值以 interface{} 类型返回，可以通过类型断言转换为指定类型</td>
+<tbody>
+<tr>
+<td style="text-align:center">Interface() interface {}</td>
+<td style="text-align:center">将值以 interface{} 类型返回，可以通过类型断言转换为指定类型</td>
 </tr>
 <tr>
-<td align="center">Int() int64</td>
-<td align="center">将值以 int 类型返回，所有有符号整型均可以此方式返回</td>
+<td style="text-align:center">Int() int64</td>
+<td style="text-align:center">将值以 int 类型返回，所有有符号整型均可以此方式返回</td>
 </tr>
 <tr>
-<td align="center">Uint() uint64</td>
-<td align="center">将值以 uint 类型返回，所有无符号整型均可以此方式返回</td>
+<td style="text-align:center">Uint() uint64</td>
+<td style="text-align:center">将值以 uint 类型返回，所有无符号整型均可以此方式返回</td>
 </tr>
 <tr>
-<td align="center">Float() float64</td>
-<td align="center">将值以双精度（float64）类型返回，所有浮点数（float32、float64）均可以此方式返回</td>
+<td style="text-align:center">Float() float64</td>
+<td style="text-align:center">将值以双精度（float64）类型返回，所有浮点数（float32、float64）均可以此方式返回</td>
 </tr>
 <tr>
-<td align="center">Bool() bool</td>
-<td align="center">将值以 bool 类型返回</td>
+<td style="text-align:center">Bool() bool</td>
+<td style="text-align:center">将值以 bool 类型返回</td>
 </tr>
 <tr>
-<td align="center">Bytes() []bytes</td>
-<td align="center">将值以字节数组 []bytes 类型返回</td>
+<td style="text-align:center">Bytes() []bytes</td>
+<td style="text-align:center">将值以字节数组 []bytes 类型返回</td>
 </tr>
 <tr>
-<td align="center">String() string</td>
-<td align="center">将值以字符串类型返回</td>
+<td style="text-align:center">String() string</td>
+<td style="text-align:center">将值以字符串类型返回</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h5 id="通过反射获取值"><a href="#通过反射获取值" class="headerlink" title="通过反射获取值"></a>通过反射获取值</h5><p>举例：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">reflectValue</span><span class="token punctuation">(</span>x <span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    v <span class="token operator">:=</span> reflect<span class="token punctuation">.</span><span class="token function">ValueOf</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
-    k <span class="token operator">:=</span> v<span class="token punctuation">.</span><span class="token function">Kind</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    
-    <span class="token keyword">switch</span> k <span class="token punctuation">{</span>
-    <span class="token keyword">case</span> reflect<span class="token punctuation">.</span>Int64<span class="token punctuation">:</span>
-        <span class="token comment" spellcheck="true">// v.Int()从反射中获取整型的原始值，然后通过int64()强制类型转换</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"type is int64, value is %d\n"</span><span class="token punctuation">,</span> <span class="token function">int64</span><span class="token punctuation">(</span>v<span class="token punctuation">.</span><span class="token function">Int</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token keyword">case</span> reflect<span class="token punctuation">.</span>Float32<span class="token punctuation">:</span>
-        <span class="token comment" spellcheck="true">// v.Float()从反射中获取浮点型的原始值，然后通过float32()强制类型转换</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"type is float32, value is %f\n"</span><span class="token punctuation">,</span> <span class="token function">float32</span><span class="token punctuation">(</span>v<span class="token punctuation">.</span><span class="token function">Float</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token keyword">case</span> reflect<span class="token punctuation">.</span>Float64<span class="token punctuation">:</span>
-        <span class="token comment" spellcheck="true">// v.Float()从反射中获取浮点型的原始值，然后通过float64()强制类型转换</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"type is float64, value is %f\n"</span><span class="token punctuation">,</span> <span class="token function">float64</span><span class="token punctuation">(</span>v<span class="token punctuation">.</span><span class="token function">Float</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">var</span> a <span class="token builtin">float32</span> <span class="token operator">=</span> <span class="token number">3.14</span>
-    <span class="token keyword">var</span> b <span class="token builtin">int64</span> <span class="token operator">=</span> <span class="token number">100</span>
-    
-    <span class="token function">reflectValue</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// type is float32, value is 3.140000</span>
-    <span class="token function">reflectValue</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// type is int64, value is 100</span>
-    
-    <span class="token comment" spellcheck="true">// 将int类型的原始值转换为reflect.Value类型</span>
-    c <span class="token operator">:=</span> reflect<span class="token punctuation">.</span><span class="token function">ValueOf</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"type c :%T\n"</span><span class="token punctuation">,</span> c<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// type c :reflect.Value</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func reflectValue(x interface{}) {
+    v := reflect.ValueOf(x)
+    k := v.Kind()
+
+    switch k {
+    case reflect.Int64:
+        // v.Int()从反射中获取整型的原始值，然后通过int64()强制类型转换
+        fmt.Printf("type is int64, value is %d\n", int64(v.Int()))
+    case reflect.Float32:
+        // v.Float()从反射中获取浮点型的原始值，然后通过float32()强制类型转换
+        fmt.Printf("type is float32, value is %f\n", float32(v.Float()))
+    case reflect.Float64:
+        // v.Float()从反射中获取浮点型的原始值，然后通过float64()强制类型转换
+        fmt.Printf("type is float64, value is %f\n", float64(v.Float()))
+    }
+}
+func main() {
+    var a float32 = 3.14
+    var b int64 = 100
+
+    reflectValue(a) // type is float32, value is 3.140000
+    reflectValue(b) // type is int64, value is 100
+
+    // 将int类型的原始值转换为reflect.Value类型
+    c := reflect.ValueOf(10)
+    fmt.Printf("type c :%T\n", c) // type c :reflect.Value
+}
 </code></pre>
 <h5 id="通过反射设置变量的值"><a href="#通过反射设置变量的值" class="headerlink" title="通过反射设置变量的值"></a>通过反射设置变量的值</h5><p>想要在函数中通过反射修改变量的值，必须传递变量地址才能修改变量值。</p>
 <p>反射中使用专有的<code>Elem()</code>方法来获取指针对应的值。</p>
 <p>举例：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">reflectSetValue1</span><span class="token punctuation">(</span>x <span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    v <span class="token operator">:=</span> reflect<span class="token punctuation">.</span><span class="token function">ValueOf</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
-    <span class="token keyword">if</span> v<span class="token punctuation">.</span><span class="token function">Kind</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> reflect<span class="token punctuation">.</span>Int64 <span class="token punctuation">{</span>
-        v<span class="token punctuation">.</span><span class="token function">SetInt</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//修改的是副本，reflect包会引发panic</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<span class="token keyword">func</span> <span class="token function">reflectSetValue2</span><span class="token punctuation">(</span>x <span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    v <span class="token operator">:=</span> reflect<span class="token punctuation">.</span><span class="token function">ValueOf</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
-    <span class="token comment" spellcheck="true">// 反射中使用 Elem()方法获取指针对应的值</span>
-    <span class="token keyword">if</span> v<span class="token punctuation">.</span><span class="token function">Elem</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Kind</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> reflect<span class="token punctuation">.</span>Int64 <span class="token punctuation">{</span>
-        v<span class="token punctuation">.</span><span class="token function">Elem</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">SetInt</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">var</span> a <span class="token builtin">int64</span> <span class="token operator">=</span> <span class="token number">100</span>
-    
-    <span class="token comment" spellcheck="true">// reflectSetValue1(a) //panic: reflect: reflect.Value.SetInt using unaddressable value</span>
-    <span class="token function">reflectSetValue2</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>a<span class="token punctuation">)</span>
-    
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func reflectSetValue1(x interface{}) {
+    v := reflect.ValueOf(x)
+    if v.Kind() == reflect.Int64 {
+        v.SetInt(200) //修改的是副本，reflect包会引发panic
+    }
+}
+func reflectSetValue2(x interface{}) {
+    v := reflect.ValueOf(x)
+    // 反射中使用 Elem()方法获取指针对应的值
+    if v.Elem().Kind() == reflect.Int64 {
+        v.Elem().SetInt(200)
+    }
+}
+func main() {
+    var a int64 = 100
+
+    // reflectSetValue1(a) //panic: reflect: reflect.Value.SetInt using unaddressable value
+    reflectSetValue2(&a)
+
+    fmt.Println(a)
+}
 </code></pre>
 <h5 id="isNil-和isValid"><a href="#isNil-和isValid" class="headerlink" title="isNil()和isValid()"></a><code>isNil()</code>和<code>isValid()</code></h5><p>判断是否为空<code>IsNil()</code></p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token punctuation">(</span>v Value<span class="token punctuation">)</span> <span class="token function">IsNil</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">bool</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func (v Value) IsNil() bool
 </code></pre>
 <p><code>IsNil()</code>报告v持有的值是否为nil。</p>
 <p>v持有的值的分类必须是通道、函数、接口、映射、指针、切片之一；否则<code>IsNil</code>函数会导致<code>panic</code>。</p>
 <p>判断是否为零<code>IsValid()</code></p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token punctuation">(</span>v Value<span class="token punctuation">)</span> <span class="token function">IsValid</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">bool</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func (v Value) IsValid() bool
 </code></pre>
 <p><code>IsValid()</code>返回<code>v</code>是否持有一个值。</p>
 <p>如果<code>v</code>是<code>Value</code>零值会返回假，此时<code>v</code>除了<code>IsValid</code>、<code>String</code>、<code>Kind</code>之外的方法都会导致<code>panic</code>。</p>
 <h4 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h4><p><code>IsNil()</code>常被用于判断指针是否为空；<code>IsValid()</code>常被用于判定返回值是否有效。</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">// *int类型空指针</span>
-    <span class="token keyword">var</span> a <span class="token operator">*</span><span class="token builtin">int</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"var a *int IsNil:"</span><span class="token punctuation">,</span> reflect<span class="token punctuation">.</span><span class="token function">ValueOf</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">IsNil</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token comment" spellcheck="true">// nil值</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"nil IsValid:"</span><span class="token punctuation">,</span> reflect<span class="token punctuation">.</span><span class="token function">ValueOf</span><span class="token punctuation">(</span><span class="token boolean">nil</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">IsValid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token comment" spellcheck="true">// 实例化一个匿名结构体</span>
-    b <span class="token operator">:=</span> <span class="token keyword">struct</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
-    <span class="token comment" spellcheck="true">// 尝试从结构体中查找"abc"字段</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"不存在的结构体成员:"</span><span class="token punctuation">,</span> reflect<span class="token punctuation">.</span><span class="token function">ValueOf</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">FieldByName</span><span class="token punctuation">(</span><span class="token string">"abc"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">IsValid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token comment" spellcheck="true">// 尝试从结构体中查找"abc"方法</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"不存在的结构体方法:"</span><span class="token punctuation">,</span> reflect<span class="token punctuation">.</span><span class="token function">ValueOf</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">MethodByName</span><span class="token punctuation">(</span><span class="token string">"abc"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">IsValid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token comment" spellcheck="true">// map</span>
-    c <span class="token operator">:=</span> <span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
-    <span class="token comment" spellcheck="true">// 尝试从map中查找一个不存在的键</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"map中不存在的键："</span><span class="token punctuation">,</span> reflect<span class="token punctuation">.</span><span class="token function">ValueOf</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">MapIndex</span><span class="token punctuation">(</span>reflect<span class="token punctuation">.</span><span class="token function">ValueOf</span><span class="token punctuation">(</span><span class="token string">"娜扎"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">IsValid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func main() {
+    // *int类型空指针
+    var a *int
+    fmt.Println("var a *int IsNil:", reflect.ValueOf(a).IsNil())
+    // nil值
+    fmt.Println("nil IsValid:", reflect.ValueOf(nil).IsValid())
+    // 实例化一个匿名结构体
+    b := struct{}{}
+    // 尝试从结构体中查找"abc"字段
+    fmt.Println("不存在的结构体成员:", reflect.ValueOf(b).FieldByName("abc").IsValid())
+    // 尝试从结构体中查找"abc"方法
+    fmt.Println("不存在的结构体方法:", reflect.ValueOf(b).MethodByName("abc").IsValid())
+    // map
+    c := map[string]int{}
+    // 尝试从map中查找一个不存在的键
+    fmt.Println("map中不存在的键：", reflect.ValueOf(c).MapIndex(reflect.ValueOf("娜扎")).IsValid())
+}
 </code></pre>
 <h3 id="结构体反射"><a href="#结构体反射" class="headerlink" title="结构体反射"></a>结构体反射</h3><h5 id="与结构体相关的方法"><a href="#与结构体相关的方法" class="headerlink" title="与结构体相关的方法"></a>与结构体相关的方法</h5><p>任意值通过<code>reflect.TypeOf()</code>获得反射对象信息后，如果它的类型是结构体，可以通过反射值对象（<code>reflect.Type</code>）的<code>NumField()</code>和<code>Field()</code>方法获得结构体成员的详细信息。</p>
 <p><code>reflect.Type</code>中与获取结构体成员相关的的方法如下表所示。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">方法</th>
-<th align="center">说明</th>
+<th style="text-align:center">方法</th>
+<th style="text-align:center">说明</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">Field(i int) StructField</td>
-<td align="center">根据索引，返回索引对应的结构体字段的信息。</td>
+<tbody>
+<tr>
+<td style="text-align:center">Field(i int) StructField</td>
+<td style="text-align:center">根据索引，返回索引对应的结构体字段的信息。</td>
 </tr>
 <tr>
-<td align="center">NumField() int</td>
-<td align="center">返回结构体成员字段数量。</td>
+<td style="text-align:center">NumField() int</td>
+<td style="text-align:center">返回结构体成员字段数量。</td>
 </tr>
 <tr>
-<td align="center">FieldByName(name string) (StructField, bool)</td>
-<td align="center">根据给定字符串返回字符串对应的结构体字段的信息。</td>
+<td style="text-align:center">FieldByName(name string) (StructField, bool)</td>
+<td style="text-align:center">根据给定字符串返回字符串对应的结构体字段的信息。</td>
 </tr>
 <tr>
-<td align="center">FieldByIndex(index []int) StructField</td>
-<td align="center">多层成员访问时，根据 []int 提供的每个结构体的字段索引，返回字段的信息。</td>
+<td style="text-align:center">FieldByIndex(index []int) StructField</td>
+<td style="text-align:center">多层成员访问时，根据 []int 提供的每个结构体的字段索引，返回字段的信息。</td>
 </tr>
 <tr>
-<td align="center">FieldByNameFunc(match func(string) bool) (StructField,bool)</td>
-<td align="center">根据传入的匹配函数匹配需要的字段。</td>
+<td style="text-align:center">FieldByNameFunc(match func(string) bool) (StructField,bool)</td>
+<td style="text-align:center">根据传入的匹配函数匹配需要的字段。</td>
 </tr>
 <tr>
-<td align="center">NumMethod() int</td>
-<td align="center">返回该类型的方法集中方法的数目</td>
+<td style="text-align:center">NumMethod() int</td>
+<td style="text-align:center">返回该类型的方法集中方法的数目</td>
 </tr>
 <tr>
-<td align="center">Method(int) Method</td>
-<td align="center">返回该类型方法集中的第i个方法</td>
+<td style="text-align:center">Method(int) Method</td>
+<td style="text-align:center">返回该类型方法集中的第i个方法</td>
 </tr>
 <tr>
-<td align="center">MethodByName(string)(Method, bool)</td>
-<td align="center">根据方法名返回该类型方法集中的方法</td>
+<td style="text-align:center">MethodByName(string)(Method, bool)</td>
+<td style="text-align:center">根据方法名返回该类型方法集中的方法</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h5 id="StructField类型"><a href="#StructField类型" class="headerlink" title="StructField类型"></a>StructField类型</h5><p><code>StructField</code>类型用来描述结构体中的一个字段的信息。</p>
 <p><code>StructField</code>的定义如下：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">type</span> StructField <span class="token keyword">struct</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">// Name是字段的名字。PkgPath是非导出字段的包路径，对导出字段该字段为""。</span>
-    <span class="token comment" spellcheck="true">// 参见http://golang.org/ref/spec#Uniqueness_of_identifiers</span>
-    Name    <span class="token builtin">string</span>
-    PkgPath <span class="token builtin">string</span>
-    Type      Type      <span class="token comment" spellcheck="true">// 字段的类型</span>
-    Tag       StructTag <span class="token comment" spellcheck="true">// 字段的标签</span>
-    Offset    <span class="token builtin">uintptr</span>   <span class="token comment" spellcheck="true">// 字段在结构体中的字节偏移量</span>
-    Index     <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span>     <span class="token comment" spellcheck="true">// 用于Type.FieldByIndex时的索引切片</span>
-    Anonymous <span class="token builtin">bool</span>      <span class="token comment" spellcheck="true">// 是否匿名字段</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">type StructField struct {
+    // Name是字段的名字。PkgPath是非导出字段的包路径，对导出字段该字段为""。
+    // 参见http://golang.org/ref/spec#Uniqueness_of_identifiers
+    Name    string
+    PkgPath string
+    Type      Type      // 字段的类型
+    Tag       StructTag // 字段的标签
+    Offset    uintptr   // 字段在结构体中的字节偏移量
+    Index     []int     // 用于Type.FieldByIndex时的索引切片
+    Anonymous bool      // 是否匿名字段
+}
 </code></pre>
 <h5 id="结构体反射示例"><a href="#结构体反射示例" class="headerlink" title="结构体反射示例"></a>结构体反射示例</h5><p>当我们使用反射得到一个结构体数据之后可以通过索引依次获取其字段信息，也可以通过字段名去获取指定的字段信息。</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">type</span> student <span class="token keyword">struct</span> <span class="token punctuation">{</span>
-    Name  <span class="token builtin">string</span> <span class="token string">`json:"name"`</span>
-    Score <span class="token builtin">int</span>    <span class="token string">`json:"score"`</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">type student struct {
+    Name  string `json:"name"`
+    Score int    `json:"score"`
+}
 
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    stu1 <span class="token operator">:=</span> student<span class="token punctuation">{</span>
-        Name<span class="token punctuation">:</span>  <span class="token string">"小王子"</span><span class="token punctuation">,</span>
-        Score<span class="token punctuation">:</span> <span class="token number">90</span><span class="token punctuation">,</span>
-    <span class="token punctuation">}</span>
+func main() {
+    stu1 := student{
+        Name:  "小王子",
+        Score: 90,
+    }
 
-    t <span class="token operator">:=</span> reflect<span class="token punctuation">.</span><span class="token function">TypeOf</span><span class="token punctuation">(</span>stu1<span class="token punctuation">)</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>t<span class="token punctuation">.</span><span class="token function">Name</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> t<span class="token punctuation">.</span><span class="token function">Kind</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// student struct</span>
-    <span class="token comment" spellcheck="true">// 通过for循环遍历结构体的所有字段信息</span>
-    <span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> t<span class="token punctuation">.</span><span class="token function">NumField</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">{</span>
-        field <span class="token operator">:=</span> t<span class="token punctuation">.</span><span class="token function">Field</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"name:%s index:%d type:%v json tag:%v\n"</span><span class="token punctuation">,</span> field<span class="token punctuation">.</span>Name<span class="token punctuation">,</span> field<span class="token punctuation">.</span>Index<span class="token punctuation">,</span> field<span class="token punctuation">.</span>Type<span class="token punctuation">,</span> field<span class="token punctuation">.</span>Tag<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">"json"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
+    t := reflect.TypeOf(stu1)
+    fmt.Println(t.Name(), t.Kind()) // student struct
+    // 通过for循环遍历结构体的所有字段信息
+    for i := 0; i < t.NumField(); i++ {
+        field := t.Field(i)
+        fmt.Printf("name:%s index:%d type:%v json tag:%v\n", field.Name, field.Index, field.Type, field.Tag.Get("json"))
+    }
 
-    <span class="token comment" spellcheck="true">// 通过字段名获取指定结构体字段信息</span>
-    <span class="token keyword">if</span> scoreField<span class="token punctuation">,</span> ok <span class="token operator">:=</span> t<span class="token punctuation">.</span><span class="token function">FieldByName</span><span class="token punctuation">(</span><span class="token string">"Score"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> ok <span class="token punctuation">{</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"name:%s index:%d type:%v json tag:%v\n"</span><span class="token punctuation">,</span> scoreField<span class="token punctuation">.</span>Name<span class="token punctuation">,</span> scoreField<span class="token punctuation">.</span>Index<span class="token punctuation">,</span> scoreField<span class="token punctuation">.</span>Type<span class="token punctuation">,</span> scoreField<span class="token punctuation">.</span>Tag<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">"json"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+    // 通过字段名获取指定结构体字段信息
+    if scoreField, ok := t.FieldByName("Score"); ok {
+        fmt.Printf("name:%s index:%d type:%v json tag:%v\n", scoreField.Name, scoreField.Index, scoreField.Type, scoreField.Tag.Get("json"))
+    }
+}
 </code></pre>
 <p>接下来编写一个函数<code>printMethod(s interface{})</code>来遍历打印s包含的方法。</p>
-<pre class=" language-go"><code class="language-go"><span class="token comment" spellcheck="true">// 给student添加两个方法 Study和Sleep(注意首字母大写)</span>
-<span class="token keyword">func</span> <span class="token punctuation">(</span>s student<span class="token punctuation">)</span> <span class="token function">Study</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>
-    msg <span class="token operator">:=</span> <span class="token string">"好好学习，天天向上。"</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span>
-    <span class="token keyword">return</span> msg
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">// 给student添加两个方法 Study和Sleep(注意首字母大写)
+func (s student) Study() string {
+    msg := "好好学习，天天向上。"
+    fmt.Println(msg)
+    return msg
+}
 
-<span class="token keyword">func</span> <span class="token punctuation">(</span>s student<span class="token punctuation">)</span> <span class="token function">Sleep</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>
-    msg <span class="token operator">:=</span> <span class="token string">"好好睡觉，快快长大。"</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span>
-    <span class="token keyword">return</span> msg
-<span class="token punctuation">}</span>
+func (s student) Sleep() string {
+    msg := "好好睡觉，快快长大。"
+    fmt.Println(msg)
+    return msg
+}
 
-<span class="token keyword">func</span> <span class="token function">printMethod</span><span class="token punctuation">(</span>x <span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    t <span class="token operator">:=</span> reflect<span class="token punctuation">.</span><span class="token function">TypeOf</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
-    v <span class="token operator">:=</span> reflect<span class="token punctuation">.</span><span class="token function">ValueOf</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+func printMethod(x interface{}) {
+    t := reflect.TypeOf(x)
+    v := reflect.ValueOf(x)
 
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>t<span class="token punctuation">.</span><span class="token function">NumMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> v<span class="token punctuation">.</span><span class="token function">NumMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">{</span>
-        methodType <span class="token operator">:=</span> v<span class="token punctuation">.</span><span class="token function">Method</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Type</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"method name:%s\n"</span><span class="token punctuation">,</span> t<span class="token punctuation">.</span><span class="token function">Method</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">.</span>Name<span class="token punctuation">)</span>
-        fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"method:%s\n"</span><span class="token punctuation">,</span> methodType<span class="token punctuation">)</span>
-        <span class="token comment" spellcheck="true">// 通过反射调用方法传递的参数必须是 []reflect.Value 类型</span>
-        <span class="token keyword">var</span> args <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>reflect<span class="token punctuation">.</span>Value<span class="token punctuation">{</span><span class="token punctuation">}</span>
-        v<span class="token punctuation">.</span><span class="token function">Method</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Call</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+    fmt.Println(t.NumMethod())
+    for i := 0; i < v.NumMethod(); i++ {
+        methodType := v.Method(i).Type()
+        fmt.Printf("method name:%s\n", t.Method(i).Name)
+        fmt.Printf("method:%s\n", methodType)
+        // 通过反射调用方法传递的参数必须是 []reflect.Value 类型
+        var args = []reflect.Value{}
+        v.Method(i).Call(args)
+    }
+}
 </code></pre>
 <h1 id="反射的坏处"><a href="#反射的坏处" class="headerlink" title="反射的坏处"></a>反射的坏处</h1><p>反射不应该被滥用，原因有以下三个。</p>
 <ol>
@@ -1280,7 +1288,7 @@ fmt<span class="token punctuation">.</span><span class="token function">Printf</
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="变量与常量">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="变量与常量">
                         
                         <span class="card-title">变量与常量</span>
                     </div>
@@ -1337,7 +1345,7 @@ fmt<span class="token punctuation">.</span><span class="token function">Printf</
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="流程控制">
+                        <img src="/medias/featureimages/28.jpg" class="responsive-img" alt="流程控制">
                         
                         <span class="card-title">流程控制</span>
                     </div>
@@ -1539,6 +1547,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
@@ -1557,7 +1572,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">41.9k</span>
+                        class="white-color">36.5k</span>
             
             
             
@@ -1793,9 +1808,9 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-
+    <script src="/js/FunnyTitle.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 
 </html>

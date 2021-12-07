@@ -333,7 +333,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -502,14 +502,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-06
+                    2021-12-07
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    162
+                    160
                 </div>
                 
 
@@ -538,25 +538,18 @@
             <div id="articleContent">
                 <h2 id="RSA加密算法"><a href="#RSA加密算法" class="headerlink" title="RSA加密算法"></a>RSA加密算法</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
 <li><p>公钥</p>
-<p>$$(E, N)$$</p>
-</li>
+<script type="math/tex; mode=display">(E, N)</script></li>
 <li><p>私钥</p>
-<p>$$(D, N)$$</p>
-</li>
+<script type="math/tex; mode=display">(D, N)</script></li>
 <li><p>密钥对</p>
-<p>$$(E, D, N)$$</p>
-</li>
+<script type="math/tex; mode=display">(E, D, N)</script></li>
 </ul>
-<h3 id="加密过程"><a href="#加密过程" class="headerlink" title="加密过程"></a>加密过程</h3><p>$$密文 = 明文^E\ mod N$$</p>
-<h3 id="解密过程"><a href="#解密过程" class="headerlink" title="解密过程"></a>解密过程</h3><p>$$明文 = 密文^D\ mod N$$</p>
-<h3 id="生成密钥对"><a href="#生成密钥对" class="headerlink" title="生成密钥对"></a>生成密钥对</h3><ol>
+<h3 id="加密过程"><a href="#加密过程" class="headerlink" title="加密过程"></a>加密过程</h3><script type="math/tex; mode=display">密文 = 明文^E\ mod N</script><h3 id="解密过程"><a href="#解密过程" class="headerlink" title="解密过程"></a>解密过程</h3><script type="math/tex; mode=display">明文 = 密文^D\ mod N</script><h3 id="生成密钥对"><a href="#生成密钥对" class="headerlink" title="生成密钥对"></a>生成密钥对</h3><ol>
 <li><p>求<strong>N</strong></p>
 <p>选取两个相对较大的质数<strong>P</strong>,<strong>Q</strong></p>
-<p>$$N = P * Q$$</p>
-</li>
+<script type="math/tex; mode=display">N = P * Q</script></li>
 <li><p>求<strong>φ(N)</strong>: 需要的中间量</p>
-<p>$$\phi(N) = (P - 1 ) * (Q - 1)$$</p>
-</li>
+<script type="math/tex; mode=display">\phi(N) = (P - 1 ) * (Q - 1)</script></li>
 <li><p>求<strong>E</strong></p>
 <p><strong>E</strong>是选取出来的满足特定条件的数，一般取0x10001</p>
 <p><strong>E</strong>需要满足的条件：</p>
@@ -566,9 +559,8 @@
 </ul>
 </li>
 <li><p>求<strong>D</strong></p>
-<p><strong>D</strong>是通过<strong>E</strong>和**φ(N)**计算得出的数字</p>
-<p>$$(D*E) \ mod \phi(N) = 1$$</p>
-<p><strong>D</strong>需要满足的条件：</p>
+<p><strong>D</strong>是通过<strong>E</strong>和<strong>φ(N)</strong>计算得出的数字</p>
+<script type="math/tex; mode=display">(D*E) \ mod \phi(N) = 1</script><p><strong>D</strong>需要满足的条件：</p>
 <ul>
 <li><strong>1 &lt; E &lt; φ(N)</strong></li>
 <li><strong>gcd(E,φ(N)) = 1</strong></li>
@@ -1025,7 +1017,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="欧拉函数">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="欧拉函数">
                         
                         <span class="card-title">欧拉函数</span>
                     </div>
@@ -1090,7 +1082,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="time包">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="time包">
                         
                         <span class="card-title">time包</span>
                     </div>
@@ -1292,6 +1284,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
@@ -1310,7 +1309,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">41.9k</span>
+                        class="white-color">36.5k</span>
             
             
             
@@ -1546,9 +1545,9 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-
+    <script src="/js/FunnyTitle.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 
 </html>

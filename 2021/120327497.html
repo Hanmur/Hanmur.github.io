@@ -333,7 +333,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -494,7 +494,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-03
+                    2021-12-07
                 </div>
                 
 
@@ -533,10 +533,10 @@
 <p>接口做的事情是定义一个协议，不关心属性(数据)，只关心行为(方法)</p>
 <h3 id="接口的定义"><a href="#接口的定义" class="headerlink" title="接口的定义"></a>接口的定义</h3><p>Go语言提倡面向接口编程</p>
 <p>每个接口由数个方法组成，接口的定义格式：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">type</span> 接口名 <span class="token keyword">interface</span><span class="token punctuation">{</span>
-    方法名<span class="token function">1</span><span class="token punctuation">(</span> 参数列表<span class="token number">1</span> <span class="token punctuation">)</span> 返回值列表<span class="token number">1</span>
-    方法名<span class="token function">2</span><span class="token punctuation">(</span> 参数列表<span class="token number">2</span> <span class="token punctuation">)</span> 返回值列表<span class="token number">2</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">type 接口名 interface{
+    方法名1( 参数列表1 ) 返回值列表1
+    方法名2( 参数列表2 ) 返回值列表2
+}
 </code></pre>
 <p>其中：</p>
 <ul>
@@ -545,125 +545,125 @@
 <li>参数列表、返回值列表：参数变量名可以省略</li>
 </ul>
 <p>举例：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">type</span> writer <span class="token keyword">interface</span><span class="token punctuation">{</span>
-    <span class="token function">Write</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">)</span> <span class="token builtin">error</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">type writer interface{
+    Write([]byte) error
+}
 </code></pre>
 <h3 id="实现接口"><a href="#实现接口" class="headerlink" title="实现接口"></a>实现接口</h3><p>一个对象只要实现了接口中的全部方法，就实现了这个接口，所以接口就是一个需要实现的方法列表。</p>
 <p>举例：</p>
-<pre class=" language-go"><code class="language-go"><span class="token comment" spellcheck="true">// Sayer 接口</span>
-<span class="token keyword">type</span> Sayer <span class="token keyword">interface</span> <span class="token punctuation">{</span>
-    <span class="token function">say</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">// Sayer 接口
+type Sayer interface {
+    say()
+}
 </code></pre>
-<pre class=" language-go"><code class="language-go"><span class="token comment" spellcheck="true">//定义dog和cat两个结构体：</span>
-<span class="token keyword">type</span> dog <span class="token keyword">struct</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-<span class="token keyword">type</span> cat <span class="token keyword">struct</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">//定义dog和cat两个结构体：
+type dog struct {}
+type cat struct {}
 
-<span class="token comment" spellcheck="true">// dog实现了Sayer接口</span>
-<span class="token keyword">func</span> <span class="token punctuation">(</span>d dog<span class="token punctuation">)</span> <span class="token function">say</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"汪汪汪"</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
-<span class="token comment" spellcheck="true">// cat实现了Sayer接口</span>
-<span class="token keyword">func</span> <span class="token punctuation">(</span>c cat<span class="token punctuation">)</span> <span class="token function">say</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"喵喵喵"</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+// dog实现了Sayer接口
+func (d dog) say() {
+    fmt.Println("汪汪汪")
+}
+// cat实现了Sayer接口
+func (c cat) say() {
+    fmt.Println("喵喵喵")
+}
 </code></pre>
 <h3 id="接口类型变量"><a href="#接口类型变量" class="headerlink" title="接口类型变量"></a>接口类型变量</h3><p>实现了接口，就可以通过接口实现多态</p>
 <p>举例：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">var</span> x Sayer <span class="token comment" spellcheck="true">// 声明一个Sayer类型的变量x</span>
-    
-    a <span class="token operator">:=</span> cat<span class="token punctuation">{</span><span class="token punctuation">}</span>  <span class="token comment" spellcheck="true">// 实例化一个cat</span>
-    b <span class="token operator">:=</span> dog<span class="token punctuation">{</span><span class="token punctuation">}</span>  <span class="token comment" spellcheck="true">// 实例化一个dog</span>
-    
-    x <span class="token operator">=</span> a       <span class="token comment" spellcheck="true">// 可以把cat实例直接赋值给x</span>
-    x<span class="token punctuation">.</span><span class="token function">say</span><span class="token punctuation">(</span><span class="token punctuation">)</span>     <span class="token comment" spellcheck="true">// 喵喵喵</span>
-    
-    x <span class="token operator">=</span> b       <span class="token comment" spellcheck="true">// 可以把dog实例直接赋值给x</span>
-    x<span class="token punctuation">.</span><span class="token function">say</span><span class="token punctuation">(</span><span class="token punctuation">)</span>     <span class="token comment" spellcheck="true">// 汪汪汪</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func main() {
+    var x Sayer // 声明一个Sayer类型的变量x
+
+    a := cat{}  // 实例化一个cat
+    b := dog{}  // 实例化一个dog
+
+    x = a       // 可以把cat实例直接赋值给x
+    x.say()     // 喵喵喵
+
+    x = b       // 可以把dog实例直接赋值给x
+    x.say()     // 汪汪汪
+}
 </code></pre>
 <h3 id="值接收者和指针接收者实现接口的区别"><a href="#值接收者和指针接收者实现接口的区别" class="headerlink" title="值接收者和指针接收者实现接口的区别"></a>值接收者和指针接收者实现接口的区别</h3><p><strong>使用值接收者实现接口后</strong></p>
 <p>不管是类型变量，还是指针类型变量，都可以赋给该接口变量</p>
 <p>举例：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token punctuation">(</span>d dog<span class="token punctuation">)</span> <span class="token function">move</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"狗会动"</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">func (d dog) move() {
+    fmt.Println("狗会动")
+}
 
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">var</span> x Mover
-    
-    <span class="token keyword">var</span> wangcai <span class="token operator">=</span> dog<span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment" spellcheck="true">// 旺财是dog类型</span>
-    x <span class="token operator">=</span> wangcai         <span class="token comment" spellcheck="true">// x可以接收dog类型</span>
+func main() {
+    var x Mover
 
-    <span class="token keyword">var</span> fugui <span class="token operator">=</span> <span class="token operator">&amp;</span>dog<span class="token punctuation">{</span><span class="token punctuation">}</span>  <span class="token comment" spellcheck="true">// 富贵是*dog类型</span>
-    x <span class="token operator">=</span> fugui           <span class="token comment" spellcheck="true">// x可以接收*dog类型</span>
-<span class="token punctuation">}</span>
+    var wangcai = dog{} // 旺财是dog类型
+    x = wangcai         // x可以接收dog类型
+
+    var fugui = &dog{}  // 富贵是*dog类型
+    x = fugui           // x可以接收*dog类型
+}
 </code></pre>
 <p><strong>使用指针接收者实现接口后：</strong></p>
 <p>只有指针类型变量可以赋给该接口变量</p>
 <p>举例：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">func</span> <span class="token punctuation">(</span>d <span class="token operator">*</span>dog<span class="token punctuation">)</span> <span class="token function">move</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"狗会动"</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">var</span> x Mover
+<pre class=" language-lang-go"><code class="language-lang-go">func (d *dog) move() {
+    fmt.Println("狗会动")
+}
+func main() {
+    var x Mover
 
-    <span class="token keyword">var</span> wangcai <span class="token operator">=</span> dog<span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment" spellcheck="true">// 旺财是dog类型</span>
-    x <span class="token operator">=</span> wangcai         <span class="token comment" spellcheck="true">// x不可以接收dog类型</span>
+    var wangcai = dog{} // 旺财是dog类型
+    x = wangcai         // x不可以接收dog类型
 
-    <span class="token keyword">var</span> fugui <span class="token operator">=</span> <span class="token operator">&amp;</span>dog<span class="token punctuation">{</span><span class="token punctuation">}</span>  <span class="token comment" spellcheck="true">// 富贵是*dog类型</span>
-    x <span class="token operator">=</span> fugui           <span class="token comment" spellcheck="true">// x可以接收*dog类型</span>
-<span class="token punctuation">}</span>
+    var fugui = &dog{}  // 富贵是*dog类型
+    x = fugui           // x可以接收*dog类型
+}
 </code></pre>
 <h3 id="类型与接口的关系"><a href="#类型与接口的关系" class="headerlink" title="类型与接口的关系"></a>类型与接口的关系</h3><p>一个类型可以实现多个接口，且接口直接相互独立。</p>
 <p>多个类型也可以实现一个接口。</p>
 <h3 id="接口嵌套"><a href="#接口嵌套" class="headerlink" title="接口嵌套"></a>接口嵌套</h3><p>接口之间可以嵌套产生新的接口，这里类似继承的关系</p>
 <p>举例：</p>
-<pre class=" language-go"><code class="language-go"><span class="token comment" spellcheck="true">// Sayer 接口</span>
-<span class="token keyword">type</span> Sayer <span class="token keyword">interface</span> <span class="token punctuation">{</span>
-    <span class="token function">say</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">// Sayer 接口
+type Sayer interface {
+    say()
+}
 
-<span class="token comment" spellcheck="true">// Mover 接口</span>
-<span class="token keyword">type</span> Mover <span class="token keyword">interface</span> <span class="token punctuation">{</span>
-    <span class="token function">move</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+// Mover 接口
+type Mover interface {
+    move()
+}
 
-<span class="token comment" spellcheck="true">// 接口嵌套</span>
-<span class="token keyword">type</span> animal <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+// 接口嵌套
+type animal interface {
     Sayer
     Mover
-<span class="token punctuation">}</span>
+}
 </code></pre>
 <h3 id="空接口"><a href="#空接口" class="headerlink" title="空接口"></a>空接口</h3><h5 id="空接口的定义"><a href="#空接口的定义" class="headerlink" title="空接口的定义"></a>空接口的定义</h5><p>空接口是指没有定义任何方法的接口。因此任何类型都实现了空接口。</p>
 <p>空接口类型的变量可以存储任意类型的变量。</p>
-<pre class=" language-go"><code class="language-go"><span class="token comment" spellcheck="true">// 定义一个空接口x</span>
-<span class="token keyword">var</span> x <span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">// 定义一个空接口x
+var x interface{}
 </code></pre>
 <h5 id="空接口的应用"><a href="#空接口的应用" class="headerlink" title="空接口的应用"></a>空接口的应用</h5><p><strong>空接口作为函数的参数</strong></p>
 <p>使用空接口实现可以接收任意类型的函数参数。</p>
-<pre class=" language-go"><code class="language-go"><span class="token comment" spellcheck="true">// 空接口作为函数参数</span>
-<span class="token keyword">func</span> <span class="token function">show</span><span class="token punctuation">(</span>a <span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"type:%T value:%v\n"</span><span class="token punctuation">,</span> a<span class="token punctuation">,</span> a<span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">// 空接口作为函数参数
+func show(a interface{}) {
+    fmt.Printf("type:%T value:%v\n", a, a)
+}
 </code></pre>
 <p><strong>空接口作为map的值</strong></p>
 <p>使用空接口实现可以保存任意值的字典。</p>
-<pre class=" language-go"><code class="language-go"><span class="token comment" spellcheck="true">// 空接口作为map值</span>
-<span class="token keyword">var</span> studentInfo <span class="token operator">=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">// 空接口作为map值
+var studentInfo = make(map[string]interface{})
 </code></pre>
 <h3 id="类型断言"><a href="#类型断言" class="headerlink" title="类型断言"></a>类型断言</h3><h5 id="接口值"><a href="#接口值" class="headerlink" title="接口值"></a>接口值</h5><p>接口值是由<code>具体类型</code>和<code>具体类型的值</code>两部分组成，这两部分称为接口的<code>动态类型</code>和<code>动态值</code></p>
 <p>举例：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">var</span> w io<span class="token punctuation">.</span>Writer
-w <span class="token operator">=</span> os<span class="token punctuation">.</span>Stdout
-w <span class="token operator">=</span> <span class="token function">new</span><span class="token punctuation">(</span>bytes<span class="token punctuation">.</span>Buffer<span class="token punctuation">)</span>
-w <span class="token operator">=</span> <span class="token boolean">nil</span>
+<pre class=" language-lang-go"><code class="language-lang-go">var w io.Writer
+w = os.Stdout
+w = new(bytes.Buffer)
+w = nil
 </code></pre>
 <p><img src="https://www.liwenzhou.com/images/Go/interface/interface.png" alt="接口值图解"></p>
 <h5 id="类型断言-1"><a href="#类型断言-1" class="headerlink" title="类型断言"></a>类型断言</h5><p>判断空接口中的值可以使用类型断言：</p>
-<pre class=" language-go"><code class="language-go">x<span class="token punctuation">.</span><span class="token punctuation">(</span>T<span class="token punctuation">)</span>
+<pre class=" language-lang-go"><code class="language-lang-go">x.(T)
 </code></pre>
 <p>其中：</p>
 <ul>
@@ -677,16 +677,16 @@ w <span class="token operator">=</span> <span class="token boolean">nil</span>
 </ul>
 <p>可以使用<code>switch</code>语句实现多次断言</p>
 <p>举例：</p>
-<pre class=" language-go"><code class="language-go"><span class="token keyword">switch</span> v <span class="token operator">:=</span> x<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token keyword">type</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">case</span> <span class="token builtin">string</span><span class="token punctuation">:</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"x is a string，value is %v\n"</span><span class="token punctuation">,</span> v<span class="token punctuation">)</span>
-    <span class="token keyword">case</span> <span class="token builtin">int</span><span class="token punctuation">:</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"x is a int is %v\n"</span><span class="token punctuation">,</span> v<span class="token punctuation">)</span>
-    <span class="token keyword">case</span> <span class="token builtin">bool</span><span class="token punctuation">:</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"x is a bool is %v\n"</span><span class="token punctuation">,</span> v<span class="token punctuation">)</span>
-    <span class="token keyword">default</span><span class="token punctuation">:</span>
-    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"unsupport type！"</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+<pre class=" language-lang-go"><code class="language-lang-go">switch v := x.(type) {
+    case string:
+    fmt.Printf("x is a string，value is %v\n", v)
+    case int:
+    fmt.Printf("x is a int is %v\n", v)
+    case bool:
+    fmt.Printf("x is a bool is %v\n", v)
+    default:
+    fmt.Println("unsupport type！")
+}
 </code></pre>
 
                 
@@ -1134,7 +1134,7 @@ w <span class="token operator">=</span> <span class="token boolean">nil</span>
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="函数">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="函数">
                         
                         <span class="card-title">函数</span>
                     </div>
@@ -1191,7 +1191,7 @@ w <span class="token operator">=</span> <span class="token boolean">nil</span>
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="包">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="包">
                         
                         <span class="card-title">包</span>
                     </div>
@@ -1393,6 +1393,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
@@ -1411,7 +1418,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">41.9k</span>
+                        class="white-color">36.5k</span>
             
             
             
@@ -1647,9 +1654,9 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-
+    <script src="/js/FunnyTitle.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 
 </html>

@@ -502,21 +502,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-07
+                    2021-12-08
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.4k
+                    2.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    7 分
+                    11 分
                 </div>
                 
 
@@ -634,7 +634,7 @@ for i in range(1, e + 1):
             d = gmpy2.invert(e, phi) % phi
             print(libnum.n2s(pow(c, d, n)))
 </code></pre>
-<h2 id="已知-n-e1-e2-c1-c2-求m"><a href="#已知-n-e1-e2-c1-c2-求m" class="headerlink" title="已知(n,e1,e2,c1,c2) 求m"></a>已知(n,e1,e2,c1,c2) 求m</h2><h3 id="参数-4"><a href="#参数-4" class="headerlink" title="参数"></a>参数</h3><ul>
+<h2 id="共模攻击：已知-n-e1-e2-c1-c2-求m"><a href="#共模攻击：已知-n-e1-e2-c1-c2-求m" class="headerlink" title="共模攻击：已知(n,e1,e2,c1,c2) 求m"></a>共模攻击：已知(n,e1,e2,c1,c2) 求m</h2><h3 id="参数-4"><a href="#参数-4" class="headerlink" title="参数"></a>参数</h3><ul>
 <li>n：大数字n</li>
 <li>e1, e2：加密指数</li>
 <li>c1, c2：密文c</li>
@@ -757,11 +757,118 @@ for i in xrange(200000):
         print libnum,n2s(m)
         break
 </code></pre>
-<h2 id="低解密指数攻击-e太大-太小时"><a href="#低解密指数攻击-e太大-太小时" class="headerlink" title="低解密指数攻击(e太大/太小时)"></a>低解密指数攻击(e太大/太小时)</h2><h3 id="原理-8"><a href="#原理-8" class="headerlink" title="原理"></a>原理</h3><p>低解密指数攻击，也称RSA维纳攻击(RSA wiener attack)</p>
+<h2 id="低加密指数广播攻击-已知-n-i-c-i-e-，-求-m"><a href="#低加密指数广播攻击-已知-n-i-c-i-e-，-求-m" class="headerlink" title="低加密指数广播攻击(已知$n_i, c_i, e$， 求$m$)"></a>低加密指数广播攻击(已知$n_i, c_i, e$， 求$m$)</h2><h3 id="原理-8"><a href="#原理-8" class="headerlink" title="原理"></a>原理</h3><p>如果选取的加密指数较低，并且使用了相同的加密指数给一个接受者的群发送相同的信息，那么可以进行广播攻击得到明文。</p>
+<p>对于</p>
 <script type="math/tex; mode=display">
-e * d \equiv 1 \mod \phi(n)</script><p>在解密指数$d$比较小的时候，加密指数$e$会显得很大，在$e$过大或者过小的时候，可以用算法从$e$快速推断$d$的值，进而求$m$</p>
-<p>具体算法我再读读代码)</p>
-<h3 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h3><pre class=" language-lang-python"><code class="language-lang-python">import gmpy2
+c_i = m^e \mod n_i</script><p>使用中国剩余定理，有:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+c_x 
+&= m^e\mod \prod n_i \\
+&= m^e\mod n_1*n_2*...
+\end{align}</script><h3 id="Python代码1：中国剩余定理"><a href="#Python代码1：中国剩余定理" class="headerlink" title="Python代码1：中国剩余定理"></a>Python代码1：中国剩余定理</h3><pre class=" language-lang-python"><code class="language-lang-python">import gmpy2
+import libnum
+
+
+def CRT(data):
+    sum = 0
+    m = 1
+    for n in data:
+        m = m * n[0]
+    for n, c in data:
+        m1 = m / n
+        mr = gmpy2.invert(m1, n)
+        sum = sum + mr * m1 * c
+    return sum % m
+
+
+c1 = ...
+c2 = ...
+c3 = ...
+n1 = ...
+n2 = ...
+n3 = ...
+e = 3
+
+n = [n1, n2, n3]
+c = [c1, c2, c3]
+data = zip(n, c)
+m_e = CRT(data)
+m = gmpy2.iroot(m_e, e)[0]
+print m    # 输出明文数字 
+print libnum.n2s(m)   # 输出明文数字转为的字符串
+</code></pre>
+<h3 id="Python代码2：自动爆破e"><a href="#Python代码2：自动爆破e" class="headerlink" title="Python代码2：自动爆破e"></a>Python代码2：自动爆破e</h3><pre class=" language-lang-python"><code class="language-lang-python">import random
+from gmpy2 import invert, iroot
+import libnum
+
+
+def broadcast(n1, n2 ,n3, c1, c2, c3):
+    n = [n1, n2, n3]
+    C = [c1, c2, c3]
+    N = 1
+    for i in n:
+        N *= i
+
+    Ni = []
+    for i in n:
+        Ni.append(N / i)
+
+    T = []
+    for i in xrange(3):
+        T.append(long(invert(Ni[i], n[i])))
+
+    X = 0
+    for i in xrange(3):
+        X += C[i] * Ni[i] * T[i]
+
+    m3 = X % N
+    m = iroot(m3, 3)
+    return m[0]
+
+
+if __name__=="__main__":
+    # e = ... （不需要）
+    c1 = ...
+    c2 = ...
+    c3 = ...
+    n1 = ...
+    n2 = ...
+    n3 = ...
+
+    m = broadcast(n1, n2 ,n3, c1, c2, c3)
+    print m    # 输出明文m
+    print libnum.n2s(m)   # 输出明文数字转化为字符串后的结果
+</code></pre>
+<h2 id="低解密指数攻击-e太大-太小时"><a href="#低解密指数攻击-e太大-太小时" class="headerlink" title="低解密指数攻击(e太大/太小时)"></a>低解密指数攻击(e太大/太小时)</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>低解密指数攻击，也称RSA维纳攻击(RSA Wiener Attack)，是一种基于连分数的特殊攻击类型</p>
+<script type="math/tex; mode=display">
+e * d \equiv 1 \mod \phi(n)</script><p>满足条件：</p>
+<ul>
+<li>$d &lt; \frac13 n^{\frac14}$</li>
+<li>$q &lt; p &lt; 2q$</li>
+</ul>
+<p>在上述条件下，可以通过Wiener Attack在多项式的时间内分解n</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>在RSA中</p>
+<script type="math/tex; mode=display">
+N = pq,\quad \phi(n) = (p - 1)(q - 1) \approx N \\
+\because ed \equiv 1\mod \phi(n)    \\
+\therefore ed - 1 = k * \phi(n),\quad 两边同除 d\phi(n) \\
+\therefore \frac e{\phi(n)} - \frac kd = \frac 1{d\phi(n)}    \\
+\because \phi(n) \approx N,\quad \frac 1{d\phi(n)}\approx 0 \\
+\therefore \frac eN 略大于 \frac kd</script><p>回顾一下已知条件，我们是知道$\frac eN$的，而Wiener告诉我们，计算$\frac eN$的连分数展开可以精准的覆盖$\frac kd$</p>
+<h3 id="原理-9"><a href="#原理-9" class="headerlink" title="原理"></a>原理</h3><ul>
+<li><p>将$\frac eN$连分数展开(举例：$0, 1, \frac 12, \frac 23, …$ )</p>
+</li>
+<li><p>对每一个渐进分数，假设之成立</p>
+<ul>
+<li>则$k = 分子, d = 分母$，代入$ed - 1 = k * \phi(n)$，求得$\phi(n)$</li>
+<li>通过$\begin{cases}\phi(n) = (p - 1)(q - 1) = N - (p + q) + 1 \ N = pq \end{cases}$ ， 求得$p+q$与$pq$的值</li>
+<li>利用韦达定理，构造方程$x^2 - (p + q) * x + pq = 0$，求根得到p, q</li>
+<li>验证p * q是否满足</li>
+</ul>
+</li>
+</ul>
+<h3 id="Python代码1"><a href="#Python代码1" class="headerlink" title="Python代码1"></a>Python代码1</h3><pre class=" language-lang-python"><code class="language-lang-python">import gmpy2
 import time
 
 # 展开为连分数
@@ -812,6 +919,93 @@ if __name__ == '__main__':
     m = pow(c, d, n)
 
     print '  [-]m is:' + '{:x}'.format(m).decode('hex')
+</code></pre>
+<h3 id="Python代码2"><a href="#Python代码2" class="headerlink" title="Python代码2"></a>Python代码2</h3><pre class=" language-lang-python"><code class="language-lang-python">import gmpy2
+from Crypto.Util.number import *
+
+
+def transform(x, y):       # 使用辗转相处将分数 x/y 转为连分数的形式
+    res=[]
+    while y:
+        res.append(x // y)
+        x, y = y, x % y
+    return res
+
+
+def continued_fraction(sub_res):
+    numerator,denominator = 1, 0
+    for i in sub_res[::-1]:      # 从sublist的后面往前循环
+        denominator, numerator = numerator, i * numerator + denominator
+    return denominator,numerator   # 得到渐进分数的分母和分子，并返回
+
+
+#求解每个渐进分数
+def sub_fraction(x, y):
+    res = transform(x, y)
+    res = list(map(continued_fraction, (res[0:i] for i in range(1, len(res)))))  #将连分数的结果逐一截取以求渐进分数
+    return res
+
+# 以上是获得e/n的连分数
+
+def get_pq(a, b, c):      # 由p+q和pq的值通过维达定理来求解p和q
+    par = gmpy2.isqrt(b * b - 4 * a * c)   # 由上述可得，开根号一定是整数，因为有解
+    x1, x2 = (-b + par) // (2 * a), (-b - par) // (2 * a)
+    return x1, x2
+
+def wienerAttack(e, n):
+    for (d, k) in sub_fraction(e, n):  # 用一个for循环来注意试探e/n的连续函数的渐进分数，直到找到一个满足条件的渐进分数
+        # if k==0:                     # 可能会出现连分数的第一个为0的情况，排除
+            # continue
+        # if (e*d-1)%k!=0:             # ed=1 (\pmod φ(n)) 因此如果找到了d的话，(ed-1)会整除φ(n),也就是存在k使得(e*d-1)//k=φ(n)
+            # continue
+        if 250 <= d.bit_length() <= 256:
+            print(d)
+            global c
+            print(long_to_bytes(pow(c, d, n)))
+        else:
+            continue
+        phi = (e * d - 1) // k               # 这个结果就是 φ(n)
+        px, qy = get_pq(1, n - phi + 1, n)
+        if px * qy == n:
+            p, q = abs(int(px)), abs(int(qy))     # 可能会得到两个负数，负负得正未尝不会出现
+            d = gmpy2.invert(e, (p - 1) * (q - 1))     # 求ed=1 (\pmod  φ(n))的结果，也就是e关于 φ(n)的乘法逆元d
+            return d
+    print("该方法不适用")
+
+
+e = ...
+n = ...
+c = ...
+
+d = wienerAttack(e, n)
+
+print("d=", d)
+</code></pre>
+<h2 id="两个N的模不互素"><a href="#两个N的模不互素" class="headerlink" title="两个N的模不互素"></a>两个N的模不互素</h2><h3 id="原理-10"><a href="#原理-10" class="headerlink" title="原理"></a>原理</h3><script type="math/tex; mode=display">
+\begin{cases}
+n_1 = p_1 * q \\
+n_2 = p_2 * q 
+\end{cases}
+\quad, q为n_1, n_2的公因数</script><p>找出$n_1, n_2$的公因数作为$q$，再对$n_1,n_2$分别除$q$，求得$p_1, p_2$，之后直接求解即可</p>
+<h3 id="Python代码-6"><a href="#Python代码-6" class="headerlink" title="Python代码"></a>Python代码</h3><pre class=" language-lang-python"><code class="language-lang-python">import gmpy2
+import libnum
+
+e = ...
+c1 = ...
+c2 = ...
+n1 = ...
+n2 = ...
+
+q = gmpy2.gcd(n1, n2)
+assert (q != 1)
+p1 = n1 / q
+p2 = n2 / q
+
+d1 = gmpy2.invert(e, (q - 1) * (p1 - 1))
+d2 = gmpy2.invert(e, (q - 1) * (p2 - 1))
+m1 = pow(c1, d1, n1)
+m2 = pow(c2, d2, n2)
+print libnum.n2s(m1) + libnum.n2s(m2)
 </code></pre>
 
                 
@@ -1410,30 +1604,6 @@ if __name__ == '__main__':
 <script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
 
 
-<div class="info-break-policy">
-    
-        <i class="fa fa-pencil"></i> 作者: Hanmur
-     
-</div>
-
-<!-- 代码块功能依赖 -->
-<script type="text/javascript" src="/libs/codeBlock/codeBlockFunction.js"></script>
-
-<!-- 代码语言 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
-
-
-<!-- 代码块复制 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
-
-
-<!-- 代码块收缩 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
-
-
 <!-- 代码块折行 -->
 
 <style type="text/css">
@@ -1565,7 +1735,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">36.5k</span>
+                        class="white-color">37.4k</span>
             
             
             

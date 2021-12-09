@@ -4,8 +4,8 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="makefile, Hanmur">
-    <meta name="description" content="为Golang项目编写makefile">
+    <meta name="keywords" content="N的分解, Hanmur">
+    <meta name="description" content="一些常见的分解N的方式">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>makefile | Hanmur</title>
+    <title>N的分解 | Hanmur</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -333,12 +333,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">makefile</h1>
+                    <h1 class="description center-align post-title">N的分解</h1>
                 </div>
             </div>
         </div>
@@ -454,12 +454,16 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Go%E8%AF%AD%E8%A8%80/">
-                                <span class="chip bg-color">Go语言</span>
+                            <a href="/tags/CTF/">
+                                <span class="chip bg-color">CTF</span>
                             </a>
                         
-                            <a href="/tags/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">
-                                <span class="chip bg-color">基础语法</span>
+                            <a href="/tags/Crypto/">
+                                <span class="chip bg-color">Crypto</span>
+                            </a>
+                        
+                            <a href="/tags/RSA/">
+                                <span class="chip bg-color">RSA</span>
                             </a>
                         
                     </div>
@@ -470,12 +474,16 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Go%E8%AF%AD%E8%A8%80/" class="post-category">
-                                Go语言
+                            <a href="/categories/CTF/" class="post-category">
+                                CTF
                             </a>
                         
-                            <a href="/categories/Go%E8%AF%AD%E8%A8%80/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="post-category">
-                                基础语法
+                            <a href="/categories/CTF/Crypto/" class="post-category">
+                                Crypto
+                            </a>
+                        
+                            <a href="/categories/CTF/Crypto/RSA/" class="post-category">
+                                RSA
                             </a>
                         
                     </div>
@@ -487,21 +495,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-12-02
+                    2021-12-08
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-07
+                    2021-12-09
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    522
+                    435
                 </div>
                 
 
@@ -528,59 +536,201 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="为Go项目编写Makefile"><a href="#为Go项目编写Makefile" class="headerlink" title="为Go项目编写Makefile"></a>为Go项目编写Makefile</h1><p>借助<code>Makefile</code>我们在编译过程中不再需要每次手动输入编译的命令和编译的参数，可以极大简化项目编译过程。</p>
-<h2 id="make介绍"><a href="#make介绍" class="headerlink" title="make介绍"></a>make介绍</h2><p><code>make</code>是一个构建自动化工具，会在当前目录下寻找<code>Makefile</code>或<code>makefile</code>文件。如果存在相应的文件，它就会依据其中定义好的规则完成构建任务。</p>
-<h2 id="Makefile介绍"><a href="#Makefile介绍" class="headerlink" title="Makefile介绍"></a>Makefile介绍</h2><p>我们可以把<code>Makefile</code>简单理解为它定义了一个项目文件的编译规则。借助<code>Makefile</code>我们在编译过程中不再需要每次手动输入编译的命令和编译的参数，可以极大简化项目编译过程。同时使用<code>Makefile</code>也可以在项目中确定具体的编译规则和流程，很多开源项目中都会定义<code>Makefile</code>文件。</p>
-<p>本文不会详细介绍<code>Makefile</code>的各种规则，只会给出Go项目中常用的<code>Makefile</code>示例。</p>
-<p>关于<code>Makefile</code>的详细内容推荐阅读<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/7097.html">Makefile教程</a>。</p>
-<h3 id="规则概述"><a href="#规则概述" class="headerlink" title="规则概述"></a>规则概述</h3><p><code>Makefile</code>由多条规则组成，每条规则主要由两个部分组成，分别是依赖的关系和执行的命令。</p>
-<p>其结构如下所示：</p>
-<pre class=" language-lang-makefile"><code class="language-lang-makefile">[target] ... : [prerequisites] ...
-<tab>[command]
-    ...
-    ...
+                <h2 id="在线软件的使用"><a href="#在线软件的使用" class="headerlink" title="在线软件的使用"></a>在线软件的使用</h2><h3 id="factordb"><a href="#factordb" class="headerlink" title="factordb"></a>factordb</h3><p><a target="_blank" rel="noopener" href="http://factordb.com">http://factordb.com</a> 记录了部分大质数的分解，很多质数可以直接在这查找出质因数分解</p>
+<h3 id="ECM"><a href="#ECM" class="headerlink" title="ECM"></a>ECM</h3><p><a target="_blank" rel="noopener" href="https://www.alpertron.com.ar/ECM.HTM">https://www.alpertron.com.ar/ECM.HTM</a> 是ECM在线分解大整数的网站</p>
+<h2 id="短除法"><a href="#短除法" class="headerlink" title="短除法"></a>短除法</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>从2开始暴力破解</p>
+<h3 id="Python代码1"><a href="#Python代码1" class="headerlink" title="Python代码1"></a>Python代码1</h3><pre class=" language-lang-python"><code class="language-lang-python">def factorization(n):
+    i = 2
+    ret = []
+    while i * i <= n:
+        while n % i == 0:
+            ret.append(i)
+            n //= i
+        i += 1
+    if n > 1:
+        ret.append(n)
+    return ret
+
+
+if __name__ == '__main__':
+    print(factorization(int(input())))
 </code></pre>
-<p>其中：</p>
-<ul>
-<li>targets：规则的目标</li>
-<li>prerequisites：可选的要生成 targets 需要的文件或者是目标。</li>
-<li>command：make 需要执行的命令（任意的 shell 命令）。可以有多条命令，每一条命令占一行。</li>
-</ul>
-<p>举个例子：</p>
-<pre class=" language-lang-makefile"><code class="language-lang-makefile">build:
-    CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o xx
+<h3 id="Python代码2"><a href="#Python代码2" class="headerlink" title="Python代码2"></a>Python代码2</h3><p>(先打表出2到$n^{\frac 12}$之间的质数）</p>
+<pre class=" language-lang-python"><code class="language-lang-python">pri = []
+MX = int(1e6)
+isprime = [True] * MX
+
+
+def init():
+    global a, MX
+    for i in range(2, MX):
+        if isprime[i]:
+            pri.append(i)
+            for j in range(i + i, MX, i):
+                isprime[j] = False
+
+
+def factorization(n):
+    global pri
+    ret = []
+    for i in pri:
+        if i * i > n:
+            break
+        while n % i == 0:
+            ret.append(i)
+            n //= i
+    ret.append(n)
+    return ret
+
+
+if __name__ == '__main__':
+    init()
+    print(factorization(int(input())))
 </code></pre>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><pre class=" language-lang-makefile"><code class="language-lang-makefile">.PHONY: all build run gotool clean help
+<h2 id="Miller-Rabin素性测试和离散对数Pollard-rho分解"><a href="#Miller-Rabin素性测试和离散对数Pollard-rho分解" class="headerlink" title="Miller-Rabin素性测试和离散对数Pollard_rho分解"></a>Miller-Rabin素性测试和离散对数Pollard_rho分解</h2><h3 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h3><p>暂无</p>
+<h3 id="Python代码"><a href="#Python代码" class="headerlink" title="Python代码"></a>Python代码</h3><pre class=" language-lang-python"><code class="language-lang-python">"""
+用Miller-Rabin素性测试和离散对数Pollard_rho算法进行大数因数分解：
+复杂度: 0(n^1/4)
+适用范围: n 2-10^33
+"""
+import random
+# from math import log, log10
+from collections import Counter
 
-BINARY="bluebell"
 
-all: gotool build
+def gcd(x, y):
+    return x if y == 0 else gcd(y, x % y)
 
-build:
-    CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ${BINARY}
 
-run:
-    @go run ./
+def fpow(a, x, n):
+    ans = 1
+    while x > 0:
+        if x & 1:
+            ans = ans * a % n
+        a = a * a % n
+        x >>= 1
+    return ans
 
-gotool:
-    go fmt ./
-    go vet ./
 
-clean:
-    @if [ -f ${BINARY} ] ; then rm ${BINARY} ; fi
+# there change the times of Rabin-Miller
+TIMES = 10
 
-help:
-    @echo "make - 格式化 Go 代码, 并编译生成二进制文件"
-    @echo "make build - 编译 Go 代码, 生成二进制文件"
-    @echo "make run - 直接运行 Go 代码"
-    @echo "make clean - 移除二进制文件和 vim swap files"
-    @echo "make gotool - 运行 Go 工具 'fmt' and 'vet'"
+
+def is_prime(n):
+    def check(a, n, x, t):
+        ret = fpow(a, x, n)
+        last = ret
+        for i in range(0, t):
+            ret = ret * ret % n
+            if ret == 1 and last != 1 and last != n - 1:
+                return True
+            last = ret
+        if ret != 1:
+            return True
+        return False
+
+    if not isinstance(n, int):
+        raise TypeError(str(n) + ' is not an integer!')
+    if n <= 0:
+        raise ValueError('%d <= 0' % n)
+    if n in {2, 3, 5, 7, 11}:
+        return True
+    for i in {2, 3, 5, 7, 11}:
+        if n % i == 0:
+            return False
+    x = n - 1
+    t = 0
+    while not x & 1:
+        x >>= 1
+        t += 1
+    for i in range(0, TIMES):
+        a = random.randint(1, n - 2)
+        if check(a, n, x, t):
+            return False
+    return True
+
+
+def pollard_rho_2(n, c):
+    x = random.randint(0, n)
+    i, k, y = 1, 2, x
+    while True:
+        i += 1
+        x = (x * x) % n + c
+        d = gcd(y - x, n)
+        if d != 1 and d != n:
+            return d
+        if y == x:
+            return n
+        if i == k:
+            y = x
+            k <<= 1
+
+
+def pollard_rho_1(n):
+    if not isinstance(n, int):
+        raise TypeError(str(n) + ' is not an integer!')
+    if n == 1:
+        return None
+    if is_prime(n):
+        return [n]
+    ans = []
+    p = n
+    while p >= n:
+        p = pollard_rho_2(p, random.randint(1, n - 1))
+    ans.extend(pollard_rho_1(p))
+    ans.extend(pollard_rho_1(n // p))
+    return ans
+
+
+def factorization(n):
+    return Counter(pollard_rho_1(n))
+
+
+if __name__ == '__main__':
+    n = int(input())
+    print('len:', len(str(n)))
+    print(factorization(n))
 </code></pre>
-<p>其中：</p>
-<ul>
-<li><code>BINARY="bluebell"</code>是定义变量。</li>
-<li><code>.PHONY</code>用来定义伪目标。不创建目标文件，而是去执行这个目标下面的命令。</li>
-</ul>
+<h2 id="Fermat分解"><a href="#Fermat分解" class="headerlink" title="Fermat分解"></a>Fermat分解</h2><h3 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h3><p>暂无</p>
+<h3 id="Python代码-1"><a href="#Python代码-1" class="headerlink" title="Python代码"></a>Python代码</h3><pre class=" language-lang-python"><code class="language-lang-python">from isqrt import isqrt
+import libnum
+
+
+def fermat(n):
+    a = isqrt(n)
+    b2 = a * a - n
+    b = isqrt(n)
+    count = 0
+    while b * b != b2:
+        a = a + 1
+        b2 = a * a - n
+        b = isqrt(b2)
+        count += 1
+    p = a + b
+    q = a - b
+    assert n == p * q
+    return p, q
+
+
+if __name__ == '__main__':
+    N = 966808932627497190635859236054960349099463975227350564265384373280336699853387254070662881265937565163000758606154308757944030571837175048514574473061401566330836334647176655282619268592560172726526643074499534129878217409046045533656897050117438496357231575999185527675071002803951800635220029015932007465117818739948903750200830856115668691007706836952244842719419452946259275251773298338162389930518838272704908887016474007051397194588396039111216708866214614779627566959335170676055025850932631053641576566165694121420546081043285806783239296799795655191121966377590175780618944910532816988143056757054052679968538901460893571204904394975714081055455240523895653305315517745729334114549756695334171142876080477105070409544777981602152762154610738540163796164295222810243309051503090866674634440359226192530724635477051576515179864461174911975667162597286769079380660782647952944808596310476973939156187472076952935728249061137481887589103973591082872988641958270285169650803792395556363304056290077801453980822097583574309682935697260204862756923865556397686696854239564541407185709940107806536773160263764483443859425726953142964148216209968437587044617613518058779287167853349364533716458676066734216877566181514607693882375533
+    e = 65537
+    c = 168502910088858295634315070244377409556567637139736308082186369003227771936407321783557795624279162162305200436446903976385948677897665466290852769877562167487142385308027341639816401055081820497002018908896202860342391029082581621987305533097386652183849657065952062433988387640990383623264405525144003500286531262674315900537001845043225363148359766771033899680111076181672797077410584747509581932045540801777738548872747597899965366950827505529432483779821158152928899947837196391555666165486441878183288008753561108995715961920472927844877569855940505148843530998878113722830427807926679324241141182238903567682042410145345551889442158895157875798990903715105782682083886461661307063583447696168828687126956147955886493383805513557604179029050981678755054945607866353195793654108403939242723861651919152369923904002966873994811826391080318146260416978499377182540684409790357257490816203138499369634490897553227763563553981246891677613446390134477832143175248992161641698011195968792105201847976082322786623390242470226740685822218140263182024226228692159380557661591633072091945077334191987860262448385123599459647228562137369178069072804498049463136233856337817385977990145571042231795332995523988174895432819872832170029690848
+    p, q = fermat(N)
+    print("p:", p)
+    print("q:", q)
+
+    # 根据p,q求phi_n也即N的欧拉函数值
+    phi_n = (p-1)*(q-1)
+    # 求d
+    d = libnum.invmod(e, phi_n)
+
+    # 用d解密
+    flag = libnum.n2s(pow(c, d, N))
+    print(flag)
+</code></pre>
+<h2 id="yafu"><a href="#yafu" class="headerlink" title="yafu"></a>yafu</h2><h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p><a target="_blank" rel="noopener" href="https://bbs.pediy.com/thread-266648.htm">[原创]Crypto-RSA大整数分解-LineCTF2021-babycrypto3</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.tr0y.wang/2017/11/06/CTFRSA/#%E5%A4%A7%E6%95%B0%E5%88%86%E8%A7%A3%E7%AE%97%E6%B3%95">RSA大礼包 - Tr0y’s Blog</a></p>
 
                 
             </div>
@@ -607,7 +757,7 @@ help:
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://hanmur.github.io/2021/12027120.html">https://hanmur.github.io/2021/12027120.html</a>
+                    <a href="https://hanmur.github.io/2021/120853668.html">https://hanmur.github.io/2021/120853668.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -645,12 +795,16 @@ help:
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Go%E8%AF%AD%E8%A8%80/">
-                                    <span class="chip bg-color">Go语言</span>
+                                <a href="/tags/CTF/">
+                                    <span class="chip bg-color">CTF</span>
                                 </a>
                             
-                                <a href="/tags/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">
-                                    <span class="chip bg-color">基础语法</span>
+                                <a href="/tags/Crypto/">
+                                    <span class="chip bg-color">Crypto</span>
+                                </a>
+                            
+                                <a href="/tags/RSA/">
+                                    <span class="chip bg-color">RSA</span>
                                 </a>
                             
                         </div>
@@ -1019,54 +1173,64 @@ help:
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/12024074.html">
+                <a href="/2021/120853668.html">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/30.jpg" class="responsive-img" alt="运算符">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="N的分解">
                         
-                        <span class="card-title">运算符</span>
+                        <span class="card-title">N的分解</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Golang中的运算符
+                            一些常见的分解N的方式
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-12-02
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-08
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Go%E8%AF%AD%E8%A8%80/" class="post-category">
-                                    Go语言
+                            <a href="/categories/CTF/" class="post-category">
+                                    CTF
                                 </a>
                             
-                            <a href="/categories/Go%E8%AF%AD%E8%A8%80/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="post-category">
-                                    基础语法
+                            <a href="/categories/CTF/Crypto/" class="post-category">
+                                    Crypto
+                                </a>
+                            
+                            <a href="/categories/CTF/Crypto/RSA/" class="post-category">
+                                    RSA
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Go%E8%AF%AD%E8%A8%80/">
-                        <span class="chip bg-color">Go语言</span>
+                    <a href="/tags/CTF/">
+                        <span class="chip bg-color">CTF</span>
                     </a>
                     
-                    <a href="/tags/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">
-                        <span class="chip bg-color">基础语法</span>
+                    <a href="/tags/Crypto/">
+                        <span class="chip bg-color">Crypto</span>
+                    </a>
+                    
+                    <a href="/tags/RSA/">
+                        <span class="chip bg-color">RSA</span>
                     </a>
                     
                 </div>
@@ -1080,35 +1244,39 @@ help:
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/120260565.html">
+                <a href="/2021/120661227.html">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="基本数据类型">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="常见解题思路">
                         
-                        <span class="card-title">基本数据类型</span>
+                        <span class="card-title">常见解题思路</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Golang中基本的数据类型
+                            RSA加密过程中一些常见的解题思路
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-02
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-06
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Go%E8%AF%AD%E8%A8%80/" class="post-category">
-                                    Go语言
+                            <a href="/categories/CTF/" class="post-category">
+                                    CTF
                                 </a>
                             
-                            <a href="/categories/Go%E8%AF%AD%E8%A8%80/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="post-category">
-                                    数据类型
+                            <a href="/categories/CTF/Crypto/" class="post-category">
+                                    Crypto
+                                </a>
+                            
+                            <a href="/categories/CTF/Crypto/RSA/" class="post-category">
+                                    RSA
                                 </a>
                             
                             
@@ -1118,12 +1286,16 @@ help:
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Go%E8%AF%AD%E8%A8%80/">
-                        <span class="chip bg-color">Go语言</span>
+                    <a href="/tags/CTF/">
+                        <span class="chip bg-color">CTF</span>
                     </a>
                     
-                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
-                        <span class="chip bg-color">数据类型</span>
+                    <a href="/tags/Crypto/">
+                        <span class="chip bg-color">Crypto</span>
+                    </a>
+                    
+                    <a href="/tags/RSA/">
+                        <span class="chip bg-color">RSA</span>
                     </a>
                     
                 </div>

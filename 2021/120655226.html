@@ -31,8 +31,8 @@
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
 <meta name="generator" content="Hexo 5.4.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 
 
@@ -502,14 +502,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-07
+                    2021-12-09
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    76
+                    77
                 </div>
                 
 
@@ -536,13 +536,18 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="欧拉函数"><a href="#欧拉函数" class="headerlink" title="欧拉函数"></a>欧拉函数</h2><h3 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h3><script type="math/tex; mode=display">\phi(n) = \underline{从1到n中和n互素的数}的个数</script><script type="math/tex; mode=display">公式：\phi(n) = n * \prod(1 - \frac{1}{p_i}), \quad p_i是n的所有质因子</script><h3 id="规律："><a href="#规律：" class="headerlink" title="规律："></a>规律：</h3><ul>
+                <h2 id="欧拉函数"><a href="#欧拉函数" class="headerlink" title="欧拉函数"></a>欧拉函数</h2><h3 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h3><script type="math/tex; mode=display">
+\phi(n) = \underline{从1到n中和n互素的数}的个数</script><script type="math/tex; mode=display">
+公式：\phi(n) = n * \prod(1 - \frac{1}{p_i}), \quad p_i是n的所有质因子</script><h3 id="规律："><a href="#规律：" class="headerlink" title="规律："></a>规律：</h3><ul>
 <li><p>$n$为质数：</p>
-<script type="math/tex; mode=display">\phi(n) = n - 1</script></li>
+<script type="math/tex; mode=display">
+\phi(n) = n - 1</script></li>
 <li><p>$n = p^k$，$p$为素数：</p>
-<script type="math/tex; mode=display">\phi(n) = p^k *(1 - \frac1p)</script></li>
+<script type="math/tex; mode=display">
+\phi(n) = p^k (1 - \frac1p)</script></li>
 <li><p>当$m$和$n$互质：</p>
-<script type="math/tex; mode=display">\phi(n * m) = \phi(n) * \phi(m)</script></li>
+<script type="math/tex; mode=display">
+\phi(n * m) = \phi(n) \cdot \phi(m)</script></li>
 </ul>
 
                 

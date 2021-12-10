@@ -4,6 +4,39 @@
   
     
     <entry>
+      <title>古典密码-单表替换</title>
+      <link href="/2021/121155226.html"/>
+      <url>/2021/121155226.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="凯撒密码"><a href="#凯撒密码" class="headerlink" title="凯撒密码"></a>凯撒密码</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p><strong>恺撒密码（Caesar cipher）</strong>，或称<strong>恺撒加密</strong>、<strong>恺撒变换</strong>、<strong>变换加密</strong>，是一种最简单且最广为人知的加密技术。它是一种替换加密的技术，明文中的所有字母都在字母表上向后（或向前）按照一个固定数目进行偏移后被替换成密文。</p><p>其中根据偏移量不同，存在一些特定的凯撒密码：</p><ul><li>偏移量为10：Avocat(A→K)</li><li>偏移量为13：ROT13</li><li>偏移量为-5：Cassis (K 6)</li><li>偏移量为-6：Cassette (K 7)</li></ul><h3 id="破解方式"><a href="#破解方式" class="headerlink" title="破解方式"></a>破解方式</h3><p>对于已知偏移量的情况，直接通过脚本或者网站：<a href="https://ctf.bugku.com/tool/caesar">凯撒(Caesar)加密/解密 - Bugku CTF</a> 计算即可。</p><p>对于未知偏移量的情况，爆破26个偏移量即可。</p><h3 id="Caesar的拓展：基于秘钥的凯撒密码"><a href="#Caesar的拓展：基于秘钥的凯撒密码" class="headerlink" title="Caesar的拓展：基于秘钥的凯撒密码"></a>Caesar的拓展：基于秘钥的凯撒密码</h3><p>利用一个密钥，将密钥的每一位转换为数字（一般转化为字母表对应顺序的数字），分别以这一数字为<strong>对应位的偏移量</strong>加密明文的每一位字母。</p><p>如：</p><pre><code>明文: aaa bbb ccc密钥: ldm ldm ldm偏移量: 11 3 12 11 3 12 11 3 12密文: ldm men nfo</code></pre><h3 id="Caesar的拓展-移位密码"><a href="#Caesar的拓展-移位密码" class="headerlink" title="Caesar的拓展: 移位密码"></a>Caesar的拓展: 移位密码</h3><p>移位密码就是使凯撒密码拓展到<strong>数字、字母、特殊字符</strong>，常在<strong>ASCII码表</strong>上进行移位，破解方式与凯撒密码类似</p><h2 id="简单替换密码"><a href="#简单替换密码" class="headerlink" title="简单替换密码"></a>简单替换密码</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><p><strong>简单替换密码(Simple Substitution Cipher)</strong>是设置一个字母对应表，每一种字母均唯一对应一种字母</p><h3 id="破解方式-1"><a href="#破解方式-1" class="headerlink" title="破解方式"></a>破解方式</h3><p>由于简单替换密码的密钥很难确定，最常见的解法是使用词频分析进行破解。</p><p>在线词频分析网站：<a href="http://quipqiup.com/">quipqiup - cryptoquip and cryptogram solver</a></p><p>如：</p><p><img src="C:\Users\86189\AppData\Roaming\Typora\typora-user-images\image-20211209175539294.png" alt="image-20211209175539294"></p><h2 id="仿射密码"><a href="#仿射密码" class="headerlink" title="仿射密码"></a>仿射密码</h2><h3 id="介绍-2"><a href="#介绍-2" class="headerlink" title="介绍"></a>介绍</h3><p><strong>仿射密码</strong>是将字母表中的每个字母使用一个简单的数学函数对应一个数值，再将对应数值转换为字母</p><blockquote><p>当$a=1$ 时，仿射加密是凯撒加密。</p></blockquote><h3 id="加解密"><a href="#加解密" class="headerlink" title="加解密"></a>加解密</h3><h4 id="加密函数"><a href="#加密函数" class="headerlink" title="加密函数"></a>加密函数</h4><script type="math/tex; mode=display">E(x) = (ax+b)\mod m</script><p>其中</p><ul><li>$m$为编码系统中字母个数(通常为26)，</li><li>$a$需要与$m$互质，$b$任意。</li><li>x为明文按照某种编码对应的数字</li></ul><h4 id="解密函数"><a href="#解密函数" class="headerlink" title="解密函数"></a>解密函数</h4><script type="math/tex; mode=display">D(x) = a^{-1}(x - b) \mod m</script><p>其中</p><ul><li>$a^{-1}$是$a$ 在$Z_m$群的乘法逆元</li></ul><h3 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h3><h4 id="加密过程"><a href="#加密过程" class="headerlink" title="加密过程"></a>加密过程</h4><p>秘钥为(5, 8)进行加密<code>AFFINECIPHER</code></p><div class="table-container"><table><thead><tr><th style="text-align:left">明文</th><th style="text-align:left">A</th><th style="text-align:left">F</th><th style="text-align:left">F</th><th style="text-align:left">I</th><th style="text-align:left">N</th><th style="text-align:left">E</th><th style="text-align:left">C</th><th style="text-align:left">I</th><th style="text-align:left">P</th><th style="text-align:left">H</th><th style="text-align:left">E</th><th style="text-align:left">R</th></tr></thead><tbody><tr><td style="text-align:left">x</td><td style="text-align:left">0</td><td style="text-align:left">5</td><td style="text-align:left">5</td><td style="text-align:left">8</td><td style="text-align:left">13</td><td style="text-align:left">4</td><td style="text-align:left">2</td><td style="text-align:left">8</td><td style="text-align:left">15</td><td style="text-align:left">7</td><td style="text-align:left">4</td><td style="text-align:left">17</td></tr><tr><td style="text-align:left">y=5x+8</td><td style="text-align:left">8</td><td style="text-align:left">33</td><td style="text-align:left">33</td><td style="text-align:left">48</td><td style="text-align:left">73</td><td style="text-align:left">28</td><td style="text-align:left">18</td><td style="text-align:left">48</td><td style="text-align:left">83</td><td style="text-align:left">43</td><td style="text-align:left">28</td><td style="text-align:left">93</td></tr><tr><td style="text-align:left">$y\mod26$</td><td style="text-align:left">8</td><td style="text-align:left">7</td><td style="text-align:left">7</td><td style="text-align:left">22</td><td style="text-align:left">21</td><td style="text-align:left">2</td><td style="text-align:left">18</td><td style="text-align:left">22</td><td style="text-align:left">5</td><td style="text-align:left">17</td><td style="text-align:left">2</td><td style="text-align:left">15</td></tr><tr><td style="text-align:left">密文</td><td style="text-align:left">I</td><td style="text-align:left">H</td><td style="text-align:left">H</td><td style="text-align:left">W</td><td style="text-align:left">V</td><td style="text-align:left">C</td><td style="text-align:left">S</td><td style="text-align:left">W</td><td style="text-align:left">F</td><td style="text-align:left">R</td><td style="text-align:left">C</td><td style="text-align:left">P</td></tr></tbody></table></div><p>加密结果：<code>IHHWVCSWFRCP</code></p><h4 id="解密过程"><a href="#解密过程" class="headerlink" title="解密过程"></a>解密过程</h4><p>1.先求解5关于模26的乘法逆元，为21</p><p>2.解密函数就是$D(x) = 21(x - 8) \mod 26$</p><p>3.解密如下:</p><div class="table-container"><table><thead><tr><th style="text-align:left">密文</th><th style="text-align:left">I</th><th style="text-align:left">H</th><th style="text-align:left">H</th><th style="text-align:left">W</th><th style="text-align:left">V</th><th style="text-align:left">C</th><th style="text-align:left">S</th><th style="text-align:left">W</th><th style="text-align:left">F</th><th style="text-align:left">R</th><th style="text-align:left">C</th><th style="text-align:left">P</th></tr></thead><tbody><tr><td style="text-align:left">y</td><td style="text-align:left">8</td><td style="text-align:left">7</td><td style="text-align:left">7</td><td style="text-align:left">22</td><td style="text-align:left">21</td><td style="text-align:left">2</td><td style="text-align:left">18</td><td style="text-align:left">22</td><td style="text-align:left">5</td><td style="text-align:left">17</td><td style="text-align:left">2</td><td style="text-align:left">15</td></tr><tr><td style="text-align:left">x = 21(y - 8)</td><td style="text-align:left">0</td><td style="text-align:left">-21</td><td style="text-align:left">-21</td><td style="text-align:left">294</td><td style="text-align:left">273</td><td style="text-align:left">-126</td><td style="text-align:left">210</td><td style="text-align:left">294</td><td style="text-align:left">-63</td><td style="text-align:left">189</td><td style="text-align:left">-126</td><td style="text-align:left">147</td></tr><tr><td style="text-align:left">$x\mod26$</td><td style="text-align:left">0</td><td style="text-align:left">5</td><td style="text-align:left">5</td><td style="text-align:left">8</td><td style="text-align:left">13</td><td style="text-align:left">4</td><td style="text-align:left">2</td><td style="text-align:left">8</td><td style="text-align:left">15</td><td style="text-align:left">7</td><td style="text-align:left">4</td><td style="text-align:left">17</td></tr><tr><td style="text-align:left">明文</td><td style="text-align:left">A</td><td style="text-align:left">F</td><td style="text-align:left">F</td><td style="text-align:left">I</td><td style="text-align:left">N</td><td style="text-align:left">E</td><td style="text-align:left">C</td><td style="text-align:left">I</td><td style="text-align:left">P</td><td style="text-align:left">H</td><td style="text-align:left">E</td><td style="text-align:left">R</td></tr></tbody></table></div><h3 id="破解"><a href="#破解" class="headerlink" title="破解"></a>破解</h3><p>一般来说，我们利用仿射密码时，其字符集都用的是字母表</p><ul><li><p>a的可能范围为$\phi(26)=\phi(2) \times \phi(13) = 12$</p></li><li><p>b的可能范围为26</p></li><li><p>密钥空间大小为$a * b = 312$</p></li></ul><h4 id="在已知部分明文的情况下"><a href="#在已知部分明文的情况下" class="headerlink" title="在已知部分明文的情况下"></a>在已知部分明文的情况下</h4><p>通过：</p><script type="math/tex; mode=display">y_1=(ax_1+b)\mod{26} \\ y_2=(ax_2+b)\mod{26}</script><p>我们可以直接计算出$a,b$的大小，进而进行解密。</p><h4 id="在密文较长的情况下"><a href="#在密文较长的情况下" class="headerlink" title="在密文较长的情况下"></a>在密文较长的情况下</h4><p>可以考虑通过词频分析<a href="http://quipqiup.com/">quipqiup - cryptoquip and cryptogram solver</a> </p><h2 id="Atbash-Cipher-埃特巴什码"><a href="#Atbash-Cipher-埃特巴什码" class="headerlink" title="Atbash Cipher(埃特巴什码)"></a>Atbash Cipher(埃特巴什码)</h2><h3 id="介绍-3"><a href="#介绍-3" class="headerlink" title="介绍"></a>介绍</h3><p>其实就是把原字母表的逆序作为映射，最后一个字母代表第一个字母，倒数第二个字母代表第二个字母。</p><p>明文：A B C D E F G H I J K L M N O P Q R S T U V W X Y Z </p><p>密文：Z Y X W V U T S R Q P O N M L K J I H G F E D C B A</p><h3 id="破解-1"><a href="#破解-1" class="headerlink" title="破解"></a>破解</h3><p>在线网站： <a href="http://www.practicalcryptography.com/ciphers/classical-era/atbash-cipher/">Practical Cryptography</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> CTF </category>
+          
+          <category> Crypto </category>
+          
+          <category> 古典密码 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CTF </tag>
+            
+            <tag> Crypto </tag>
+            
+            <tag> 古典密码 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>N的分解</title>
       <link href="/2021/120853668.html"/>
       <url>/2021/120853668.html</url>
@@ -37,7 +70,7 @@
     
     
     <entry>
-      <title>常见解题思路</title>
+      <title>RSA常见解题思路</title>
       <link href="/2021/120661227.html"/>
       <url>/2021/120661227.html</url>
       
@@ -156,8 +189,6 @@
             
             <tag> Go语言 </tag>
             
-            <tag> 标准库的基础使用 </tag>
-            
         </tags>
       
     </entry>
@@ -184,8 +215,6 @@
         <tags>
             
             <tag> Go语言 </tag>
-            
-            <tag> 标准库的基础使用 </tag>
             
         </tags>
       
@@ -214,8 +243,6 @@
             
             <tag> Go语言 </tag>
             
-            <tag> 标准库的基础使用 </tag>
-            
         </tags>
       
     </entry>
@@ -242,8 +269,6 @@
         <tags>
             
             <tag> Go语言 </tag>
-            
-            <tag> 标准库的基础使用 </tag>
             
         </tags>
       
@@ -272,8 +297,6 @@
             
             <tag> Go语言 </tag>
             
-            <tag> 标准库的基础使用 </tag>
-            
         </tags>
       
     </entry>
@@ -300,8 +323,6 @@
         <tags>
             
             <tag> Go语言 </tag>
-            
-            <tag> 标准库的基础使用 </tag>
             
         </tags>
       
@@ -330,8 +351,6 @@
             
             <tag> Go语言 </tag>
             
-            <tag> 标准库的基础使用 </tag>
-            
         </tags>
       
     </entry>
@@ -358,8 +377,6 @@
         <tags>
             
             <tag> Go语言 </tag>
-            
-            <tag> 标准库的基础使用 </tag>
             
         </tags>
       
@@ -388,8 +405,6 @@
             
             <tag> Go语言 </tag>
             
-            <tag> 标准库的基础使用 </tag>
-            
         </tags>
       
     </entry>
@@ -416,8 +431,6 @@
         <tags>
             
             <tag> Go语言 </tag>
-            
-            <tag> 标准库的基础使用 </tag>
             
         </tags>
       
@@ -446,8 +459,6 @@
             
             <tag> Go语言 </tag>
             
-            <tag> 标准库的基础使用 </tag>
-            
         </tags>
       
     </entry>
@@ -459,7 +470,7 @@
       <link href="/2021/120325221.html"/>
       <url>/2021/120325221.html</url>
       
-        <content type="html"><![CDATA[<h1 id="深入Golang调度器之GMP模型"><a href="#深入Golang调度器之GMP模型" class="headerlink" title="深入Golang调度器之GMP模型"></a>深入Golang调度器之GMP模型</h1><blockquote><p> 作者：sunsky303</p></blockquote><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>随着服务器硬件迭代升级，配置也越来越高。为充分利用服务器资源，并发编程也变的越来越重要。在开始之前，需要了解一下并发(concurrency)和并行(parallesim)的区别。</p><p><strong>并发:</strong> 逻辑上具有处理多个同时性任务的能力。</p><p><strong>并行:</strong>  物理上同一时刻执行多个并发任务。</p><p>通常所说的并发编程，也就是说它允许多个任务同时执行，但实际上并不一定在同一时刻被执行。在单核处理器上，通过多线程共享CPU时间片串行执行(并发非并行)。而并行则依赖于多核处理器等物理资源，让多个任务可以实现并行执行(并发且并行)。</p><p>多线程或多进程是并行的基本条件，但单线程也可以用协程(coroutine)做到并发。简单将Goroutine归纳为协程并不合适，因为它运行时会创建多个线程来执行并发任务，且任务单元可被调度到其它线程执行。这更像是多线程和协程的结合体，能最大限度提升执行效率，发挥多核处理器能力。</p><p>Go编写一个并发编程程序很简单，只需要在函数之前使用一个Go关键字就可以实现并发编程。</p><pre><code>func main() {    go func(){        fmt.Println("Hello,World!")    }()}</code></pre><p>Go调度器组成</p><p>Go语言虽然使用一个Go关键字即可实现并发编程，但Goroutine被调度到后端之后，具体的实现比较复杂。先看看调度器有哪几部分组成。</p><p> <strong>1、G</strong></p><p>G是Goroutine的缩写，相当于操作系统中的进程控制块，在这里就是Goroutine的控制结构，是对Goroutine的抽象。其中包括执行的函数指令及参数；G保存的任务对象；线程上下文切换，现场保护和现场恢复需要的寄存器(SP、IP)等信息。</p><p>Go不同版本Goroutine默认栈大小不同。</p><pre><code>// Go1.11版本默认stack大小为2KB_StackMin = 2048 // 创建一个g对象,然后放到g队列// 等待被执行func newproc1(fn *funcval, argp *uint8, narg int32, callergp *g, callerpc uintptr) {    _g_ := getg()    _g_.m.locks++    siz := narg    siz = (siz + 7) &amp;^ 7    _p_ := _g_.m.p.ptr()    newg := gfget(_p_)        if newg == nil {               // 初始化g stack大小        newg = malg(_StackMin)        casgstatus(newg, _Gidle, _Gdead)        allgadd(newg)    }        // 以下省略}</code></pre><p><strong>2、M</strong></p><p>M是一个线程或称为Machine，所有M是有线程栈的。如果不对该线程栈提供内存的话，系统会给该线程栈提供内存(不同操作系统提供的线程栈大小不同)。当指定了线程栈，则M.stack→G.stack，M的PC寄存器指向G提供的函数，然后去执行。</p><pre><code>type m struct {        /*        1.  所有调用栈的Goroutine,这是一个比较特殊的Goroutine。        2.  普通的Goroutine栈是在Heap分配的可增长的stack,而g0的stack是M对应的线程栈。        3.  所有调度相关代码,会先切换到该Goroutine的栈再执行。    */    g0       *g    curg     *g         // M当前绑定的结构体G    // SP、PC寄存器用于现场保护和现场恢复    vdsoSP uintptr    vdsoPC uintptr    // 省略…}</code></pre><p><strong>3、P</strong></p><p>P(Processor)是一个抽象的概念，并不是真正的物理CPU。所以当P有任务时需要创建或者唤醒一个系统线程来执行它队列里的任务。所以P/M需要进行绑定，构成一个执行单元。</p><p>P决定了同时可以并发任务的数量，可通过GOMAXPROCS限制同时执行用户级任务的操作系统线程。可以通过runtime.GOMAXPROCS进行指定。在Go1.5之后GOMAXPROCS被默认设置可用的核数，而之前则默认为1。</p><pre><code>// 自定义设置GOMAXPROCS数量func GOMAXPROCS(n int) int {        /*        1.  GOMAXPROCS设置可执行的CPU的最大数量,同时返回之前的设置。        2.  如果n &lt; 1,则不更改当前的值。    */    ret := int(gomaxprocs)    stopTheWorld("GOMAXPROCS")        // startTheWorld启动时,使用newprocs。    newprocs = int32(n)    startTheWorld()        return ret}// 默认P被绑定到所有CPU核上// P == cpu.coresfunc getproccount() int32 {        const maxCPUs = 64 * 1024    var buf [maxCPUs / 8]byte    // 获取CPU Core    r := sched_getaffinity(0, unsafe.Sizeof(buf), &amp;buf[0])    n := int32(0)        for _, v := range buf[:r] {               for v != 0 {            n += int32(v &amp; 1)            v &gt;&gt;= 1        }    }        if n == 0 {       n = 1    }        return n}// 一个进程默认被绑定在所有CPU核上,返回所有CPU core。// 获取进程的CPU亲和性掩码系统调用// rax 204                          ; 系统调用码// system_call sys_sched_getaffinity; 系统调用名称// rid  pid                         ; 进程号// rsi unsigned int len             // rdx unsigned long *user_mask_ptrsys_linux_amd64.s:TEXT runtime·sched_getaffinity(SB),NOSPLIT,$0    MOVQ    pid+0(FP), DI    MOVQ    len+8(FP), SI    MOVQ    buf+16(FP), DX    MOVL    $SYS_sched_getaffinity, AX    SYSCALL    MOVL    AX, ret+24(FP)    RET</code></pre><p>Go调度器调度过程</p><p>首先创建一个G对象，G对象保存到P本地队列或者是全局队列。P此时去唤醒一个M。P继续执行它的执行序。M寻找是否有空闲的P，如果有则将该G对象移动到它本身。接下来M执行一个调度循环(调用G对象-&gt;执行-&gt;清理线程→继续找新的Goroutine执行)。</p><p>M执行过程中，随时会发生上下文切换。当发生上线文切换时，需要对执行现场进行保护，以便下次被调度执行时进行现场恢复。Go调度器M的栈保存在G对象上，只需要将M所需要的寄存器(SP、PC等)保存到G对象上就可以实现现场保护。当这些寄存器数据被保护起来，就随时可以做上下文切换了，在中断之前把现场保存起来。如果此时G任务还没有执行完，M可以将任务重新丢到P的任务队列，等待下一次被调度执行。当再次被调度执行时，M通过访问G的vdsoSP、vdsoPC寄存器进行现场恢复(从上次中断位置继续执行)。</p><p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="img"></p><p><strong>1、P 队列</strong><br>通过上图可以发现，P有两种队列：本地队列和全局队列。</p><ul><li><strong>本地队列：</strong> 当前P的队列，本地队列是Lock-Free，没有数据竞争问题，无需加锁处理，可以提升处理速度。</li><li><strong>全局队列：</strong>全局队列为了保证多个P之间任务的平衡。所有M共享P全局队列，为保证数据竞争问题，需要加锁处理。相比本地队列处理速度要低于全局队列。</li></ul><p>2、<strong>上线文切换</strong></p><p>简单理解为当时的环境即可，环境可以包括当时程序状态以及变量状态。例如线程切换的时候在内核会发生上下文切换，这里的上下文就包括了当时寄存器的值，把寄存器的值保存起来，等下次该线程又得到cpu时间的时候再恢复寄存器的值，这样线程才能正确运行。</p><p>对于代码中某个值说，上下文是指这个值所在的局部(全局)作用域对象。相对于进程而言，上下文就是进程执行时的环境，具体来说就是各个变量和数据，包括所有的寄存器变量、进程打开的文件、内存(堆栈)信息等。</p><p><strong>3、线程清理</strong><br>Goroutine被调度执行必须保证P/M进行绑定，所以线程清理只需要将P释放就可以实现线程的清理。什么时候P会释放，保证其它G可以被执行。P被释放主要有两种情况。</p><ul><li>主动释放：最典型的例子是，当执行G任务时有系统调用，当发生系统调用时M会处于Block状态。调度器会设置一个超时时间，当超时时会将P释放。</li><li><strong>被动释放：</strong>如果发生系统调用，有一个专门监控程序，进行扫描当前处于阻塞的P/M组合。当超过系统程序设置的超时时间，会自动将P资源抢走。去执行队列的其它G任务。</li></ul><p>终于要来说说Golang中最吸引人的goroutine了，这也是Golang能够横空出世的主要原因。不同于Python基于进程的并发模型，以及C++、Java等基于线程的并发模型。Golang采用轻量级的goroutine来实现并发，可以大大减少CPU的切换。现在已经有太多的文章来介绍goroutine的用法，在这里，我们从源码的角度来看看其内部实现。</p><h2 id="重申一下重点：goroutine中的三个实体"><a href="#重申一下重点：goroutine中的三个实体" class="headerlink" title="重申一下重点：goroutine中的三个实体"></a>重申一下重点：goroutine中的三个实体</h2><p>goroutine中最主要的是三个实体为GMP，其中：</p><p><code>G:</code> 代表一个goroutine对象，每次go调用的时候，都会创建一个G对象，它包括栈、指令指针以及对于调用goroutines很重要的其它信息，比如阻塞它的任何channel，其主要数据结构：</p><pre><code>type g struct {  stack       stack   // 描述了真实的栈内存，包括上下界  m              *m     // 当前的m  sched          gobuf   // goroutine切换时，用于保存g的上下文        param          unsafe.Pointer // 用于传递参数，睡眠时其他goroutine可以设置param，唤醒时该goroutine可以获取  atomicstatus   uint32  stackLock      uint32   goid           int64  // goroutine的ID  waitsince      int64 // g被阻塞的大体时间  lockedm        *m     // G被锁定只在这个m上运行}</code></pre><p>其中最主要的当然是sched了，保存了goroutine的上下文。goroutine切换的时候不同于线程有OS来负责这部分数据，而是由一个gobuf对象来保存，这样能够更加轻量级，再来看看gobuf的结构：</p><pre><code>type gobuf struct {    sp   uintptr    pc   uintptr    g    guintptr    ctxt unsafe.Pointer    ret  sys.Uintreg    lr   uintptr    bp   uintptr // for GOEXPERIMENT=framepointer}</code></pre><p>其实就是保存了当前的栈指针，计数器，当然还有g自身，这里记录自身g的指针是为了能快速的访问到goroutine中的信息。</p><p><code>M：</code>代表一个线程，每次创建一个M的时候，都会有一个底层线程创建；所有的G任务，最终还是在M上执行，其主要数据结构：</p><pre><code>type m struct {    g0      *g     // 带有调度栈的goroutine    gsignal       *g         // 处理信号的goroutine    tls           [6]uintptr // thread-local storage    mstartfn      func()    curg          *g       // 当前运行的goroutine    caughtsig     guintptr     p             puintptr // 关联p和执行的go代码    nextp         puintptr    id            int32    mallocing     int32 // 状态    spinning      bool // m是否out of work    blocked       bool // m是否被阻塞    inwb          bool // m是否在执行写屏蔽    printlock     int8    incgo         bool // m在执行cgo吗    fastrand      uint32    ncgocall      uint64      // cgo调用的总数    ncgo          int32       // 当前cgo调用的数目    park          note    alllink       *m // 用于链接allm    schedlink     muintptr    mcache        *mcache // 当前m的内存缓存    lockedg       *g // 锁定g在当前m上执行，而不会切换到其他m    createstack   [32]uintptr // thread创建的栈}</code></pre><p>结构体M中有两个G是需要关注一下的，一个是curg，代表结构体M当前绑定的结构体G。另一个是g0，是带有调度栈的goroutine，这是一个比较特殊的goroutine。普通的goroutine的栈是在堆上分配的可增长的栈，而g0的栈是M对应的线程的栈。所有调度相关的代码，会先切换到该goroutine的栈中再执行。也就是说线程的栈也是用的g实现，而不是使用的OS的。</p><p><code>P：</code>代表一个处理器，每一个运行的M都必须绑定一个P，就像线程必须在么一个CPU核上执行一样，由P来调度G在M上的运行，P的个数就是GOMAXPROCS（最大256），启动时固定的，一般不修改；M的个数和P的个数不一定一样多（会有休眠的M或者不需要太多的M）（最大10000）；每一个P保存着本地G任务队列，也有一个全局G任务队列。P的数据结构：</p><pre><code>type p struct {    lock mutex    id          int32    status      uint32 // 状态，可以为pidle/prunning/...    link        puintptr    schedtick   uint32     // 每调度一次加1    syscalltick uint32     // 每一次系统调用加1    sysmontick  sysmontick     m           muintptr   // 回链到关联的m    mcache      *mcache    racectx     uintptr    goidcache    uint64 // goroutine的ID的缓存    goidcacheend uint64    // 可运行的goroutine的队列    runqhead uint32    runqtail uint32    runq     [256]guintptr    runnext guintptr // 下一个运行的g    sudogcache []*sudog    sudogbuf   [128]*sudog    palloc persistentAlloc // per-P to avoid mutex    pad [sys.CacheLineSize]byte</code></pre><p>其中P的状态有Pidle, Prunning, Psyscall, Pgcstop, Pdead；在其内部队列runqhead里面有可运行的goroutine，P优先从内部获取执行的g，这样能够提高效率。</p><p>除此之外，还有一个数据结构需要在这里提及，就是schedt，可以看做是一个全局的调度者：</p><pre><code>type schedt struct {   goidgen  uint64    lastpoll uint64    lock mutex    midle        muintptr // idle状态的m    nmidle       int32    // idle状态的m个数    nmidlelocked int32    // lockde状态的m个数    mcount       int32    // 创建的m的总数    maxmcount    int32    // m允许的最大个数    ngsys uint32 // 系统中goroutine的数目，会自动更新    pidle      puintptr // idle的p    npidle     uint32    nmspinning uint32     // 全局的可运行的g队列    runqhead guintptr    runqtail guintptr    runqsize int32    // dead的G的全局缓存    gflock       mutex    gfreeStack   *g    gfreeNoStack *g    ngfree       int32    // sudog的缓存中心    sudoglock  mutex    sudogcache *sudog}</code></pre><p>大多数需要的信息都已放在了结构体M、G和P中，schedt结构体只是一个壳。可以看到，其中有M的idle队列，P的idle队列，以及一个全局的就绪的G队列。schedt结构体中的Lock是非常必须的，如果M或P等做一些非局部的操作，它们一般需要先锁住调度器。</p><h2 id="goroutine的运行过程"><a href="#goroutine的运行过程" class="headerlink" title="goroutine的运行过程"></a>goroutine的运行过程</h2><p>所有的goroutine都是由函数<code>newproc</code>来创建的，但是由于该函数不能调用分段栈，最后真正调用的是<code>newproc1</code>。在<code>newproc1</code>中主要进行如下动作：</p><pre><code>func newproc1(fn *funcval, argp *uint8, narg int32, nret int32, callerpc uintptr) *g {    newg = malg(_StackMin)    casgstatus(newg, _Gidle, _Gdead)    allgadd(newg)     newg.sched.sp = sp    newg.stktopsp = sp    newg.sched.pc = funcPC(goexit) + sys.PCQuantum     newg.sched.g = guintptr(unsafe.Pointer(newg))    gostartcallfn(&amp;newg.sched, fn)    newg.gopc = callerpc    newg.startpc = fn.fn    ......}</code></pre><p>分配一个g的结构体<br>初始化这个结构体的一些域<br>将g挂在就绪队列<br>绑定g到一个m上</p><p>这个绑定只要m没有突破上限GOMAXPROCS,就拿一个m绑定一个g。如果m的waiting队列中有就从队列中拿,否则就要新建一个m,调用<code>newm</code>。</p><pre><code>func newm(fn func(), _p_ *p) {    mp := allocm(_p_, fn)    mp.nextp.set(_p_)    mp.sigmask = initSigmask    execLock.rlock()    newosproc(mp, unsafe.Pointer(mp.g0.stack.hi))    execLock.runlock()}</code></pre><p>该函数其实就是创建一个m，跟<code>newproc</code>有些相似，之前也说了m在底层就是一个线程的创建，也即是<code>newosproc</code>函数，在往下挖可以看到会根据不同的OS来执行不同的<code>bsdthread_create</code>函数，而底层就是调用的<code>runtime.clone</code>：</p><pre><code>clone(cloneFlags,stk,unsafe.Pointer(mp),unsafe.Pointer(mp.g0),unsafe.Pointer(funcPC(mstart)))</code></pre><p>m创建好之后，线程的入口是mstart，最后调用的即是<code>mstart1</code>：</p><pre><code>func mstart1() {    _g_ := getg()    gosave(&amp;_g_.m.g0.sched)    _g_.m.g0.sched.pc = ^uintptr(0)    asminit()    minit()    if _g_.m == &amp;m0 {        initsig(false)    }    if fn := _g_.m.mstartfn; fn != nil {        fn()    }    schedule()}</code></pre><p>里面最重要的就是schedule了，在schedule中的动作大体就是找到一个等待运行的g，然后然后搬到m上，设置其状态为<code>Grunning</code>,直接切换到g的上下文环境,恢复g的执行。</p><pre><code>func schedule() {    _g_ := getg()    if _g_.m.lockedg != nil {        stoplockedm()        execute(_g_.m.lockedg, false) // Never returns.    }}</code></pre><p><code>schedule</code>的执行可以大体总结为：</p><p><em>schedule函数获取g =&gt; [必要时休眠] =&gt; [唤醒后继续获取] =&gt; execute函数执行g =&gt; 执行后返回到goexit =&gt; 重新执行schedule函数</em></p><p>简单来说g所经历的几个主要的过程就是：Gwaiting-&gt;Grunnable-&gt;Grunning。经历了创建,到挂在就绪队列,到从就绪队列拿出并运行整个过程。</p><pre><code>casgstatus(gp, _Gwaiting, _Grunnable)casgstatus(gp, _Grunnable, _Grunning)</code></pre><p>引入了struct M这层抽象。m就是这里的worker,但不是线程。处理系统调用中的m不会占用mcpu数量,只有干事的m才会对应到线程.当mcpu数量少于GOMAXPROCS时可以一直开新的线程干活.而goroutine的执行则是在m和g都满足之后通过schedule切换上下文进入的.</p><h2 id="抢占式调度"><a href="#抢占式调度" class="headerlink" title="抢占式调度"></a>抢占式调度</h2><p>当有很多goroutine需要执行的时候，是怎么调度的了，上面说的P还没有出场呢，在<code>runtime.main</code>中会创建一个额外m运行<code>sysmon</code>函数，抢占就是在sysmon中实现的。</p><p>sysmon会进入一个无限循环, 第一轮回休眠20us, 之后每次休眠时间倍增, 最终每一轮都会休眠10ms. sysmon中有netpool(获取fd事件), retake(抢占), forcegc(按时间强制执行gc), scavenge heap(释放自由列表中多余的项减少内存占用)等处理.</p><pre><code>func sysmon() {    lasttrace := int64(0)    idle := 0 // how many cycles in succession we had not wokeup somebody    delay := uint32(0)    for {        if idle == 0 { // start with 20us sleep...            delay = 20        } else if idle &gt; 50 { // start doubling the sleep after 1ms...            delay *= 2        }        if delay &gt; 10*1000 { // up to 10ms            delay = 10 * 1000        }        usleep(delay)        ......    }       }</code></pre><p>里面的函数<code>retake</code>负责抢占：</p><pre><code>func retake(now int64) uint32 {    n := 0    for i := int32(0); i &lt; gomaxprocs; i++ {        _p_ := allp[i]        if _p_ == nil {            continue        }        pd := &amp;_p_.sysmontick        s := _p_.status        if s == _Psyscall {            // 如果p的syscall时间超过一个sysmon tick则抢占该p            t := int64(_p_.syscalltick)            if int64(pd.syscalltick) != t {                pd.syscalltick = uint32(t)                pd.syscallwhen = now                continue            }            if runqempty(_p_) &amp;&amp; atomic.Load(&amp;sched.nmspinning)+atomic.Load(&amp;sched.npidle) &gt; 0 &amp;&amp; pd.syscallwhen+10*1000*1000 &gt; now {                continue            }            incidlelocked(-1)            if atomic.Cas(&amp;_p_.status, s, _Pidle) {                if trace.enabled {                    traceGoSysBlock(_p_)                    traceProcStop(_p_)                }                n++                _p_.syscalltick++                handoffp(_p_)            }            incidlelocked(1)        } else if s == _Prunning {            // 如果G运行时间过长，则抢占该G            t := int64(_p_.schedtick)            if int64(pd.schedtick) != t {                pd.schedtick = uint32(t)                pd.schedwhen = now                continue            }            if pd.schedwhen+forcePreemptNS &gt; now {                continue            }            preemptone(_p_)        }    }    return uint32(n)}</code></pre><p>枚举所有的P 如果P在系统调用中(_Psyscall), 且经过了一次sysmon循环(20us~10ms), 则抢占这个P， 调用handoffp解除M和P之间的关联， 如果P在运行中(_Prunning), 且经过了一次sysmon循环并且G运行时间超过forcePreemptNS(10ms), 则抢占这个P</p><p>并设置g.preempt = true，g.stackguard0 = stackPreempt。</p><p>为什么设置了stackguard就可以实现抢占?</p><p>因为这个值用于检查当前栈空间是否足够, go函数的开头会比对这个值判断是否需要扩张栈。</p><p>newstack函数判断g.stackguard0等于stackPreempt, 就知道这是抢占触发的, 这时会再检查一遍是否要抢占。</p><p>抢占机制保证了不会有一个G长时间的运行导致其他G无法运行的情况发生。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>相比大多数并行设计模型，Go比较优势的设计就是P上下文这个概念的出现，如果只有G和M的对应关系，那么当G阻塞在IO上的时候，M是没有实际在工作的，这样造成了资源的浪费，没有了P，那么所有G的列表都放在全局，这样导致临界区太大，对多核调度造成极大影响。</p><p>而goroutine在使用上面的特点，感觉既可以用来做密集的多核计算，又可以做高并发的IO应用，做IO应用的时候，写起来感觉和对程序员最友好的同步阻塞一样，而实际上由于runtime的调度，底层是以同步非阻塞的方式在运行（即IO多路复用）。</p><p>所以说保护现场的抢占式调度和G被阻塞后传递给其他m调用的核心思想，使得goroutine的产生。</p><h2 id=""><a href="#" class="headerlink" title=" "></a> </h2><p>本文从宏观角度介绍了一下Go调度器的调度过程。Go调度器也是Go语言最精华的部分，希望对大家有所帮助。</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="转载-深入Golang调度器之GMP模型"><a href="#转载-深入Golang调度器之GMP模型" class="headerlink" title="[转载]深入Golang调度器之GMP模型"></a>[转载]深入Golang调度器之GMP模型</h1><blockquote><p> 作者：sunsky303</p></blockquote><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>随着服务器硬件迭代升级，配置也越来越高。为充分利用服务器资源，并发编程也变的越来越重要。在开始之前，需要了解一下并发(concurrency)和并行(parallesim)的区别。</p><p><strong>并发:</strong> 逻辑上具有处理多个同时性任务的能力。</p><p><strong>并行:</strong>  物理上同一时刻执行多个并发任务。</p><p>通常所说的并发编程，也就是说它允许多个任务同时执行，但实际上并不一定在同一时刻被执行。在单核处理器上，通过多线程共享CPU时间片串行执行(并发非并行)。而并行则依赖于多核处理器等物理资源，让多个任务可以实现并行执行(并发且并行)。</p><p>多线程或多进程是并行的基本条件，但单线程也可以用协程(coroutine)做到并发。简单将Goroutine归纳为协程并不合适，因为它运行时会创建多个线程来执行并发任务，且任务单元可被调度到其它线程执行。这更像是多线程和协程的结合体，能最大限度提升执行效率，发挥多核处理器能力。</p><p>Go编写一个并发编程程序很简单，只需要在函数之前使用一个Go关键字就可以实现并发编程。</p><pre><code>func main() {    go func(){        fmt.Println("Hello,World!")    }()}</code></pre><p>Go调度器组成</p><p>Go语言虽然使用一个Go关键字即可实现并发编程，但Goroutine被调度到后端之后，具体的实现比较复杂。先看看调度器有哪几部分组成。</p><p> <strong>1、G</strong></p><p>G是Goroutine的缩写，相当于操作系统中的进程控制块，在这里就是Goroutine的控制结构，是对Goroutine的抽象。其中包括执行的函数指令及参数；G保存的任务对象；线程上下文切换，现场保护和现场恢复需要的寄存器(SP、IP)等信息。</p><p>Go不同版本Goroutine默认栈大小不同。</p><pre><code>// Go1.11版本默认stack大小为2KB_StackMin = 2048 // 创建一个g对象,然后放到g队列// 等待被执行func newproc1(fn *funcval, argp *uint8, narg int32, callergp *g, callerpc uintptr) {    _g_ := getg()    _g_.m.locks++    siz := narg    siz = (siz + 7) &amp;^ 7    _p_ := _g_.m.p.ptr()    newg := gfget(_p_)        if newg == nil {               // 初始化g stack大小        newg = malg(_StackMin)        casgstatus(newg, _Gidle, _Gdead)        allgadd(newg)    }        // 以下省略}</code></pre><p><strong>2、M</strong></p><p>M是一个线程或称为Machine，所有M是有线程栈的。如果不对该线程栈提供内存的话，系统会给该线程栈提供内存(不同操作系统提供的线程栈大小不同)。当指定了线程栈，则M.stack→G.stack，M的PC寄存器指向G提供的函数，然后去执行。</p><pre><code>type m struct {        /*        1.  所有调用栈的Goroutine,这是一个比较特殊的Goroutine。        2.  普通的Goroutine栈是在Heap分配的可增长的stack,而g0的stack是M对应的线程栈。        3.  所有调度相关代码,会先切换到该Goroutine的栈再执行。    */    g0       *g    curg     *g         // M当前绑定的结构体G    // SP、PC寄存器用于现场保护和现场恢复    vdsoSP uintptr    vdsoPC uintptr    // 省略…}</code></pre><p><strong>3、P</strong></p><p>P(Processor)是一个抽象的概念，并不是真正的物理CPU。所以当P有任务时需要创建或者唤醒一个系统线程来执行它队列里的任务。所以P/M需要进行绑定，构成一个执行单元。</p><p>P决定了同时可以并发任务的数量，可通过GOMAXPROCS限制同时执行用户级任务的操作系统线程。可以通过runtime.GOMAXPROCS进行指定。在Go1.5之后GOMAXPROCS被默认设置可用的核数，而之前则默认为1。</p><pre><code>// 自定义设置GOMAXPROCS数量func GOMAXPROCS(n int) int {        /*        1.  GOMAXPROCS设置可执行的CPU的最大数量,同时返回之前的设置。        2.  如果n &lt; 1,则不更改当前的值。    */    ret := int(gomaxprocs)    stopTheWorld("GOMAXPROCS")        // startTheWorld启动时,使用newprocs。    newprocs = int32(n)    startTheWorld()        return ret}// 默认P被绑定到所有CPU核上// P == cpu.coresfunc getproccount() int32 {        const maxCPUs = 64 * 1024    var buf [maxCPUs / 8]byte    // 获取CPU Core    r := sched_getaffinity(0, unsafe.Sizeof(buf), &amp;buf[0])    n := int32(0)        for _, v := range buf[:r] {               for v != 0 {            n += int32(v &amp; 1)            v &gt;&gt;= 1        }    }        if n == 0 {       n = 1    }        return n}// 一个进程默认被绑定在所有CPU核上,返回所有CPU core。// 获取进程的CPU亲和性掩码系统调用// rax 204                          ; 系统调用码// system_call sys_sched_getaffinity; 系统调用名称// rid  pid                         ; 进程号// rsi unsigned int len             // rdx unsigned long *user_mask_ptrsys_linux_amd64.s:TEXT runtime·sched_getaffinity(SB),NOSPLIT,$0    MOVQ    pid+0(FP), DI    MOVQ    len+8(FP), SI    MOVQ    buf+16(FP), DX    MOVL    $SYS_sched_getaffinity, AX    SYSCALL    MOVL    AX, ret+24(FP)    RET</code></pre><p>Go调度器调度过程</p><p>首先创建一个G对象，G对象保存到P本地队列或者是全局队列。P此时去唤醒一个M。P继续执行它的执行序。M寻找是否有空闲的P，如果有则将该G对象移动到它本身。接下来M执行一个调度循环(调用G对象-&gt;执行-&gt;清理线程→继续找新的Goroutine执行)。</p><p>M执行过程中，随时会发生上下文切换。当发生上线文切换时，需要对执行现场进行保护，以便下次被调度执行时进行现场恢复。Go调度器M的栈保存在G对象上，只需要将M所需要的寄存器(SP、PC等)保存到G对象上就可以实现现场保护。当这些寄存器数据被保护起来，就随时可以做上下文切换了，在中断之前把现场保存起来。如果此时G任务还没有执行完，M可以将任务重新丢到P的任务队列，等待下一次被调度执行。当再次被调度执行时，M通过访问G的vdsoSP、vdsoPC寄存器进行现场恢复(从上次中断位置继续执行)。</p><p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="img"></p><p><strong>1、P 队列</strong><br>通过上图可以发现，P有两种队列：本地队列和全局队列。</p><ul><li><strong>本地队列：</strong> 当前P的队列，本地队列是Lock-Free，没有数据竞争问题，无需加锁处理，可以提升处理速度。</li><li><strong>全局队列：</strong>全局队列为了保证多个P之间任务的平衡。所有M共享P全局队列，为保证数据竞争问题，需要加锁处理。相比本地队列处理速度要低于全局队列。</li></ul><p>2、<strong>上线文切换</strong></p><p>简单理解为当时的环境即可，环境可以包括当时程序状态以及变量状态。例如线程切换的时候在内核会发生上下文切换，这里的上下文就包括了当时寄存器的值，把寄存器的值保存起来，等下次该线程又得到cpu时间的时候再恢复寄存器的值，这样线程才能正确运行。</p><p>对于代码中某个值说，上下文是指这个值所在的局部(全局)作用域对象。相对于进程而言，上下文就是进程执行时的环境，具体来说就是各个变量和数据，包括所有的寄存器变量、进程打开的文件、内存(堆栈)信息等。</p><p><strong>3、线程清理</strong><br>Goroutine被调度执行必须保证P/M进行绑定，所以线程清理只需要将P释放就可以实现线程的清理。什么时候P会释放，保证其它G可以被执行。P被释放主要有两种情况。</p><ul><li>主动释放：最典型的例子是，当执行G任务时有系统调用，当发生系统调用时M会处于Block状态。调度器会设置一个超时时间，当超时时会将P释放。</li><li><strong>被动释放：</strong>如果发生系统调用，有一个专门监控程序，进行扫描当前处于阻塞的P/M组合。当超过系统程序设置的超时时间，会自动将P资源抢走。去执行队列的其它G任务。</li></ul><p>终于要来说说Golang中最吸引人的goroutine了，这也是Golang能够横空出世的主要原因。不同于Python基于进程的并发模型，以及C++、Java等基于线程的并发模型。Golang采用轻量级的goroutine来实现并发，可以大大减少CPU的切换。现在已经有太多的文章来介绍goroutine的用法，在这里，我们从源码的角度来看看其内部实现。</p><h2 id="重申一下重点：goroutine中的三个实体"><a href="#重申一下重点：goroutine中的三个实体" class="headerlink" title="重申一下重点：goroutine中的三个实体"></a>重申一下重点：goroutine中的三个实体</h2><p>goroutine中最主要的是三个实体为GMP，其中：</p><p><code>G:</code> 代表一个goroutine对象，每次go调用的时候，都会创建一个G对象，它包括栈、指令指针以及对于调用goroutines很重要的其它信息，比如阻塞它的任何channel，其主要数据结构：</p><pre><code>type g struct {  stack       stack   // 描述了真实的栈内存，包括上下界  m              *m     // 当前的m  sched          gobuf   // goroutine切换时，用于保存g的上下文        param          unsafe.Pointer // 用于传递参数，睡眠时其他goroutine可以设置param，唤醒时该goroutine可以获取  atomicstatus   uint32  stackLock      uint32   goid           int64  // goroutine的ID  waitsince      int64 // g被阻塞的大体时间  lockedm        *m     // G被锁定只在这个m上运行}</code></pre><p>其中最主要的当然是sched了，保存了goroutine的上下文。goroutine切换的时候不同于线程有OS来负责这部分数据，而是由一个gobuf对象来保存，这样能够更加轻量级，再来看看gobuf的结构：</p><pre><code>type gobuf struct {    sp   uintptr    pc   uintptr    g    guintptr    ctxt unsafe.Pointer    ret  sys.Uintreg    lr   uintptr    bp   uintptr // for GOEXPERIMENT=framepointer}</code></pre><p>其实就是保存了当前的栈指针，计数器，当然还有g自身，这里记录自身g的指针是为了能快速的访问到goroutine中的信息。</p><p><code>M：</code>代表一个线程，每次创建一个M的时候，都会有一个底层线程创建；所有的G任务，最终还是在M上执行，其主要数据结构：</p><pre><code>type m struct {    g0      *g     // 带有调度栈的goroutine    gsignal       *g         // 处理信号的goroutine    tls           [6]uintptr // thread-local storage    mstartfn      func()    curg          *g       // 当前运行的goroutine    caughtsig     guintptr     p             puintptr // 关联p和执行的go代码    nextp         puintptr    id            int32    mallocing     int32 // 状态    spinning      bool // m是否out of work    blocked       bool // m是否被阻塞    inwb          bool // m是否在执行写屏蔽    printlock     int8    incgo         bool // m在执行cgo吗    fastrand      uint32    ncgocall      uint64      // cgo调用的总数    ncgo          int32       // 当前cgo调用的数目    park          note    alllink       *m // 用于链接allm    schedlink     muintptr    mcache        *mcache // 当前m的内存缓存    lockedg       *g // 锁定g在当前m上执行，而不会切换到其他m    createstack   [32]uintptr // thread创建的栈}</code></pre><p>结构体M中有两个G是需要关注一下的，一个是curg，代表结构体M当前绑定的结构体G。另一个是g0，是带有调度栈的goroutine，这是一个比较特殊的goroutine。普通的goroutine的栈是在堆上分配的可增长的栈，而g0的栈是M对应的线程的栈。所有调度相关的代码，会先切换到该goroutine的栈中再执行。也就是说线程的栈也是用的g实现，而不是使用的OS的。</p><p><code>P：</code>代表一个处理器，每一个运行的M都必须绑定一个P，就像线程必须在么一个CPU核上执行一样，由P来调度G在M上的运行，P的个数就是GOMAXPROCS（最大256），启动时固定的，一般不修改；M的个数和P的个数不一定一样多（会有休眠的M或者不需要太多的M）（最大10000）；每一个P保存着本地G任务队列，也有一个全局G任务队列。P的数据结构：</p><pre><code>type p struct {    lock mutex    id          int32    status      uint32 // 状态，可以为pidle/prunning/...    link        puintptr    schedtick   uint32     // 每调度一次加1    syscalltick uint32     // 每一次系统调用加1    sysmontick  sysmontick     m           muintptr   // 回链到关联的m    mcache      *mcache    racectx     uintptr    goidcache    uint64 // goroutine的ID的缓存    goidcacheend uint64    // 可运行的goroutine的队列    runqhead uint32    runqtail uint32    runq     [256]guintptr    runnext guintptr // 下一个运行的g    sudogcache []*sudog    sudogbuf   [128]*sudog    palloc persistentAlloc // per-P to avoid mutex    pad [sys.CacheLineSize]byte</code></pre><p>其中P的状态有Pidle, Prunning, Psyscall, Pgcstop, Pdead；在其内部队列runqhead里面有可运行的goroutine，P优先从内部获取执行的g，这样能够提高效率。</p><p>除此之外，还有一个数据结构需要在这里提及，就是schedt，可以看做是一个全局的调度者：</p><pre><code>type schedt struct {   goidgen  uint64    lastpoll uint64    lock mutex    midle        muintptr // idle状态的m    nmidle       int32    // idle状态的m个数    nmidlelocked int32    // lockde状态的m个数    mcount       int32    // 创建的m的总数    maxmcount    int32    // m允许的最大个数    ngsys uint32 // 系统中goroutine的数目，会自动更新    pidle      puintptr // idle的p    npidle     uint32    nmspinning uint32     // 全局的可运行的g队列    runqhead guintptr    runqtail guintptr    runqsize int32    // dead的G的全局缓存    gflock       mutex    gfreeStack   *g    gfreeNoStack *g    ngfree       int32    // sudog的缓存中心    sudoglock  mutex    sudogcache *sudog}</code></pre><p>大多数需要的信息都已放在了结构体M、G和P中，schedt结构体只是一个壳。可以看到，其中有M的idle队列，P的idle队列，以及一个全局的就绪的G队列。schedt结构体中的Lock是非常必须的，如果M或P等做一些非局部的操作，它们一般需要先锁住调度器。</p><h2 id="goroutine的运行过程"><a href="#goroutine的运行过程" class="headerlink" title="goroutine的运行过程"></a>goroutine的运行过程</h2><p>所有的goroutine都是由函数<code>newproc</code>来创建的，但是由于该函数不能调用分段栈，最后真正调用的是<code>newproc1</code>。在<code>newproc1</code>中主要进行如下动作：</p><pre><code>func newproc1(fn *funcval, argp *uint8, narg int32, nret int32, callerpc uintptr) *g {    newg = malg(_StackMin)    casgstatus(newg, _Gidle, _Gdead)    allgadd(newg)     newg.sched.sp = sp    newg.stktopsp = sp    newg.sched.pc = funcPC(goexit) + sys.PCQuantum     newg.sched.g = guintptr(unsafe.Pointer(newg))    gostartcallfn(&amp;newg.sched, fn)    newg.gopc = callerpc    newg.startpc = fn.fn    ......}</code></pre><p>分配一个g的结构体<br>初始化这个结构体的一些域<br>将g挂在就绪队列<br>绑定g到一个m上</p><p>这个绑定只要m没有突破上限GOMAXPROCS,就拿一个m绑定一个g。如果m的waiting队列中有就从队列中拿,否则就要新建一个m,调用<code>newm</code>。</p><pre><code>func newm(fn func(), _p_ *p) {    mp := allocm(_p_, fn)    mp.nextp.set(_p_)    mp.sigmask = initSigmask    execLock.rlock()    newosproc(mp, unsafe.Pointer(mp.g0.stack.hi))    execLock.runlock()}</code></pre><p>该函数其实就是创建一个m，跟<code>newproc</code>有些相似，之前也说了m在底层就是一个线程的创建，也即是<code>newosproc</code>函数，在往下挖可以看到会根据不同的OS来执行不同的<code>bsdthread_create</code>函数，而底层就是调用的<code>runtime.clone</code>：</p><pre><code>clone(cloneFlags,stk,unsafe.Pointer(mp),unsafe.Pointer(mp.g0),unsafe.Pointer(funcPC(mstart)))</code></pre><p>m创建好之后，线程的入口是mstart，最后调用的即是<code>mstart1</code>：</p><pre><code>func mstart1() {    _g_ := getg()    gosave(&amp;_g_.m.g0.sched)    _g_.m.g0.sched.pc = ^uintptr(0)    asminit()    minit()    if _g_.m == &amp;m0 {        initsig(false)    }    if fn := _g_.m.mstartfn; fn != nil {        fn()    }    schedule()}</code></pre><p>里面最重要的就是schedule了，在schedule中的动作大体就是找到一个等待运行的g，然后然后搬到m上，设置其状态为<code>Grunning</code>,直接切换到g的上下文环境,恢复g的执行。</p><pre><code>func schedule() {    _g_ := getg()    if _g_.m.lockedg != nil {        stoplockedm()        execute(_g_.m.lockedg, false) // Never returns.    }}</code></pre><p><code>schedule</code>的执行可以大体总结为：</p><p><em>schedule函数获取g =&gt; [必要时休眠] =&gt; [唤醒后继续获取] =&gt; execute函数执行g =&gt; 执行后返回到goexit =&gt; 重新执行schedule函数</em></p><p>简单来说g所经历的几个主要的过程就是：Gwaiting-&gt;Grunnable-&gt;Grunning。经历了创建,到挂在就绪队列,到从就绪队列拿出并运行整个过程。</p><pre><code>casgstatus(gp, _Gwaiting, _Grunnable)casgstatus(gp, _Grunnable, _Grunning)</code></pre><p>引入了struct M这层抽象。m就是这里的worker,但不是线程。处理系统调用中的m不会占用mcpu数量,只有干事的m才会对应到线程.当mcpu数量少于GOMAXPROCS时可以一直开新的线程干活.而goroutine的执行则是在m和g都满足之后通过schedule切换上下文进入的.</p><h2 id="抢占式调度"><a href="#抢占式调度" class="headerlink" title="抢占式调度"></a>抢占式调度</h2><p>当有很多goroutine需要执行的时候，是怎么调度的了，上面说的P还没有出场呢，在<code>runtime.main</code>中会创建一个额外m运行<code>sysmon</code>函数，抢占就是在sysmon中实现的。</p><p>sysmon会进入一个无限循环, 第一轮回休眠20us, 之后每次休眠时间倍增, 最终每一轮都会休眠10ms. sysmon中有netpool(获取fd事件), retake(抢占), forcegc(按时间强制执行gc), scavenge heap(释放自由列表中多余的项减少内存占用)等处理.</p><pre><code>func sysmon() {    lasttrace := int64(0)    idle := 0 // how many cycles in succession we had not wokeup somebody    delay := uint32(0)    for {        if idle == 0 { // start with 20us sleep...            delay = 20        } else if idle &gt; 50 { // start doubling the sleep after 1ms...            delay *= 2        }        if delay &gt; 10*1000 { // up to 10ms            delay = 10 * 1000        }        usleep(delay)        ......    }       }</code></pre><p>里面的函数<code>retake</code>负责抢占：</p><pre><code>func retake(now int64) uint32 {    n := 0    for i := int32(0); i &lt; gomaxprocs; i++ {        _p_ := allp[i]        if _p_ == nil {            continue        }        pd := &amp;_p_.sysmontick        s := _p_.status        if s == _Psyscall {            // 如果p的syscall时间超过一个sysmon tick则抢占该p            t := int64(_p_.syscalltick)            if int64(pd.syscalltick) != t {                pd.syscalltick = uint32(t)                pd.syscallwhen = now                continue            }            if runqempty(_p_) &amp;&amp; atomic.Load(&amp;sched.nmspinning)+atomic.Load(&amp;sched.npidle) &gt; 0 &amp;&amp; pd.syscallwhen+10*1000*1000 &gt; now {                continue            }            incidlelocked(-1)            if atomic.Cas(&amp;_p_.status, s, _Pidle) {                if trace.enabled {                    traceGoSysBlock(_p_)                    traceProcStop(_p_)                }                n++                _p_.syscalltick++                handoffp(_p_)            }            incidlelocked(1)        } else if s == _Prunning {            // 如果G运行时间过长，则抢占该G            t := int64(_p_.schedtick)            if int64(pd.schedtick) != t {                pd.schedtick = uint32(t)                pd.schedwhen = now                continue            }            if pd.schedwhen+forcePreemptNS &gt; now {                continue            }            preemptone(_p_)        }    }    return uint32(n)}</code></pre><p>枚举所有的P 如果P在系统调用中(_Psyscall), 且经过了一次sysmon循环(20us~10ms), 则抢占这个P， 调用handoffp解除M和P之间的关联， 如果P在运行中(_Prunning), 且经过了一次sysmon循环并且G运行时间超过forcePreemptNS(10ms), 则抢占这个P</p><p>并设置g.preempt = true，g.stackguard0 = stackPreempt。</p><p>为什么设置了stackguard就可以实现抢占?</p><p>因为这个值用于检查当前栈空间是否足够, go函数的开头会比对这个值判断是否需要扩张栈。</p><p>newstack函数判断g.stackguard0等于stackPreempt, 就知道这是抢占触发的, 这时会再检查一遍是否要抢占。</p><p>抢占机制保证了不会有一个G长时间的运行导致其他G无法运行的情况发生。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>相比大多数并行设计模型，Go比较优势的设计就是P上下文这个概念的出现，如果只有G和M的对应关系，那么当G阻塞在IO上的时候，M是没有实际在工作的，这样造成了资源的浪费，没有了P，那么所有G的列表都放在全局，这样导致临界区太大，对多核调度造成极大影响。</p><p>而goroutine在使用上面的特点，感觉既可以用来做密集的多核计算，又可以做高并发的IO应用，做IO应用的时候，写起来感觉和对程序员最友好的同步阻塞一样，而实际上由于runtime的调度，底层是以同步非阻塞的方式在运行（即IO多路复用）。</p><p>所以说保护现场的抢占式调度和G被阻塞后传递给其他m调用的核心思想，使得goroutine的产生。</p><h2 id=""><a href="#" class="headerlink" title=" "></a> </h2><p>本文从宏观角度介绍了一下Go调度器的调度过程。Go调度器也是Go语言最精华的部分，希望对大家有所帮助。</p>]]></content>
       
       
       <categories>
@@ -474,8 +485,6 @@
         <tags>
             
             <tag> Go语言 </tag>
-            
-            <tag> 并发编程 </tag>
             
         </tags>
       
@@ -504,8 +513,6 @@
             
             <tag> Go语言 </tag>
             
-            <tag> 并发编程 </tag>
-            
         </tags>
       
     </entry>
@@ -532,8 +539,6 @@
         <tags>
             
             <tag> Go语言 </tag>
-            
-            <tag> 并发编程 </tag>
             
         </tags>
       
@@ -562,8 +567,6 @@
             
             <tag> Go语言 </tag>
             
-            <tag> 并发编程 </tag>
-            
         </tags>
       
     </entry>
@@ -590,8 +593,6 @@
         <tags>
             
             <tag> Go语言 </tag>
-            
-            <tag> 函数与接口 </tag>
             
         </tags>
       
@@ -620,8 +621,6 @@
             
             <tag> Go语言 </tag>
             
-            <tag> 函数与接口 </tag>
-            
         </tags>
       
     </entry>
@@ -648,8 +647,6 @@
         <tags>
             
             <tag> Go语言 </tag>
-            
-            <tag> 基础语法 </tag>
             
         </tags>
       
@@ -678,8 +675,6 @@
             
             <tag> Go语言 </tag>
             
-            <tag> 基础语法 </tag>
-            
         </tags>
       
     </entry>
@@ -706,8 +701,6 @@
         <tags>
             
             <tag> Go语言 </tag>
-            
-            <tag> 基础语法 </tag>
             
         </tags>
       
@@ -736,8 +729,6 @@
             
             <tag> Go语言 </tag>
             
-            <tag> 基础语法 </tag>
-            
         </tags>
       
     </entry>
@@ -764,8 +755,6 @@
         <tags>
             
             <tag> Go语言 </tag>
-            
-            <tag> 基础语法 </tag>
             
         </tags>
       
@@ -794,8 +783,6 @@
             
             <tag> Go语言 </tag>
             
-            <tag> 基础语法 </tag>
-            
         </tags>
       
     </entry>
@@ -822,8 +809,6 @@
         <tags>
             
             <tag> Go语言 </tag>
-            
-            <tag> 基础语法 </tag>
             
         </tags>
       
@@ -852,8 +837,6 @@
             
             <tag> Go语言 </tag>
             
-            <tag> 数据类型 </tag>
-            
         </tags>
       
     </entry>
@@ -880,8 +863,6 @@
         <tags>
             
             <tag> Go语言 </tag>
-            
-            <tag> 数据类型 </tag>
             
         </tags>
       
@@ -910,8 +891,6 @@
             
             <tag> Go语言 </tag>
             
-            <tag> 数据类型 </tag>
-            
         </tags>
       
     </entry>
@@ -938,8 +917,6 @@
         <tags>
             
             <tag> Go语言 </tag>
-            
-            <tag> 数据类型 </tag>
             
         </tags>
       
@@ -968,8 +945,6 @@
             
             <tag> Go语言 </tag>
             
-            <tag> 数据类型 </tag>
-            
         </tags>
       
     </entry>
@@ -996,8 +971,6 @@
         <tags>
             
             <tag> Go语言 </tag>
-            
-            <tag> 数据类型 </tag>
             
         </tags>
       
@@ -1026,8 +999,6 @@
             
             <tag> Go语言 </tag>
             
-            <tag> 数据类型 </tag>
-            
         </tags>
       
     </entry>
@@ -1054,8 +1025,6 @@
         <tags>
             
             <tag> Go语言 </tag>
-            
-            <tag> 数据类型 </tag>
             
         </tags>
       
@@ -1084,8 +1053,6 @@
             
             <tag> Go语言 </tag>
             
-            <tag> 数据类型 </tag>
-            
         </tags>
       
     </entry>
@@ -1109,7 +1076,9 @@
       
         <tags>
             
-            <tag> HelloWorld </tag>
+            <tag> 杂类 </tag>
+            
+            <tag> Hello-World </tag>
             
         </tags>
       

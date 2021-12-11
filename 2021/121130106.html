@@ -4,8 +4,8 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="http-net包, Hanmur">
-    <meta name="description" content="Golang的http-net包">
+    <meta name="keywords" content="WriteUp-Hackergame 2021, Hanmur">
+    <meta name="description" content="这是第一次正经打的比赛呢">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>http-net包 | Hanmur</title>
+    <title>WriteUp-Hackergame 2021 | Hanmur</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -333,12 +333,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">http-net包</h1>
+                    <h1 class="description center-align post-title">WriteUp-Hackergame 2021</h1>
                 </div>
             </div>
         </div>
@@ -454,8 +454,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Go%E8%AF%AD%E8%A8%80/">
-                                <span class="chip bg-color">Go语言</span>
+                            <a href="/tags/CTF/">
+                                <span class="chip bg-color">CTF</span>
+                            </a>
+                        
+                            <a href="/tags/WriteUp/">
+                                <span class="chip bg-color">WriteUp</span>
                             </a>
                         
                     </div>
@@ -466,12 +470,12 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Go%E8%AF%AD%E8%A8%80/" class="post-category">
-                                Go语言
+                            <a href="/categories/CTF/" class="post-category">
+                                CTF
                             </a>
                         
-                            <a href="/categories/Go%E8%AF%AD%E8%A8%80/%E6%A0%87%E5%87%86%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/" class="post-category">
-                                标准库的基础使用
+                            <a href="/categories/CTF/WriteUp/" class="post-category">
+                                WriteUp
                             </a>
                         
                     </div>
@@ -483,28 +487,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-12-03
+                    2021-12-11
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-09
+                    2021-12-11
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.3k
+                    5.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    22 分
                 </div>
                 
 
@@ -524,196 +528,296 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Go语言基础之net-http"><a href="#Go语言基础之net-http" class="headerlink" title="Go语言基础之net/http"></a>Go语言基础之net/http</h1><p>Go语言内置的<code>net/http</code>包十分的优秀，提供了HTTP客户端和服务端的实现。</p>
-<h2 id="net-http介绍"><a href="#net-http介绍" class="headerlink" title="net/http介绍"></a>net/http介绍</h2><p>Go语言内置的<code>net/http</code>包提供了HTTP客户端和服务端的实现。</p>
-<h3 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h3><p>超文本传输协议（HTTP，HyperText Transfer Protocol)是互联网上应用最为广泛的一种网络传输协议，所有的WWW文件都必须遵守这个标准。设计HTTP最初的目的是为了提供一种发布和接收HTML页面的方法。</p>
-<h2 id="HTTP客户端"><a href="#HTTP客户端" class="headerlink" title="HTTP客户端"></a>HTTP客户端</h2><h3 id="基本的HTTP-HTTPS请求"><a href="#基本的HTTP-HTTPS请求" class="headerlink" title="基本的HTTP/HTTPS请求"></a>基本的HTTP/HTTPS请求</h3><p>Get、Head、Post和PostForm函数发出HTTP/HTTPS请求。</p>
-<pre class=" language-lang-go"><code class="language-lang-go">resp, err := http.Get("http://example.com/")
-...
-resp, err := http.Post("http://example.com/upload", "image/jpeg", &buf)
-...
-resp, err := http.PostForm("http://example.com/form",
-    url.Values{"key": {"Value"}, "id": {"123"}})
-</code></pre>
-<p>程序在使用完response后必须关闭回复的主体。</p>
-<pre class=" language-lang-go"><code class="language-lang-go">resp, err := http.Get("http://example.com/")
-if err != nil {
-    // handle error
-}
-defer resp.Body.Close()
-body, err := ioutil.ReadAll(resp.Body)
-// ...
-</code></pre>
-<h3 id="GET请求示例"><a href="#GET请求示例" class="headerlink" title="GET请求示例"></a>GET请求示例</h3><p>使用<code>net/http</code>包编写一个简单的发送HTTP请求的Client端，代码如下：</p>
-<pre class=" language-lang-go"><code class="language-lang-go">package main
+                <h1 id="WriteUp-Hackergame-2021"><a href="#WriteUp-Hackergame-2021" class="headerlink" title="WriteUp - Hackergame 2021"></a>WriteUp - Hackergame 2021</h1><p>这里是个初次接触Hackergame的萌新@Hanmur 的WP，虽然最后有不少题有思路，但是懒得写了QwQ</p>
+<p>代码全丢了才知道要写WP，挠头</p>
+<h2 id="签到"><a href="#签到" class="headerlink" title="签到"></a>签到</h2><hr>
+<blockquote>
+<p> 为了能让大家顺利签到，命题组把每一秒的 flag 都记录下来制成了日记本的一页。你只需要打开日记，翻到 Hackergame 2021 比赛进行期间的任何一页就能得到 flag！</p>
+<p>提示：完成题目遇到困难？你可以参考 <a target="_blank" rel="noopener" href="https://github.com/ustclug/hackergame2018-writeups/tree/master/official/qiandao">2018 年签到题题解</a>、<a target="_blank" rel="noopener" href="https://github.com/ustclug/hackergame2019-writeups/blob/master/official/签到题/README.md">2019 年签到题题解</a> 和 <a target="_blank" rel="noopener" href="https://github.com/USTC-Hackergame/hackergame2020-writeups/blob/master/official/签到/README.md">2020 年签到题题解</a>。</p>
+</blockquote>
+<p><img src="https://static01.imgkr.com/temp/57846367ac244fe5801b1f10b0fd07c2.png" alt="image-20211031234211973"></p>
+<p>（好像是第三还是第几道才写的题）</p>
+<p>到页面后翻一页就可以看到上面的参数 <code>Page = 1</code></p>
+<ul>
+<li>可以获取当前时间戳输进去</li>
+<li>可以用二分法多猜几次数字</li>
+<li>可以用连点器加截屏检测爆破（bushi）</li>
+</ul>
+<h2 id="进制十六——参上"><a href="#进制十六——参上" class="headerlink" title="进制十六——参上"></a>进制十六——参上</h2><blockquote>
+<p>为严防 flag 泄漏以及其他存在于未来所有可能的意外灾难，神通广大的 Z 同学不仅强制要求每一道题目都加上权限和资源的限制，还给所有参与 Hackergame 2021 命题的计算机施加了一层法术结界。任何试图从结界逃逸的 flag 都会被无情抹除。</p>
+<p>而一位明面上是计算机学院的新生，实则为物理学院暗部核心成员的 X 同学，在 Hackergame 2021 命题组已经潜伏多时。妄想趁比赛开始的午时，借阳火正旺之势，冲破 Z 同学的结界，以图片而非明文的形式，将 flag 悄悄传递出来。</p>
+<p>好在 Z 同学法力之深厚，不可管窥蠡测。在 flag 被传出去的前两天，就已预知此事并将图片中的 flag 无声消泯了。</p>
+<p>只是，这位 X 同学，虽然不会退出 Vim，但是似乎对打开十六进制编辑器颇有造诣……</p>
+<p><img src="https://hack.lug.ustc.edu.cn/media/629da242-b1b1-5f69-a623-1c13fcedf019/hex_editor.png" alt="hex_editor"></p>
+</blockquote>
+<p>很简单的一题，在010编辑器按照左边的16进制输入就看得到了，没有010编辑器的可以用代码自己写</p>
+<h2 id="去吧！追寻自由的电波"><a href="#去吧！追寻自由的电波" class="headerlink" title="去吧！追寻自由的电波"></a>去吧！追寻自由的电波</h2><blockquote>
+<p>（前情提要） 为了打破 Z 同学布下的结界，X 同学偷偷搬出社团的业余无线电台试图向外界通讯。</p>
+<p>当然，如果只是这样还远远不够。遵依史称“老爹”的上古先贤的至理名言，必须要“用魔法打败魔法”。X 同学向上级申请到了科大西区同步辐射实验室设备的使用权限，以此打通次元空间，借助到另一个平行宇宙中 Z 同学的法力进行数据对冲，方才于乱中搏得一丝机会，将 flag 用无线电的形式发射了出去。</p>
+<p>考虑到信息的鲁棒性，X 同学使用了无线电中惯用的方法来区分字符串中读音相近的字母。即使如此，打破次元的强大能量扭曲了时空，使得最终接受到的录音的速度有所改变。</p>
+<p>为了保障同步辐射设备的持续运转，组织牺牲了大量的能源，甚至以东北部分地区无计划限电为代价，把这份沉甸甸的录音文件送到了你的手上。而刚刚起床没多久，试图抢签到题一血还失败了的你，可以不辜负同学们对你的殷切期望吗？</p>
+<p>注：flag 花括号内只包含小写字母。</p>
+</blockquote>
+<p>英语听力现在开始）</p>
+<p>在网上可以找到这个译码表</p>
+<p><img src="https://static01.imgkr.com/temp/b28c2a0621c14907b840006a104813c8.png" alt="image-20211031235405633"></p>
+<p>下载文件后可以明显发现音频的速度被加快了，将音频放进AU里调整一下 <code>伸缩与变调</code> 就可以获取到正常的音频了</p>
+<p>我是直接硬听出了结果，不过后面好像知道有软件可以直接转译，真适合我这个有软件就用的懒逼哎</p>
+<h2 id="猫咪问答"><a href="#猫咪问答" class="headerlink" title="猫咪问答"></a>猫咪问答</h2><blockquote>
+<p>我猛然一看，就猛然看到这个猫咪问答，我直呼我直呼，上次看到这么这么的发言还是上次，这问答属于是典型的典型了，我之前还没发现，当我发现的时候我已经发现了，这问答就像一个问答，问答的内容充满了内容，我不禁感慨了一句感慨：希望下次看到这么这么的猫咪问答是下次。</p>
+<p>提示：<strong>解出谜题不需要是科大在校学生</strong>。解题遇到困难？你可以参考 <a target="_blank" rel="noopener" href="https://github.com/ustclug/hackergame2018-writeups/blob/master/official/ustcquiz/README.md">2018 年猫咪问答题解</a> 和 <a target="_blank" rel="noopener" href="https://github.com/USTC-Hackergame/hackergame2020-writeups/blob/master/official/猫咪问答++/README.md">2020 年猫咪问答++ 题解</a>。</p>
+</blockquote>
+<p>都是些通过搜索找得到的答案</p>
+<pre><code>1. 2017 年，中科大信息安全俱乐部（SEC@USTC）并入中科大 Linux 用户协会（USTCLUG）。目前，信息安全俱乐部的域名（sec.ustc.edu.cn）已经无法访问，但你能找到信息安全俱乐部的社团章程在哪一天的会员代表大会上通过的吗？
+提示：输入格式为 YYYYMMDD，如 20211023。请不要回答 “能” 或者 “不能”。
+</code></pre><p>搜一下SEC@USTC看得到一个Contest，进去后在附属页面里可以找到</p>
+<p><a target="_blank" rel="noopener" href="https://web.archive.org/web/20181004003308/http://sec.ustc.edu.cn/doku.php/codes">https://web.archive.org/web/20181004003308/http://sec.ustc.edu.cn/doku.php/codes</a></p>
+<pre><code>2. 中国科学技术大学 Linux 用户协会在近五年多少次被评为校五星级社团？
+提示：是一个非负整数。
+</code></pre><p>在Hacakergame的主页进LUG的官网，找一下就看得到了</p>
+<p><a target="_blank" rel="noopener" href="https://lug.ustc.edu.cn/wiki/intro/#特色活动">中国科学技术大学 Linux 用户协会 - LUG @ USTC</a></p>
+<p><img src="https://static01.imgkr.com/temp/701669ff295b43ccbd65119056c84e29.png" alt="image-20211101000225489"></p>
+<pre><code>3. 中国科学技术大学 Linux 用户协会位于西区图书馆的活动室门口的牌子上“LUG @ USTC”下方的小字是？
+提示：正确答案的长度为 27，注意大小写。
+</code></pre><p>搜索“西区图书馆 活动室”就可以看到了</p>
+<p><a target="_blank" rel="noopener" href="https://lug.ustc.edu.cn/news/2016/06/new-activity-room-in-west-library/">西区图书馆新活动室启用 - LUG @ USTC</a></p>
+<pre><code>4. 在 SIGBOVIK 2021 的一篇关于二进制 Newcomb-Benford 定律的论文中，作者一共展示了多少个数据集对其理论结果进行验证？
+提示：是一个非负整数。
+</code></pre><p>搜索SIGBOVIK 2021 可以找到这个PDF，在里面找到Newcomb-Benford相关内容即可</p>
+<p><a target="_blank" rel="noopener" href="http://sigbovik.org/2021/proceedings.pdf">sigbovik.org/2021/proceedings.pdf</a></p>
+<pre><code>5. 不严格遵循协议规范的操作着实令人生厌，好在 IETF 于 2021 年成立了 Protocol Police 以监督并惩戒所有违背 RFC 文档的行为个体。假如你发现了某位同学可能违反了协议规范，根据 Protocol Police 相关文档中规定的举报方法，你应该将你的举报信发往何处？
+提示：正确答案的长度为 9。
+</code></pre><p>搜索Protocol Police，找到PDF后翻查一下就可以找到</p>
+<p><a target="_blank" rel="noopener" href="https://www.rfc-editor.org/rfc/rfc8962.html">RFC 8962: Establishing the Protocol Police (rfc-editor.org)</a></p>
+<p><img src="https://static01.imgkr.com/temp/807061e4222b400e994f0ddab1b58690.png" alt="image-20211101001103902"></p>
+<h2 id="卖瓜"><a href="#卖瓜" class="headerlink" title="卖瓜"></a>卖瓜</h2><blockquote>
+<p>有一个人前来买瓜。</p>
+<p>HQ：哥们，这瓜多少钱一斤啊？</p>
+<p>你：两块钱一斤。</p>
+<p>HQ：What’s up！这瓜皮子是金子做的还是瓜粒子是金子做的？</p>
+<p>你：你瞧瞧现在哪有瓜啊？这都是大棚的瓜，只有 6 斤一个和 9 斤一个的，你嫌贵我还嫌贵呢。</p>
+<p>（HQ 心里默默一算）</p>
+<p>HQ：给我来 20 斤的瓜。</p>
+<p>你：行！</p>
+<p>HQ：行？这瓜能称出 20 斤吗？</p>
+<p>你：我开水果摊的，还不会称重？</p>
+<p>HQ：我问你这瓜能称出 20 斤吗？</p>
+<p>你：你是故意找茬，是不是？你要不要吧！</p>
+<p>HQ：你这瓜要是刚好 20 斤吗我肯定要啊。那它要是没有怎么办啊？</p>
+<p>你：要是不是 20 斤，我自己吃了它，满意了吧？</p>
+<p>（你开始选瓜称重）</p>
+<p><strong>补充说明：当称的数字变为浮点数而不是整数时，HQ 不会认可最终的称重结果。</strong></p>
+</blockquote>
+<p>你找茬是吧？</p>
+<p>测试一下后发现</p>
+<ul>
+<li><p>放入6斤的瓜如果是正数则不会上溢，是负数则正常增加</p>
+</li>
+<li><p>放入9斤的瓜如果正数则会出现上溢，是负数则会越加越负（成浮点）</p>
+</li>
+</ul>
+<p>呢么思路就很清晰了，先放入足够多的9斤瓜，让斤数变负后，计算一下放多少6斤瓜会接近到0，再看看能不能凑到20，不能就重复几次，总可以堆出来（人懒不想算）</p>
+<h2 id="透明的文件"><a href="#透明的文件" class="headerlink" title="透明的文件"></a>透明的文件</h2><blockquote>
+<p>一个透明的文件，用于在终端中展示一个五颜六色的 flag。</p>
+<p>可能是在 cmd.exe 等劣质终端中被长期使用的原因，这个文件失去了一些重要成分，变成了一堆乱码，也不会再显示出 flag 了。</p>
+<p>注意：flag 内部的字符全部为小写字母。</p>
+</blockquote>
+<p>下载文件后得到一堆奇怪的乱码，由题目提示可以发现它是Linux Shell的终端颜色码</p>
+<p>用Python在所有 <code>[</code> 前加上 <code>\e</code> 就可以在一个”优质终端”里运行出需要的图形了（然后这个笨比就在一堆劣质终端试完才跑虚拟机去跑）</p>
+<p>代码被记忆清除了就不放图了</p>
+<h2 id="旅行照片"><a href="#旅行照片" class="headerlink" title="旅行照片"></a>旅行照片</h2><blockquote>
+<p>你的学长决定来一场说走就走的旅行。通过他发给你的照片来看，他应该是在酒店住下了。</p>
+<p><img src="https://hack.lug.ustc.edu.cn/media/175efcf9-3959-5d4c-b9b4-cbc81850da77/travel-photo.jpg" alt="travel-photo"></p>
+<p>从照片来看，酒店似乎在小区的一栋高楼里，附近还有一家 KFC 分店。突然，你意识到照片里透露出来的信息比表面上看起来的要多。</p>
+<p>请观察照片并答对全部 5 道题以获取 flag。注意：图片未在其他地方公开发布过，也未采取任何隐写措施（通过手机拍摄屏幕亦可答题）。</p>
+</blockquote>
+<p>学长有闲又有钱，运气还好，不像我去个长沙回来就得写检讨（怒）</p>
+<p>整张图片最显眼的肯定是那个蓝色KFC，简单找找就可以发现他是 <code>北戴河Tiffany KFC</code></p>
+<p><img src="https://static01.imgkr.com/temp/a44cecd23fb44c89a252ffefbc3cb31f.png" alt="image-20211101002410117"></p>
+<p>在百度地图上找到位置，仔细比对一下发现跟拍摄角度怎么都不符合，但是我们搜一下新澳海底世界（这个位置），瞧瞧我们发现了什么</p>
+<p><img src="http://t1-q.mafengwo.net/s17/M00/C2/27/CoUBXl-dCC6AbiArABnA8ndj7wY568.jpg?imageMogr2%2Fthumbnail%2F%21690x450r%2Fgravity%2FCenter%2Fcrop%2F%21690x450%2Fquality%2F90%7Cwatermark%2F1%2Fimage%2FaHR0cDovL3QxLXEubWFmZW5nd28ubmV0L3MxMS9NMDAvNDQvOUIvd0tnQkVGc1A1UnlBRHY3cEFBQUhaWlVQUmxROTkwLnBuZw%3D%3D%2Fgravity%2FSouthEast%2Fdx%2F10%2Fdy%2F11" alt="img"></p>
+<p>很明显了，这个KFC从地图上位置搬到了海豚馆的旁边，这下就符合了，之后在地图上找找对应信息就可以了</p>
+<h2 id="FLAG助力大礼包"><a href="#FLAG助力大礼包" class="headerlink" title="FLAG助力大礼包"></a>FLAG助力大礼包</h2><blockquote>
+<p>“听说没？【大砍刀】平台又双叒做活动啦！参与活动就送 0.5 个 flag 呢，攒满 1 个 flag 即可免费提取！”</p>
+<p>“还有这么好的事情？我也要参加！”</p>
+<p>“快点吧！我已经拿到 flag 了呢！再不参加 flag 就要发完了呢。”</p>
+<p>“那怎么才能参加呢？”</p>
+<p>“这还不简单！点击下面的链接就行”</p>
+<p><strong>公告：本题在小概率情况下会产生操作时间限制无法重置的现象，表现为一直显示“操作速度太快了，请稍后再试！”，现已修复，请大家重新点击按钮后稍等几秒钟即可恢复。</strong></p>
+</blockquote>
+<p>这题很简单，找256个地方的人帮你助力一下就可以了，相信作为新时代大学生，广结良朋的你应该很容易就可以完成这个任务，我们看下一题(bushi)</p>
+<p>很明显的一个IP伪造，Burp拦截一下Post的数据，在其中增加</p>
+<pre><code>X-Forward-For: 1.1.1.1
+</code></pre><p>并把 <code>IP =</code> 后面的数值也更改成 <code>1.1.1.1</code> ，我们发现我们成功给自己助力了一刀，呢么我们多改几次数据，比如<code>2.2.2.2</code>，256次之后就可以做完啦！</p>
+<p>好吧我们有更容易的方法，使用Burp的Intruder，从0到256爆破一遍，时间间隔设置成2s就刚好稳稳地可以在十分钟内完成256次助力。</p>
+<h2 id="Amnesia"><a href="#Amnesia" class="headerlink" title="Amnesia"></a>Amnesia</h2><blockquote>
+<p>你的程序只需要输出字符串 <code>Hello, world!</code>（结尾有无换行均可）并正常结束。</p>
+<p>编译指令：<code>gcc -O file.c -m32</code></p>
+<p>运行指令：<code>./a.out</code></p>
+<p>编译器版本：Docker 镜像 <code>ustclug/debian:10</code> 中 <code>apt update &amp;&amp; apt -y upgrade &amp;&amp; apt install -y gcc=4:8.3.0-1 gcc-multilib=4:8.3.0-1</code> 的版本</p>
+<p><strong>轻度失忆</strong></p>
+<p>编译后 ELF 文件的 <code>.data</code> 和 <code>.rodata</code> 段会被清零。</p>
+<p>连接题目：<code>nc 202.38.93.111 10051</code> 或<a target="_blank" rel="noopener" href="http://202.38.93.111:10050/?token=1058%3AMEUCIQD7V9cVhsm8ZASKWsQmtEj7enU12QPOBk3xC%2FOCNcXrzQIgBI4aFDOhwvvz9XL9rqRw6Ed2j8DAX%2FmUQ4GGTHYK%2FRU%3D">网页终端</a></p>
+<p>判题脚本：<a target="_blank" rel="noopener" href="https://hack.lug.ustc.edu.cn/media/c4d3e46b-81aa-511d-a16c-e30cc5fda260/amnesia_1_checker.zip">下载</a></p>
+<p><strong>记忆清除</strong></p>
+<p>编译后 ELF 文件的 <code>.text</code> 段会被清零。</p>
+<p>连接题目：<code>nc 202.38.93.111 10061</code> 或<a target="_blank" rel="noopener" href="http://202.38.93.111:10060/?token=1058%3AMEUCIQD7V9cVhsm8ZASKWsQmtEj7enU12QPOBk3xC%2FOCNcXrzQIgBI4aFDOhwvvz9XL9rqRw6Ed2j8DAX%2FmUQ4GGTHYK%2FRU%3D">网页终端</a></p>
+<p>判题脚本：<a target="_blank" rel="noopener" href="https://hack.lug.ustc.edu.cn/media/c4d3e46b-81aa-511d-a16c-e30cc5fda260/amnesia_2_checker.zip">下载</a></p>
+</blockquote>
+<p>轻度失忆，虽然代码没了，但是这题我真的忍不住要给大家展示一下我的生草代码，以下代码是用Python生成，请问我这样可以成为88W行代码的大佬吗。</p>
+<pre><code>#include &lt;stdio.h&gt;
 
-import (
-    "fmt"
-    "io/ioutil"
-    "net/http"
-)
+int main(){
 
-func main() {
-    resp, err := http.Get("https://www.baidu.com/")
-    if err != nil {
-        fmt.Printf("get failed, err:%v\n", err)
-        return
-    }
-    defer resp.Body.Close()
-    body, err := ioutil.ReadAll(resp.Body)
-    if err != nil {
-        fmt.Printf("read from resp.Body failed, err:%v\n", err)
-        return
-    }
-    fmt.Print(string(body))
-}
-</code></pre>
-<p>将上面的代码保存之后编译成可执行文件，执行之后就能在终端打印<code>baidu.com</code>网站首页的内容了，我们的浏览器其实就是一个发送和接收HTTP协议数据的客户端，我们平时通过浏览器访问网页其实就是从网站的服务器接收HTTP数据，然后浏览器会按照HTML、CSS等规则将网页渲染展示出来。</p>
-<h3 id="带参数的GET请求示例"><a href="#带参数的GET请求示例" class="headerlink" title="带参数的GET请求示例"></a>带参数的GET请求示例</h3><p>关于GET请求的参数需要使用Go语言内置的<code>net/url</code>这个标准库来处理。</p>
-<pre class=" language-lang-go"><code class="language-lang-go">func main() {
-    apiUrl := "http://127.0.0.1:9090/get"
-    // URL param
-    data := url.Values{}
-    data.Set("name", "小王子")
-    data.Set("age", "18")
-    u, err := url.ParseRequestURI(apiUrl)
-    if err != nil {
-        fmt.Printf("parse url requestUrl failed, err:%v\n", err)
-    }
-    u.RawQuery = data.Encode() // URL encode
-    fmt.Println(u.String())
-    resp, err := http.Get(u.String())
-    if err != nil {
-        fmt.Printf("post failed, err:%v\n", err)
-        return
-    }
-    defer resp.Body.Close()
-    b, err := ioutil.ReadAll(resp.Body)
-    if err != nil {
-        fmt.Printf("get resp failed, err:%v\n", err)
-        return
-    }
-    fmt.Println(string(b))
-}
-</code></pre>
-<p>对应的Server端HandlerFunc如下：</p>
-<pre class=" language-lang-go"><code class="language-lang-go">func getHandler(w http.ResponseWriter, r *http.Request) {
-    defer r.Body.Close()
-    data := r.URL.Query()
-    fmt.Println(data.Get("name"))
-    fmt.Println(data.Get("age"))
-    answer := `{"status": "ok"}`
-    w.Write([]byte(answer))
-}
-</code></pre>
-<h3 id="Post请求示例"><a href="#Post请求示例" class="headerlink" title="Post请求示例"></a>Post请求示例</h3><p>上面演示了使用<code>net/http</code>包发送<code>GET</code>请求的示例，发送<code>POST</code>请求的示例代码如下：</p>
-<pre class=" language-lang-go"><code class="language-lang-go">package main
+    char temp;
+temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;
+    printf("%c", temp);
 
-import (
-    "fmt"
-    "io/ioutil"
-    "net/http"
-    "strings"
-)
+    temp = 0;
+temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;
+    printf("%c", temp);
 
-// net/http post demo
+    temp = 0;
+temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;
+    printf("%c", temp);    
 
-func main() {
-    url := "http://127.0.0.1:9090/post"
-    // 表单数据
-    //contentType := "application/x-www-form-urlencoded"
-    //data := "name=小王子&age=18"
-    // json
-    contentType := "application/json"
-    data := `{"name":"小王子","age":18}`
-    resp, err := http.Post(url, contentType, strings.NewReader(data))
-    if err != nil {
-        fmt.Printf("post failed, err:%v\n", err)
-        return
-    }
-    defer resp.Body.Close()
-    b, err := ioutil.ReadAll(resp.Body)
-    if err != nil {
-        fmt.Printf("get resp failed, err:%v\n", err)
-        return
-    }
-    fmt.Println(string(b))
-}
-</code></pre>
-<p>对应的Server端HandlerFunc如下：</p>
-<pre class=" language-lang-go"><code class="language-lang-go">func postHandler(w http.ResponseWriter, r *http.Request) {
-    defer r.Body.Close()
-    // 1. 请求类型是application/x-www-form-urlencoded时解析form数据
-    r.ParseForm()
-    fmt.Println(r.PostForm) // 打印form数据
-    fmt.Println(r.PostForm.Get("name"), r.PostForm.Get("age"))
-    // 2. 请求类型是application/json时从r.Body读取数据
-    b, err := ioutil.ReadAll(r.Body)
-    if err != nil {
-        fmt.Printf("read request.Body failed, err:%v\n", err)
-        return
-    }
-    fmt.Println(string(b))
-    answer := `{"status": "ok"}`
-    w.Write([]byte(answer))
-}
-</code></pre>
-<h3 id="自定义Client"><a href="#自定义Client" class="headerlink" title="自定义Client"></a>自定义Client</h3><p>要管理HTTP客户端的头域、重定向策略和其他设置，创建一个Client：</p>
-<pre class=" language-lang-go"><code class="language-lang-go">client := &http.Client{
-    CheckRedirect: redirectPolicyFunc,
-}
-resp, err := client.Get("http://example.com")
-// ...
-req, err := http.NewRequest("GET", "http://example.com", nil)
-// ...
-req.Header.Add("If-None-Match", `W/"wyzzy"`)
-resp, err := client.Do(req)
-// ...
-</code></pre>
-<h3 id="自定义Transport"><a href="#自定义Transport" class="headerlink" title="自定义Transport"></a>自定义Transport</h3><p>要管理代理、TLS配置、keep-alive、压缩和其他设置，创建一个Transport：</p>
-<pre class=" language-lang-go"><code class="language-lang-go">tr := &http.Transport{
-    TLSClientConfig:    &tls.Config{RootCAs: pool},
-    DisableCompression: true,
-}
-client := &http.Client{Transport: tr}
-resp, err := client.Get("https://example.com")
-</code></pre>
-<p>Client和Transport类型都可以安全的被多个goroutine同时使用。出于效率考虑，应该一次建立、尽量重用。</p>
-<h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><h3 id="默认的Server"><a href="#默认的Server" class="headerlink" title="默认的Server"></a>默认的Server</h3><p>ListenAndServe使用指定的监听地址和处理器启动一个HTTP服务端。处理器参数通常是nil，这表示采用包变量DefaultServeMux作为处理器。</p>
-<p>Handle和HandleFunc函数可以向DefaultServeMux添加处理器。</p>
-<pre class=" language-lang-go"><code class="language-lang-go">http.Handle("/foo", fooHandler)
-http.HandleFunc("/bar", func(w http.ResponseWriter, r *http.Request) {
-    fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
-})
-log.Fatal(http.ListenAndServe(":8080", nil))
-</code></pre>
-<h3 id="默认的Server示例"><a href="#默认的Server示例" class="headerlink" title="默认的Server示例"></a>默认的Server示例</h3><p>使用Go语言中的<code>net/http</code>包来编写一个简单的接收HTTP请求的Server端示例，<code>net/http</code>包是对net包的进一步封装，专门用来处理HTTP协议的数据。具体的代码如下：</p>
-<pre class=" language-lang-go"><code class="language-lang-go">// http server
+    temp = 0;
+temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;
+    printf("%c", temp);    
 
-func sayHello(w http.ResponseWriter, r *http.Request) {
-    fmt.Fprintln(w, "Hello 康康！")
-}
+    temp = 0;
+temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;
+    printf("%c", temp);    
 
-func main() {
-    http.HandleFunc("/", sayHello)
-    err := http.ListenAndServe(":9090", nil)
-    if err != nil {
-        fmt.Printf("http server failed, err:%v\n", err)
-        return
-    }
+//dot
+    temp = 0;
+temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;
+    printf("%c", temp);
+
+    temp = 0;    
+temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;
+    printf("%c", temp);    
+
+    temp = 0;
+temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;
+    printf("%c", temp);    
+
+    temp = 0;
+temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;
+    printf("%c", temp);    
+
+    temp = 0;
+temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;
+    printf("%c", temp);    
+
+    temp = 0;
+temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;
+    printf("%c", temp);    
+
+    temp = 0;
+temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;
+    printf("%c", temp);    
+
+    temp = 0;
+temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;temp++;
+    printf("%c", temp);    
+
+    return 0;
 }
-</code></pre>
-<p>将上面的代码编译之后执行，打开你电脑上的浏览器在地址栏输入<code>127.0.0.1:9090</code>回车，此时就能够看到如下页面了。<img src="C:\Users\86189\AppData\Roaming\Typora\typora-user-images\image-20210828190935720.png" alt="image-20210828190935720"></p>
-<h3 id="自定义Server"><a href="#自定义Server" class="headerlink" title="自定义Server"></a>自定义Server</h3><p>要管理服务端的行为，可以创建一个自定义的Server：</p>
-<pre class=" language-lang-go"><code class="language-lang-go">s := &http.Server{
-    Addr:           ":8080",
-    Handler:        myHandler,
-    ReadTimeout:    10 * time.Second,
-    WriteTimeout:   10 * time.Second,
-    MaxHeaderBytes: 1 << 20,
-}
-log.Fatal(s.ListenAndServe())
-</code></pre>
+</code></pre><h2 id="Easy-RSA"><a href="#Easy-RSA" class="headerlink" title="Easy RSA"></a>Easy RSA</h2><blockquote>
+<p>自从 <a target="_blank" rel="noopener" href="https://github.com/ustclug/hackergame2018-writeups/tree/master/official/RSA_of_Z#解法-1">Hackergame 2018 公然揭露了大整数可以被神童口算分解的事实</a>，RSA 在 hackergame 中已经只能处于低分值的地位了。如果不在其名称前面加上 Easy 这个单词，似乎就会显得完全对不起其他题目。</p>
+<p>更何况，在本题的附件中，你还获得了构造 p 和 q 的方式。数理基础扎实的你应该可以轻松解决这些问题吧。</p>
+</blockquote>
+<p>作为某靶场清空RSA题的男人，我觉得这题应该不会有什么问题，直接开场冲去抢一血，然后一切顺利，死活不过，眼看着前面一个个人写出来了。最终发现自己扔进RSA解码的p是原来的p之后狠狠地emo了，只在中大的内场拿了这题的一血。</p>
+<p>代码没了，不过作为一血题还是重新写了一遍</p>
+<p>这题其实就是常规的RSA解码，在P和Q上加了两个算法题而已</p>
+<p><strong>P的算法</strong></p>
+<p>原题给出的P提示</p>
+<pre><code>def get_p():
+    x = 11124440021748127159092076861405454814981575144744508857178576572929321435002942998531420985771090167262256877805902135304112271641074498386662361391760451
+    y = 11124440021748127159092076861405454814981575144744508857178576572929321435002942998531420985771090167262256877805902135304112271641074498386662361391661439
+    value_p = sympy.nextprime((math.factorial(y)) % x)  # Hint：这里直接计算会溢出，请你仔细观察 x 和 y 的特征
+    return value_p
+</code></pre><p>这里其实就是计算y的阶乘取模x的结果，我们可以写个函数</p>
+<pre><code>def getPrime(A, B):
+    k = 1
+    for i in range(B+1, A):
+        k = (k*i) % A
+    res = (-gmpy2.invert(k, A)) % A
+    return sympy.nextprime(res)
+</code></pre><p>在 <code>get_p</code> 中调用 <code>getPrime(x, y)</code> 就可以得到P的值了</p>
+<pre><code>p =  10569944080090591401315432556965818857327680380269154543273468441025963038065648915158194147019839932524599260058098616377893091051396090650574162446875263
+</code></pre><p><strong>Q的算法</strong></p>
+<p>原题给出的Q提示</p>
+<pre><code>def get_q():
+    value = [getPrime(256)]
+    for i in range(1, 10):
+        value.append(sympy.nextprime(value[i - 1]))
+    print("value[-1] = ", value[-1])
+    # value[-1] = 80096058210213458444437404275177554701604739094679033012396452382975889905967
+    n = 1
+    for i in range(10):
+        n = n * value[i]
+    q = getPrime(512)
+    value_q = pow(q, e, n)
+    print("value_q = ", value_q)
+    # value_q = 5591130088089053683141520294620171646179623062803708281023766040254675625012293743465254007970358536660934858789388093688621793201658889399155357407224541324547522479617669812322262372851929223461622559971534394847970366311206823328200747893961649255426063204482192349202005330622561575868946656570678176047822163692259375233925446556338917358118222905050574458037965803154233167594946713038301249145097770337253930655681648299249481985768272321820718607757023350742647019762122572886601905212830744868048802864679734428398229280780215896045509020793530842541217790352661324630048261329493088812057300480085895399922301827190211956061083460036781018660201163819104150988531352228650991733072010425499238731811243310625701946882701082178190402011133439065106720309788819
+    return sympy.nextprime(q)
+</code></pre><p>细读一下代码，value先获取随机的一个质数，之后获取该指数后面9个质数</p>
+<p>而我们知道了value的最后一个质数是<code>80096058210213458444437404275177554701604739094679033012396452382975889905967</code></p>
+<p>呢么通过</p>
+<pre><code>    value = 80096058210213458444437404275177554701604739094679033012396452382975889905967
+
+    for i in range(1, 10):
+        value = sympy.prevprime(value)
+        print("value = ", value)
+</code></pre><p>把value的第一个质数找出来，之后把原题代码中<code>value = [getPrime(256)]</code>的方括号内替换成这个质数，就可以获取到value的正确序列了:</p>
+<pre><code>    value = [80096058210213458444437404275177554701604739094679033012396452382975889905121]
+
+    for i in range(1, 10):
+        value.append(sympy.nextprime(value[i - 1]))
+    print("value[-1] = ", value[-1])
+</code></pre><p>继续读代码，n是value每个元素的乘积，知道value_q的值，也知道了 <code>value_q = pow(q, e, n)</code> </p>
+<p>很自然的我们由RSA的算法可以想到，<code>q = pow(value_q, d, n )</code>，其中d的值为<code>gmpy2.invert(e, phi_n)</code></p>
+<p><code>phi(n)</code>当然不能用n简单取模，不过由于</p>
+<ul>
+<li><p>欧拉函数中<code>phi(n*m) = phi(n) * phi(m)</code>，</p>
+</li>
+<li><p>且对于质数k，有<code>phi(k) = k - 1</code></p>
+</li>
+</ul>
+<p>我们就可以求出phi(n)的值，进而求出d的值</p>
+<p>于是直接带入运算即可得到q。</p>
+<pre><code>value_q = 5591130088089053683141520294620171646179623062803708281023766040254675625012293743465254007970358536660934858789388093688621793201658889399155357407224541324547522479617669812322262372851929223461622559971534394847970366311206823328200747893961649255426063204482192349202005330622561575868946656570678176047822163692259375233925446556338917358118222905050574458037965803154233167594946713038301249145097770337253930655681648299249481985768272321820718607757023350742647019762122572886601905212830744868048802864679734428398229280780215896045509020793530842541217790352661324630048261329493088812057300480085895399922301827190211956061083460036781018660201163819104150988531352228650991733072010425499238731811243310625701946882701082178190402011133439065106720309788819
+    phi_n = 1
+    for i in range(10):
+        phi_n *= value[i] - 1
+
+    d = gmpy2.invert(e, phi_n)
+
+    q = pow(value_q, d, n)
+    print("q = ", q)
+</code></pre><p><strong>RSA解码</strong></p>
+<p>所有需要的数据都获得了，直接扔进通用的RSA解码代码里，得到FLAG</p>
+<pre><code>import gmpy2
+import binascii
+
+p = gmpy2.mpz(10569944080090591401315432556965818857327680380269154543273468441025963038065648915158194147019839932524599260058098616377893091051396090650574162446875263)
+q = gmpy2.mpz(10477925992460766451892208516181598312750484426056814542870756188277177949099084361476539803367804757559880919838828678145609717295215924948786830953571811)
+n = p * q
+
+e = gmpy2.mpz(65537)
+phi_n = (p-1)*(q-1)
+d = gmpy2.invert(e, phi_n)
+c = gmpy2.mpz(110644875422336073350488613774418819991169603750711465190260581119043921549811353108399064284589038384540018965816137286856268590507418636799746759551009749004176545414118128330198437101472882906564195341277423007542422286760940374859966152871273887950174522820162832774361714668826122465471705166574184367478)
+
+m = pow(c, d, n)
+print("十进制:\n%s" % m)
+m_hex = hex(m)[2:]
+print("十六进制:\n%s" % (m_hex,))
+# print("ascII:\n%s" % ((binascii.b2a_hex(hex(m)[2:])).decode('hex'),))
+print("ascii:\n%s" % (binascii.a2b_hex(m_hex).decode("utf8"),))
+</code></pre><p><img src="https://static01.imgkr.com/temp/44146d076d7b401d9a23920b11944d0a.png" alt="image-20211101012259731"></p>
 
                 
             </div>
@@ -740,7 +844,7 @@ log.Fatal(s.ListenAndServe())
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://hanmur.github.io/2021/120322993.html">https://hanmur.github.io/2021/120322993.html</a>
+                    <a href="https://hanmur.github.io/2021/121130106.html">https://hanmur.github.io/2021/121130106.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -778,8 +882,12 @@ log.Fatal(s.ListenAndServe())
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Go%E8%AF%AD%E8%A8%80/">
-                                    <span class="chip bg-color">Go语言</span>
+                                <a href="/tags/CTF/">
+                                    <span class="chip bg-color">CTF</span>
+                                </a>
+                            
+                                <a href="/tags/WriteUp/">
+                                    <span class="chip bg-color">WriteUp</span>
                                 </a>
                             
                         </div>
@@ -1148,50 +1256,56 @@ log.Fatal(s.ListenAndServe())
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/120334166.html">
+                <a href="/2021/121130106.html">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="log包">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="WriteUp-Hackergame 2021">
                         
-                        <span class="card-title">log包</span>
+                        <span class="card-title">WriteUp-Hackergame 2021</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Golang的log包
+                            这是第一次正经打的比赛呢
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-12-03
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-11
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Go%E8%AF%AD%E8%A8%80/" class="post-category">
-                                    Go语言
+                            <a href="/categories/CTF/" class="post-category">
+                                    CTF
                                 </a>
                             
-                            <a href="/categories/Go%E8%AF%AD%E8%A8%80/%E6%A0%87%E5%87%86%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/" class="post-category">
-                                    标准库的基础使用
+                            <a href="/categories/CTF/WriteUp/" class="post-category">
+                                    WriteUp
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Go%E8%AF%AD%E8%A8%80/">
-                        <span class="chip bg-color">Go语言</span>
+                    <a href="/tags/CTF/">
+                        <span class="chip bg-color">CTF</span>
+                    </a>
+                    
+                    <a href="/tags/WriteUp/">
+                        <span class="chip bg-color">WriteUp</span>
                     </a>
                     
                 </div>
@@ -1205,35 +1319,35 @@ log.Fatal(s.ListenAndServe())
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/120325228.html">
+                <a href="/2021/121140268.html">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="fmt占位符">
+                        <img src="/medias/featureimages/25.jpg" class="responsive-img" alt="WriteUp-美团网络安全高校挑战赛2021">
                         
-                        <span class="card-title">fmt占位符</span>
+                        <span class="card-title">WriteUp-美团网络安全高校挑战赛2021</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Golang的fmt占位符
+                            一场作为新人密码手发挥还行的比赛）
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-03
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-11
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Go%E8%AF%AD%E8%A8%80/" class="post-category">
-                                    Go语言
+                            <a href="/categories/CTF/" class="post-category">
+                                    CTF
                                 </a>
                             
-                            <a href="/categories/Go%E8%AF%AD%E8%A8%80/%E6%A0%87%E5%87%86%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/" class="post-category">
-                                    标准库的基础使用
+                            <a href="/categories/CTF/WriteUp/" class="post-category">
+                                    WriteUp
                                 </a>
                             
                             
@@ -1243,8 +1357,12 @@ log.Fatal(s.ListenAndServe())
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Go%E8%AF%AD%E8%A8%80/">
-                        <span class="chip bg-color">Go语言</span>
+                    <a href="/tags/CTF/">
+                        <span class="chip bg-color">CTF</span>
+                    </a>
+                    
+                    <a href="/tags/WriteUp/">
+                        <span class="chip bg-color">WriteUp</span>
                     </a>
                     
                 </div>

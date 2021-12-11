@@ -4,8 +4,8 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="map, Hanmur">
-    <meta name="description" content="Golang中的map类型">
+    <meta name="keywords" content="WriteUp-美团网络安全高校挑战赛2021, Hanmur">
+    <meta name="description" content="一场作为新人密码手发挥还行的比赛）">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>map | Hanmur</title>
+    <title>WriteUp-美团网络安全高校挑战赛2021 | Hanmur</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -333,12 +333,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/25.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">map</h1>
+                    <h1 class="description center-align post-title">WriteUp-美团网络安全高校挑战赛2021</h1>
                 </div>
             </div>
         </div>
@@ -454,8 +454,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Go%E8%AF%AD%E8%A8%80/">
-                                <span class="chip bg-color">Go语言</span>
+                            <a href="/tags/CTF/">
+                                <span class="chip bg-color">CTF</span>
+                            </a>
+                        
+                            <a href="/tags/WriteUp/">
+                                <span class="chip bg-color">WriteUp</span>
                             </a>
                         
                     </div>
@@ -466,12 +470,12 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Go%E8%AF%AD%E8%A8%80/" class="post-category">
-                                Go语言
+                            <a href="/categories/CTF/" class="post-category">
+                                CTF
                             </a>
                         
-                            <a href="/categories/Go%E8%AF%AD%E8%A8%80/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="post-category">
-                                数据类型
+                            <a href="/categories/CTF/WriteUp/" class="post-category">
+                                WriteUp
                             </a>
                         
                     </div>
@@ -483,28 +487,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-12-02
+                    2021-12-11
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-09
+                    2021-12-11
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    618
+                    630
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    3 分
                 </div>
                 
 
@@ -524,139 +528,86 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="map"><a href="#map" class="headerlink" title="map"></a>map</h1><p>map是一种无序的，基于<code>key_value</code>的数据结构</p>
-<p>go语言中map是引用类型，必须初始化</p>
-<h3 id="map的定义"><a href="#map的定义" class="headerlink" title="map的定义"></a>map的定义</h3><p><code>map</code>的定义语法：</p>
-<pre class=" language-lang-go"><code class="language-lang-go">map[keyType]valueType
+                <h2 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p><img src="https://static01.imgkr.com/temp/6ab277a9adb04f4691829aa881e763b7.png" alt="Symbols.png"></p>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>对于经常写文档的你，一定对LaTeX的特殊字符不陌生</p>
+<p>将对应字符的首位连起来就是本题的flag了</p>
+<h3 id="LaTeX代码"><a href="#LaTeX代码" class="headerlink" title="LaTeX代码"></a>LaTeX代码</h3><p><img src="https://static01.imgkr.com/temp/e513474ef4cc43e3bfce6a1a5467b558.png" alt="Symbols"></p>
+<h2 id="hamburgerRSA"><a href="#hamburgerRSA" class="headerlink" title="hamburgerRSA"></a>hamburgerRSA</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><pre class=" language-lang-python"><code class="language-lang-python">import Crypto.Util.number
+
+flag = open('flag.txt').read()
+nbit = 64
+
+while True:
+    p, q = Crypto.Util.number.getPrime(nbit), Crypto.Util.number.getPrime(nbit)
+    PP = int(str(p) + str(p) + str(q) + str(q))
+    QQ = int(str(q) + str(q) + str(p) + str(p))
+    if Crypto.Util.number.isPrime(PP) and Crypto.Util.number.isPrime(QQ):
+        break
+
+n = PP * QQ
+m = Crypto.Util.number.bytes_to_long(flag.encode())
+c = pow(m, 65537, n)
+print('n =', n)
+print('c =', c)
+n = 177269125756508652546242326065138402971542751112423326033880862868822164234452280738170245589798474033047460920552550018968571267978283756742722231922451193
+c = 47718022601324543399078395957095083753201631332808949406927091589044837556469300807728484035581447960954603540348152501053100067139486887367207461593404096
 </code></pre>
-<p>其中，</p>
+<h3 id="解题思路-1"><a href="#解题思路-1" class="headerlink" title="解题思路"></a>解题思路</h3><p>我们可以把PP,QQ的生成过程拆分成以下过程</p>
+<pre class=" language-lang-python"><code class="language-lang-python">while True:
+    p, q = getPrime(nbit), getPrime(nbit)
+    P = int(str(p) + str(p))
+    Q = int(str(q) + str(q))
+    PP = int(str(P) + str(Q))
+    QQ = int(str(Q) + str(P))
+    if isPrime(PP) and isPrime(QQ):
+        break
+</code></pre>
+<p>分析一下N的生成过程：</p>
+<script type="math/tex; mode=display">
+令x, y = len(p), len(q)\\P = 10^x p + p,\quad Q = 10^y q + q\\令x', y' = len(P), len(Q)\\PP = 10^{x'}P + P,\quad QQ = 10^{y'}Q + Q</script><script type="math/tex; mode=display">
+PP = 10^{x' + x}p + (10^{x'} + 10^{x} + 1)p    \\QQ = 10^{y' + y}q + (10^{y'} + 10^{y} + 1)q \\则N = PP \cdot QQ = 10^{x' + x + y' + y}p\cdot q + (...)p\cdot q + p\cdot q</script><p>省略号中的相较于$10^{x’+x+y’+y}$要小很多，相较于1要大很多</p>
+<p>于是在N前面的某一部分等价于$p\cdot q$前面的某一部分，后面同理，即：</p>
 <ul>
-<li><code>keyType</code>：键的类型</li>
-<li><code>valueType</code>：值的类型</li>
+<li><code>str(N)[:?]</code> 等价于 <code>str(p*q)[:?]</code></li>
+<li><code>str(N)[?:]</code> 等价于  <code>str(p*q)[?:]</code>.</li>
 </ul>
-<p>map类型的变量初始值为<code>nil</code></p>
-<p>需要使用<code>make()</code>函数分配内存</p>
-<pre class=" language-lang-go"><code class="language-lang-go">make(map[keyType]valueType, [cap])
-</code></pre>
-<p>其中，</p>
-<ul>
-<li><code>cap</code>：map的容量</li>
-</ul>
-<h3 id="map的使用"><a href="#map的使用" class="headerlink" title="map的使用"></a>map的使用</h3><p>map中数据是成对存在的，使用示例如下：</p>
-<pre class=" language-lang-go"><code class="language-lang-go">scoreMap := make(map[string]int, 8)
-scoreMap["武子"] = 90
-scoreMap["康康"] = 100
+<p>通过对省略号内部的分析，我们可以知道<strong>这一部分的长度肯定比$\min(x,y)$要长</strong></p>
+<p>由于题目给出的N的长度为156，则PP的长度为78，p和q的长度之和为39。</p>
+<p>又因为p，q是通过<code>Crypto.Util.number.getPrime(64)</code>生成的，则<strong>p和q的长度为19和20</strong></p>
+<p>呢么我们可以确定$p\cdot q$已知的部分为前19和后19位。</p>
+<p>$p\cdot q$的长度为39位，除却已知的，我们只需要爆破中间的一位即可找到p和q，进而获取flag啦！</p>
+<p>这里可以通过<a target="_blank" rel="noopener" href="http://factordb.com/index.php?query=177269125756508652526742722231922451193">factordb.com</a>对十个需要爆破的$p\cdot q$进行因式分解</p>
+<h3 id="解题代码"><a href="#解题代码" class="headerlink" title="解题代码"></a>解题代码</h3><pre class=" language-lang-python"><code class="language-lang-python">import Crypto.Util.number
 
-fmt.println(scoreMap)            //输出：map[康康:100 武子:90]
-fmt.println(scoreMap["武子"])       //输出：100
-</code></pre>
-<p>map也可以在声明时初始化元素</p>
-<pre class=" language-lang-go"><code class="language-lang-go">nMap := map[string]string{
-    "武子" : "90",
-    "康康" : "100",
-}
-</code></pre>
-<h3 id="判断Map中某个键是否存在"><a href="#判断Map中某个键是否存在" class="headerlink" title="判断Map中某个键是否存在"></a>判断Map中某个键是否存在</h3><p>Go语言中判断map中键是否存在</p>
-<pre class=" language-lang-go"><code class="language-lang-go">value,ok := map[key]
-</code></pre>
-<p>举例</p>
-<pre class=" language-lang-go"><code class="language-lang-go">//数分考试
-scoreMap := make(map[string] int)
-scoreMap["武子"] = 90
-scoreMap["康康"] = 100
+def decrypt_RSA(c, e, p, q):
+    phi = (p-1) * (q-1)
+    d = Crypto.Util.number.inverse(e, phi)
+    m = pow(c, d, p*q)
+    print(Crypto.Util.number.long_to_bytes(m))
 
-// 如果key存在     ok为true    v为对应的值；
-// 如果key不存在     ok为false   v为值类型的零值
-v, ok := scoreMap["武子"]
+n = 177269125756508652546242326065138402971542751112423326033880862868822164234452280738170245589798474033047460920552550018968571267978283756742722231922451193
+c = 47718022601324543399078395957095083753201631332808949406927091589044837556469300807728484035581447960954603540348152501053100067139486887367207461593404096
+e = 65537
 
-if ok {
-    fmt.Println(v)
-} else {
-    fmt.Println("这人旷考？")
-}
-</code></pre>
-<h3 id="map的遍历"><a href="#map的遍历" class="headerlink" title="map的遍历"></a>map的遍历</h3><p>使用<code>for range</code>遍历map</p>
-<pre class=" language-lang-go"><code class="language-lang-go">scoreMap := make(map[string]int, 8)
-scoreMap["武子"] = 90
-scoreMap["康康"] = 100
+# 爆破p,q
+# low = str(n)[-19:]
+# high = str(n)[:19]
+# for i in range(10):
+#     print(int(high + str(i) + low))
 
-//遍历key和value
-for key, value := range scoreMap{
-    fmt.Println(key, value)
-}
-//遍历key
-for key := range scoreMap{
-    fmt.Println(key, value)
-}
-</code></pre>
-<h3 id="使用delete-函数删除键值对"><a href="#使用delete-函数删除键值对" class="headerlink" title="使用delete()函数删除键值对"></a>使用delete()函数删除键值对</h3><p><code>delete</code>函数的格式：</p>
-<pre class=" language-lang-go"><code class="language-lang-go">delete(map, key)
-</code></pre>
-<p>其中，</p>
-<ul>
-<li><p><code>map</code>：要删除键值对的map</p>
-</li>
-<li><p><code>key</code>：要删除键值对的键</p>
-</li>
-</ul>
-<p>举例：</p>
-<pre class=" language-lang-go"><code class="language-lang-go">scoreMap := make(map[string]int, 8)
-scoreMap["武子"] = 90
-scoreMap["康康"] = 100
+# 解密
+p = 9788542938580474429
+q = 18109858317913867117
+P = int(str(p) + str(p))
+Q = int(str(q) + str(q))
+PP = int(str(P) + str(Q))
+QQ = int(str(Q) + str(P))
+N = PP * QQ
 
-delete(scoreMap, "武子")    //delete 武子 对应的键值对
-fmt.println(scoreMap)    //输出：map[康康:100]
-</code></pre>
-<h3 id="按照指定顺序遍历map"><a href="#按照指定顺序遍历map" class="headerlink" title="按照指定顺序遍历map"></a>按照指定顺序遍历map</h3><pre class=" language-lang-go"><code class="language-lang-go">rand.Seed(time.Now().UnixNano()) //初始化随机数种子
-
-var scoreMap = make(map[string]int, 200)
-
-for i := 0; i < 100; i++ {
-    key := fmt.Sprintf("stu%02d", i) //生成stu开头的字符串
-    value := rand.Intn(100)          //生成0~99的随机整数
-    scoreMap[key] = value
-}
-//取出map中的所有key存入切片keys
-var keys = make([]string, 0, 200)
-for key := range scoreMap {
-    keys = append(keys, key)
-}
-//对切片进行排序
-sort.Strings(keys)
-//按照排序后的key遍历map
-for _, key := range keys {
-    fmt.Println(key, scoreMap[key])
-}
-</code></pre>
-<h3 id="元素为map的切片"><a href="#元素为map的切片" class="headerlink" title="元素为map的切片"></a>元素为map的切片</h3><pre class=" language-lang-go"><code class="language-lang-go">func main() {
-    var mapSlice = make([]map[string]string, 3)
-
-    // 对切片中的map元素进行初始化
-    mapSlice[0] = make(map[string]string, 10)
-    mapSlice[0]["name"] = "小王子"
-    mapSlice[0]["password"] = "123456"
-    mapSlice[0]["address"] = "沙河"
-
-    fmt.Println(mapSlice)
-}
-</code></pre>
-<h3 id="值为切片类型的map"><a href="#值为切片类型的map" class="headerlink" title="值为切片类型的map"></a>值为切片类型的map</h3><p>下面的代码演示了map中值为切片类型的操作：</p>
-<pre class=" language-lang-go"><code class="language-lang-go">func main() {
-    var sliceMap = make(map[string][]string, 3)
-
-    key := "中国"
-
-    //判定key是否在map中
-    value, ok := sliceMap[key]
-    if !ok {
-        value = make([]string, 0, 2)
-    }
-    value = append(value, "北京", "上海")
-
-    sliceMap[key] = value
-
-    fmt.Println(sliceMap)
-}
+if N == n:
+    decrypt_RSA(c, e, PP, QQ)
+else:
+    print("error")
 </code></pre>
 
                 
@@ -684,7 +635,7 @@ for _, key := range keys {
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://hanmur.github.io/2021/120243450.html">https://hanmur.github.io/2021/120243450.html</a>
+                    <a href="https://hanmur.github.io/2021/121140268.html">https://hanmur.github.io/2021/121140268.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -722,8 +673,12 @@ for _, key := range keys {
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Go%E8%AF%AD%E8%A8%80/">
-                                    <span class="chip bg-color">Go语言</span>
+                                <a href="/tags/CTF/">
+                                    <span class="chip bg-color">CTF</span>
+                                </a>
+                            
+                                <a href="/tags/WriteUp/">
+                                    <span class="chip bg-color">WriteUp</span>
                                 </a>
                             
                         </div>
@@ -1092,50 +1047,56 @@ for _, key := range keys {
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/120240853.html">
+                <a href="/2021/121140268.html">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="指针">
+                        <img src="/medias/featureimages/25.jpg" class="responsive-img" alt="WriteUp-美团网络安全高校挑战赛2021">
                         
-                        <span class="card-title">指针</span>
+                        <span class="card-title">WriteUp-美团网络安全高校挑战赛2021</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Golang中的指针操作
+                            一场作为新人密码手发挥还行的比赛）
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-12-02
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-11
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Go%E8%AF%AD%E8%A8%80/" class="post-category">
-                                    Go语言
+                            <a href="/categories/CTF/" class="post-category">
+                                    CTF
                                 </a>
                             
-                            <a href="/categories/Go%E8%AF%AD%E8%A8%80/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="post-category">
-                                    数据类型
+                            <a href="/categories/CTF/WriteUp/" class="post-category">
+                                    WriteUp
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Go%E8%AF%AD%E8%A8%80/">
-                        <span class="chip bg-color">Go语言</span>
+                    <a href="/tags/CTF/">
+                        <span class="chip bg-color">CTF</span>
+                    </a>
+                    
+                    <a href="/tags/WriteUp/">
+                        <span class="chip bg-color">WriteUp</span>
                     </a>
                     
                 </div>
@@ -1149,35 +1110,39 @@ for _, key := range keys {
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/120228165.html">
+                <a href="/2021/121155226.html">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="字符串操作">
+                        <img src="/medias/featureimages/26.jpg" class="responsive-img" alt="古典密码-单表替换">
                         
-                        <span class="card-title">字符串操作</span>
+                        <span class="card-title">古典密码-单表替换</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Golang的一些常见字符串操作
+                            古典密码中的一些单表替换密码
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-02
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-11
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Go%E8%AF%AD%E8%A8%80/" class="post-category">
-                                    Go语言
+                            <a href="/categories/CTF/" class="post-category">
+                                    CTF
                                 </a>
                             
-                            <a href="/categories/Go%E8%AF%AD%E8%A8%80/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="post-category">
-                                    数据类型
+                            <a href="/categories/CTF/Crypto/" class="post-category">
+                                    Crypto
+                                </a>
+                            
+                            <a href="/categories/CTF/Crypto/%E5%8F%A4%E5%85%B8%E5%AF%86%E7%A0%81/" class="post-category">
+                                    古典密码
                                 </a>
                             
                             
@@ -1187,8 +1152,16 @@ for _, key := range keys {
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Go%E8%AF%AD%E8%A8%80/">
-                        <span class="chip bg-color">Go语言</span>
+                    <a href="/tags/CTF/">
+                        <span class="chip bg-color">CTF</span>
+                    </a>
+                    
+                    <a href="/tags/Crypto/">
+                        <span class="chip bg-color">Crypto</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%8F%A4%E5%85%B8%E5%AF%86%E7%A0%81/">
+                        <span class="chip bg-color">古典密码</span>
                     </a>
                     
                 </div>

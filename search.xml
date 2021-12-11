@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>WriteUp-美团网络安全高校挑战赛2021</title>
+      <link href="/2021/121140268.html"/>
+      <url>/2021/121140268.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p><img src="https://static01.imgkr.com/temp/6ab277a9adb04f4691829aa881e763b7.png" alt="Symbols.png"></p><h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>对于经常写文档的你，一定对LaTeX的特殊字符不陌生</p><p>将对应字符的首位连起来就是本题的flag了</p><h3 id="LaTeX代码"><a href="#LaTeX代码" class="headerlink" title="LaTeX代码"></a>LaTeX代码</h3><p><img src="https://static01.imgkr.com/temp/e513474ef4cc43e3bfce6a1a5467b558.png" alt="Symbols"></p><h2 id="hamburgerRSA"><a href="#hamburgerRSA" class="headerlink" title="hamburgerRSA"></a>hamburgerRSA</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><pre class=" language-lang-python"><code class="language-lang-python">import Crypto.Util.numberflag = open('flag.txt').read()nbit = 64while True:    p, q = Crypto.Util.number.getPrime(nbit), Crypto.Util.number.getPrime(nbit)    PP = int(str(p) + str(p) + str(q) + str(q))    QQ = int(str(q) + str(q) + str(p) + str(p))    if Crypto.Util.number.isPrime(PP) and Crypto.Util.number.isPrime(QQ):        breakn = PP * QQm = Crypto.Util.number.bytes_to_long(flag.encode())c = pow(m, 65537, n)print('n =', n)print('c =', c)n = 177269125756508652546242326065138402971542751112423326033880862868822164234452280738170245589798474033047460920552550018968571267978283756742722231922451193c = 47718022601324543399078395957095083753201631332808949406927091589044837556469300807728484035581447960954603540348152501053100067139486887367207461593404096</code></pre><h3 id="解题思路-1"><a href="#解题思路-1" class="headerlink" title="解题思路"></a>解题思路</h3><p>我们可以把PP,QQ的生成过程拆分成以下过程</p><pre class=" language-lang-python"><code class="language-lang-python">while True:    p, q = getPrime(nbit), getPrime(nbit)    P = int(str(p) + str(p))    Q = int(str(q) + str(q))    PP = int(str(P) + str(Q))    QQ = int(str(Q) + str(P))    if isPrime(PP) and isPrime(QQ):        break</code></pre><p>分析一下N的生成过程：</p><script type="math/tex; mode=display">令x, y = len(p), len(q)\\P = 10^x p + p,\quad Q = 10^y q + q\\令x', y' = len(P), len(Q)\\PP = 10^{x'}P + P,\quad QQ = 10^{y'}Q + Q</script><script type="math/tex; mode=display">PP = 10^{x' + x}p + (10^{x'} + 10^{x} + 1)p    \\QQ = 10^{y' + y}q + (10^{y'} + 10^{y} + 1)q \\则N = PP \cdot QQ = 10^{x' + x + y' + y}p\cdot q + (...)p\cdot q + p\cdot q</script><p>省略号中的相较于$10^{x’+x+y’+y}$要小很多，相较于1要大很多</p><p>于是在N前面的某一部分等价于$p\cdot q$前面的某一部分，后面同理，即：</p><ul><li><code>str(N)[:?]</code> 等价于 <code>str(p*q)[:?]</code></li><li><code>str(N)[?:]</code> 等价于  <code>str(p*q)[?:]</code>.</li></ul><p>通过对省略号内部的分析，我们可以知道<strong>这一部分的长度肯定比$\min(x,y)$要长</strong></p><p>由于题目给出的N的长度为156，则PP的长度为78，p和q的长度之和为39。</p><p>又因为p，q是通过<code>Crypto.Util.number.getPrime(64)</code>生成的，则<strong>p和q的长度为19和20</strong></p><p>呢么我们可以确定$p\cdot q$已知的部分为前19和后19位。</p><p>$p\cdot q$的长度为39位，除却已知的，我们只需要爆破中间的一位即可找到p和q，进而获取flag啦！</p><p>这里可以通过<a href="http://factordb.com/index.php?query=177269125756508652526742722231922451193">factordb.com</a>对十个需要爆破的$p\cdot q$进行因式分解</p><h3 id="解题代码"><a href="#解题代码" class="headerlink" title="解题代码"></a>解题代码</h3><pre class=" language-lang-python"><code class="language-lang-python">import Crypto.Util.numberdef decrypt_RSA(c, e, p, q):    phi = (p-1) * (q-1)    d = Crypto.Util.number.inverse(e, phi)    m = pow(c, d, p*q)    print(Crypto.Util.number.long_to_bytes(m))n = 177269125756508652546242326065138402971542751112423326033880862868822164234452280738170245589798474033047460920552550018968571267978283756742722231922451193c = 47718022601324543399078395957095083753201631332808949406927091589044837556469300807728484035581447960954603540348152501053100067139486887367207461593404096e = 65537# 爆破p,q# low = str(n)[-19:]# high = str(n)[:19]# for i in range(10):#     print(int(high + str(i) + low))# 解密p = 9788542938580474429q = 18109858317913867117P = int(str(p) + str(p))Q = int(str(q) + str(q))PP = int(str(P) + str(Q))QQ = int(str(Q) + str(P))N = PP * QQif N == n:    decrypt_RSA(c, e, PP, QQ)else:    print("error")</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> CTF </category>
+          
+          <category> WriteUp </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CTF </tag>
+            
+            <tag> WriteUp </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>古典密码-单表替换</title>
       <link href="/2021/121155226.html"/>
       <url>/2021/121155226.html</url>

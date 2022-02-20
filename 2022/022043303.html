@@ -4,8 +4,8 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="flag包, Hanmur">
-    <meta name="description" content="Golang的flag包">
+    <meta name="keywords" content="常用字符编码的介绍与相关问题, Hanmur">
+    <meta name="description" content="关于一些常用的字符编码的介绍以及问题的相关解释">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>flag包 | Hanmur</title>
+    <title>常用字符编码的介绍与相关问题 | Hanmur</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -333,12 +333,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">flag包</h1>
+                    <h1 class="description center-align post-title">常用字符编码的介绍与相关问题</h1>
                 </div>
             </div>
         </div>
@@ -454,8 +454,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Go%E8%AF%AD%E8%A8%80/">
-                                <span class="chip bg-color">Go语言</span>
+                            <a href="/tags/%E7%94%9F%E6%B4%BB%E5%B8%B8%E8%AF%86/">
+                                <span class="chip bg-color">生活常识</span>
                             </a>
                         
                     </div>
@@ -466,12 +466,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Go%E8%AF%AD%E8%A8%80/" class="post-category">
-                                Go语言
-                            </a>
-                        
-                            <a href="/categories/Go%E8%AF%AD%E8%A8%80/%E6%A0%87%E5%87%86%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/" class="post-category">
-                                标准库的基础使用
+                            <a href="/categories/%E7%94%9F%E6%B4%BB%E5%B8%B8%E8%AF%86/" class="post-category">
+                                生活常识
                             </a>
                         
                     </div>
@@ -483,28 +479,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-12-03
+                    2022-02-20
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-12-09
+                    2022-02-20
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    991
+                    3.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    13 分
                 </div>
                 
 
@@ -524,151 +520,337 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Go语言标准库flag基本使用"><a href="#Go语言标准库flag基本使用" class="headerlink" title="Go语言标准库flag基本使用"></a>Go语言标准库flag基本使用</h1><p>Go语言内置的<code>flag</code>包实现了命令行参数的解析，<code>flag</code>包使得开发命令行工具更为简单。</p>
-<h2 id="os-Args"><a href="#os-Args" class="headerlink" title="os.Args"></a>os.Args</h2><p>如果只是简单的想要获取命令行参数，可以像下面的代码示例一样使用<code>os.Args</code>来获取命令行参数。</p>
-<pre class=" language-lang-go"><code class="language-lang-go">package main
-
-import (
-    "fmt"
-    "os"
-)
-
-//os.Args demo
-func main() {
-    //os.Args是一个[]string
-    if len(os.Args) > 0 {
-        for index, arg := range os.Args {
-            fmt.Printf("args[%d]=%v\n", index, arg)
-        }
-    }
-}
-</code></pre>
-<p>将上面的代码执行<code>go build -o "args_demo"</code>编译之后，执行：</p>
-<pre class=" language-lang-bash"><code class="language-lang-bash">$ ./args_demo a b c d
-args[0]=./args_demo
-args[1]=a
-args[2]=b
-args[3]=c
-args[4]=d
-</code></pre>
-<p><code>os.Args</code>是一个存储命令行参数的字符串切片，它的第一个元素是执行文件的名称。</p>
-<h2 id="flag包基本使用"><a href="#flag包基本使用" class="headerlink" title="flag包基本使用"></a>flag包基本使用</h2><p>本文介绍了flag包的常用函数和基本用法，更详细的内容请查看<a target="_blank" rel="noopener" href="https://studygolang.com/pkgdoc">官方文档</a>。</p>
-<h3 id="导入flag包"><a href="#导入flag包" class="headerlink" title="导入flag包"></a>导入flag包</h3><pre class=" language-lang-go"><code class="language-lang-go">import flag
-</code></pre>
-<h3 id="flag参数类型"><a href="#flag参数类型" class="headerlink" title="flag参数类型"></a>flag参数类型</h3><p>flag包支持的命令行参数类型有<code>bool</code>、<code>int</code>、<code>int64</code>、<code>uint</code>、<code>uint64</code>、<code>float</code> <code>float64</code>、<code>string</code>、<code>duration</code>。</p>
+                <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>在我的日常生活里，时常能遇到一些朋友出现一些神奇的问题，比如：</p>
+<ul>
+<li>微信直接Copy代码然后编译/上传不通过（甚至搞崩某OJ）</li>
+<li>拷贝别人的代码或者从不同编译器打开代码看到内部中文出现乱码</li>
+<li>编程器在编译时不能输出或者支持中文字符</li>
+<li>进行密码的转码时被一堆奇怪的格式转换弄的头大</li>
+<li>玩游戏时输入的一些字会被识别成乱码</li>
+</ul>
+<p>在了解和帮助我的朋友们解答这些问题的同时，了解到了许多编码常识。<br>于是乎，本文将基于WIKI和一些相关资料，对生活中常见的一些编码进行简单的介绍，并介绍一下我对上述问题粗浅的理解。</p>
+<h2 id="字符编码"><a href="#字符编码" class="headerlink" title="字符编码"></a>字符编码</h2><blockquote>
+<p>Wiki： “<strong>字符编码</strong> (Character encoding)是把<strong>字符集</strong>中的<strong>字符</strong>编码成指定集合中的某一对象”</p>
+</blockquote>
+<p>简单的说，<strong>字符编码</strong>(Character encoding) 就是将字符转换成另一种便于计算机存储和传递的形式，例如二进制数字</p>
+<p>比如将K编为 <code>00000001</code> (占用1 Byte) 并以此类推构成一个对应表</p>
 <div class="table-container">
 <table>
 <thead>
 <tr>
-<th style="text-align:center">flag参数</th>
-<th style="text-align:center">有效值</th>
+<th>字符</th>
+<th>编码</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">字符串flag</td>
-<td style="text-align:center">合法字符串</td>
+<td>K</td>
+<td>00000001</td>
 </tr>
 <tr>
-<td style="text-align:center">整数flag</td>
-<td style="text-align:center">1234、0664、0x1234等类型，也可以是负数。</td>
+<td>b</td>
+<td>00000002</td>
 </tr>
 <tr>
-<td style="text-align:center">浮点数flag</td>
-<td style="text-align:center">合法浮点数</td>
+<td>i</td>
+<td>00000003</td>
 </tr>
 <tr>
-<td style="text-align:center">bool类型flag</td>
-<td style="text-align:center">1, 0, t, f, T, F, true, false, TRUE, FALSE, True, False。</td>
-</tr>
-<tr>
-<td style="text-align:center">时间段flag</td>
-<td style="text-align:center">任何合法的时间段字符串。如”300ms”、”-1.5h”、”2h45m”。 合法的单位有”ns”、”us” /“µs”、”ms”、”s”、”m”、”h”。</td>
+<td>s</td>
+<td>00000004</td>
 </tr>
 </tbody>
 </table>
 </div>
-<h3 id="定义命令行flag参数"><a href="#定义命令行flag参数" class="headerlink" title="定义命令行flag参数"></a>定义命令行flag参数</h3><p>有以下两种常用的定义命令行<code>flag</code>参数的方法。</p>
-<h4 id="flag-Type"><a href="#flag-Type" class="headerlink" title="flag.Type()"></a>flag.Type()</h4><p>基本格式如下：</p>
-<p><code>flag.Type(flag名, 默认值, 帮助信息)*Type</code> 例如我们要定义姓名、年龄、婚否三个命令行参数，我们可以按如下方式定义：</p>
-<pre class=" language-lang-go"><code class="language-lang-go">name := flag.String("name", "张三", "姓名")
-age := flag.Int("age", 18, "年龄")
-married := flag.Bool("married", false, "婚否")
-delay := flag.Duration("d", 0, "时间间隔")
-</code></pre>
-<p>需要注意的是，此时<code>name</code>、<code>age</code>、<code>married</code>、<code>delay</code>均为对应类型的指针。</p>
-<h4 id="flag-TypeVar"><a href="#flag-TypeVar" class="headerlink" title="flag.TypeVar()"></a>flag.TypeVar()</h4><p>基本格式如下： <code>flag.TypeVar(Type指针, flag名, 默认值, 帮助信息)</code> 例如我们要定义姓名、年龄、婚否三个命令行参数，我们可以按如下方式定义：</p>
-<pre class=" language-lang-go"><code class="language-lang-go">var name string
-var age int
-var married bool
-var delay time.Duration
-flag.StringVar(&name, "name", "张三", "姓名")
-flag.IntVar(&age, "age", 18, "年龄")
-flag.BoolVar(&married, "married", false, "婚否")
-flag.DurationVar(&delay, "d", 0, "时间间隔")
-</code></pre>
-<h3 id="flag-Parse"><a href="#flag-Parse" class="headerlink" title="flag.Parse()"></a>flag.Parse()</h3><p>通过以上两种方法定义好命令行flag参数后，需要通过调用<code>flag.Parse()</code>来对命令行参数进行解析。</p>
-<p>支持的命令行参数格式有以下几种：</p>
+<p>那么在我们这里设置的编码体系内 <code>00000001 00000001 00000002 00000003 00000004 00000004</code> 便对应着 <code>KKbiss</code></p>
+<p>字符编码相关的一些概念: </p>
 <ul>
-<li><code>-flag xxx</code> （使用空格，一个<code>-</code>符号）</li>
-<li><code>--flag xxx</code> （使用空格，两个<code>-</code>符号）</li>
-<li><code>-flag=xxx</code> （使用等号，一个<code>-</code>符号）</li>
-<li><code>--flag=xxx</code> （使用等号，两个<code>-</code>符号）</li>
+<li><strong>码点</strong> : 码点（Code point）表示一个字符在字符集中所处的位置。可以理解为[<em>这是字符集中的第几个字符</em>]</li>
+<li><strong>码元</strong> : 码元 (Code Unit) 表示一个编码体系中最短比特组合的单元，比如UTF-8的码元是8 bit, UTF-16的码元是 16 bit。</li>
+<li><strong>现代编码模型</strong> : 相较于传统编码模型，<strong>现代编码模型</strong>将字符编码过程分为了五个层次，详细可以参考WIKI : <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/字符编码">字符编码 - 维基百科，自由的百科全书 (wikipedia.org)</a></li>
 </ul>
-<p>其中，布尔类型的参数必须使用等号的方式指定。</p>
-<p>Flag解析在第一个非flag参数（单个”-“不是flag参数）之前停止，或者在终止符”–“之后停止。</p>
-<h3 id="flag其他函数"><a href="#flag其他函数" class="headerlink" title="flag其他函数"></a>flag其他函数</h3><pre class=" language-lang-go"><code class="language-lang-go">flag.Args()  ////返回命令行参数后的其他参数，以[]string类型
-flag.NArg()  //返回命令行参数后的其他参数个数
-flag.NFlag() //返回使用的命令行参数个数
-</code></pre>
-<h3 id="完整示例"><a href="#完整示例" class="headerlink" title="完整示例"></a>完整示例</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><pre class=" language-lang-go"><code class="language-lang-go">func main() {
-    //定义命令行参数方式1
-    var name string
-    var age int
-    var married bool
-    var delay time.Duration
-    flag.StringVar(&name, "name", "张三", "姓名")
-    flag.IntVar(&age, "age", 18, "年龄")
-    flag.BoolVar(&married, "married", false, "婚否")
-    flag.DurationVar(&delay, "d", 0, "延迟的时间间隔")
-
-    //解析命令行参数
-    flag.Parse()
-    fmt.Println(name, age, married, delay)
-    //返回命令行参数后的其他参数
-    fmt.Println(flag.Args())
-    //返回命令行参数后的其他参数个数
-    fmt.Println(flag.NArg())
-    //返回使用的命令行参数个数
-    fmt.Println(flag.NFlag())
-}
-</code></pre>
-<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p>命令行参数使用提示：</p>
-<pre class=" language-lang-bash"><code class="language-lang-bash">$ ./flag_demo -help
-Usage of ./flag_demo:
-  -age int
-        年龄 (default 18)
-  -d duration
-        时间间隔
-  -married
-        婚否
-  -name string
-        姓名 (default "张三")
-</code></pre>
-<p>正常使用命令行flag参数：</p>
-<pre class=" language-lang-bash"><code class="language-lang-bash">$ ./flag_demo -name 沙河娜扎 --age 28 -married=false -d=1h30m
-沙河娜扎 28 false 1h30m0s
-[]
-0
-4
-</code></pre>
-<p>使用非flag命令行参数：</p>
-<pre class=" language-lang-bash"><code class="language-lang-bash">$ ./flag_demo a b c
-张三 18 false 0s
-[a b c]
-3
-0
-</code></pre>
+<p>本文将涉及的一些字符编码：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>标准</th>
+<th>字符编码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>通用</td>
+<td>ASCII</td>
+</tr>
+<tr>
+<td>欧洲标准</td>
+<td>ISO/IEC 8859</td>
+</tr>
+<tr>
+<td>中国标准</td>
+<td>GB 2312、GB 18030、GBK、Big5</td>
+</tr>
+<tr>
+<td>Unicode</td>
+<td>Unicode、UTF-8、UTF-16</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="ASCII"><a href="#ASCII" class="headerlink" title="ASCII"></a>ASCII</h3><p><strong>ASCII</strong>(<strong>A</strong>merican <strong>S</strong>tandard <strong>C</strong>ode for <strong>I</strong>nformation <strong>I</strong>nterchange 美国信息交换标准代码) 应该是计算机学生最早接触的编码了，目前几乎所有的常见编码体系都会支持ASCII码(除了UTF-16和UTF-32)。</p>
+<p>ASCII有一个特点是他分为了<strong>控制字符</strong>和<strong>可显示字符</strong>，原因是ASCII是由电报码发展而来，有一部分字符被用作表示<strong>文本开始、文本结束、换行</strong>等功能。</p>
+<h4 id="控制字符"><a href="#控制字符" class="headerlink" title="控制字符"></a>控制字符</h4><p>ASCII控制字符的编号范围为[0-31]与127共33个字符<br>在大部分的终端系统里（cmd.exe、Linux Shell、FreeBSD)，控制字符都采用<strong>脱出字符表示法</strong>以表示，用<code>Ctrl</code>表示脱出字符，比如 cmd.exe 中最常用的<code>Ctrl+C</code>表示结束。</p>
+<blockquote>
+<p>脱出字符表示法: 以脱出字符 ‘^’ 开头，再接一个符号表示控制字符，如 ^C 为本文结束</p>
+</blockquote>
+<p><img src="https://static01.imgkr.com/temp/0d51ff589b994524b26430b7dd28b0d2.png" alt="ASCII控制字符"></p>
+<blockquote>
+<p>[图源:  <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/ASCII">ASCII - 维基百科，自由的百科全书 (wikipedia.org)</a>]</p>
+</blockquote>
+<h4 id="可显示字符"><a href="#可显示字符" class="headerlink" title="可显示字符"></a>可显示字符</h4><p>ASCII可显示字符的编号范围为[32-126]共95个字符</p>
+<p><img src="https://static01.imgkr.com/temp/e398113d5e5a4daa8c2a7390f553fe1b.png" alt="ASCII可显示字符"></p>
+<blockquote>
+<p>[图源:  <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/ASCII">ASCII - 维基百科，自由的百科全书 (wikipedia.org)</a>]</p>
+</blockquote>
+<h3 id="ISO-IEC-8859"><a href="#ISO-IEC-8859" class="headerlink" title="ISO/IEC 8859"></a>ISO/IEC 8859</h3><blockquote>
+<p>Wiki : ISO 8859 是 国际标准化组织(ISO)及 国际电工委员会 (IEC) 联合制定的一系列8位元字符集的标准 </p>
+</blockquote>
+<p>ASCII收录的字符足够英语使用，但是对于欧洲许多国家来说就不够了。比如法语的重音符号、东欧语言的西里尔字母等等。ISO/IEC 8859的一系列字符标准因此而生。</p>
+<p>ISO 8859字符集:</p>
+<ul>
+<li>ISO/IEC 8859-1 (Latin-1) - 西欧语言</li>
+<li>ISO/IEC 8859-2 (Latin-2) - 中欧语言</li>
+<li>ISO/IEC 8859-3 (Latin-3) - 南欧语言、世界语</li>
+<li>ISO/IEC 8859-4 (Latin-4) - 北欧语言</li>
+<li>ISO/IEC 8859-5 (Cyrillic) - 斯拉夫语言</li>
+<li>ISO/IEC 8859-6 (Arabic) - 阿拉伯语</li>
+<li>ISO/IEC 8859-7 (Greek) - 希腊语</li>
+<li>ISO/IEC 8859-8 (Hebrew) - 希伯来语（视觉顺序）<ul>
+<li>ISO 8859-8-I - 希伯来语（逻辑顺序）</li>
+</ul>
+</li>
+<li>ISO/IEC 8859-9（Latin-5 或 Turkish）- 它把Latin-1的冰岛语字母换走，加入土耳其语字母。</li>
+<li>ISO/IEC 8859-10（Latin-6 或 Nordic）- 北日耳曼语支，用来代替Latin-4。</li>
+<li>ISO/IEC 8859-11 (Thai) - 泰语，从泰国 TIS620 标准字集演化而来。</li>
+<li>ISO/IEC 8859-13（Latin-7 或 Baltic Rim）- 波罗的语族</li>
+<li>ISO/IEC 8859-14（Latin-8 或 Celtic）- 凯尔特语族</li>
+<li>ISO/IEC 8859-15 (Latin-9) - 西欧语言，加入Latin-1欠缺的芬兰语字母和大写法语重音字母，以及欧元（€）符号。</li>
+<li>ISO/IEC 8859-16 (Latin-10) - 东南欧语言。主要供罗马尼亚语使用，并加入欧元符号。</li>
+</ul>
+<blockquote>
+<p>[资料源：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/ISO/IEC_8859">ISO/IEC 8859 - 维基百科，自由的百科全书 (wikipedia.org)</a>]</p>
+</blockquote>
+<p>一个有趣的事情，这个系列是没有ISO/IEC 8859-12的。<br>一个说法是它本来要设计成塞尔特语族字符集，但后来塞尔特语族变成了ISO 8859-14。另一个说法是它本来要预留给印度天城梵文，后来被搁置了。</p>
+<p>另外ISO还有一个ISO 6438，是非洲字母的字符集，但是很少被采纳。</p>
+<h3 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h3><p>看到ISO/IEC 8859这一堆语言的字符集，是不是感觉很混乱，如果有一个体系能让呢么多的字符集统一起来，事情就会简单很多。</p>
+<p><strong>Unicode</strong> (统一码) 整理、编码了世界上大部分的文字系统，换句话说，Unicode用数字把世界上所有的字符都表示了出来！</p>
+<p><strong>Unicode 平面</strong></p>
+<p>Unicode 编码空间由17个平面（Plane）组成，每个平面最多可以包含$2^{16} = 65536$个字符。第一个平面称为<strong>基本多语言平面 </strong> BMP(Basic Multilingual Plane) 或称<strong>第零平面</strong>(Plane 0) 其他平面均称为<strong>辅助平面</strong>(Supplementary Planes)。目前的汉字字符主要出现在第0,1,2平面中</p>
+<p><strong>Unicode Zalgo Text</strong></p>
+<blockquote>
+<p>[来自周总的文章：<a target="_blank" rel="noopener" href="https://darkyzhou.net/articles/character-encoding-you-must-know">关于字符编码，这些知识一定要知道 · Darky’s Blog (darkyzhou.net)</a>]</p>
+</blockquote>
+<p>这个文章出了点问题，你看这字都成乱码了：H̴͓̪̩̟̳̺̠̫̤͉̭̗̊̏͑e̷̛̮̠͖͕̝͍̤l̸̛̮͈͍̬̇̈͌́̌̑̎̿͌͝l̶͔͕̀̒̋͐ȍ̷̡̧̦̘̹̺̫̟̭̣͂̌͗̍̽͒̈͑̋̈́͂͑̄͠ ̴̨̲͓̙̺̰͖̞̯̼̝͚̦̐̈́͊̂̊́͊̚ͅw̷̝͍͑̋͐̂͘o̸̱̽̈̓̌̅̽̑́̔͒̃̏̅͗r̶͙͖̬͙̚͝ͅl̴̨͇͙͇̯̬͔̙̞͛̑̈̀͑̓̉̈́͒̾͠͝d̷̠͙̲̗̲̍̐̅</p>
+<p>事实上这是Unicode Zalgo Text的特性，Unicode有着许多给前面的字符顶部或底部加上记号的特殊字符：Acute accent，通常用于拉丁语、希腊语等有特殊标记符的语言中</p>
+<h3 id="UTF系列"><a href="#UTF系列" class="headerlink" title="UTF系列"></a>UTF系列</h3><p>理论上Unicode 只是一个大字符集，不是编码规范。而UTF-8、UTF-16、UTF-32就是提供的具体的编码规范。Unicode本身只是一个数字与字符对应的大字典。</p>
+<h4 id="UTF-8"><a href="#UTF-8" class="headerlink" title="UTF-8"></a>UTF-8</h4><p>UTF-8可能是目前<strong>最常用</strong>的编码方式了，它的最大特点是<strong>可变长</strong>，即能使用不同字节数去表示Unicode的所有有效码点。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>字节数</th>
+<th>二进制编码格式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0xxxxxxx</td>
+</tr>
+<tr>
+<td>2</td>
+<td>110xxxxx 10xxxxxx</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1110xxxx 10xxxxxx 10xxxxxx</td>
+</tr>
+<tr>
+<td>4</td>
+<td>11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</td>
+</tr>
+<tr>
+<td>5</td>
+<td>111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx</td>
+</tr>
+<tr>
+<td>6</td>
+<td>1111110x 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>UTF-8的编码规则</p>
+<ul>
+<li>在编码中开头连续出现的”1”的个数表示用该字符占用字节个数</li>
+<li>凡是不属于首字节的字节都以<code>10</code>开头</li>
+<li>x中的位置是真正用来表示Unicode数值的位置。</li>
+</ul>
+<h4 id="UTF-16"><a href="#UTF-16" class="headerlink" title="UTF-16"></a>UTF-16</h4><p>如果你认真读了Unicode里平面的介绍，你会知道Unicode的一个编码平面有$2^{16}$个字符，而UTF-16便基于<strong>第零平面</strong>和<strong>辅助平面</strong>进行区分，前者内的字符占用2个字节，后者占用4个字节。</p>
+<p>UTF-16对字符所处平面进行区分的依据是<strong>代理对</strong>(Surrogate Pair)</p>
+<p><strong>代理对</strong>的原理：第零平面内从U+D800到U+DFFF是一个空段，这些码点并不对应任何字符，因而这些空段可以用来映射辅助平面的字符。<br>辅助平面的码点有22w+个，因此表示这些字符最少需要20个二进制位，UTF-16将这些二进制位分为两半：</p>
+<ul>
+<li>前10位映射在U+D800到U+DBFF，称为高位(H)</li>
+<li>后10位映射在U+DC00到U+DFFF，称为低位(L)</li>
+</ul>
+<p>Unicode3.0 中给出了辅助平面字符的转换公式：</p>
+<pre><code>H = Math.floor((c-0x10000) / 0x400)+0xD800
+L = (c - 0x10000) % 0x400 + 0xDC00
+</code></pre><h4 id="UTF-32"><a href="#UTF-32" class="headerlink" title="UTF-32"></a>UTF-32</h4><p>UTF-32是定长的编码，其每个32位值代表一个Unicode码位，并且与该码位数值完全一致。</p>
+<p>UTF-32可以直接通过Unicode码位进行索引，但是由于他定长的特性，空间浪费太大，因此大部分编码规则会采用UTF-8或UTF-16</p>
+<blockquote>
+<p>冷知识: Go语言的<code>rune</code>类型使用的是UTF-32编码</p>
+</blockquote>
+<h3 id="中文编码"><a href="#中文编码" class="headerlink" title="中文编码"></a>中文编码</h3><p>ISO 8859的提出可以解决欧洲国家多出来的字符，在Unicode标准出现前中国汉字的个数显然是不可能在原来ASCII的标准下装的完的。在此基础上，国家推出了GB 2312规范。其中GB是国标的缩写，指国家标准。</p>
+<p>中文编码的包含关系图：</p>
+<p><img src="https://static01.imgkr.com/temp/68b9235c67cb4f4d8ec0e767adf864b0.jpg" alt="中文编码的包含关系图"></p>
+<blockquote>
+<p>[图源：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/46216008">程序员必备：彻底弄懂常见的7种中文字符编码 - 知乎 (zhihu.com)</a>]</p>
+</blockquote>
+<h4 id="GB-T-2312"><a href="#GB-T-2312" class="headerlink" title="GB/T 2312"></a>GB/T 2312</h4><p>原GB 2312现在应该称GB/T 2312，因为2312标准并不能覆盖所有繁体字，在后来国家从强制标准转成了推荐标准，即”T”记号。</p>
+<p>GB/T 2312对汉字进行分区，每区含有94个汉字／符号，共计94个区。用所在的区和位来表示字符（码位），因此称为区位码。<br>例如”万”在45区82位，则万的区位码为: 45, 82，分别处于高低位字节。</p>
+<ul>
+<li>01~09区（682个）：特殊符号、数字、英文字符、制表符等，包括拉丁字母、希腊字母、日文平假名及片假名字母、俄语西里尔字母等在内的682个全角字符；</li>
+<li>10~15区：空区，留待扩展；在附录3，第10区推荐作为 GB 1988–80 中的94个图形字符区域（即第3区字符之半形版本）。</li>
+<li>16~55区（3755个）：常用汉字（也称一级汉字），按拼音排序；</li>
+<li>56~87区（3008个）：非常用汉字（也称二级汉字），按部首/笔画排序；</li>
+<li>88~94区：空区，留待扩展。</li>
+</ul>
+<h4 id="GBK"><a href="#GBK" class="headerlink" title="GBK"></a>GBK</h4><p>GB 2312没有完整收录<strong>一些汉字</strong>和<strong>繁体字</strong>，在其基础上进行拓展，形成了GBK<br>也是大部分人所接触的汉字编码形式(Windows简体中文版使用的就是GBK)</p>
+<p><strong>汉字内码扩展规范</strong>(简称: GBK)，其中K表示”扩展”，GB表示”国标”</p>
+<p>字符有一字节和双字节编码</p>
+<ul>
+<li>第一个字节在00–7F范围内为单字节，和ASCII保持一致，此范围内严格上说有96个文字和32个控制符号。</li>
+<li>第一个字节在81-FE范围内为双字节<ul>
+<li>第二字节一部分在40-7E范围内</li>
+<li>第二字节其他领域在80-FE范围内</li>
+</ul>
+</li>
+</ul>
+<p>GBK的编码范围：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">范围</th>
+<th style="text-align:center">第1字节</th>
+<th style="text-align:center">第2字节</th>
+<th style="text-align:center">编码数</th>
+<th style="text-align:center">字数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">水准GBK/1</td>
+<td style="text-align:center">A1–A9</td>
+<td style="text-align:center">A1–FE</td>
+<td style="text-align:center">846</td>
+<td style="text-align:center">717</td>
+</tr>
+<tr>
+<td style="text-align:center">水准GBK/2</td>
+<td style="text-align:center">B0–F7</td>
+<td style="text-align:center">A1–FE</td>
+<td style="text-align:center">6,768</td>
+<td style="text-align:center">6,763</td>
+</tr>
+<tr>
+<td style="text-align:center">水准GBK/3</td>
+<td style="text-align:center">81–A0</td>
+<td style="text-align:center">40–FE (7F除外)</td>
+<td style="text-align:center">6,080</td>
+<td style="text-align:center">6,080</td>
+</tr>
+<tr>
+<td style="text-align:center">水准GBK/4</td>
+<td style="text-align:center">AA–FE</td>
+<td style="text-align:center">40–A0 (7F除外)</td>
+<td style="text-align:center">8,160</td>
+<td style="text-align:center">8,160</td>
+</tr>
+<tr>
+<td style="text-align:center">水准GBK/5</td>
+<td style="text-align:center">A8–A9</td>
+<td style="text-align:center">40–A0 (7F除外)</td>
+<td style="text-align:center">192</td>
+<td style="text-align:center">166</td>
+</tr>
+<tr>
+<td style="text-align:center">用户定义</td>
+<td style="text-align:center">AA–AF</td>
+<td style="text-align:center">A1–FE</td>
+<td style="text-align:center">564</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">用户定义</td>
+<td style="text-align:center">F8–FE</td>
+<td style="text-align:center">A1–FE</td>
+<td style="text-align:center">658</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">用户定义</td>
+<td style="text-align:center">A1–A7</td>
+<td style="text-align:center">40–A0 (7F除外)</td>
+<td style="text-align:center">672</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">合计：</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">23,940</td>
+<td style="text-align:center">21,886</td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p>[资料源：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/汉字内码扩展规范">汉字内码扩展规范 - 维基百科，自由的百科全书 (wikipedia.org)</a>]</p>
+</blockquote>
+<h4 id="GB-18030"><a href="#GB-18030" class="headerlink" title="GB 18030"></a>GB 18030</h4><p>人类总是贪心的，GBK的两万多字也已经不够我们用了。于是，在GBK的基础上，变长的GB 18030解决了中文、日文、朝鲜语等的编码</p>
+<p>GB 18030主要有以下特点：</p>
+<ul>
+<li>采用变长多<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/字节">字节</a>编码，每个字可以由1个、2个或4个字节组成。</li>
+<li>编码空间庞大，最多可定义161万个字符。</li>
+<li>完全支持Unicode，无需动用造字区即可支持中国国内少数民族文字、中日韩和繁体汉字以及emoji等字符。</li>
+</ul>
+<p>虽然GB 18030编码的字数远远多于GBK，但实际业务里GBK见得要常见的多，因为如果看一下GB 18030编码的文字，你会跟我一样觉得自己是个文盲233。</p>
+<p><img src="https://static01.imgkr.com/temp/038868515f5d48399b0a75622f651abe.jpg" alt="GB18030编码的部分汉字"></p>
+<p>下图展现了一些中文编码在前两个字节内的编码实现(兼容意味着下位面积同时也是上位面积)</p>
+<ul>
+<li>GB2312兼容ASCII</li>
+<li>GBK兼容GB 2312</li>
+<li>GB18030兼容GBK</li>
+</ul>
+<p><img src="https://static01.imgkr.com/temp/65eaed76a5144a5fb33627aacc66bbf3.jpg" alt="几种不同编码的前2字节值域"></p>
+<blockquote>
+<p>[图源：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/46216008">程序员必备：彻底弄懂常见的7种中文字符编码 - 知乎 (zhihu.com)</a>]</p>
+</blockquote>
+<h4 id="Big5"><a href="#Big5" class="headerlink" title="Big5"></a>Big5</h4><p> <strong>大五码</strong>(Big5)是使用繁体中文社群中常用的汉字标准(Windows繁体中文版使用Big5)</p>
+<p>Big5虽普及于港澳台等繁体中文地区，但长期并非官方标准。用两个字节存储一个中文汉字。</p>
+<p>Big5本身存在一些神奇的问题</p>
+<ul>
+<li><strong>冲码问题</strong>：因为低比特字符中包含了编程语言、shell、script中字符串或命令常用的特殊字符<code>@ A-Z [ \ ] ^ _ ` a-z { | } ~</code>因而许多软件无法正常处理以Big5编码的字符串或文件。于是这个问题又叫”許功蓋”(这三个字都有这个问题)</li>
+<li><strong>画线字符相冲</strong>：例如<code>│維基百科│</code>以Big5码存储，显示时会变成<code>竟�穧坌鮈�</code></li>
+</ul>
+<h2 id="杂谈＆回答"><a href="#杂谈＆回答" class="headerlink" title="杂谈＆回答"></a>杂谈＆回答</h2><p>[更新中]</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/字符编码">字符编码 - 维基百科，自由的百科全书 (wikipedia.org)</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/46216008">程序员必备：彻底弄懂常见的7种中文字符编码 - 知乎 (zhihu.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://darkyzhou.net/articles/character-encoding-you-must-know#介绍">关于字符编码，这些知识一定要知道 · Darky’s Blog (darkyzhou.net)</a></p>
+<p>and 一些零散的其他资料…</p>
 
                 
             </div>
@@ -695,7 +877,7 @@ Usage of ./flag_demo:
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://hanmur.cn/2021/120316921.html">https://hanmur.cn/2021/120316921.html</a>
+                    <a href="https://hanmur.cn/2022/022043303.html">https://hanmur.cn/2022/022043303.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -733,8 +915,8 @@ Usage of ./flag_demo:
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Go%E8%AF%AD%E8%A8%80/">
-                                    <span class="chip bg-color">Go语言</span>
+                                <a href="/tags/%E7%94%9F%E6%B4%BB%E5%B8%B8%E8%AF%86/">
+                                    <span class="chip bg-color">生活常识</span>
                                 </a>
                             
                         </div>
@@ -1103,50 +1285,48 @@ Usage of ./flag_demo:
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/120327403.html">
+                <a href="/2022/022043303.html">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="fmt包">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="常用字符编码的介绍与相关问题">
                         
-                        <span class="card-title">fmt包</span>
+                        <span class="card-title">常用字符编码的介绍与相关问题</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Golang的fmt包
+                            关于一些常用的字符编码的介绍以及问题的相关解释
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-12-03
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-20
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Go%E8%AF%AD%E8%A8%80/" class="post-category">
-                                    Go语言
-                                </a>
-                            
-                            <a href="/categories/Go%E8%AF%AD%E8%A8%80/%E6%A0%87%E5%87%86%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/" class="post-category">
-                                    标准库的基础使用
+                            <a href="/categories/%E7%94%9F%E6%B4%BB%E5%B8%B8%E8%AF%86/" class="post-category">
+                                    生活常识
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Go%E8%AF%AD%E8%A8%80/">
-                        <span class="chip bg-color">Go语言</span>
+                    <a href="/tags/%E7%94%9F%E6%B4%BB%E5%B8%B8%E8%AF%86/">
+                        <span class="chip bg-color">生活常识</span>
                     </a>
                     
                 </div>
@@ -1160,35 +1340,39 @@ Usage of ./flag_demo:
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/120331663.html">
+                <a href="/2021/121421377.html">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="context包">
+                        <img src="/medias/featureimages/26.jpg" class="responsive-img" alt="古典密码-多表替换">
                         
-                        <span class="card-title">context包</span>
+                        <span class="card-title">古典密码-多表替换</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Golang的context包
+                            古典密码中的一些多表替换密码
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-03
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-14
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Go%E8%AF%AD%E8%A8%80/" class="post-category">
-                                    Go语言
+                            <a href="/categories/CTF/" class="post-category">
+                                    CTF
                                 </a>
                             
-                            <a href="/categories/Go%E8%AF%AD%E8%A8%80/%E6%A0%87%E5%87%86%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/" class="post-category">
-                                    标准库的基础使用
+                            <a href="/categories/CTF/Crypto/" class="post-category">
+                                    Crypto
+                                </a>
+                            
+                            <a href="/categories/CTF/Crypto/%E5%8F%A4%E5%85%B8%E5%AF%86%E7%A0%81/" class="post-category">
+                                    古典密码
                                 </a>
                             
                             
@@ -1198,8 +1382,16 @@ Usage of ./flag_demo:
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Go%E8%AF%AD%E8%A8%80/">
-                        <span class="chip bg-color">Go语言</span>
+                    <a href="/tags/CTF/">
+                        <span class="chip bg-color">CTF</span>
+                    </a>
+                    
+                    <a href="/tags/Crypto/">
+                        <span class="chip bg-color">Crypto</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%8F%A4%E5%85%B8%E5%AF%86%E7%A0%81/">
+                        <span class="chip bg-color">古典密码</span>
                     </a>
                     
                 </div>

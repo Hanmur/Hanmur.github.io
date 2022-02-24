@@ -493,14 +493,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.2k
+                    2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    8 分
                 </div>
                 
 
@@ -585,7 +585,7 @@ Content-Length: 90                    //主体内容长度
 <li>4XX 客户端错误 - 请求有语法错误或请求无法实现</li>
 <li>5XX 服务器端错误 - 服务器未能实现合法的请求</li>
 </ul>
-<h2 id="Golang的简单Web服务实现"><a href="#Golang的简单Web服务实现" class="headerlink" title="Golang的简单Web服务实现"></a>Golang的简单Web服务实现</h2><p>这里是一个简单的Web服务实现代码</p>
+<h2 id="Golang的简单Web服务实现"><a href="#Golang的简单Web服务实现" class="headerlink" title="Golang的简单Web服务实现"></a>Golang的简单Web服务实现</h2><h3 id="服务的简单实现"><a href="#服务的简单实现" class="headerlink" title="服务的简单实现"></a>服务的简单实现</h3><p>这里是一个简单的Web服务实现代码</p>
 <pre class=" language-lang-go"><code class="language-lang-go">package main
 
 import (
@@ -620,7 +620,7 @@ func main() {
 <li><code>http.ListenAndServe(":9090", nil)</code>设置了服务监听的端口和使用的路由</li>
 <li>具体对请求包和响应包的操作可以参考<code>sayhelloName</code>函数</li>
 </ul>
-<p>如果我们想自己写一个路由呢？</p>
+<h3 id="路由的简单实现"><a href="#路由的简单实现" class="headerlink" title="路由的简单实现"></a>路由的简单实现</h3><p>如果我们想自己写一个路由呢？</p>
 <p>下面的代码使用MyMux类型作为<code>http.ListenAndServe()</code>的第二个参数，我们只用让MyMux类型实现ServeHTTP方法就可以正常工作</p>
 <pre class=" language-lang-go"><code class="language-lang-go">package main
 
@@ -655,7 +655,119 @@ func main() {
     _ = http.ListenAndServe(":9090", mux)
 }
 </code></pre>
-<h2 id="Golang实现Web的原理"><a href="#Golang实现Web的原理" class="headerlink" title="Golang实现Web的原理"></a>Golang实现Web的原理</h2><h1 id="不想学原理拉-摆烂"><a href="#不想学原理拉-摆烂" class="headerlink" title="不想学原理拉 摆烂"></a><strong><em>不想学原理拉</em> 摆烂</strong></h1><h1 id="还是不想学原理-摆烂"><a href="#还是不想学原理-摆烂" class="headerlink" title="还是不想学原理 摆烂"></a>还是不想学原理 摆烂</h1>
+<h2 id="Golang实现Web的原理"><a href="#Golang实现Web的原理" class="headerlink" title="Golang实现Web的原理"></a>Golang实现Web的原理</h2><h3 id="服务运行机制"><a href="#服务运行机制" class="headerlink" title="服务运行机制"></a>服务运行机制</h3><p>Go执行Web服务的工作模式：</p>
+<ol>
+<li>创建<code>Listen Socket</code>监听端口，等待客户端请求</li>
+<li><code>Listen Socket</code>接收到客户端请求得到<code>Client Socket</code></li>
+<li><code>Client Socket</code>分配<code>Handler</code>处理客户端请求，返回数据给客户端</li>
+</ol>
+<p><img src="https://static01.imgkr.com/temp/70f82c2575be4f638a0f34b8e7c27eb7.png" alt="HTTP包执行流程"></p>
+<h3 id="ListenAndServe原理"><a href="#ListenAndServe原理" class="headerlink" title="ListenAndServe原理"></a><code>ListenAndServe</code>原理</h3><p>对于上面的三个过程(监听端口，接收请求，分配Handler)，Go通过函数<code>ListenAndServe</code>进行处理</p>
+<p><img src="https://static01.imgkr.com/temp/44750792f1c342d191f8774f8c193920.png" alt="ListenAndServe内部过程"></p>
+<p><strong>监听端口：</strong><br>初始化一个server对象，调用<code>net.Listen("tcp",addr)</code>(用TCP协议搭建服务)，监控<code>ListenAndServe</code>第一个参数设置的端口</p>
+<p><strong>接收请求：</strong><br>调用<code>srv.Serve(net.Listener)</code>函数接收处理请求，下面是其源码</p>
+<pre class=" language-lang-Go"><code class="language-lang-Go">func (srv *Server) Serve(l net.Listener) error {
+    defer l.Close()
+    var tempDelay time.Duration // how long to sleep on accept failure
+    for {
+        rw, e := l.Accept()
+        if e != nil {
+            if ne, ok := e.(net.Error); ok && ne.Temporary() {
+                if tempDelay == 0 {
+                    tempDelay = 5 * time.Millisecond
+                } else {
+                    tempDelay *= 2
+                }
+                if max := 1 * time.Second; tempDelay > max {
+                    tempDelay = max
+                }
+                log.Printf("http: Accept error: %v; retrying in %v", e, tempDelay)
+                time.Sleep(tempDelay)
+                continue
+            }
+            return e
+        }
+        tempDelay = 0
+        c, err := srv.newConn(rw)
+        if err != nil {
+            continue
+        }
+        go c.serve()
+    }
+}
+</code></pre>
+<p>这个函数在内部先用Listener接收请求，然后创建Conn，最后开启一个goroutine进行处理(这里是高并发的体现)</p>
+<blockquote>
+<p>Conn是一种通用的面向流的网络连接，多个Goroutine可以同时调用Conn上的方法。</p>
+</blockquote>
+<p><strong>分配Handler：</strong><br>Coon先解析Request，获取相应的Handler(<code>ListenAndServe</code>第二个参数：路由器)。路由器通过url匹配，跳转到相应的handle函数，通过写入Response的信息返回给客户端。</p>
+<h3 id="路由内部原理"><a href="#路由内部原理" class="headerlink" title="路由内部原理"></a>路由内部原理</h3><p>Golang为我们提供了默认的路由器:</p>
+<pre class=" language-lang-Go"><code class="language-lang-Go">type ServeMux struct {
+    mu sync.RWMutex   //锁，由于请求涉及到并发处理，因此这里需要一个锁机制
+    m  map[string]muxEntry  // 路由规则，一个string对应一个mux实体，这里的string就是注册的路由表达式
+    hosts bool // 是否在任意的规则中带有host信息
+}
+
+type muxEntry struct {
+    explicit bool   // 是否精确匹配
+    h        Handler // 这个路由表达式对应哪个handler
+    pattern  string  //匹配字符串
+}
+
+type Handler interface {
+    ServeHTTP(ResponseWriter, *Request)  // 路由实现器
+}
+</code></pre>
+<blockquote>
+<p>Handler是一个接口，而我们所写的函数并没有实现<code>ServeHTTP</code>这个接口函数，是因为<code>HTTP</code>包为我们提供了一个类型:<code>HandlerFunc</code>，他将我们所写的函数强制转换为了HandlerFunc类型实现了接口方法。</p>
+<pre class=" language-lang-Go"><code class="language-lang-Go">type HandlerFunc func(ResponseWriter, *Request)
+
+// ServeHTTP calls f(w, r).
+func (f HandlerFunc) ServeHTTP(w ResponseWriter, r *Request) {
+    f(w, r)
+}
+</code></pre>
+</blockquote>
+<p>在路由内部存储了我们设定的路由规则，当路由接收到用户请求的url，会与路由存储的map进行匹配，进而调用相应的handler进行处理。</p>
+<p>下为相关的路由匹配源码</p>
+<pre class=" language-lang-Go"><code class="language-lang-Go">func (mux *ServeMux) ServeHTTP(w ResponseWriter, r *Request) {
+    if r.RequestURI == "*" {
+        w.Header().Set("Connection", "close")
+        w.WriteHeader(StatusBadRequest)
+        return
+    }
+    h, _ := mux.Handler(r)
+    h.ServeHTTP(w, r)
+}
+
+func (mux *ServeMux) Handler(r *Request) (h Handler, pattern string) {
+    if r.Method != "CONNECT" {
+        if p := cleanPath(r.URL.Path); p != r.URL.Path {
+            _, pattern = mux.handler(r.Host, p)
+            return RedirectHandler(p, StatusMovedPermanently), pattern
+        }
+    }    
+    return mux.handler(r.Host, r.URL.Path)
+}
+
+func (mux *ServeMux) handler(host, path string) (h Handler, pattern string) {
+    mux.mu.RLock()
+    defer mux.mu.RUnlock()
+
+    // Host-specific pattern takes precedence over generic ones
+    if mux.hosts {
+        h, pattern = mux.match(host + path)
+    }
+    if h == nil {
+        h, pattern = mux.match(path)
+    }
+    if h == nil {
+        h, pattern = NotFoundHandler(), ""
+    }
+    return
+}
+</code></pre>
+
                 
             </div>
             <hr/>
@@ -1343,7 +1455,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">14.7k</span>
+                        class="white-color">15.5k</span>
             
             
             

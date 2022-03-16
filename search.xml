@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Prolog的安装和基本使用</title>
+      <link href="/2022/031650390.html"/>
+      <url>/2022/031650390.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="Prolog的安装"><a href="#Prolog的安装" class="headerlink" title="Prolog的安装"></a>Prolog的安装</h2><h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><p>访问官网<a href="https://www.swi-prolog.org/">SWI-Prolog</a> 在DOWNLOAD找到对应的二进制文件下载安装即可(建议选择配置环境变量)</p><h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><p>也可以在官网安装，还可以用指令<br><code>sudo apt-get install swi-prolog</code></p><h2 id="Prolog的运行"><a href="#Prolog的运行" class="headerlink" title="Prolog的运行"></a>Prolog的运行</h2><h3 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h3><p>输入<code>swipl</code>启动Prolog运行环境</p><pre class=" language-lang-bash"><code class="language-lang-bash">?- write("Hello, world").Hello, world!true.</code></pre><p>退出 SWI-Prolog，可以使用<code>halt</code>命令：<code>?- halt.</code></p><h3 id="在线编译器"><a href="#在线编译器" class="headerlink" title="在线编译器"></a>在线编译器</h3><p><a href="https://swish.swi-prolog.org/">SWISH — SWI-Prolog for SHaring</a></p><h3 id="VSC"><a href="#VSC" class="headerlink" title="VSC"></a>VSC</h3><h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>在VSC下载拓展VSC-Prolog</p><p>Settings中添加如下配置(prolog.executablePath修改为自己下载的路径)</p><pre><code>    "prolog.dialect": "swi", //prolog方言选择:swi(SWI-Prolog)或者ecl(ECLiPSe)    "prolog.executablePath": "D:\\Coder\\swipl\\bin\\swipl.exe", //指向prolog可执行文件    "prolog.linter.run": "onSave", //保存文件时进行代码检查    //"prolog.linter.delay": 500,  //使用"onType"时用到的选项     "prolog.format.enabled": true, //允许format源代码    "prolog.format.tabSize": 4,    //将tab替换为4个空格    "prolog.format.insertSpaces": true, //更偏向使用空格</code></pre><p>Launch中添加如下配置(runtimeExecutable修改为自己下载的路径)</p><pre><code>        {            "name": "Prolog Launch File",        //配置名称            "type": "prolog",       //配置类型            "request": "launch",    //请求配置类型,可以是启动launch或附加attach            "program": "${file}",   //将要进行调试的程序的完整路径            "startupQuery": "start",            "stopAtEntry": false,   //设为true时调试程序将暂停在程序入口处,否则将执行到第一个断点处            "cwd": "${fileDirname}",//调试程序时的工作目录,此处为源码文件所在目录            "env": {},              //传递给源文件的环境变量            "runtimeExecutable": "D:\\Coder\\swipl\\bin\\swipl.exe",  //调试进程的可执行文件               "runtimeArgs": [],      //传递给调试程序的命令行参数            "args": [],             //程序调试时传递给程序的命令行参数,这里设为空即可            "traceCmds": {          //介于vscode调试命令和prolog trace选项之间的映射                "continue": ["leap", "l"],                 "stepover": ["skip", "s"],                "stepinto": ["creep", "c"],                 "stepout": ["up", "u"]            },         }</code></pre><h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><p>编写的代码文件后缀为<code>.pl</code><br>在<code>.pl</code>的文件中右键选择Prolog: Load document 可以进入swi终端运行文件，类似地输入<code>halt.</code>可以终止服务<br>(ctrl+c 后输入h可以看到一些指令，ctrl+c后输入e也可以中断终端)</p><p><img src="https://static01.imgkr.com/temp/53c4d121669b434d9ab7fa72ad274e83.png" alt="VSC运行Prolog"></p><h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><h3 id="常量和变量"><a href="#常量和变量" class="headerlink" title="常量和变量"></a>常量和变量</h3><ul><li>小写字母开头的字符串=常量；</li><li>大写字母开头的字符串=变量。</li></ul><pre class=" language-lang-bash"><code class="language-lang-bash">?- write(abc).abctrue.?- write(Abc)._3386true.</code></pre><h3 id="关系和属性"><a href="#关系和属性" class="headerlink" title="关系和属性"></a>关系和属性</h3><p>两个对象之间的关系表示为：<code>关系名(主体，客体)</code></p><p>比如，kk的朋友是uzi，写成<code>friend(kk, uzi).</code>（注意这里不等同于<code>friend(uzi,kk)</code> 表示两者互为朋友需要两个代码都写上）</p><p>括号里面只有一个参数，表示对象拥有该属性<br>比如 kk 是卷王，写成<code>juanking(kk).</code></p><h3 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h3><p>规则是推理方法，即如何从一个论断得到另一个论断。</p><p>如规则：所有朋友关系都是相互的：</p><pre><code>friend(X, Y) :- friend(Y, X).</code></pre><p>上面代码中，<code>X</code>和<code>Y</code>都是大写，表示这是两个变量。<br>符号<code>:-</code>表示推理关系，含义是只要右为<code>true</code>，则左也为<code>true</code>（注意因果）</p><p>如果一条规则取决于多个条件，则条件之间使用逗号分隔，如</p><pre><code>mother(X, Y) :- child(Y,X), female(X).</code></pre><p>如果一条规则取决于某个条件为<code>false</code>，则在条件之前加上<code>\+</code>表示否定。</p><pre><code>onesidelove(X, Y) :- loves(X, Y), \+ loves(Y,X).</code></pre><h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><p>Prolog可以查询已经设定的条件。我们先写一个脚本<code>hello.pl</code>。</p><pre class=" language-lang-bash"><code class="language-lang-bash">friend(john, julia).friend(john, jack).friend(julia, sam).friend(julia, molly).</code></pre><p>然后在 SWI-Prolog 里面加载这个脚本。</p><pre class=" language-lang-bash"><code class="language-lang-bash">?- [hello].true.</code></pre><p>上面代码中，<code>true.</code>是返回的结果，表示加载成功。</p><p>然后，可以查询两个人是否为朋友。</p><pre class=" language-lang-bash"><code class="language-lang-bash">?- friend(john, jack).true.?- friend(john, sam).false.</code></pre><p><code>listing()</code>函数可以列出所有的朋友关系。</p><pre class=" language-lang-bash"><code class="language-lang-bash">?- listing(friend).friend(john, julia).friend(john, jack).friend(julia, sam).friend(julia, molly).true.</code></pre><p>还可以查询<code>john</code>有多少个朋友。</p><pre class=" language-lang-bash"><code class="language-lang-bash">?- friend(john, Who).Who = julia ;Who = jack.</code></pre><p>上面代码中，<code>Who</code>是变量名。任意的变量名都可以，只要首字母为大写。</p><h2 id="相关教程"><a href="#相关教程" class="headerlink" title="相关教程"></a>相关教程</h2><blockquote><p> <a href="https://zhzluke96.github.io/prolog-tut-cn/">前言 · Prolog 教程 (zhzluke96.github.io)</a></p><p>比较完善的Prolog体系教程</p><p><a href="https://ruanyifeng.com/blog/2019/01/prolog.html">Prolog 语言入门教程 - 阮一峰的网络日志 (ruanyifeng.com)</a></p><p>简单的语法介绍，有几个例子可以快速入门</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 生活常识 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 生活常识 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Golang实现Web服务的工作方式及内部展现</title>
       <link href="/2022/022452009.html"/>
       <url>/2022/022452009.html</url>
